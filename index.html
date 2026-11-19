@@ -210,9 +210,93 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .num b{font-variant-numeric:tabular-nums}
 .num .bar{display:block;height:2px;width:0;background:var(--g);transition:width 1.1s cubic-bezier(.3,.7,.2,1) .5s}
 .numbers.in .num .bar{width:2.6rem}
+.num .sdg + .sdg{margin-top:-.2rem}
 .num .sdg{margin:.2rem 0 0;display:flex;align-items:center;gap:.5rem;font:500 .62rem/1.3 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);opacity:0;transform:translateY(6px);transition:opacity .6s 1s,transform .6s 1s}
 .numbers.in .num .sdg{opacity:1;transform:none}
 .num .sdg em{font-style:normal;display:grid;place-items:center;min-width:1.35rem;height:1.35rem;padding:0 .2rem;background:var(--g);color:#fff;font:700 .7rem/1 var(--f-body);letter-spacing:0}
+.ba{position:relative;aspect-ratio:3/2;max-width:100%;overflow:hidden;background:var(--bg-3);touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:ew-resize}
+.ba-img,.ba-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.ba-before{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.ba-line{position:absolute;top:0;bottom:0;left:var(--p);width:2px;margin-left:-1px;background:var(--gold);pointer-events:none}
+.ba-line span{position:absolute;top:50%;left:50%;width:2.6rem;height:2.6rem;margin:-1.3rem 0 0 -1.3rem;border-radius:50%;background:var(--gold);color:var(--on-gold);display:grid;place-items:center;font-size:1.2rem;box-shadow:0 4px 18px rgba(0,0,0,.4)}
+.ba-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize;pointer-events:none}
+.ba-range:focus-visible + *,.ba:focus-within .ba-line span{outline:2px solid var(--ink);outline-offset:2px}
+.ba.hint .ba-line{transition:left .9s cubic-bezier(.4,0,.2,1)}
+.ba.hint .ba-before{transition:clip-path .9s cubic-bezier(.4,0,.2,1)}
+.quiz{background:var(--bg-2);border-top:1px solid var(--line)}
+.qz{max-width:46rem}
+.qz-prog{display:flex;gap:.4rem;margin-bottom:1.6rem}
+.qz-prog i{height:3px;flex:1;background:var(--line);transition:background .3s}
+.qz-prog i.on{background:var(--gold)}
+.qz-q{font:400 clamp(1.6rem,4vw,2.3rem)/1.2 var(--f-display);margin:0 0 1.5rem}
+.qz-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+.qz-opts button{text-align:left;background:var(--bg);border:1px solid var(--line);color:var(--ink);font:300 1.02rem/1.45 var(--f-body);padding:1.1rem 1.2rem;cursor:pointer;transition:border-color .2s,transform .2s,background .2s}
+.qz-opts button:hover,.qz-opts button:focus-visible{border-color:var(--gold);transform:translateY(-2px)}
+.qz-opts button b{display:block;font:500 .66rem/1 var(--f-body);letter-spacing:.24em;color:var(--gold);margin-bottom:.45rem}
+@media (max-width:600px){.qz-opts{grid-template-columns:1fr}}
+.qz-card{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1.4rem 1.8rem;align-items:center;padding:clamp(1.6rem,4vw,2.4rem);background:var(--gc);color:#fff;animation:pop .5s cubic-bezier(.2,1.4,.4,1) both}
+.qz-card .n{font:700 clamp(4rem,12vw,6.5rem)/.9 var(--f-body);letter-spacing:-.03em}
+.qz-card .k{font:600 .7rem/1.4 var(--f-body);letter-spacing:.24em;text-transform:uppercase;opacity:.85}
+.qz-card h3{font:600 clamp(1.5rem,4vw,2.2rem)/1.15 var(--f-body);margin:.3rem 0 .6rem}
+.qz-card p{margin:0;font:400 1.02rem/1.5 var(--f-body);opacity:.95;max-width:30rem}
+@media (max-width:520px){.qz-card{grid-template-columns:1fr}}
+.qz-act{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.2rem}
+.qz-act button{font:500 .72rem/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;padding:1rem 1.3rem;cursor:pointer;border:1px solid var(--gold)}
+.qz-act .solid{background:var(--gold);color:var(--on-gold)}
+.qz-act .ghost{background:none;color:var(--ink-soft);border-color:var(--line)}
+.qz-note{margin-top:.8rem;font-size:.9rem;color:var(--ink-faint)}
+.board{margin-top:1.6rem}
+.board .label{margin-bottom:.8rem}.board .label span{color:var(--ink-faint)}
+.board ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:2rem}
+@media (max-width:600px){.board ol{grid-template-columns:1fr}}
+.board li{display:grid;grid-template-columns:2rem minmax(0,1fr) auto;gap:.6rem;align-items:baseline;padding:.6rem 0;border-bottom:1px solid var(--line);font-size:.98rem}
+.board li .r{font:400 italic 1rem/1 var(--f-display);color:var(--gold)}
+.board li .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
+.board li .s{font-variant-numeric:tabular-nums;color:var(--ink-soft)}
+.board li.me .n,.board li.me .s{color:var(--gold-ink)}
+.board li.empty{display:block;grid-column:1/-1;color:var(--ink-faint);font-size:.95rem;border:0}
+.lb-new{margin-top:1rem;display:grid;gap:.5rem;animation:pop .4s ease both}
+.lb-new label{font:500 .72rem/1.4 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.lb-new div{display:flex;gap:.5rem;max-width:26rem}
+.lb-new input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);color:var(--ink);font:400 1rem var(--f-body);padding:.8rem .9rem}
+.lb-new input:focus{outline:none;border-color:var(--gold)}
+.lb-new button{background:var(--gold);color:var(--on-gold);border:0;font:500 .72rem/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;padding:0 1.2rem;cursor:pointer}
+.egg-host{position:relative}
+.egg{position:absolute;top:-.4rem;right:max(16px,env(safe-area-inset-right,0px));width:2.1rem;height:2.1rem;padding:0;border:0;border-radius:50%;overflow:hidden;cursor:pointer;opacity:.22;filter:grayscale(.8);background:none;transition:opacity .3s,filter .3s,transform .3s}
+.egg img{width:100%;height:100%;object-fit:cover;display:block}
+.egg:hover,.egg:focus-visible{opacity:.75;filter:none;transform:scale(1.12) rotate(-6deg)}
+.egg.found{opacity:1;filter:none;box-shadow:0 0 0 2px var(--gold);animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
+.toast{position:fixed;z-index:47;left:50%;bottom:calc(5rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--bg-2);border:1px solid var(--gold);color:var(--ink);padding:.8rem 1.1rem;font:400 .95rem/1.4 var(--f-body);max-width:calc(100vw - 32px);text-align:center;animation:toastIn .4s ease both}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+.toast b{color:var(--gold)}
+.party{position:fixed;inset:0;z-index:70;background:#07090a;display:grid;place-items:center}
+.party canvas{position:absolute;inset:0;width:100%;height:100%}
+.party-txt{position:relative;text-align:center;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));margin-top:-38vh;display:grid;gap:.5rem}
+.party-txt .k{font:500 .72rem/1.4 var(--f-body);letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.party-txt h3{font-size:clamp(2rem,7vw,3.6rem)}
+.party-txt h3 em{color:var(--gold)}
+.party-txt p{margin:0;color:var(--ink-soft)}
+.party-x{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));background:var(--gold);color:var(--on-gold);border:0;font:500 .72rem/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;padding:1rem 1.4rem;cursor:pointer}
+.ask{border-top:1px solid var(--line)}
+.ask-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(2rem,6vw,5rem);align-items:start}
+.ask-grid .answered{grid-column:1/-1}
+@media (max-width:860px){.ask-grid{grid-template-columns:1fr}}
+.ask-form{display:grid;gap:1rem}
+.ask-form label{display:grid;gap:.45rem;font:500 .7rem/1.4 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+.ask-form small{letter-spacing:.05em;text-transform:none;color:var(--ink-faint);font-weight:300;font-size:.8rem}
+.ask-form input,.ask-form textarea{background:var(--bg-2);border:1px solid var(--line);color:var(--ink);font:300 1rem/1.5 var(--f-body);letter-spacing:0;text-transform:none;padding:.85rem .95rem;width:100%;box-sizing:border-box;resize:vertical}
+.ask-form input:focus,.ask-form textarea:focus{outline:none;border-color:var(--gold)}
+.ask-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:560px){.ask-row{grid-template-columns:1fr}}
+.ask-form .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.ask-send{display:flex;flex-wrap:wrap;align-items:center;gap:1rem}
+.ask-send button{background:var(--gold);color:var(--on-gold);border:0;font:500 .74rem/1 var(--f-body);letter-spacing:.22em;text-transform:uppercase;padding:1.05rem 1.5rem;cursor:pointer}
+.ask-send button:disabled{opacity:.6;cursor:wait}
+.ask-msg{margin:0;font-size:.95rem;color:var(--ink-soft)}
+.ask-msg.ok{color:var(--gold-ink)}
+.answered{border-top:1px solid var(--line);padding-top:1.6rem}
+.answered .label{margin-bottom:.8rem}
+.answered .empty{color:var(--ink-faint);margin:0}
 .work{background:var(--bg-2)}
 .areas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--gold)}
 .area{padding:2rem 1.6rem 0 0;display:grid;gap:.9rem;align-content:start}
@@ -326,6 +410,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
       <a href="#speaking">Speaking</a>
       <a href="#gallery">Gallery</a>
       <a href="#press">Press</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#ask">Ask</a>
       <a class="cta" href="#contact">Contact</a>
     </nav>
   </div>
@@ -364,7 +450,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 <section class="numbers" aria-label="Impact at a glance">
   <div class="sdg-stripe" aria-hidden="true"><i style="--c:#E5243B;--d:0ms"></i><i style="--c:#DDA63A;--d:45ms"></i><i style="--c:#4C9F38;--d:90ms"></i><i style="--c:#C5192D;--d:135ms"></i><i style="--c:#FF3A21;--d:180ms"></i><i style="--c:#26BDE2;--d:225ms"></i><i style="--c:#FCC30B;--d:270ms"></i><i style="--c:#A21942;--d:315ms"></i><i style="--c:#FD6925;--d:360ms"></i><i style="--c:#DD1367;--d:405ms"></i><i style="--c:#FD9D24;--d:450ms"></i><i style="--c:#BF8B2E;--d:495ms"></i><i style="--c:#3F7E44;--d:540ms"></i><i style="--c:#0A97D9;--d:585ms"></i><i style="--c:#56C02B;--d:630ms"></i><i style="--c:#00689D;--d:675ms"></i><i style="--c:#19486A;--d:720ms"></i></div>
   <div class="wrap num-grid">
-    <div class="num" style="--g:#26BDE2"><b data-to="5" data-pre="" data-suf="M+" data-sep="0">5M+</b><i class="bar"></i><span>people reached by <a class="tl" href="https://www.facebook.com/awarenessthreesixty" target="_blank" rel="noopener">Awareness 360</a></span><p class="sdg"><em>6</em>Clean Water and Sanitation</p></div>
+    <div class="num" style="--g:#26BDE2"><b data-to="5" data-pre="" data-suf="M+" data-sep="0">5M+</b><i class="bar"></i><span>people reached by <a class="tl" href="https://www.facebook.com/awarenessthreesixty" target="_blank" rel="noopener">Awareness 360</a></span><p class="sdg"><em>6</em>Clean Water and Sanitation</p><p class="sdg" style="--g:#FF3A21"><em>5</em>Gender Equality</p></div>
     <div class="num" style="--g:#19486A"><b data-to="100" data-pre="" data-suf="+" data-sep="0">100+</b><i class="bar"></i><span>countries in our youth network</span><p class="sdg"><em>17</em>Partnerships for the Goals</p></div>
     <div class="num" style="--g:#E5243B"><b data-to="700" data-pre="$" data-suf="K+" data-sep="0">$700K+</b><i class="bar"></i><span>raised for grassroots work</span><p class="sdg"><em>1</em>No Poverty</p></div>
     <div class="num" style="--g:#C5192D"><b data-to="2000" data-pre="" data-suf="+" data-sep="1">2,000+</b><i class="bar"></i><span>youth-led projects supported</span><p class="sdg"><em>4</em>Quality Education</p></div>
@@ -380,13 +466,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 
     <article class="chapter">
       <div class="ch-media">
-        <button class="main" type="button" data-open="canal-before" style="aspect-ratio:3/2">
-          <picture><source srcset="img/canal-before.webp" type="image/webp"><img src="img/canal-before.jpg" alt="A Dhaka canal choked with rubbish before the clean-up" loading="lazy" width="1440" height="958"></picture>
-        </button>
-        <button class="main" type="button" data-open="canal-after" style="aspect-ratio:3/2">
-          <picture><source srcset="img/canal-after.webp" type="image/webp"><img src="img/canal-after.jpg" alt="The same Dhaka canal after the Khale Hobe clean-up, clear water and painted embankments" loading="lazy" width="1440" height="948"></picture>
-        </button>
-        <p class="cap">A canal near home, before and after our Khale Hobe clean-up.</p>
+        <div class="ba" id="ba" style="--p:50%">
+          <picture class="ba-img"><source srcset="img/canal-after.webp" type="image/webp"><img src="img/canal-after.jpg" alt="The same Dhaka canal after the Khale Hobe clean-up, with clear water and painted embankments" loading="lazy" width="1440" height="948"></picture>
+          <picture class="ba-img ba-before"><source srcset="img/canal-before.webp" type="image/webp"><img src="img/canal-before.jpg" alt="A Dhaka canal choked with rubbish before the clean-up" loading="lazy" width="1440" height="958"></picture>
+          <div class="ba-line" aria-hidden="true"><span>&#8596;</span></div>
+          <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Slide to compare the canal before and after the clean-up">
+        </div>
+        <p class="cap">Drag to see the canal near home before and after our Khale Hobe clean-up.</p>
       </div>
       <div class="ch-text">
         <p class="ch-num">I</p>
@@ -592,7 +678,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 </section>
 
 <section class="sec" id="speaking">
-  <div class="wrap">
+  <div class="wrap egg-host"><button type="button" class="egg" data-egg="kibo" aria-label="Something is hiding here"><img src="img/pet-kibo.jpg" alt="" width="64" height="64" loading="lazy"></button>
     <div class="sec-head">
       <p class="label gold">Speaking</p>
       <h2>Stages, panels &amp; <em class="g">classrooms</em></h2>
@@ -624,7 +710,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 </section>
 
 <section class="sec gallery" id="gallery">
-  <div class="wrap">
+  <div class="wrap egg-host"><button type="button" class="egg" data-egg="shinbo" aria-label="Something is hiding here"><img src="img/pet-shinbo.jpg" alt="" width="64" height="64" loading="lazy"></button>
     <div class="sec-head">
       <p class="label gold">Gallery</p>
       <h2>On the <em class="g">ground</em></h2>
@@ -640,7 +726,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 </section>
 
 <section class="sec" id="press">
-  <div class="wrap">
+  <div class="wrap egg-host"><button type="button" class="egg" data-egg="simba" aria-label="Something is hiding here"><img src="img/pet-simba.jpg" alt="" width="64" height="64" loading="lazy"></button>
     <div class="sec-head">
       <p class="label gold">In the news</p>
       <h2>Press &amp; <em class="g">writing</em></h2>
@@ -684,6 +770,30 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
   </div>
 </section>
 
+
+<section class="sec ask" id="ask">
+  <div class="wrap ask-grid">
+    <div class="sec-head">
+      <p class="label gold">Ask Rijve</p>
+      <h2>Got a question? <em class="g">Ask me.</em></h2>
+      <p>Students and young changemakers: ask about starting a project, scholarships, fundraising or anything else. I'll answer some of them here.</p>
+    </div>
+    <form class="ask-form" id="askForm" novalidate>
+      <label>Your question<textarea name="question" id="askQ" rows="4" maxlength="600" required placeholder="How did you start Awareness 360 with no money?"></textarea></label>
+      <div class="ask-row">
+        <label>Name <small>(optional)</small><input name="name" maxlength="60" autocomplete="name"></label>
+        <label>Where are you from? <small>(optional)</small><input name="from" maxlength="80" placeholder="City, country or university"></label>
+      </div>
+      <label>Email <small>(optional, only if you want a reply)</small><input name="email" type="email" maxlength="120" autocomplete="email"></label>
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="ask-send"><button type="submit" id="askBtn">Send my question</button><p class="ask-msg" id="askMsg" role="status" aria-live="polite"></p></div>
+    </form>
+    <div class="answered">
+      <p class="label">Asked &amp; answered</p>
+      <p class="empty">The first answers will appear here soon.</p>
+    </div>
+  </div>
+</section>
 <section class="sec contact" id="contact">
   <div class="wrap">
     <div class="contact-grid">
@@ -712,6 +822,17 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
   </div>
 </section>
 
+
+<section class="sec quiz" id="quiz">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label gold">Quiz</p>
+      <h2>Which <em class="g">Goal</em> are you?</h2>
+      <p>Five quick questions. Find the Sustainable Development Goal that matches you, then save your card to share.</p>
+    </div>
+    <div class="qz" id="qz" aria-live="polite"></div>
+  </div>
+</section>
 <section class="sec play" id="play">
   <div class="wrap">
     <div class="sec-head">
@@ -727,6 +848,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
     </div>
     <div class="sdgs" id="sdgs" aria-hidden="true"></div>
     <p class="g-goal" id="gGoal" aria-live="polite"></p>
+    <form class="lb-new" id="lbNew" hidden><label for="lbName">New top-10 score! Add your name</label><div><input id="lbName" maxlength="18" autocomplete="nickname" placeholder="Your name"><button type="submit">Save</button></div></form>
+    <div class="board"><p class="label">Leaderboard <span>· top 10</span></p><ol id="lbList"></ol></div>
   </div>
 </section>
 </main>
@@ -739,6 +862,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
   <div class="row"><button type="button" class="yes" id="sndYes">Yes, play</button><button type="button" class="no" id="sndNo">No, thanks</button></div>
 </div>
 <button type="button" class="snd-btn" id="sndBtn" aria-label="Play nature sounds" aria-pressed="false" hidden></button>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<div class="party" id="party" hidden role="dialog" aria-label="Scuba Cat dance party">
+  <canvas id="partyCv"></canvas>
+  <div class="party-txt"><p class="k">Secret unlocked</p><h3>Scuba Cat <em>dance party!</em></h3><p>You found Kibo, Shinbo and Simba.</p></div>
+  <button type="button" class="party-x" id="partyX">Back to the website</button>
+</div>
 <footer><div class="wrap"><span>© 2026 Rijve Arefin</span></div></footer>
 
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
@@ -1015,10 +1145,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
   document.addEventListener("keydown",onKey);
   window.addEventListener("resize",size);
   document.addEventListener("visibilitychange",function(){if(document.hidden&&st==="run")over();});
+  window.__catOn=function(c2,x,y,t,sc){var sv=ctx;ctx=c2;if(!C.gold)col();ctx.save();ctx.translate(x,y);ctx.scale(sc,sc);drawCat(0,0,t,false);ctx.restore();ctx=sv;};
   var idleVis=false;
   function idle(t){if(st==="run"||!idleVis)return;clock=t/1000;draw();requestAnimationFrame(idle);}
   if("IntersectionObserver" in window){new IntersectionObserver(function(es){idleVis=es[0].isIntersecting;if(idleVis&&st!=="run")requestAnimationFrame(idle);}).observe(cv);}
-  var _over=over;over=function(){_over();if(idleVis)requestAnimationFrame(idle);};
+  var _over=over;over=function(){_over();if(window.__rtgOver)window.__rtgOver(score,unlocked||0,metCat);if(idleVis)requestAnimationFrame(idle);};
   py=undefined;size();
 })();
 </script>
@@ -1119,6 +1250,173 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
   if(!("IntersectionObserver" in window)){sec.classList.add("in");return;}
   var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();run();}},{threshold:.35});
   io.observe(sec);
+})();
+</script>
+<script>
+(function(){
+  var ba=document.getElementById("ba"); if(!ba) return;
+  var r=ba.querySelector(".ba-range"),drag=false;
+  function set(v){v=Math.max(0,Math.min(100,v));ba.style.setProperty("--p",v+"%");r.value=Math.round(v);}
+  function at(e){var b=ba.getBoundingClientRect();set((e.clientX-b.left)/b.width*100);}
+  ba.addEventListener("pointerdown",function(e){drag=true;ba.classList.remove("hint");ba.setPointerCapture&&ba.setPointerCapture(e.pointerId);at(e);});
+  ba.addEventListener("pointermove",function(e){if(drag)at(e);});
+  ["pointerup","pointercancel","lostpointercapture"].forEach(function(n){ba.addEventListener(n,function(){drag=false;});});
+  r.addEventListener("input",function(){set(+r.value);});
+  /* a gentle nudge the first time it scrolls into view */
+  if("IntersectionObserver" in window && !(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)){
+    var io=new IntersectionObserver(function(es){if(!es[0].isIntersecting)return;io.disconnect();ba.classList.add("hint");setTimeout(function(){set(78)},300);setTimeout(function(){set(28)},1300);setTimeout(function(){set(50)},2300);setTimeout(function(){ba.classList.remove("hint")},3300);},{threshold:.6});
+    io.observe(ba);
+  }
+})();
+</script>
+<script>
+(function(){
+  var box=document.getElementById("qz"); if(!box) return;
+  var G=[["No Poverty","#E5243B","You can't look away when someone is struggling, and you always do something about it."],
+  ["Zero Hunger","#DDA63A","You show love with food and believe nobody should go to bed hungry."],
+  ["Good Health and Well-being","#4C9F38","You're the friend who checks in, and you believe health is a right, not a luxury."],
+  ["Quality Education","#C5192D","You light up when you explain things, and you know learning changes lives."],
+  ["Gender Equality","#FF3A21","You call out unfairness on the spot and lift up the people around you."],
+  ["Clean Water and Sanitation","#26BDE2","You care about the basics that make everything else possible, starting with clean water."],
+  ["Affordable and Clean Energy","#FCC30B","You're full of bright ideas and want to power the world without burning it."],
+  ["Decent Work and Economic Growth","#A21942","You build things that create jobs and dignity for others."],
+  ["Industry, Innovation and Infrastructure","#FD6925","You're a builder and a tinkerer who solves problems with new ideas."],
+  ["Reduced Inequalities","#DD1367","You notice who's left out of the room, and you pull up a chair for them."],
+  ["Sustainable Cities and Communities","#FD9D24","You dream of streets, parks and neighbourhoods that work for everyone."],
+  ["Responsible Consumption and Production","#BF8B2E","You reuse, repair and think twice before you buy. Waste annoys you."],
+  ["Climate Action","#3F7E44","You feel the urgency, and you'd rather act today than apologise tomorrow."],
+  ["Life Below Water","#0A97D9","Your heart belongs to the ocean, and plastic in the sea makes you furious."],
+  ["Life on Land","#56C02B","You're happiest outdoors among trees, animals and open sky."],
+  ["Peace, Justice and Strong Institutions","#00689D","You stand for fairness and truth, even when it's hard."],
+  ["Partnerships for the Goals","#19486A","You bring people together, because you know nobody changes the world alone."]];
+  var Q=[["A free Saturday. You…",[["Volunteer at a food drive",[1,2]],["Go hiking or plant trees",[15,13]],["Teach a younger cousin something new",[4,10]],["Build or fix something",[9,7]]]],
+  ["What makes you angriest?",[["People without clean water",[6,3]],["Unequal pay and harassment",[5,8,10]],["Plastic in the ocean",[14,12]],["Corruption and injustice",[16,10]]]],
+  ["Pick a superpower.",[["Heal anyone",[3,1]],["Talk to animals",[15,14]],["Make energy from sunlight",[7,13]],["Bring enemies together",[17,16]]]],
+  ["Your dream job?",[["Climate scientist",[13,7]],["City planner",[11,9]],["Social entrepreneur",[8,1]],["Human rights lawyer",[16,5]]]],
+  ["Pick your motto.",[["Leave no one behind",[10,1]],["Waste nothing",[12,6]],["Stronger together",[17,11]],["Knowledge is power",[4,2]]]]];
+  var step=0,score,res;
+  function start(){step=0;score=new Array(18).fill(0);ask();}
+  function ask(){
+    var q=Q[step],h='<div class="qz-prog">'+Q.map(function(_,i){return '<i class="'+(i<=step?'on':'')+'"></i>';}).join("")+'</div><p class="qz-q">'+q[0]+'</p><div class="qz-opts">';
+    q[1].forEach(function(o,i){h+='<button type="button" data-i="'+i+'"><b>'+"ABCD"[i]+'</b>'+o[0]+'</button>';});
+    box.innerHTML=h+'</div>';
+    box.querySelectorAll(".qz-opts button").forEach(function(b){b.addEventListener("click",function(){var g=q[1][+b.dataset.i][1];g.forEach(function(n,j){score[n]+=j?1:2;});step++;step<Q.length?ask():result();});});
+  }
+  function result(){
+    var mx=Math.max.apply(null,score),top=[];for(var i=1;i<=17;i++)if(score[i]===mx)top.push(i);
+    res=top[Math.floor(Math.random()*top.length)];var g=G[res-1];
+    box.innerHTML='<div class="qz-card" style="--gc:'+g[1]+'"><div class="n">'+res+'</div><div><p class="k">You are Goal '+res+'</p><h3>'+g[0]+'</h3><p>'+g[2]+'</p></div></div>'+
+      '<div class="qz-act"><button type="button" class="solid" id="qzSave">Save my card</button><button type="button" class="ghost" id="qzAgain">Take it again</button></div><p class="qz-note">Share it on your story and tag @rijvearefin.</p>';
+    document.getElementById("qzAgain").onclick=start;
+    document.getElementById("qzSave").onclick=save;
+  }
+  function wrap(c,text,x,y,maxW,lh){var w=text.split(" "),line="";for(var i=0;i<w.length;i++){var t=line+w[i]+" ";if(c.measureText(t).width>maxW&&line){c.fillText(line.trim(),x,y);line=w[i]+" ";y+=lh;}else line=t;}c.fillText(line.trim(),x,y);return y;}
+  function save(){
+    var g=G[res-1],cv=document.createElement("canvas");cv.width=1080;cv.height=1350;var c=cv.getContext("2d");
+    c.fillStyle=g[1];c.fillRect(0,0,1080,1350);
+    for(var i=0;i<17;i++){c.fillStyle=G[i][1];c.fillRect(i*1080/17,0,1080/17+1,24);c.fillRect(i*1080/17,1326,1080/17+1,24);}
+    c.fillStyle="rgba(255,255,255,.12)";c.font="700 760px Jost, Arial, sans-serif";c.textAlign="right";c.fillText(String(res),1060,980);
+    c.textAlign="left";c.fillStyle="#fff";
+    c.font="600 34px Jost, Arial, sans-serif";c.fillText("WHICH GOAL ARE YOU?",90,170);
+    c.font="700 300px Jost, Arial, sans-serif";c.fillText(String(res),80,500);
+    c.font="600 40px Jost, Arial, sans-serif";c.fillText("I AM GOAL "+res,90,600);
+    c.font="700 86px Jost, Arial, sans-serif";var y=wrap(c,g[0],90,710,900,96);
+    c.font="400 44px Jost, Arial, sans-serif";wrap(c,g[2],90,y+110,880,62);
+    c.font="500 32px Jost, Arial, sans-serif";c.fillText("Take the quiz: rijvearefin-360.github.io",90,1250);
+    cv.toBlob(function(b){
+      var f=new File([b],"my-sdg-goal-"+res+".png",{type:"image/png"});
+      if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:"I am Goal "+res+": "+g[0]}).catch(function(){});return;}
+      var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=f.name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},1000);
+    },"image/png");
+  }
+  start();
+})();
+</script>
+<script>
+(function(){
+  var list=document.getElementById("lbList"),form=document.getElementById("lbNew"),inp=document.getElementById("lbName"); if(!list) return;
+  var KEY="rtg-board",pending=null,last=null;
+  function load(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return []}}
+  function saveB(b){try{localStorage.setItem(KEY,JSON.stringify(b))}catch(e){}}
+  function esc(t){return String(t).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function render(){var b=load();if(!b.length){list.innerHTML='<li class="empty">No scores yet. Be the first on the board.</li>';return;}
+    list.innerHTML=b.map(function(e,i){return '<li class="'+(e.t===last?'me':'')+'"><span class="r">'+(i+1)+'</span><span class="n">'+esc(e.n)+(e.c?' 🐱':'')+'</span><span class="s">'+e.s+' pts · '+e.g+'/17</span></li>';}).join("");}
+  window.__rtgOver=function(score,goals,cat){
+    if(!score) return; var b=load();
+    if(b.length<10||score>b[b.length-1].s){pending={s:score,g:goals,c:!!cat,t:Date.now()};form.hidden=false;try{inp.value=localStorage.getItem("rtg-name")||""}catch(e){}setTimeout(function(){inp.focus({preventScroll:true})},50);}
+  };
+  form.addEventListener("submit",function(e){e.preventDefault();if(!pending)return;var name=(inp.value||"").trim().slice(0,18)||"Anonymous";
+    try{localStorage.setItem("rtg-name",name)}catch(x){}
+    var b=load();pending.n=name;b.push(pending);b.sort(function(a,c){return c.s-a.s});b=b.slice(0,10);saveB(b);last=pending.t;pending=null;form.hidden=true;render();});
+  render();
+})();
+</script>
+<script>
+(function(){
+  var eggs=[].slice.call(document.querySelectorAll(".egg")); if(!eggs.length) return;
+  var NAMES={kibo:"Kibo",shinbo:"Shinbo",simba:"Simba"},toast=document.getElementById("toast"),tt;
+  var found={};try{found=JSON.parse(localStorage.getItem("rtg-eggs"))||{}}catch(e){}
+  function saveF(){try{localStorage.setItem("rtg-eggs",JSON.stringify(found))}catch(e){}}
+  function count(){return Object.keys(NAMES).filter(function(k){return found[k]}).length;}
+  function say(h){toast.innerHTML=h;toast.hidden=false;clearTimeout(tt);tt=setTimeout(function(){toast.hidden=true},3200);}
+  eggs.forEach(function(b){var k=b.dataset.egg;if(found[k]){b.classList.add("found");b.setAttribute("aria-label","Found "+NAMES[k]);}
+    b.addEventListener("click",function(){
+      if(!found[k]){found[k]=1;saveF();b.classList.add("found");b.setAttribute("aria-label","Found "+NAMES[k]);}
+      var n=count();
+      if(n<3)say("You found <b>"+NAMES[k]+"</b>! "+n+" of 3 pets. Keep looking…");
+      else party();
+    });});
+  /* dance party */
+  var P=document.getElementById("party"),cv=document.getElementById("partyCv"),cx=cv.getContext("2d"),raf,actx=null,beat=null,conf=[];
+  var COL=["#E5243B","#DDA63A","#4C9F38","#C5192D","#FF3A21","#26BDE2","#FCC30B","#A21942","#FD6925","#DD1367","#FD9D24","#BF8B2E","#3F7E44","#0A97D9","#56C02B","#00689D","#19486A"];
+  function music(){
+    var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;actx=new AC();var m=actx.createGain();m.gain.value=.35;m.connect(actx.destination);
+    var bpm=118,step=60/bpm/2,next=actx.currentTime+.1,i=0,bass=[55,55,65.4,73.4];
+    beat=setInterval(function(){while(next<actx.currentTime+.2){var t=next;
+      if(i%4===0){var o=actx.createOscillator(),g=actx.createGain();o.frequency.setValueAtTime(140,t);o.frequency.exponentialRampToValueAtTime(45,t+.12);g.gain.setValueAtTime(.9,t);g.gain.exponentialRampToValueAtTime(.001,t+.18);o.connect(g);g.connect(m);o.start(t);o.stop(t+.2);}
+      if(i%2===1){var nb=actx.createBuffer(1,2205,44100),d=nb.getChannelData(0);for(var j=0;j<d.length;j++)d[j]=Math.random()*2-1;var s=actx.createBufferSource(),hp=actx.createBiquadFilter(),hg=actx.createGain();s.buffer=nb;hp.type="highpass";hp.frequency.value=7000;hg.gain.setValueAtTime(.18,t);hg.gain.exponentialRampToValueAtTime(.001,t+.05);s.connect(hp);hp.connect(hg);hg.connect(m);s.start(t);}
+      if(i%2===0){var b=actx.createOscillator(),bg=actx.createGain();b.type="triangle";b.frequency.value=bass[Math.floor(i/8)%4]*(i%8===6?2:1);bg.gain.setValueAtTime(.35,t);bg.gain.exponentialRampToValueAtTime(.001,t+step*1.8);b.connect(bg);bg.connect(m);b.start(t);b.stop(t+step*2);}
+      if(i%8===4){var c=actx.createOscillator(),cg=actx.createGain();c.type="square";c.frequency.value=[523,659,587,784][Math.floor(i/8)%4];cg.gain.setValueAtTime(.05,t);cg.gain.exponentialRampToValueAtTime(.001,t+.25);c.connect(cg);cg.connect(m);c.start(t);c.stop(t+.3);}
+      next+=step;i++;}},50);
+  }
+  function party(){
+    P.hidden=false;document.body.style.overflow="hidden";var dpr=Math.min(devicePixelRatio||1,2),W,H;
+    function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);}
+    size();window.addEventListener("resize",size);conf=[];
+    try{music();}catch(e){}
+    var t0=performance.now();
+    (function frame(now){var t=(now-t0)/1000;cx.clearRect(0,0,W,H);
+      for(var k=0;k<5;k++){var a=t*.6+k*1.3;cx.globalAlpha=.16;cx.fillStyle=COL[(k*3+Math.floor(t*2))%17];cx.beginPath();cx.arc(W*(.5+.45*Math.sin(a)),H*(.45+.35*Math.cos(a*1.3)),Math.min(W,H)*.35,0,7);cx.fill();}
+      cx.globalAlpha=1;
+      if(conf.length<160)for(var c=0;c<4;c++)conf.push({x:Math.random()*W,y:-10,vy:60+Math.random()*120,vx:(Math.random()-.5)*40,r:Math.random()*6,c:COL[Math.floor(Math.random()*17)],s:4+Math.random()*5});
+      conf.forEach(function(p){p.y+=p.vy/60;p.x+=p.vx/60;p.r+=.08;if(p.y>H+10){p.y=-10;p.x=Math.random()*W;}cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);cx.restore();});
+      var n=W<600?3:5,sc=W<600?2.1:2.6,gap=W/(n+1);
+      for(var i=0;i<n;i++){if(window.__catOn)window.__catOn(cx,gap*(i+1),H*.78,t+i*.11,sc);}
+      raf=requestAnimationFrame(frame);})(t0);
+    document.getElementById("partyX").focus({preventScroll:true});
+  }
+  function close(){P.hidden=true;document.body.style.overflow="";cancelAnimationFrame(raf);clearInterval(beat);if(actx){actx.close();actx=null;}}
+  document.getElementById("partyX").addEventListener("click",close);
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!P.hidden)close();});
+})();
+</script>
+<script>
+(function(){
+  var f=document.getElementById("askForm"); if(!f) return;
+  var msg=document.getElementById("askMsg"),btn=document.getElementById("askBtn"),q=document.getElementById("askQ");
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    if(f.elements["_honey"].value) return;
+    var text=q.value.trim(); if(text.length<5){msg.className="ask-msg";msg.textContent="Please write your question first.";q.focus();return;}
+    if(f.elements["email"].value&&!f.elements["email"].checkValidity()){msg.className="ask-msg";msg.textContent="That email doesn't look right. You can also leave it empty.";f.elements["email"].focus();return;}
+    btn.disabled=true;msg.className="ask-msg";msg.textContent="Sending…";
+    fetch("https://formsubmit.co/ajax/rijvearefin@gmail.com",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body:JSON.stringify({_subject:"New question for Ask Rijve",_template:"table",_captcha:"false",question:text,name:f.elements["name"].value.trim()||"Anonymous",from:f.elements["from"].value.trim(),email:f.elements["email"].value.trim()})})
+    .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||j.success==="false"||j.success===false)throw 0;});})
+    .then(function(){f.reset();msg.className="ask-msg ok";msg.textContent="Thank you! Your question is on its way to Rijve.";})
+    .catch(function(){msg.className="ask-msg";msg.textContent="Sorry, that didn't send. Please try again, or email rijvearefin@gmail.com.";})
+    .then(function(){btn.disabled=false;});
+  });
 })();
 </script>
 <!--B2-->

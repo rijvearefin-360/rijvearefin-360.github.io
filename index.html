@@ -201,6 +201,18 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .snd-btn .bars i:nth-child(2){animation-delay:-.4s}.snd-btn .bars i:nth-child(3){animation-delay:-.7s}
 .menu-open .snd-btn,.menu-open .snd-pop{display:none}
 @keyframes eq{0%,100%{height:25%}50%{height:100%}}
+.numbers{position:relative;overflow:hidden}
+.sdg-stripe{display:grid;grid-template-columns:repeat(17,1fr);height:3px}
+.sdg-stripe i{background:var(--c);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.3,.7,.2,1) var(--d)}
+.numbers.in .sdg-stripe i{transform:none}
+.num{transition:transform .35s}
+.num:hover{transform:translateY(-3px)}
+.num b{font-variant-numeric:tabular-nums}
+.num .bar{display:block;height:2px;width:0;background:var(--g);transition:width 1.1s cubic-bezier(.3,.7,.2,1) .5s}
+.numbers.in .num .bar{width:2.6rem}
+.num .sdg{margin:.2rem 0 0;display:flex;align-items:center;gap:.5rem;font:500 .62rem/1.3 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);opacity:0;transform:translateY(6px);transition:opacity .6s 1s,transform .6s 1s}
+.numbers.in .num .sdg{opacity:1;transform:none}
+.num .sdg em{font-style:normal;display:grid;place-items:center;min-width:1.35rem;height:1.35rem;padding:0 .2rem;background:var(--g);color:#fff;font:700 .7rem/1 var(--f-body);letter-spacing:0}
 .work{background:var(--bg-2)}
 .areas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--gold)}
 .area{padding:2rem 1.6rem 0 0;display:grid;gap:.9rem;align-content:start}
@@ -350,11 +362,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 </section>
 
 <section class="numbers" aria-label="Impact at a glance">
+  <div class="sdg-stripe" aria-hidden="true"><i style="--c:#E5243B;--d:0ms"></i><i style="--c:#DDA63A;--d:45ms"></i><i style="--c:#4C9F38;--d:90ms"></i><i style="--c:#C5192D;--d:135ms"></i><i style="--c:#FF3A21;--d:180ms"></i><i style="--c:#26BDE2;--d:225ms"></i><i style="--c:#FCC30B;--d:270ms"></i><i style="--c:#A21942;--d:315ms"></i><i style="--c:#FD6925;--d:360ms"></i><i style="--c:#DD1367;--d:405ms"></i><i style="--c:#FD9D24;--d:450ms"></i><i style="--c:#BF8B2E;--d:495ms"></i><i style="--c:#3F7E44;--d:540ms"></i><i style="--c:#0A97D9;--d:585ms"></i><i style="--c:#56C02B;--d:630ms"></i><i style="--c:#00689D;--d:675ms"></i><i style="--c:#19486A;--d:720ms"></i></div>
   <div class="wrap num-grid">
-    <div class="num"><b>5M+</b><span>people reached by <a class="tl" href="https://www.facebook.com/awarenessthreesixty" target="_blank" rel="noopener">Awareness 360</a></span></div>
-    <div class="num"><b>100+</b><span>countries in our youth network</span></div>
-    <div class="num"><b>$700K+</b><span>raised for grassroots work</span></div>
-    <div class="num"><b>2,000+</b><span>youth-led projects supported</span></div>
+    <div class="num" style="--g:#26BDE2"><b data-to="5" data-pre="" data-suf="M+" data-sep="0">5M+</b><i class="bar"></i><span>people reached by <a class="tl" href="https://www.facebook.com/awarenessthreesixty" target="_blank" rel="noopener">Awareness 360</a></span><p class="sdg"><em>6</em>Clean Water and Sanitation</p></div>
+    <div class="num" style="--g:#19486A"><b data-to="100" data-pre="" data-suf="+" data-sep="0">100+</b><i class="bar"></i><span>countries in our youth network</span><p class="sdg"><em>17</em>Partnerships for the Goals</p></div>
+    <div class="num" style="--g:#E5243B"><b data-to="700" data-pre="$" data-suf="K+" data-sep="0">$700K+</b><i class="bar"></i><span>raised for grassroots work</span><p class="sdg"><em>1</em>No Poverty</p></div>
+    <div class="num" style="--g:#C5192D"><b data-to="2000" data-pre="" data-suf="+" data-sep="1">2,000+</b><i class="bar"></i><span>youth-led projects supported</span><p class="sdg"><em>4</em>Quality Education</p></div>
   </div>
 </section>
 
@@ -1089,6 +1102,23 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
   var pref=read("rtg-sound");
   if(pref){ui();}
   else setTimeout(function(){pop.hidden=false;},2500);
+})();
+</script>
+<script>
+(function(){
+  var sec=document.querySelector(".numbers"); if(!sec) return;
+  var nums=[].slice.call(sec.querySelectorAll("b[data-to]"));
+  var still=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function fmt(el,v,fin){var to=+el.dataset.to,n=Math.round(v),t=(to<10&&!fin)?v.toFixed(1):(el.dataset.sep==="1"?n.toLocaleString("en-US"):String(n));el.textContent=el.dataset.pre+t+el.dataset.suf;}
+  function run(){
+    sec.classList.add("in");
+    if(still) return;
+    nums.forEach(function(el,i){var to=+el.dataset.to,dur=1800,t0=null;fmt(el,0);
+      setTimeout(function(){requestAnimationFrame(function step(t){if(t0===null)t0=t;var k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);fmt(el,to*e,k>=1);if(k<1)requestAnimationFrame(step);});},i*150);});
+  }
+  if(!("IntersectionObserver" in window)){sec.classList.add("in");return;}
+  var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();run();}},{threshold:.35});
+  io.observe(sec);
 })();
 </script>
 <!--B2-->

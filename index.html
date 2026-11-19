@@ -849,7 +849,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
     <div class="sdgs" id="sdgs" aria-hidden="true"></div>
     <p class="g-goal" id="gGoal" aria-live="polite"></p>
     <form class="lb-new" id="lbNew" hidden><label for="lbName">New top-10 score! Add your name</label><div><input id="lbName" maxlength="18" autocomplete="nickname" placeholder="Your name"><button type="submit">Save</button></div></form>
-    <div class="board"><p class="label">Leaderboard <span>· top 10</span></p><ol id="lbList"></ol></div>
+    <div class="board"><p class="label">Leaderboard <span id="lbScope">· top 10</span></p><ol id="lbList"></ol></div>
   </div>
 </section>
 </main>
@@ -1334,21 +1334,42 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 </script>
 <script>
 (function(){
-  var list=document.getElementById("lbList"),form=document.getElementById("lbNew"),inp=document.getElementById("lbName"); if(!list) return;
-  var KEY="rtg-board",pending=null,last=null;
-  function load(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return []}}
-  function saveB(b){try{localStorage.setItem(KEY,JSON.stringify(b))}catch(e){}}
+  var list=document.getElementById("lbList"),form=document.getElementById("lbNew"),inp=document.getElementById("lbName"),scope=document.getElementById("lbScope"); if(!list) return;
+  /* Shared leaderboard (Supabase). Fill these two in to go worldwide; empty = this device only. */
+  var SB_URL="",SB_KEY="";
+  var shared=!!(SB_URL&&SB_KEY),KEY="rtg-board",pending=null,last=null,board=[];
+  function hdr(){var h={"apikey":SB_KEY,"Content-Type":"application/json"};if(SB_KEY.indexOf("sb_")!==0)h.Authorization="Bearer "+SB_KEY;return h;}
+  function loadLocal(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return []}}
+  function saveLocal(b){try{localStorage.setItem(KEY,JSON.stringify(b))}catch(e){}}
+  function fetchBoard(){
+    if(!shared)return Promise.resolve(loadLocal());
+    return fetch(SB_URL+"/rest/v1/scores?select=name,score,goals,cat,created_at&order=score.desc,created_at.asc&limit=10",{headers:hdr()})
+      .then(function(r){if(!r.ok)throw 0;return r.json();})
+      .then(function(rows){return rows.map(function(x){return {n:x.name,s:x.score,g:x.goals,c:x.cat,t:x.created_at};});})
+      .catch(function(){shared=false;return loadLocal();});
+  }
   function esc(t){return String(t).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
-  function render(){var b=load();if(!b.length){list.innerHTML='<li class="empty">No scores yet. Be the first on the board.</li>';return;}
-    list.innerHTML=b.map(function(e,i){return '<li class="'+(e.t===last?'me':'')+'"><span class="r">'+(i+1)+'</span><span class="n">'+esc(e.n)+(e.c?' 🐱':'')+'</span><span class="s">'+e.s+' pts · '+e.g+'/17</span></li>';}).join("");}
+  function render(){
+    if(scope)scope.textContent=shared?"· top 10 worldwide":"· top 10 on this device";
+    if(!board.length){list.innerHTML='<li class="empty">No scores yet. Be the first on the board.</li>';return;}
+    list.innerHTML=board.map(function(e,i){return '<li class="'+(last&&e.n===last.n&&e.s===last.s?'me':'')+'"><span class="r">'+(i+1)+'</span><span class="n">'+esc(e.n)+(e.c?' 🐱':'')+'</span><span class="s">'+e.s+' pts · '+e.g+'/17</span></li>';}).join("");}
+  function refresh(){return fetchBoard().then(function(b){board=b;render();});}
   window.__rtgOver=function(score,goals,cat){
-    if(!score) return; var b=load();
-    if(b.length<10||score>b[b.length-1].s){pending={s:score,g:goals,c:!!cat,t:Date.now()};form.hidden=false;try{inp.value=localStorage.getItem("rtg-name")||""}catch(e){}setTimeout(function(){inp.focus({preventScroll:true})},50);}
+    if(!score) return;
+    refresh().then(function(){
+      if(board.length<10||score>board[board.length-1].s){pending={s:score,g:goals,c:!!cat};form.hidden=false;try{inp.value=localStorage.getItem("rtg-name")||""}catch(e){}setTimeout(function(){inp.focus({preventScroll:true})},50);}
+    });
   };
-  form.addEventListener("submit",function(e){e.preventDefault();if(!pending)return;var name=(inp.value||"").trim().slice(0,18)||"Anonymous";
+  form.addEventListener("submit",function(e){e.preventDefault();if(!pending)return;
+    var name=(inp.value||"").replace(/\s+/g," ").trim().slice(0,18)||"Anonymous",entry=pending;pending=null;form.hidden=true;
     try{localStorage.setItem("rtg-name",name)}catch(x){}
-    var b=load();pending.n=name;b.push(pending);b.sort(function(a,c){return c.s-a.s});b=b.slice(0,10);saveB(b);last=pending.t;pending=null;form.hidden=true;render();});
-  render();
+    entry.n=name;last=entry;
+    var b=loadLocal();b.push({n:name,s:entry.s,g:entry.g,c:entry.c,t:Date.now()});b.sort(function(a,c){return c.s-a.s});saveLocal(b.slice(0,10));
+    if(!shared){board=loadLocal();render();return;}
+    fetch(SB_URL+"/rest/v1/scores",{method:"POST",headers:Object.assign(hdr(),{"Prefer":"return=minimal"}),body:JSON.stringify({name:name,score:entry.s,goals:entry.g,cat:entry.c})})
+      .catch(function(){}).then(refresh);
+  });
+  refresh();
 })();
 </script>
 <script>

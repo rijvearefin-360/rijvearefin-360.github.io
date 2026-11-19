@@ -214,6 +214,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .aw .y{font:400 italic 1rem/1 var(--f-display);color:var(--gold)}
 .aw b{font:400 1.35rem/1.25 var(--f-display)}
 .aw span{color:var(--ink-soft);font-weight:300;font-size:.95rem}
+a.aw{color:inherit;text-decoration:none;transition:background .2s}
+a.aw b::after{content:" ↗";color:var(--gold);font-size:.8em}
+a.aw:hover b,a.aw:focus-visible b{color:var(--gold-ink)}
+.judge a{color:var(--gold-ink);text-decoration:underline;text-underline-offset:3px}
 .judge{margin-top:2.4rem;color:var(--ink-soft);font-weight:300;max-width:54rem}
 @media (max-width:900px){.aw-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.aw:not(:nth-child(3n+1)){padding-left:0;border-left:0}.aw:nth-child(even){padding-left:1.2rem;border-left:1px solid var(--line)}}
 @media (max-width:560px){.aw-grid{grid-template-columns:1fr}.aw:nth-child(even){padding-left:0;border-left:0}}
@@ -528,8 +532,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
       <a class="press" href="https://asiapacific.unwomen.org/sites/default/files/2024-09/ap-30for2030-members-booklet-update-05SEP2004.pdf" target="_blank" rel="noopener"><p class="src">UN Women<small>2024</small></p><div><h3>30 for 2030: gender equality champions</h3><p>Profile in UN Women Asia-Pacific’s youth leaders booklet.</p></div><span class="arr">↗</span></a>
       <a class="press" href="https://theprestige.global/rijve-arefin/" target="_blank" rel="noopener"><p class="src">The Prestige<small>2021 · Feature</small></p><div><h3>Rising through the odds</h3><p>A long interview on bullying, family pressure and building Awareness 360.</p></div><span class="arr">↗</span></a>
       <a class="press" href="https://www.thedailystar.net/star-youth/news/empowering-the-youth-build-community-service-projects-2104677" target="_blank" rel="noopener"><p class="src">The Daily Star<small>2021 · Feature</small></p><div><h3>Empowering the youth to build community service projects</h3><p>How Awareness 360 trains young people to lead.</p></div><span class="arr">↗</span></a>
+      <a class="press" href="https://www.thedailystar.net/node/2119949" target="_blank" rel="noopener"><p class="src">The Daily Star<small>Jun 2021</small></p><div><h3>Nineteen changemakers from Bangladesh honoured at 2021 Diana Awards</h3><p>Named among the year’s Diana Award recipients.</p></div><span class="arr">↗</span></a>
+      <a class="press" href="https://pepsico.com/our-stories/press-release/inaugural-usa-pavilion-at-expo-2020-fellows-program-results-in-work-benefitting-thousands-of-people" target="_blank" rel="noopener"><p class="src">PepsiCo<small>2022 · Press release</small></p><div><h3>Inaugural USA Pavilion at Expo 2020 Fellows Program results in work benefitting thousands</h3><p>Listed among the program’s fellows.</p></div><span class="arr">↗</span></a>
       <a class="press" href="https://studyinternational.com/news/bsc-in-economics-grad/" target="_blank" rel="noopener"><p class="src">Study International<small>May 2021</small></p><div><h3>Dhaka-born economics graduate Rijve Arefin is making Asia cleaner</h3><p>From UPM to Forbes 30 Under 30 Asia.</p></div><span class="arr">↗</span></a>
       <a class="press" href="https://en.prothomalo.com/youth/nine-bangladeshis-featured-in-the-forbes-30-under-30-asia-list" target="_blank" rel="noopener"><p class="src">Prothom Alo<small>Apr 2021</small></p><div><h3>Nine Bangladeshis featured in the Forbes 30 Under 30 Asia list</h3><p>Named in Social Impact with Shomy Hasan Chowdhury.</p></div><span class="arr">↗</span></a>
+      <a class="press" href="https://www.thedailystar.net/node/2080621" target="_blank" rel="noopener"><p class="src">The Daily Star<small>Apr 2021</small></p><div><h3>Nine Bangladeshi youths on Forbes 30 Under 30 Asia list</h3><p>Coverage of the Social Impact listing.</p></div><span class="arr">↗</span></a>
       <a class="press" href="https://www.tbsnews.net/node/234253" target="_blank" rel="noopener"><p class="src">The Business Standard<small>Apr 2021</small></p><div><h3>9 Bangladeshi entrepreneurs named in Forbes 30 Under 30 Asia list</h3><p>Coverage of the 2021 Forbes Asia class.</p></div><span class="arr">↗</span></a>
       <a class="press" href="https://www.thedailystar.net/star-youth/workshops-hygiene-hiv-std-and-more-1450129" target="_blank" rel="noopener"><p class="src">The Daily Star<small>2017</small></p><div><h3>Workshops on hygiene, HIV, STD and more</h3><p>An early Awareness 360 health campaign, where I led the hygiene session.</p></div><span class="arr">↗</span></a>
     </div>
@@ -544,16 +551,16 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
     </div>
     <div class="aw-grid">
       <div class="aw"><p class="y">2025</p><b>Commonwealth &amp; Yusuf Ali Scholarships</b><span>Fully funded MA Human Rights, University of London</span></div>
-      <div class="aw"><p class="y">2022</p><b>UN Women 30 for 2030</b><span>Youth leader, Asia-Pacific</span></div>
+      <a class="aw" href="https://asiapacific.unwomen.org/sites/default/files/2024-09/ap-30for2030-members-booklet-update-05SEP2004.pdf" target="_blank" rel="noopener"><p class="y">2022</p><b>UN Women 30 for 2030</b><span>Youth leader, Asia-Pacific</span></a>
       <div class="aw"><p class="y">2022</p><b>50 Most Influential Global Leaders</b><span>Pan-African Youth Leadership Foundation, Global Leaders Summit</span></div>
-      <div class="aw"><p class="y">2021</p><b>Forbes 30 Under 30 Asia</b><span>Social Impact</span></div>
-      <div class="aw"><p class="y">2021</p><b>The Diana Award</b><span>For young people creating social change</span></div>
-      <div class="aw"><p class="y">2021</p><b>USA Pavilion @ Expo 2020</b><span>Winner, USD 15,000 PepsiCo Foundation grant</span></div>
+      <a class="aw" href="https://www.forbes.com/30-under-30/2021/asia/social-impact/" target="_blank" rel="noopener"><p class="y">2021</p><b>Forbes 30 Under 30 Asia</b><span>Social Impact</span></a>
+      <a class="aw" href="https://www.thedailystar.net/node/2119949" target="_blank" rel="noopener"><p class="y">2021</p><b>The Diana Award</b><span>For young people creating social change</span></a>
+      <a class="aw" href="https://pepsico.com/our-stories/press-release/inaugural-usa-pavilion-at-expo-2020-fellows-program-results-in-work-benefitting-thousands-of-people" target="_blank" rel="noopener"><p class="y">2021</p><b>USA Pavilion @ Expo 2020</b><span>Winner, USD 15,000 PepsiCo Foundation grant</span></a>
       <div class="aw"><p class="y">2022</p><b>Climate Action Champions Network</b><span>Fellow</span></div>
-      <div class="aw"><p class="y">2019</p><b>Royal Commonwealth Society</b><span>Associate Fellow</span></div>
-      <div class="aw"><p class="y">2019</p><b>Putra Icon Award</b><span>First international recipient, Universiti Putra Malaysia</span></div>
+      <a class="aw" href="https://studyinternational.com/news/bsc-in-economics-grad/" target="_blank" rel="noopener"><p class="y">2019</p><b>Royal Commonwealth Society</b><span>Associate Fellow</span></a>
+      <a class="aw" href="https://studyinternational.com/news/bsc-in-economics-grad/" target="_blank" rel="noopener"><p class="y">2019</p><b>Putra Icon Award</b><span>First international recipient, Universiti Putra Malaysia</span></a>
     </div>
-    <p class="judge">I’ve also judged The Diana Award (2022–23), the Commonwealth Youth Awards (2021–22), the UN Women Asia-Pacific WEPs Awards (2022), and served as Senior Judge of The Queen’s Commonwealth Essay Competition (2022).</p>
+    <p class="judge">I’ve also judged <a href="https://diana-award.org.uk/news/meet-the-2023-diana-award-judging-panel" target="_blank" rel="noopener">The Diana Award (2022–23)</a>, the Commonwealth Youth Awards (2021–22), the UN Women Asia-Pacific WEPs Awards (2022), and served as Senior Judge of The Queen’s Commonwealth Essay Competition (2022).</p>
   </div>
 </section>
 

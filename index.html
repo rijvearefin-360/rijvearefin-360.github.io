@@ -216,15 +216,18 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .num .sdg{margin:.2rem 0 0;display:flex;align-items:center;gap:.5rem;font:500 .62rem/1.3 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);opacity:0;transform:translateY(6px);transition:opacity .6s 1s,transform .6s 1s}
 .numbers.in .num .sdg{opacity:1;transform:none}
 .num .sdg em{font-style:normal;display:grid;place-items:center;min-width:1.35rem;height:1.35rem;padding:0 .2rem;background:var(--g);color:#fff;font:700 .7rem/1 var(--f-body);letter-spacing:0}
-.ba{position:relative;aspect-ratio:3/2;max-width:100%;overflow:hidden;background:var(--bg-3);touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:ew-resize}
+.ba{display:grid;gap:.9rem;max-width:100%}
+.ba-stage{position:relative;display:block;width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--bg-3);border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .ba-img,.ba-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.ba-before{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
-.ba-line{position:absolute;top:0;bottom:0;left:var(--p);width:2px;margin-left:-1px;background:var(--gold);pointer-events:none}
-.ba-line span{position:absolute;top:50%;left:50%;width:2.6rem;height:2.6rem;margin:-1.3rem 0 0 -1.3rem;border-radius:50%;background:var(--gold);color:var(--on-gold);display:grid;place-items:center;font-size:1.2rem;box-shadow:0 4px 18px rgba(0,0,0,.4)}
-.ba-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize;pointer-events:none}
-.ba-range:focus-visible + *,.ba:focus-within .ba-line span{outline:2px solid var(--ink);outline-offset:2px}
-.ba.hint .ba-line{transition:left .9s cubic-bezier(.4,0,.2,1)}
-.ba.hint .ba-before{transition:clip-path .9s cubic-bezier(.4,0,.2,1)}
+.ba-after{opacity:0;transition:opacity 1.1s ease}
+.ba[data-state="after"] .ba-after{opacity:1}
+.ba-img img{transform:scale(1.04);transition:transform 6s ease}
+.ba[data-state="after"] .ba-after img,.ba[data-state="before"] .ba-img:not(.ba-after) img{transform:scale(1)}
+.ba-switch{position:relative;justify-self:start;display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--gold);background:var(--bg)}
+.ba-switch button{position:relative;z-index:1;background:none;border:0;color:var(--ink-soft);font:500 .72rem/1 var(--f-body);letter-spacing:.24em;text-transform:uppercase;padding:.85rem 1.4rem;cursor:pointer;transition:color .35s}
+.ba-switch button[aria-pressed="true"]{color:var(--on-gold)}
+.ba-knob{position:absolute;top:0;bottom:0;left:0;width:50%;background:var(--gold);transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.ba[data-state="after"] .ba-knob{transform:translateX(100%)}
 .quiz{background:var(--bg-2);border-top:1px solid var(--line)}
 .q-stripe{display:grid;grid-template-columns:repeat(17,1fr);height:3px;margin-top:-1px}
 .q-wrap{position:relative}
@@ -503,13 +506,18 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 
     <article class="chapter">
       <div class="ch-media">
-        <div class="ba" id="ba" style="--p:50%">
-          <picture class="ba-img"><source srcset="img/canal-after.webp" type="image/webp"><img src="img/canal-after.jpg" alt="The same Dhaka canal after the Khale Hobe clean-up, with clear water and painted embankments" loading="lazy" width="1440" height="948"></picture>
-          <picture class="ba-img ba-before"><source srcset="img/canal-before.webp" type="image/webp"><img src="img/canal-before.jpg" alt="A Dhaka canal choked with rubbish before the clean-up" loading="lazy" width="1440" height="958"></picture>
-          <div class="ba-line" aria-hidden="true"><span>&#8596;</span></div>
-          <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Slide to compare the canal before and after the clean-up">
+        <div class="ba" id="ba" data-state="before">
+          <button type="button" class="ba-stage" id="baStage" aria-label="Show the canal after the clean-up">
+            <picture class="ba-img"><source srcset="img/canal-before.webp" type="image/webp"><img src="img/canal-before.jpg" alt="A Dhaka canal choked with rubbish before the clean-up" loading="lazy" width="1440" height="958"></picture>
+            <picture class="ba-img ba-after"><source srcset="img/canal-after.webp" type="image/webp"><img src="img/canal-after.jpg" alt="The same Dhaka canal after the Khale Hobe clean-up, with clear water and painted embankments" loading="lazy" width="1440" height="948"></picture>
+          </button>
+          <div class="ba-switch" role="group" aria-label="Before or after the clean-up">
+            <button type="button" data-v="before" aria-pressed="true">Before</button>
+            <button type="button" data-v="after" aria-pressed="false">After</button>
+            <span class="ba-knob" aria-hidden="true"></span>
+          </div>
         </div>
-        <p class="cap">Drag to see the canal near home before and after our Khale Hobe clean-up.</p>
+        <p class="cap">Tap to see the canal near home before and after our Khale Hobe clean-up.</p>
       </div>
       <div class="ch-text">
         <p class="ch-num">I</p>
@@ -1345,17 +1353,15 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 <script>
 (function(){
   var ba=document.getElementById("ba"); if(!ba) return;
-  var r=ba.querySelector(".ba-range"),drag=false;
-  function set(v){v=Math.max(0,Math.min(100,v));ba.style.setProperty("--p",v+"%");r.value=Math.round(v);}
-  function at(e){var b=ba.getBoundingClientRect();set((e.clientX-b.left)/b.width*100);}
-  ba.addEventListener("pointerdown",function(e){drag=true;ba.classList.remove("hint");ba.setPointerCapture&&ba.setPointerCapture(e.pointerId);at(e);});
-  ba.addEventListener("pointermove",function(e){if(drag)at(e);});
-  ["pointerup","pointercancel","lostpointercapture"].forEach(function(n){ba.addEventListener(n,function(){drag=false;});});
-  r.addEventListener("input",function(){set(+r.value);});
-  /* a gentle nudge the first time it scrolls into view */
+  var stage=document.getElementById("baStage"),btns=[].slice.call(ba.querySelectorAll(".ba-switch button")),touched=false;
+  function set(v){ba.dataset.state=v;btns.forEach(function(b){b.setAttribute("aria-pressed",b.dataset.v===v?"true":"false");});
+    stage.setAttribute("aria-label",v==="after"?"Show the canal before the clean-up":"Show the canal after the clean-up");}
+  btns.forEach(function(b){b.addEventListener("click",function(){touched=true;set(b.dataset.v);});});
+  stage.addEventListener("click",function(){touched=true;set(ba.dataset.state==="after"?"before":"after");});
+  /* reveal the after photo once, the first time it scrolls into view */
   if("IntersectionObserver" in window && !(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)){
-    var io=new IntersectionObserver(function(es){if(!es[0].isIntersecting)return;io.disconnect();ba.classList.add("hint");setTimeout(function(){set(78)},300);setTimeout(function(){set(28)},1300);setTimeout(function(){set(50)},2300);setTimeout(function(){ba.classList.remove("hint")},3300);},{threshold:.6});
-    io.observe(ba);
+    var io=new IntersectionObserver(function(es){if(!es[0].isIntersecting)return;io.disconnect();setTimeout(function(){if(!touched)set("after");},1600);},{threshold:.6});
+    io.observe(stage);
   }
 })();
 </script>

@@ -849,25 +849,51 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
     ctx.strokeStyle="#FD6925";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(11,0);ctx.quadraticCurveTo(16,-2,15,-14);ctx.stroke();ctx.restore();}
   function drawCat(x,y,t,blink){
     if(blink)return;
-    var bob=Math.abs(Math.sin(t*9))*4,rot=Math.sin(t*9)*.22;
-    ctx.save();ctx.translate(x,y-bob);ctx.rotate(rot);ctx.scale(1.3,1.3);
-    var cream="#e9dcc0",suit="#1f3540";
-    ctx.strokeStyle=cream;ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-9,-10);ctx.quadraticCurveTo(-22,-14+Math.sin(t*12)*6,-20,-26);ctx.stroke();
-    ctx.fillStyle="#FD6925";ctx.beginPath();ctx.roundRect?ctx.roundRect(-14,-28,7,18,3):ctx.rect(-14,-28,7,18);ctx.fill();
-    ctx.fillStyle="#FCC30B";ctx.beginPath();ctx.ellipse(-6,-1,7,3,-.3+Math.sin(t*18)*.3,0,7);ctx.fill();ctx.beginPath();ctx.ellipse(7,-1,7,3,.3-Math.sin(t*18)*.3,0,7);ctx.fill();
-    ctx.fillStyle=suit;ctx.beginPath();ctx.ellipse(0,-14,10,12,0,0,7);ctx.fill();
-    ctx.fillStyle=C.gold;ctx.fillRect(-10,-15,20,2.5);
-    var a=Math.sin(t*9)*.9;ctx.strokeStyle=cream;ctx.lineWidth=4;
-    ctx.beginPath();ctx.moveTo(-8,-18);ctx.lineTo(-17,-24-a*7);ctx.stroke();ctx.beginPath();ctx.moveTo(8,-18);ctx.lineTo(17,-24+a*7);ctx.stroke();
-    ctx.fillStyle=cream;ctx.beginPath();ctx.arc(0,-33,11,0,7);ctx.fill();
-    ctx.beginPath();ctx.moveTo(-10,-38);ctx.lineTo(-8,-49);ctx.lineTo(-2,-43);ctx.fill();ctx.beginPath();ctx.moveTo(10,-38);ctx.lineTo(8,-49);ctx.lineTo(2,-43);ctx.fill();
-    ctx.fillStyle="#e7a3a0";ctx.beginPath();ctx.moveTo(-1.5,-29);ctx.lineTo(1.5,-29);ctx.lineTo(0,-27);ctx.fill();
-    ctx.strokeStyle="#5b5346";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-3,-28);ctx.lineTo(-12,-29);ctx.moveTo(-3,-27);ctx.lineTo(-12,-25);ctx.moveTo(3,-28);ctx.lineTo(12,-29);ctx.moveTo(3,-27);ctx.lineTo(12,-25);ctx.stroke();
-    ctx.fillStyle="rgba(127,220,255,.75)";ctx.strokeStyle=C.gold;ctx.lineWidth=2;ctx.beginPath();ctx.roundRect?ctx.roundRect(-10,-40,20,9,4.5):ctx.rect(-10,-40,20,9);ctx.fill();ctx.stroke();
-    ctx.fillStyle="#1f3540";ctx.beginPath();ctx.arc(-4,-35.5,1.8,0,7);ctx.arc(4,-35.5,1.8,0,7);ctx.fill();
-    ctx.strokeStyle="#FD6925";ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(10,-36);ctx.quadraticCurveTo(16,-38,14,-50);ctx.stroke();
+    /* British Shorthair in scuba gear, doing the meme dance: upright, wide stance, alternating paw punches across the chest (~2.3 beats/s), sway and bounce on every beat */
+    var ph=t*2.3*Math.PI*2, sn=Math.sin(ph), pL=Math.max(0,sn), pR=Math.max(0,-sn);
+    var bounce=Math.abs(sn)*3, rot=sn*.1, tilt=-sn*.09;
+    var fur="#8592a0", furD="#6f7b88", muzzle="#a7b1bb", suit="#3a6175", fin="#FCC30B", tank="#FD6925";
+    function ln(ax,ay,bx,by,w,c){ctx.strokeStyle=c;ctx.lineWidth=w;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.stroke();}
+    function rr(x0,y0,w,h,r){ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x0,y0,w,h,r);else ctx.rect(x0,y0,w,h);}
+    ctx.save();ctx.translate(x,y);ctx.scale(1.3,1.3);
+    /* legs: wide stance, knees flex with the beat */
+    var k=bounce*.6;
+    ln(-4,-15+k,-8,-3,5.5,fur);ln(4,-15+k,8,-3,5.5,fur);
+    ctx.fillStyle=fin;ctx.beginPath();ctx.ellipse(-10,-1.5,6.5,2.6,-.15,0,7);ctx.fill();ctx.beginPath();ctx.ellipse(10,-1.5,6.5,2.6,.15,0,7);ctx.fill();
+    ctx.translate(0,-bounce);ctx.rotate(rot);
+    /* tail swishing behind */
+    ctx.strokeStyle=furD;ctx.lineWidth=4.5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(6,-16);ctx.quadraticCurveTo(18,-14,16+sn*3,-26);ctx.stroke();
+    /* air tank */
+    ctx.fillStyle=tank;rr(-12,-36,7,19,3);ctx.fill();ctx.fillStyle="#c4511a";ctx.fillRect(-11,-38,5,3);
+    /* torso in wetsuit */
+    ctx.fillStyle=suit;ctx.beginPath();ctx.ellipse(0,-24,10,12,0,0,7);ctx.fill();
+    ctx.fillStyle=C.gold;ctx.fillRect(-9.6,-25,19.2,2.4);
+    ctx.fillStyle=muzzle;ctx.beginPath();ctx.ellipse(0,-20,5,5.5,0,0,7);ctx.fill();
+    /* paws: one jabs across while the other tucks to the chest, alternating */
+    var lx=-4+(-13)*pL+3*pR, ly=-23-4*pL, rx=4+13*pR-3*pL, ry=-23-4*pR;
+    ln(-7,-29,lx,ly,4.6,suit);ln(7,-29,rx,ry,4.6,suit);
+    ctx.fillStyle=fur;ctx.beginPath();ctx.arc(lx,ly,3.4+pL*.6,0,7);ctx.fill();ctx.beginPath();ctx.arc(rx,ry,3.4+pR*.6,0,7);ctx.fill();
+    /* round, chubby British Shorthair head */
+    ctx.save();ctx.translate(0,-43);ctx.rotate(tilt);
+    ctx.fillStyle=fur;
+    ctx.beginPath();ctx.moveTo(-12,-5);ctx.quadraticCurveTo(-12,-14,-6,-10);ctx.fill();
+    ctx.beginPath();ctx.moveTo(12,-5);ctx.quadraticCurveTo(12,-14,6,-10);ctx.fill();
+    ctx.beginPath();ctx.ellipse(0,0,13.5,11.5,0,0,7);ctx.fill();
+    ctx.beginPath();ctx.ellipse(-8,3.5,6,5,0,0,7);ctx.fill();ctx.beginPath();ctx.ellipse(8,3.5,6,5,0,0,7);ctx.fill();
+    ctx.fillStyle="#b9a4a6";ctx.beginPath();ctx.moveTo(-10,-7);ctx.quadraticCurveTo(-10,-11,-7,-9);ctx.fill();ctx.beginPath();ctx.moveTo(10,-7);ctx.quadraticCurveTo(10,-11,7,-9);ctx.fill();
+    ctx.fillStyle=muzzle;ctx.beginPath();ctx.ellipse(-2.6,4.5,3.4,2.8,0,0,7);ctx.ellipse(2.6,4.5,3.4,2.8,0,0,7);ctx.fill();
+    ctx.fillStyle="#5d6773";ctx.beginPath();ctx.moveTo(-1.8,2.2);ctx.lineTo(1.8,2.2);ctx.lineTo(0,4);ctx.fill();
+    ctx.strokeStyle="#4b545e";ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(-4,4);ctx.lineTo(-14,3);ctx.moveTo(-4,5.2);ctx.lineTo(-14,6.5);ctx.moveTo(4,4);ctx.lineTo(14,3);ctx.moveTo(4,5.2);ctx.lineTo(14,6.5);ctx.stroke();
+    /* copper eyes behind a clear dive mask */
+    ctx.fillStyle="#e08a2c";ctx.beginPath();ctx.arc(-4.6,-2.5,2.9,0,7);ctx.arc(4.6,-2.5,2.9,0,7);ctx.fill();
+    ctx.fillStyle="#111";ctx.beginPath();ctx.arc(-4.4,-2.5,1.4,0,7);ctx.arc(4.8,-2.5,1.4,0,7);ctx.fill();
+    ctx.fillStyle="#fff";ctx.fillRect(-5.2,-4,1,1);ctx.fillRect(3.9,-4,1,1);
+    ctx.fillStyle="rgba(127,220,255,.28)";ctx.strokeStyle=C.gold;ctx.lineWidth=1.8;rr(-10.5,-7.2,21,9.5,4.7);ctx.fill();ctx.stroke();
+    ctx.strokeStyle="rgba(255,255,255,.55)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-8,-5.6);ctx.lineTo(-5,-5.6);ctx.stroke();
+    ctx.strokeStyle=tank;ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(10.5,-3);ctx.quadraticCurveTo(16,-5,14,-17);ctx.stroke();
     ctx.restore();
-    ctx.fillStyle=C.gold;ctx.font="400 14px Georgia, serif";ctx.globalAlpha=.6+.4*Math.sin(t*6);ctx.fillText("♪",x+16,y-52-Math.abs(Math.sin(t*4))*8);ctx.fillText("♫",x-26,y-44-Math.abs(Math.cos(t*4))*8);ctx.globalAlpha=1;
+    ctx.restore();
+    ctx.fillStyle=C.gold;ctx.font="400 14px Georgia, serif";ctx.globalAlpha=.6+.4*Math.sin(t*6);ctx.fillText("♪",x+18,y-70-Math.abs(Math.sin(t*4))*8);ctx.fillText("♫",x-28,y-60-Math.abs(Math.cos(t*4))*8);ctx.globalAlpha=1;
   }
   function draw(){
     if(!C.gold)col();

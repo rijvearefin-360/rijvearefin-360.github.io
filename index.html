@@ -1026,13 +1026,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
     var nb=noise(4);
     /* stream: band-passed noise that burbles */
     var s1=loopSrc(nb),bp=ctx.createBiquadFilter();bp.type="bandpass";bp.frequency.value=900;bp.Q.value=.8;
-    var g1=ctx.createGain();g1.gain.value=.16;s1.connect(bp);bp.connect(g1);g1.connect(master);
-    lfo(.13,260,bp.frequency);lfo(.7,.04,g1.gain);
+    var g1=ctx.createGain();g1.gain.value=.1;s1.connect(bp);bp.connect(g1);g1.connect(master);
+    lfo(.13,260,bp.frequency);lfo(.7,.02,g1.gain);
     var s2=loopSrc(nb),bp2=ctx.createBiquadFilter();bp2.type="bandpass";bp2.frequency.value=2400;bp2.Q.value=1.4;
-    var g2=ctx.createGain();g2.gain.value=.05;s2.connect(bp2);bp2.connect(g2);g2.connect(master);lfo(3.1,.035,g2.gain);lfo(.4,500,bp2.frequency);
+    var g2=ctx.createGain();g2.gain.value=.025;s2.connect(bp2);bp2.connect(g2);g2.connect(master);lfo(3.1,.015,g2.gain);lfo(.4,500,bp2.frequency);
     /* breeze: low rumble that swells slowly */
     var s3=loopSrc(nb),lp=ctx.createBiquadFilter();lp.type="lowpass";lp.frequency.value=380;
-    var g3=ctx.createGain();g3.gain.value=.14;s3.connect(lp);lp.connect(g3);g3.connect(master);lfo(.06,.08,g3.gain);lfo(.05,120,lp.frequency);
+    var g3=ctx.createGain();g3.gain.value=.09;s3.connect(lp);lp.connect(g3);g3.connect(master);lfo(.06,.05,g3.gain);lfo(.05,120,lp.frequency);
   }
   function chirp(t,f0,f1,dur,vol,pan){
     var o=ctx.createOscillator(),g=ctx.createGain(),p=ctx.createStereoPanner?ctx.createStereoPanner():null;
@@ -1043,17 +1043,17 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
   }
   function bird(){
     if(!on)return;
-    var t=ctx.currentTime+.05,pan=Math.random()*1.6-.8,vol=.025+Math.random()*.03,kind=Math.random();
+    var t=ctx.currentTime+.05,pan=Math.random()*1.6-.8,vol=.012+Math.random()*.016,kind=Math.random();
     if(kind<.4){var n=2+Math.floor(Math.random()*4),base=2600+Math.random()*1400;for(var i=0;i<n;i++)chirp(t+i*.13,base,base*1.45,.09,vol,pan);}
     else if(kind<.7){for(var j=0;j<8;j++)chirp(t+j*.055,3800+Math.random()*300,3300,.045,vol*.8,pan);}
     else{var b2=1700+Math.random()*500;chirp(t,b2,b2*1.25,.32,vol,pan);chirp(t+.42,b2*1.3,b2*1.05,.36,vol,pan);}
-    birdT=setTimeout(bird,1800+Math.random()*5200);
+    birdT=setTimeout(bird,2800+Math.random()*6500);
   }
   function fade(to,sec){var t=ctx.currentTime;master.gain.cancelScheduledValues(t);master.gain.setValueAtTime(master.gain.value,t);master.gain.linearRampToValueAtTime(to,t+sec);}
   function start(){
     if(!ctx)build();
     if(ctx.state==="suspended")ctx.resume();
-    on=true;fade(.9,2.5);clearTimeout(birdT);birdT=setTimeout(bird,1200);ui();store("rtg-sound","on");
+    on=true;fade(.45,3.5);clearTimeout(birdT);birdT=setTimeout(bird,1200);ui();store("rtg-sound","on");
   }
   function stop(){if(!ctx)return;on=false;clearTimeout(birdT);fade(0,.8);setTimeout(function(){if(!on&&ctx)ctx.suspend();},900);ui();store("rtg-sound","off");}
   function ui(){btn.hidden=false;btn.innerHTML=on?ICON_ON:ICON_OFF;btn.setAttribute("aria-pressed",on?"true":"false");btn.setAttribute("aria-label",on?"Turn nature sounds off":"Play nature sounds");}

@@ -76,13 +76,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:4.6rem}
 .brand{font:400 1.55rem/1 var(--f-display);text-decoration:none;letter-spacing:.01em}
 .brand em{font-style:italic;color:var(--gold)}
-.nav{display:flex;align-items:center;gap:2rem}
+.nav{display:flex;align-items:center;gap:1.55rem}
 .nav a{text-decoration:none;font:500 .74rem/1 var(--f-body);letter-spacing:.26em;text-transform:uppercase;color:var(--ink-soft);padding-block:.6rem}
 .nav a:hover,.nav a.on{color:var(--gold)}
 .nav a.cta{background:var(--gold);color:var(--on-gold);padding:1rem 1.4rem}
 .nav a.cta:hover{background:var(--gold-ink);color:var(--on-gold)}
 .menu-btn{display:none;background:var(--gold);color:var(--on-gold);border:0;padding:1rem 1.3rem;font:500 .74rem/1 var(--f-body);letter-spacing:.26em;text-transform:uppercase;cursor:pointer}
-@media (max-width:900px){
+@media (max-width:1240px){
   .menu-btn{display:inline-block}
   .nav{position:fixed;inset:0;top:calc(env(safe-area-inset-top,0px) + 4.6rem);flex-direction:column;align-items:stretch;gap:0;background:var(--bg);padding:1.5rem var(--gut-r) calc(2rem + env(safe-area-inset-bottom,0px)) var(--gut-l);opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .2s,transform .2s}
   .nav.open{opacity:1;pointer-events:auto;transform:none}
@@ -200,6 +200,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .snd-btn .bars i{width:3px;background:var(--gold);height:30%;animation:eq 1s ease-in-out infinite}
 .snd-btn .bars i:nth-child(2){animation-delay:-.4s}.snd-btn .bars i:nth-child(3){animation-delay:-.7s}
 .menu-open .snd-btn,.menu-open .snd-pop{display:none}
+.menu-open .top{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--bg)}
+@media (max-width:1240px){.nav{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.nav a{font-size:1.75rem!important;padding:.85rem 0!important}.nav a.cta{font-size:.86rem!important;padding:1.3rem!important}}
 @keyframes eq{0%,100%{height:25%}50%{height:100%}}
 .numbers{position:relative;overflow:hidden}
 .sdg-stripe{display:grid;grid-template-columns:repeat(17,1fr);height:3px}
@@ -310,6 +312,26 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .answered{border-top:1px solid var(--line);padding-top:1.6rem}
 .answered .label{margin-bottom:.8rem}
 .answered .empty{color:var(--ink-faint);margin:0}
+.learn{background:var(--bg-2);border-top:1px solid var(--line)}
+.vids{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+@media (max-width:820px){.vids{grid-template-columns:1fr}}
+.vid{display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr);gap:1.1rem;padding:1rem;border:1px solid var(--line);background:var(--bg);color:inherit;text-decoration:none;transition:border-color .25s,transform .25s}
+.vid:hover,.vid:focus-visible{border-color:var(--gold);transform:translateY(-2px)}
+@media (max-width:460px){.vid{grid-template-columns:1fr}}
+.vt{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;background:var(--bg-3);align-self:start}
+.vt img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) brightness(.85);transition:filter .3s,transform .5s}
+.vid:hover .vt img{filter:none;transform:scale(1.04)}
+.vp{position:absolute;left:50%;top:50%;width:2.4rem;height:2.4rem;margin:-1.2rem 0 0 -1.2rem;border-radius:50%;background:var(--gold);color:var(--on-gold);display:grid;place-items:center;font-size:.8rem;padding-left:.15rem;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.vd{position:absolute;right:.35rem;bottom:.35rem;background:rgba(0,0,0,.75);color:#fff;font:500 .66rem/1 var(--f-body);letter-spacing:.06em;padding:.3rem .4rem}
+.vb{display:grid;gap:.35rem;align-content:start;min-width:0}
+.vn{font:400 italic 1rem/1 var(--f-display);color:var(--gold)}
+.vb b{font:400 1.25rem/1.25 var(--f-display);color:var(--ink)}
+.vw{font:500 .66rem/1.4 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
+.vy{font:300 .95rem/1.5 var(--f-body);color:var(--ink-soft)}
+.vg{display:inline-flex;align-items:center;gap:.45rem;margin-top:.3rem;font:500 .6rem/1.3 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
+.vg em{font-style:normal;display:grid;place-items:center;min-width:1.25rem;height:1.25rem;padding:0 .2rem;background:var(--g,var(--gold));color:#fff;font:700 .66rem/1 var(--f-body);letter-spacing:0}
+.vg.all em{width:1.25rem;border-radius:50%;background:conic-gradient(#E5243B,#DDA63A,#4C9F38,#C5192D,#FF3A21,#26BDE2,#FCC30B,#A21942,#FD6925,#DD1367,#FD9D24,#BF8B2E,#3F7E44,#0A97D9,#56C02B,#00689D,#19486A,#E5243B)}
+.vg.mind em{background:var(--gold);color:var(--on-gold)}
 .work{background:var(--bg-2)}
 .areas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--gold)}
 .area{padding:2rem 1.6rem 0 0;display:grid;gap:.9rem;align-content:start}
@@ -421,9 +443,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
       <a href="#story">Story</a>
       <a href="#work">Work</a>
       <a href="#speaking">Speaking</a>
+      <a href="#learn">Learn</a>
       <a href="#gallery">Gallery</a>
       <a href="#press">Press</a>
       <a href="#quiz">Quiz</a>
+      <a href="#play">Play</a>
       <a href="#ask">Ask</a>
       <a class="cta" href="#contact">Contact</a>
     </nav>
@@ -722,6 +746,58 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
   </div>
 </section>
 
+
+<section class="sec learn" id="learn">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label gold">Resources · Watch &amp; learn</p>
+      <h2>Ten talks to <em class="g">start</em> with</h2>
+      <p>For young people who want to change something. Pick one tonight, then start where you are.</p>
+    </div>
+    <div class="vids">
+      <a class="vid" href="https://www.youtube.com/watch?v=RpqVmvMCmp0" target="_blank" rel="noopener">
+        <span class="vt"><img src="https://i.ytimg.com/vi/RpqVmvMCmp0/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">3 min</span></span>
+        <span class="vb"><span class="vn">01</span><b>We the People for The Global Goals</b><span class="vw">The Global Goals</span><span class="vy">The 17 Goals in three minutes, read by people from all over the world. Start here.</span><span class="vg all"><em></em>All 17 Goals</span></span>
+      </a>
+      <a class="vid" href="https://www.youtube.com/watch?v=c2DHzlkUI6s" target="_blank" rel="noopener">
+        <span class="vt"><img src="https://i.ytimg.com/vi/c2DHzlkUI6s/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">28 min</span></span>
+        <span class="vb"><span class="vn">02</span><b>Nobel Peace Prize Lecture</b><span class="vw">Malala Yousafzai · Nobel Prize</span><span class="vy">Why one girl's voice for education can move the world.</span><span class="vg" style="--g:#C5192D"><em>4</em>Quality Education</span></span>
+      </a>
+      <a class="vid" href="https://www.youtube.com/watch?v=hg3umXU_qWc" target="_blank" rel="noopener">
+        <span class="vt"><img src="https://i.ytimg.com/vi/hg3umXU_qWc/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">30 min</span></span>
+        <span class="vb"><span class="vn">03</span><b>We should all be feminists</b><span class="vw">Chimamanda Ngozi Adichie · TEDxEuston</span><span class="vy">A warm, funny case for gender equality that everyone should hear.</span><span class="vg" style="--g:#FF3A21"><em>5</em>Gender Equality</span></span>
+      </a>
+      <a class="vid" href="https://www.youtube.com/watch?v=ZmSF9gVz9pg" target="_blank" rel="noopener">
+        <span class="vt"><img src="https://i.ytimg.com/vi/ZmSF9gVz9pg/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">14 min</span></span>
+        <span class="vb"><span class="vn">04</span><b>Let's talk crap. Seriously.</b><span class="vw">Rose George · TED</span><span class="vy">The sanitation crisis nobody talks about, and why it matters.</span><span class="vg" style="--g:#26BDE2"><em>6</em>Clean Water</span></span>
+      </a>
+      <a class="vid" href="https://www.youtube.com/watch?v=ROW9F-c0kIQ" target="_blank" rel="noopener">
+        <span class="vt"><img src="https://i.ytimg.com/vi/ROW9F-c0kIQ/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">11 min</span></span>
+        <span class="vb"><span class="vn">05</span><b>How the oceans can clean themselves</b><span class="vw">Boyan Slat · TEDxDelft</span><span class="vy">An 18-year-old's idea to clean ocean plastic. Proof that age is no barrier.</span><span class="vg" style="--g:#0A97D9"><em>14</em>Life Below Water</span></span>
+      </a>
+      <a class="vid" href="https://www.youtube.com/watch?v=8YHtLGI172k" target="_blank" rel="noopener">
+        <span class="vt"><img src="https://i.ytimg.com/vi/8YHtLGI172k/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">60 min</span></span>
+        <span class="vb"><span class="vn">06</span><b>A World of Three Zeros</b><span class="vw">Muhammad Yunus · Talks at Google</span><span class="vy">Bangladesh's Nobel laureate on social business and ending poverty.</span><span class="vg" style="--g:#E5243B"><em>1</em>No Poverty</span></span>
+      </a>
+      <a class="vid" href="https://www.youtube.com/watch?v=hVimVzgtD6w" target="_blank" rel="noopener">
+        <span class="vt"><img src="https://i.ytimg.com/vi/hVimVzgtD6w/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">21 min</span></span>
+        <span class="vb"><span class="vn">07</span><b>The best stats you've ever seen</b><span class="vw">Hans Rosling · TED</span><span class="vy">Data that will change how you see the world and the people in it.</span><span class="vg" style="--g:#DD1367"><em>10</em>Reduced Inequalities</span></span>
+      </a>
+      <a class="vid" href="https://www.youtube.com/watch?v=chXsLtHqfdM" target="_blank" rel="noopener">
+        <span class="vt"><img src="https://i.ytimg.com/vi/chXsLtHqfdM/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">17 min</span></span>
+        <span class="vb"><span class="vn">08</span><b>Want to help someone? Shut up and listen!</b><span class="vw">Ernesto Sirolli · TED</span><span class="vy">The first lesson of development work: listen before you act.</span><span class="vg" style="--g:#19486A"><em>17</em>Partnerships</span></span>
+      </a>
+      <a class="vid" href="https://www.youtube.com/watch?v=H14bBuluwB8" target="_blank" rel="noopener">
+        <span class="vt"><img src="https://i.ytimg.com/vi/H14bBuluwB8/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">6 min</span></span>
+        <span class="vb"><span class="vn">09</span><b>Grit: the power of passion and perseverance</b><span class="vw">Angela Lee Duckworth · TED</span><span class="vy">Why passion and perseverance matter more than talent.</span><span class="vg mind"><em>✦</em>Mindset</span></span>
+      </a>
+      <a class="vid" href="https://www.youtube.com/watch?v=iCvmsMzlF7o" target="_blank" rel="noopener">
+        <span class="vt"><img src="https://i.ytimg.com/vi/iCvmsMzlF7o/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">21 min</span></span>
+        <span class="vb"><span class="vn">10</span><b>The power of vulnerability</b><span class="vw">Brené Brown · TED</span><span class="vy">Why courage starts with being honest about who you are.</span><span class="vg" style="--g:#4C9F38"><em>3</em>Good Health</span></span>
+      </a>
+    </div>
+  </div>
+</section>
 <section class="sec gallery" id="gallery">
   <div class="wrap egg-host"><button type="button" class="egg" data-egg="shinbo" aria-label="Something is hiding here"><img src="img/pet-shinbo.jpg" alt="" width="64" height="64" loading="lazy"></button>
     <div class="sec-head">

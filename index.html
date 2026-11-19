@@ -165,6 +165,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .g-msg h3 em{color:var(--gold)}
 .g-msg p{color:var(--ink-soft);font-weight:300;font-size:1rem;max-width:26rem}
 .g-msg .k{font:500 .72rem/1.4 var(--f-body);letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+@media (max-width:560px){.game canvas{height:21rem}.g-msg{place-content:start center;padding-top:3rem}.g-msg h3{font-size:1.6rem}.g-msg p{font-size:.92rem;max-width:17rem}}
 .sdgs{display:grid;grid-template-columns:repeat(17,minmax(0,1fr));gap:3px;margin-top:1rem}
 .sdgs i{height:6px;background:var(--line);transition:background .4s}
 .g-goal{margin-top:.9rem;min-height:1.5em;font:300 .95rem/1.5 var(--f-body);color:var(--ink-soft)}
@@ -913,6 +914,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
     masks.forEach(function(m){drawMask(m.x,m.y+Math.sin(clock*4)*5,1);});
     pops.forEach(function(q){ctx.globalAlpha=Math.min(1,q.l*2);ctx.fillStyle="#7fdcff";ctx.font="500 12px Jost, sans-serif";ctx.fillText(q.t,q.x,q.y);ctx.globalAlpha=1;});
     var px=W*.16,ppy=(py===undefined?G:py);
+    if(st!=="run"){var cx2=W<520?W-34:W*.82;ctx.fillStyle="rgba(10,151,217,.12)";ctx.beginPath();ctx.ellipse(cx2,G-30,46,46,0,0,7);ctx.fill();drawCat(cx2,G,clock,false);}
     if(scuba>0){drawCat(px,ppy,clock,scuba<1.5&&Math.floor(clock*8)%2);}
     else{ if(grace>0&&Math.floor(clock*10)%2)return;
       drawDrop(px,ppy-13,13,C.gold);
@@ -928,6 +930,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
   document.addEventListener("keydown",onKey);
   window.addEventListener("resize",size);
   document.addEventListener("visibilitychange",function(){if(document.hidden&&st==="run")over();});
+  var idleVis=false;
+  function idle(t){if(st==="run"||!idleVis)return;clock=t/1000;draw();requestAnimationFrame(idle);}
+  if("IntersectionObserver" in window){new IntersectionObserver(function(es){idleVis=es[0].isIntersecting;if(idleVis&&st!=="run")requestAnimationFrame(idle);}).observe(cv);}
+  var _over=over;over=function(){_over();if(idleVis)requestAnimationFrame(idle);};
   py=undefined;size();
 })();
 </script>

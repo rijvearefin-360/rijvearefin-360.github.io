@@ -468,6 +468,107 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 .hero .label,.hero h1,.hero .lead,.hero .cta-row,.portrait{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
 .hero h1{animation-delay:.05s}.hero .lead{animation-delay:.12s}.hero .cta-row{animation-delay:.18s}.portrait{animation-delay:.1s}
 </style>
+<style>
+/* Shinbo: the site's chat sidekick. Same charcoal, gold and type as the rest of the page. */
+.snd-btn{bottom:calc(16px + 5.3rem + env(safe-area-inset-bottom,0px))}
+/* Launcher: Shinbo's photo with twitching cat ears, a slowly turning ring in the 17 Goal colours, a waving paw and a speech bubble */
+.sb-launch{position:fixed;z-index:44;right:calc(max(16px,env(safe-area-inset-right,0px)) + 2px);bottom:calc(18px + env(safe-area-inset-bottom,0px));width:4.1rem;height:4.1rem;border:0;padding:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:sbHop 9s ease-in-out 4s infinite}
+.sb-launch:focus-visible{outline:none}.sb-launch:focus-visible .sb-face{outline:2px solid var(--gold);outline-offset:4px}
+.sb-ring{position:absolute;inset:0;border-radius:50%;z-index:1;background:conic-gradient(#E5243B 0 5.88%,#DDA63A 0 11.76%,#4C9F38 0 17.65%,#C5192D 0 23.53%,#FF3A21 0 29.41%,#26BDE2 0 35.29%,#FCC30B 0 41.18%,#A21942 0 47.06%,#FD6925 0 52.94%,#DD1367 0 58.82%,#FD9D24 0 64.71%,#BF8B2E 0 70.59%,#3F7E44 0 76.47%,#0A97D9 0 82.35%,#56C02B 0 88.24%,#00689D 0 94.12%,#19486A 0 100%);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3.5px),#000 calc(100% - 3px));mask:radial-gradient(farthest-side,transparent calc(100% - 3.5px),#000 calc(100% - 3px));animation:sbSpin 14s linear infinite;box-shadow:0 12px 32px rgba(0,0,0,.5)}
+.sb-face{position:absolute;inset:5px;border-radius:50%;overflow:hidden;z-index:2;background:var(--bg-2);transition:transform .3s cubic-bezier(.2,1.4,.4,1)}
+.sb-cat{width:100%;height:100%;display:block}
+.sb-cat .sb-shades{transition:transform .35s cubic-bezier(.2,1.4,.4,1)}
+.sb-cat .sb-wink{transform-box:fill-box;transform-origin:center}
+/* Every 11 seconds he lowers his heart sunglasses, winks, and puts them back. A glint crosses the lenses in between. */
+.sb-launch .sb-shades{animation:sbPeek 11s ease-in-out 6s infinite}
+.sb-launch .sb-wink{animation:sbWink 11s ease-in-out 6s infinite}
+.sb-launch .sb-glint{opacity:0;animation:sbGlint 5.5s ease-in-out 1s infinite}
+.sb-launch:hover .sb-shades{animation:none;transform:translateY(10px)}
+.sb-launch:hover .sb-wink{animation:sbWinkFast 1.4s ease-in-out .35s infinite}
+@keyframes sbPeek{0%,70%,90%,100%{transform:translateY(0)}74%,86%{transform:translateY(10px)}}
+@keyframes sbWink{0%,78%,82%,100%{transform:scaleY(1)}80%{transform:scaleY(.1)}}
+@keyframes sbWinkFast{0%,40%,60%,100%{transform:scaleY(1)}50%{transform:scaleY(.1)}}
+@keyframes sbGlint{0%,62%,100%{opacity:0;transform:translateX(-3px)}72%{opacity:1}84%{opacity:0;transform:translateX(4px)}}
+.sb-ear{position:absolute;top:-.55rem;width:1.15rem;height:1.3rem;z-index:0;background:#868a8d;clip-path:polygon(50% 0,100% 100%,0 100%);transform-origin:50% 100%;transition:transform .3s cubic-bezier(.2,1.4,.4,1)}
+.sb-ear::after{content:"";position:absolute;inset:38% 26% 6%;background:#e7a3ae;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.sb-ear.l{left:.35rem;transform:rotate(-24deg)}.sb-ear.r{right:.35rem;transform:rotate(24deg)}
+.sb-ear.l{animation:sbTwitchL 6s ease-in-out 2s infinite}.sb-ear.r{animation:sbTwitchR 7.5s ease-in-out 3.5s infinite}
+.sb-paw{position:absolute;left:-.55rem;bottom:-.1rem;width:1.55rem;height:1.55rem;z-index:3;transform-origin:70% 90%;animation:sbWave 9s ease-in-out 1.5s infinite;filter:drop-shadow(0 3px 5px rgba(0,0,0,.45))}
+.sb-dot{position:absolute;right:.15rem;bottom:.2rem;width:.8rem;height:.8rem;border-radius:50%;background:#56C02B;border:2px solid var(--bg);z-index:3}
+.sb-dot::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid #56C02B;animation:sbPing 2.4s ease-out infinite}
+.sb-tag{position:absolute;right:3.3rem;top:-1.1rem;z-index:4;white-space:nowrap;background:var(--gold);color:var(--on-gold);font:600 .78rem/1 var(--f-body);letter-spacing:.01em;padding:.42rem .62rem;border-radius:999px 999px 4px 999px;box-shadow:0 8px 20px rgba(0,0,0,.4);opacity:0;transform:translateY(6px) scale(.8);transform-origin:100% 100%;transition:opacity .3s,transform .35s cubic-bezier(.2,1.4,.4,1);pointer-events:none}
+.sb-tag.on{opacity:1;transform:none}
+.sb-launch:hover .sb-face{transform:rotate(-8deg) scale(1.04)}
+.sb-launch:hover .sb-ear.l{animation:none;transform:rotate(-12deg) translateY(-3px)}.sb-launch:hover .sb-ear.r{animation:none;transform:rotate(12deg) translateY(-3px)}
+.sb-launch:hover .sb-paw{animation:sbWave .9s ease-in-out infinite}
+.sb-launch:active .sb-face{transform:scale(.92)}
+.sb-open .sb-launch{transform:scale(.7);opacity:0;pointer-events:none;animation:none;transition:transform .2s,opacity .2s}
+@keyframes sbSpin{to{transform:rotate(360deg)}}
+@keyframes sbHop{0%,86%,100%{transform:translateY(0)}89%{transform:translateY(-9px) rotate(-3deg)}92%{transform:translateY(0)}95%{transform:translateY(-4px) rotate(2deg)}98%{transform:translateY(0)}}
+@keyframes sbTwitchL{0%,90%,100%{transform:rotate(-24deg)}93%{transform:rotate(-38deg)}96%{transform:rotate(-20deg)}}
+@keyframes sbTwitchR{0%,88%,100%{transform:rotate(24deg)}91%{transform:rotate(36deg)}94%{transform:rotate(20deg)}}
+@keyframes sbWave{0%,80%,100%{transform:rotate(0)}84%{transform:rotate(-22deg)}88%{transform:rotate(14deg)}92%{transform:rotate(-16deg)}96%{transform:rotate(6deg)}}
+@keyframes sbPing{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(2.2)}}
+.sb-nudge{position:fixed;z-index:44;right:calc(max(16px,env(safe-area-inset-right,0px)) + 4.9rem);bottom:calc(26px + env(safe-area-inset-bottom,0px));max-width:min(15rem,calc(100vw - 6.5rem));background:var(--bg-2);border:1px solid var(--line);border-left:2px solid var(--gold);color:var(--ink);padding:.6rem 2rem .6rem .85rem;font:400 .9rem/1.4 var(--f-body);box-shadow:0 12px 34px rgba(0,0,0,.4);cursor:pointer;animation:sbIn .4s ease both}
+.sb-nudge b{color:var(--gold-ink);font-weight:500}
+.sb-nudge button{position:absolute;top:.2rem;right:.2rem;width:1.7rem;height:1.7rem;border:0;background:none;color:var(--ink-faint);font-size:1rem;cursor:pointer}
+.sb-panel{position:fixed;z-index:60;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(25rem,calc(100vw - 32px));height:min(40rem,calc(100dvh - 32px));display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--gold);box-shadow:0 24px 70px rgba(0,0,0,.6);transform-origin:100% 100%;animation:sbPop .35s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes sbPop{from{opacity:0;transform:scale(.9) translateY(10px)}}
+@keyframes sbIn{from{opacity:0;transform:translateY(6px)}}
+.sb-head{display:flex;align-items:center;gap:.75rem;padding:.85rem .9rem .8rem 1rem;background:var(--bg-2)}
+.sb-av{position:relative;flex:none;width:2.6rem;height:2.6rem}
+.sb-av .sb-cat{border-radius:50%;border:1px solid var(--gold);overflow:hidden}
+.sb-speaking .sb-av .sb-shades{animation:sbPeek 2.2s ease-in-out infinite}
+.sb-av::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--gold);opacity:0}
+.sb-speaking .sb-av::after{animation:sbRing 1.2s ease-out infinite}
+@keyframes sbRing{0%{opacity:.8;transform:scale(.92)}100%{opacity:0;transform:scale(1.25)}}
+.sb-head div{flex:1;min-width:0;line-height:1.25}
+.sb-head b{display:block;font:400 1.35rem/1.1 var(--f-display);color:var(--ink)}
+.sb-head small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.78rem;color:var(--ink-soft);letter-spacing:.02em}
+.sb-head small i{display:inline-block;width:.45rem;height:.45rem;border-radius:50%;background:#56C02B;margin-right:.35rem;vertical-align:.08rem}
+.sb-tb{width:2.4rem;height:2.4rem;border:1px solid var(--line);background:none;color:var(--ink-soft);font-size:1.05rem;cursor:pointer;flex:none;display:grid;place-items:center;padding:0}
+.sb-tb:hover{color:var(--gold);border-color:var(--gold)}
+.sb-lang{width:auto;padding:0 .55rem;font:500 .82rem/1 var(--f-body);color:var(--gold-ink)}
+#sbVoice .w1,#sbVoice .w2{opacity:.25}
+#sbVoice[aria-pressed="true"]{color:var(--on-gold);background:var(--gold);border-color:var(--gold)}
+#sbVoice[aria-pressed="true"] .w1,#sbVoice[aria-pressed="true"] .w2{opacity:1}
+.sb-head{gap:.5rem}.sb-head>div{margin-left:.25rem}
+.sb-stripe{display:flex;height:3px;flex:none}.sb-stripe i{flex:1}
+.sb-log{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:1rem;display:flex;flex-direction:column;gap:.7rem;scroll-behavior:smooth}
+.sb-m{max-width:88%;padding:.65rem .85rem;font:400 .96rem/1.55 var(--f-body);animation:sbIn .3s ease both;overflow-wrap:anywhere}
+.sb-m p{margin:0}.sb-m p+p{margin-top:.5rem}
+.sb-m a{color:var(--gold-ink);text-underline-offset:3px}
+.sb-bot{align-self:flex-start;background:var(--bg-3);border-left:2px solid var(--gold);color:var(--ink)}
+.sb-me{align-self:flex-end;background:var(--gold);color:var(--on-gold)}
+.sb-m ul{margin:.35rem 0 0;padding-left:1.1rem}.sb-m li{margin:.15rem 0}
+.sb-act{color:var(--ink-faint);font-style:italic}
+.sb-ps{font-size:.86rem;color:var(--ink-soft);font-style:italic}
+.sb-m q{font-family:var(--f-display);font-style:italic;color:var(--gold-ink)}
+.sb-dots{align-self:flex-start;display:flex;gap:.3rem;padding:.8rem .9rem;background:var(--bg-3);border-left:2px solid var(--gold)}
+.sb-dots i{width:.42rem;height:.42rem;border-radius:50%;background:var(--gold);animation:sbDot 1s infinite ease-in-out}
+.sb-dots i:nth-child(2){animation-delay:.15s}.sb-dots i:nth-child(3){animation-delay:.3s}
+@keyframes sbDot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+.sb-chips{display:flex;flex-wrap:wrap;gap:.4rem;padding:0 1rem .75rem}
+.sb-chips button{font:400 .84rem/1.2 var(--f-body);color:var(--gold-ink);background:none;border:1px solid rgba(191,162,113,.45);padding:.45rem .7rem;cursor:pointer;text-align:left}
+.sb-chips button:hover{background:rgba(191,162,113,.12);border-color:var(--gold)}
+.sb-form{display:flex;gap:.5rem;padding:.75rem .9rem;border-top:1px solid var(--line);background:var(--bg-2)}
+.sb-form textarea{flex:1;min-width:0;resize:none;height:2.75rem;max-height:7rem;background:var(--bg);border:1px solid var(--line);color:var(--ink);font:400 1rem/1.4 var(--f-body);padding:.65rem .75rem}
+.sb-form textarea:focus{outline:none;border-color:var(--gold)}
+.sb-form textarea::placeholder{color:var(--ink-faint)}
+.sb-mic{flex:none;width:2.75rem;height:2.75rem;border:1px solid rgba(191,162,113,.5);background:none;color:var(--gold);cursor:pointer;display:grid;place-items:center;padding:0;position:relative}
+.sb-mic:hover{border-color:var(--gold)}
+.sb-mic.on{background:#E5243B;border-color:#E5243B;color:#fff}
+.sb-mic.on::after{content:"";position:absolute;inset:-5px;border:2px solid #E5243B;animation:sbRing 1s ease-out infinite}
+.sb-send{flex:none;width:2.75rem;height:2.75rem;border:0;background:var(--gold);color:var(--on-gold);cursor:pointer;display:grid;place-items:center}
+.sb-send:disabled{opacity:.45;cursor:default}
+.sb-note{margin:0;padding:0 1rem .7rem;background:var(--bg-2);font-size:.72rem;line-height:1.4;color:var(--ink-faint)}
+@media (max-width:560px){
+  .sb-panel{inset:0;width:100%;height:100%;height:100dvh;border:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px);transform-origin:50% 100%}
+  html.sb-lock,html.sb-lock body{overflow:hidden}
+  .sb-m{max-width:92%}
+}
+@media print{.sb-launch,.sb-nudge,.sb-panel{display:none!important}}
+</style>
 <!--A2-->
 </head>
 <body>
@@ -1014,6 +1115,27 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 </div>
 <button type="button" class="snd-btn" id="sndBtn" aria-label="Play nature sounds" aria-pressed="false" hidden></button>
 
+<button type="button" class="sb-launch" id="sbLaunch" aria-label="Chat with Shinbo, Rijve's sidekick" aria-expanded="false" aria-controls="sbPanel"><span class="sb-ear l" aria-hidden="true"></span><span class="sb-ear r" aria-hidden="true"></span><span class="sb-ring" aria-hidden="true"></span><span class="sb-face"><svg class="sb-cat" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="#1b2122"/><ellipse cx="50" cy="57" rx="48" ry="46" fill="#8a8e91"/><ellipse cx="22" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="78" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="22" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><ellipse cx="78" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><path d="M44 17v9M50 15v10M56 17v9" stroke="#6f7376" stroke-width="2.6" stroke-linecap="round"/><g class="sb-eyes"><g class="sb-eye"><ellipse cx="34" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="34" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="34" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="36" cy="42.5" r="1.6" fill="#fff"/></g><g class="sb-eye sb-wink"><ellipse cx="66" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="66" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="66" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="68" cy="42.5" r="1.6" fill="#fff"/></g></g><ellipse cx="43" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><ellipse cx="57" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><path d="M46.5 63.5h7l-3.5 4.2z" fill="#e7a3ae" stroke="#c77f8c" stroke-width="1" stroke-linejoin="round"/><path d="M43.5 71.5q3.3 3.6 6.5 0q3.2 3.6 6.5 0" fill="none" stroke="#3a3d40" stroke-width="1.6" stroke-linecap="round"/><path d="M50 67.7v3.8" stroke="#3a3d40" stroke-width="1.4" stroke-linecap="round"/><g stroke="#f1ede4" stroke-width="1" stroke-linecap="round" opacity=".75"><path d="M34 70 16 67M34 73.5 15 75M66 70 84 67M66 73.5 85 75"/></g><g class="sb-shades"><path d="M43.5 42q6.5-4.5 13 0" fill="none" stroke="#d6bd8e" stroke-width="2.4" stroke-linecap="round"/><path d="M34 56C19 46 22 33 34 40C46 33 49 46 34 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M66 56C51 46 54 33 66 40C78 33 81 46 66 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M14 41 25.5 40.5M86 41 74.5 40.5" stroke="#d6bd8e" stroke-width="2.2" stroke-linecap="round"/><g class="sb-glint" fill="#fff"><path d="M27 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/><path d="M59 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/></g></g></svg></span><svg class="sb-paw" viewBox="0 0 32 32" aria-hidden="true"><ellipse cx="16" cy="21" rx="9" ry="7.5" fill="#8a8e91"/><ellipse cx="7" cy="12" rx="3.3" ry="4.2" fill="#8a8e91"/><ellipse cx="13" cy="7.5" rx="3.3" ry="4.3" fill="#8a8e91"/><ellipse cx="19.5" cy="7.5" rx="3.3" ry="4.3" fill="#8a8e91"/><ellipse cx="25.5" cy="12" rx="3.3" ry="4.2" fill="#8a8e91"/><ellipse cx="16" cy="22" rx="5.2" ry="4.2" fill="#e7a3ae"/><ellipse cx="7.2" cy="12.6" rx="1.7" ry="2.2" fill="#e7a3ae"/><ellipse cx="13" cy="8.2" rx="1.7" ry="2.3" fill="#e7a3ae"/><ellipse cx="19.5" cy="8.2" rx="1.7" ry="2.3" fill="#e7a3ae"/><ellipse cx="25.3" cy="12.6" rx="1.7" ry="2.2" fill="#e7a3ae"/></svg><span class="sb-dot" aria-hidden="true"></span><span class="sb-tag" id="sbTag" aria-hidden="true">Meow? 👋</span></button>
+<div class="sb-nudge" id="sbNudge" hidden><span>Psst. I'm <b>Shinbo</b>. Ask me anything.</span><button type="button" aria-label="Dismiss">✕</button></div>
+<section class="sb-panel" id="sbPanel" role="dialog" aria-modal="false" aria-labelledby="sbTitle" hidden>
+  <header class="sb-head">
+    <span class="sb-av" role="img" aria-label="Shinbo, a grey cartoon cat in heart sunglasses"><svg class="sb-cat" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="#1b2122"/><ellipse cx="50" cy="57" rx="48" ry="46" fill="#8a8e91"/><ellipse cx="22" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="78" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="22" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><ellipse cx="78" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><path d="M44 17v9M50 15v10M56 17v9" stroke="#6f7376" stroke-width="2.6" stroke-linecap="round"/><g class="sb-eyes"><g class="sb-eye"><ellipse cx="34" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="34" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="34" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="36" cy="42.5" r="1.6" fill="#fff"/></g><g class="sb-eye sb-wink"><ellipse cx="66" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="66" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="66" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="68" cy="42.5" r="1.6" fill="#fff"/></g></g><ellipse cx="43" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><ellipse cx="57" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><path d="M46.5 63.5h7l-3.5 4.2z" fill="#e7a3ae" stroke="#c77f8c" stroke-width="1" stroke-linejoin="round"/><path d="M43.5 71.5q3.3 3.6 6.5 0q3.2 3.6 6.5 0" fill="none" stroke="#3a3d40" stroke-width="1.6" stroke-linecap="round"/><path d="M50 67.7v3.8" stroke="#3a3d40" stroke-width="1.4" stroke-linecap="round"/><g stroke="#f1ede4" stroke-width="1" stroke-linecap="round" opacity=".75"><path d="M34 70 16 67M34 73.5 15 75M66 70 84 67M66 73.5 85 75"/></g><g class="sb-shades"><path d="M43.5 42q6.5-4.5 13 0" fill="none" stroke="#d6bd8e" stroke-width="2.4" stroke-linecap="round"/><path d="M34 56C19 46 22 33 34 40C46 33 49 46 34 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M66 56C51 46 54 33 66 40C78 33 81 46 66 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M14 41 25.5 40.5M86 41 74.5 40.5" stroke="#d6bd8e" stroke-width="2.2" stroke-linecap="round"/><g class="sb-glint" fill="#fff"><path d="M27 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/><path d="M59 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/></g></g></svg></span>
+    <div><b id="sbTitle">Shinbo</b><small><i aria-hidden="true"></i><span id="sbSub">Chief Executive Cat · self-appointed</span></small></div>
+    <button type="button" class="sb-tb sb-lang" id="sbLang" lang="bn">বাংলা</button>
+    <button type="button" class="sb-tb" id="sbVoice" aria-pressed="false" aria-label="Read replies aloud"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path class="w1" d="M15.5 9a4.2 4.2 0 0 1 0 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path class="w2" d="M18 6.5a7.8 7.8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+    <button type="button" class="sb-tb" id="sbClose" aria-label="Close chat">✕</button>
+  </header>
+  <div class="sb-stripe" aria-hidden="true"><i style="background:#E5243B"></i><i style="background:#DDA63A"></i><i style="background:#4C9F38"></i><i style="background:#C5192D"></i><i style="background:#FF3A21"></i><i style="background:#26BDE2"></i><i style="background:#FCC30B"></i><i style="background:#A21942"></i><i style="background:#FD6925"></i><i style="background:#DD1367"></i><i style="background:#FD9D24"></i><i style="background:#BF8B2E"></i><i style="background:#3F7E44"></i><i style="background:#0A97D9"></i><i style="background:#56C02B"></i><i style="background:#00689D"></i><i style="background:#19486A"></i></div>
+  <div class="sb-log" id="sbLog" role="log" aria-live="polite" aria-relevant="additions"></div>
+  <div class="sb-chips" id="sbChips"></div>
+  <form class="sb-form" id="sbForm">
+    <label for="sbIn" class="sr">Message Shinbo</label>
+    <button type="button" class="sb-mic" id="sbMic" aria-label="Talk to Shinbo"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3.5M8.5 20.5h7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+    <textarea id="sbIn" rows="1" maxlength="500" placeholder="Ask me anything about Rijve…" autocomplete="off"></textarea>
+    <button type="submit" class="sb-send" id="sbSend" aria-label="Send"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 21 3l-8.5 18-2.2-7.3L3 11.5Z" fill="currentColor"/></svg></button>
+  </form>
+  <p class="sb-note" id="sbNote">Shinbo only knows what Rijve has shared publicly. For anything else, email <a href="mailto:rijvearefin@gmail.com">rijvearefin@gmail.com</a>.</p>
+</section>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <div class="party" id="party" hidden role="dialog" aria-label="Scuba Cat dance party">
   <canvas id="partyCv"></canvas>
@@ -1603,6 +1725,621 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 (function(){var el=document.getElementById("your-turn");if(!el)return;
 if(!("IntersectionObserver" in window)){el.classList.add("in");return;}
 var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){el.classList.add("in");io.disconnect();}},{threshold:.4});io.observe(el);})();
+</script>
+<script>
+/* Shinbo: Rijve's sidekick. A grey cat in heart sunglasses who believes he is the real Executive Director.
+   Answers come from a curated, public-only knowledge base that runs in the browser.
+   Optional: set SHINBO_API to the Supabase Edge Function URL (supabase/functions/shinbo) for full Claude answers;
+   the local brain is always the fallback, so the chat never breaks.
+   Tone rule: jokes everywhere EXCEPT topics marked s:1 (loss, floods, protests, self-doubt), which stay sincere. */
+(function(){
+var SHINBO_API="";
+var SHINBO_TTS=""; /* optional: URL of supabase/functions/shinbo-voice for studio-quality neural voices */
+var P=document.getElementById("sbPanel"),L=document.getElementById("sbLaunch");if(!P||!L)return;
+var log=document.getElementById("sbLog"),chips=document.getElementById("sbChips"),form=document.getElementById("sbForm"),inp=document.getElementById("sbIn"),send=document.getElementById("sbSend"),nudge=document.getElementById("sbNudge"),sub=document.getElementById("sbSub");
+function g(id,t){return '<a href="#'+id+'" data-go>'+t+'</a>';}
+function x(u,t){return '<a href="'+u+'" target="_blank" rel="noopener">'+t+'</a>';}
+function act(t){return '<span class="sb-act">*'+t+'*</span> ';}
+var A360=x("https://www.facebook.com/awarenessthreesixty","Awareness 360's Facebook page");
+var MAIL='<a href="mailto:rijvearefin@gmail.com">rijvearefin@gmail.com</a>';
+
+/* ---------- Rijve's taste (shared by Rijve for this site) + Shinbo's picks in the same vein ---------- */
+function ytS(q){return "https://www.youtube.com/results?search_query="+encodeURIComponent(q);}
+function ytV(id){return "https://www.youtube.com/watch?v="+id;}
+/* id = verified official video; otherwise a YouTube search link, which never breaks */
+var SONGS={
+ indie:[{t:"Ghar",a:"Bharat Chauhan",id:"e44meSqTkH0"},{t:"Tu Hoti Toh",a:"Bharat Chauhan",id:"cVDASbWZ_KI"},{t:"Mujhsa Agar Mile",a:"Bharat Chauhan",id:"PfHHm6k2Bv4"},{t:"Muddat",a:"Bharat Chauhan",id:"drMQIxeQI_A"},{t:"cold/mess",a:"Prateek Kuhad"},{t:"Baarishein",a:"Anuv Jain"},{t:"Choo Lo",a:"The Local Train"},{t:"O Sanam",a:"Lucky Ali"}],
+ folk:[{t:"Bird",a:"Billie Marten",id:"smX6xCPDbrE"},{t:"La Lune",a:"Billie Marten",id:"-osxVLurOYA"},{t:"Milk & Honey",a:"Billie Marten",id:"xNAmwWBy0nw"},{t:"Pink Moon",a:"Nick Drake"},{t:"Holocene",a:"Bon Iver"},{t:"Motion Sickness",a:"Phoebe Bridgers"},{t:"Anchor",a:"Novo Amor"},{t:"Ghosts",a:"Laura Marling"}],
+ jazz:[{t:"So What",a:"Miles Davis"},{t:"Take Five",a:"The Dave Brubeck Quartet"},{t:"My Favorite Things",a:"John Coltrane"},{t:"Feeling Good",a:"Nina Simone"},{t:"My Funny Valentine",a:"Chet Baker"},{t:"Summertime",a:"Ella Fitzgerald and Louis Armstrong"},{t:"Waltz for Debby",a:"Bill Evans"},{t:"What a Wonderful World",a:"Louis Armstrong"}],
+ rock:[{t:"Comfortably Numb",a:"Pink Floyd"},{t:"Stairway to Heaven",a:"Led Zeppelin"},{t:"Bohemian Rhapsody",a:"Queen"},{t:"Hotel California",a:"Eagles"},{t:"Dreams",a:"Fleetwood Mac"},{t:"Sultans of Swing",a:"Dire Straits"},{t:"Gimme Shelter",a:"The Rolling Stones"},{t:"Let It Be",a:"The Beatles"}]
+};
+var MOVIES={
+ pacino:[["The Godfather",1972],["Scent of a Woman",1992],["Heat",1995],["Dog Day Afternoon",1975],["Serpico",1973],["The Irishman",2019]],
+ hopkins:[["The Silence of the Lambs",1991],["The Remains of the Day",1993],["The Father",2020],["The Two Popes",2019],["Shadowlands",1993]],
+ alike:[["Taxi Driver",1976,"Robert De Niro"],["One Flew Over the Cuckoo's Nest",1975,"Jack Nicholson"],["There Will Be Blood",2007,"Daniel Day-Lewis"],["The Shawshank Redemption",1994,"Morgan Freeman"],["Raging Bull",1980,"Robert De Niro"]],
+ classic:[["12 Angry Men",1957],["Casablanca",1942],["The Godfather Part II",1974],["Chinatown",1974],["Lawrence of Arabia",1962]]
+};
+var SPACE=["A day on Venus is longer than its year. Imagine your Monday lasting longer than your birthday cycle.",
+ "Olympus Mons on Mars is about two and a half times taller than Mount Everest. Ultimate cat tree.",
+ "Sunlight takes about eight minutes to reach Earth, so you always see the Sun as it was eight minutes ago.",
+ "A teaspoon of neutron star would weigh around a billion tonnes. Still lighter than Simba after dinner.",
+ "There are more stars in the universe than grains of sand on all of Earth's beaches.",
+ "Footprints on the Moon could last millions of years, because there's no wind to blow them away."];
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function songLi(s){return "<li>"+x(s.id?ytV(s.id):ytS(s.t+" "+s.a),"<b>"+s.t+"</b>")+" · "+s.a+"</li>";}
+function songs(kind,n){return "<ul>"+shuffle(SONGS[kind]).slice(0,n).map(songLi).join("")+"</ul>";}
+function movLi(m){return "<li>"+x(ytS(m[0]+" "+m[1]+" trailer"),"<b>"+m[0]+"</b>")+" ("+m[1]+(m[2]?", "+m[2]:"")+")</li>";}
+function movs(kind,n){return shuffle(MOVIES[kind]).slice(0,n).map(movLi).join("");}
+function musicAns(q,bn){
+  var t=norm(q),kinds=/jazz|জ্যাজ/.test(t)?["jazz"]:/rock|রক/.test(t)?["rock"]:/billie|marten|folk|calm|soft/.test(t)?["folk"]:/bharat|chauhan|hindi|indian|indie/.test(t)?["indie"]:null;
+  if(kinds){var k=kinds[0],lab={jazz:bn?"জ্যাজ":"jazz",rock:bn?"ক্লাসিক রক":"classic rock",folk:bn?"Billie Marten আর একই ধাঁচের গান":"Billie Marten and friends",indie:bn?"Bharat Chauhan আর একই ধাঁচের গান":"Bharat Chauhan and friends"}[k];
+    return (bn?"<p>"+act("হেডফোন পরে")+lab+"! নাও, কয়েকটা বাছাই, YouTube লিংকসহ:</p>":"<p>"+act("puts on tiny headphones")+"Ah, "+lab+". Excellent taste. A few picks, with YouTube links:</p>")+songs(k,4)+(bn?"<p>আরও চাইলে বলো “আরও”। 🎧</p>":"<p>Say \"more\" for another round. 🎧</p>");}
+  return bn?"<p>Rijve গান ভালোবাসেন: <b>জ্যাজ</b>, <b>ক্লাসিক রক</b>, আর <b>Billie Marten</b> ও <b>Bharat Chauhan</b>-এর মতো শিল্পী। আজকের মিক্সটেপ:</p><ul>"+songLi(shuffle(SONGS.jazz)[0])+songLi(shuffle(SONGS.rock)[0])+songLi(shuffle(SONGS.folk)[0])+songLi(shuffle(SONGS.indie)[0])+"</ul><p>যেকোনো গানের নাম বললে YouTube লিংক দিয়ে দেব। 🎶</p>"
+    :"<p>Rijve's ears run on <b>jazz</b>, <b>classic rock</b>, and gentle songwriters like <b>Billie Marten</b> and <b>Bharat Chauhan</b>. Me, I prefer the sound of a tin opening. Today's mixtape:</p><ul>"+songLi(shuffle(SONGS.jazz)[0])+songLi(shuffle(SONGS.rock)[0])+songLi(shuffle(SONGS.folk)[0])+songLi(shuffle(SONGS.indie)[0])+"</ul><p>Name any song and I'll find it on YouTube for you. 🎶</p>";
+}
+function movieAns(q,bn){
+  var t=norm(q),h;
+  if(/pacino|godfather/.test(t))h=(bn?"<p>Al Pacino-র সেরা কিছু ছবি (আমার বাছাই):</p><ul>":"<p>"+act("in a raspy Godfather voice")+"An Al Pacino night. Rijve would approve. My picks:</p><ul>")+movs("pacino",4)+"</ul>";
+  else if(/hopkins|anthony/.test(t))h=(bn?"<p>Sir Anthony Hopkins-এর কিছু দারুণ ছবি:</p><ul>":"<p>Sir Anthony Hopkins: the man could read a shopping list and win an award. My picks:</p><ul>")+movs("hopkins",4)+"</ul>";
+  else h=(bn?"<p>Rijve ক্লাসিক সিনেমার ভক্ত, বিশেষ করে <b>Al Pacino</b> আর <b>Sir Anthony Hopkins</b>-এর ছবি। একই ধাঁচের কিছু বাছাই:</p><ul>":"<p>Rijve is a classic-film person, especially anything with <b>Al Pacino</b> or <b>Sir Anthony Hopkins</b>. I prefer films about cats, but nobody listens. Picks in the same spirit:</p><ul>")+movs("pacino",1)+movs("hopkins",1)+movs("alike",1)+movs("classic",1)+"</ul>";
+  return h+(bn?"<p>লিংকগুলো ট্রেইলারে নিয়ে যাবে। আরও চাইলে বলো “আরও”। 🍿</p>":"<p>Links go to the trailers. Say \"more\" for another round. 🍿</p>");
+}
+function spaceAns(q,bn){var f=SPACE[Math.floor(Math.random()*SPACE.length)];
+  return bn?"<p>Rijve মহাকাশ নিয়ে কথা বলতে ভালোবাসেন। একবার শুরু করলে থামানো মুশকিল। 🔭 আজকের মহাকাশ-তথ্য (ইংরেজিতে):</p><p><i>"+f+"</i></p><p>আরেকটা চাইলে বলো “আরও”।</p>"
+    :"<p>"+act("stares at the night sky, then at you")+"Rijve loves talking about space. Black holes, planets, the whole cosmos. Start him on it and you'll be there till sunrise. 🔭</p><p><b>Space fact:</b> "+f+"</p><p>Say \"more\" for another.</p>";}
+
+/* ---------- Knowledge: only what Rijve has shared publicly (this site, his interviews, his public posts) ---------- */
+var T=[
+{id:"hello",k:["hi","hello","hey","salam","assalamualaikum","yo","hola","good morning","good evening","whats up","sup","howdy"],
+ a:["<p>"+act("lowers heart sunglasses")+"Well, hello. Welcome to my office. Rijve thinks it's his website, and I let him believe that.</p><p>What can I do for you?</p>",
+    "<p>Oh hi! "+act("pretends I wasn't asleep on the keyboard")+"Shinbo here, Chief Executive Cat. Ask me about Rijve, Awareness 360, or how to change the world before lunch.</p>",
+    "<p>Meow. That's \"hello\" in executive. 😎 What brings you to my corner of the internet?</p>"],
+ c:["Who is Rijve?","Who are you?","Tell me a joke"]},
+{id:"shinbo",k:["who are you","what are you","your name","shinbo","are you ai","are you a bot","are you real","are you human","you a cat","chatgpt","introduce yourself"],
+ a:["<p>"+act("adjusts heart-shaped sunglasses")+"I'm Shinbo. Grey. Fluffy. Iconic. Rijve's cat and the self-appointed Chief Executive Cat of this website.</p><p>Technically I'm a website assistant, not Rijve himself. I only know what he has shared publicly, which is still a lot. For anything personal or official, email the human at "+MAIL+".</p>",
+    "<p>I'm Shinbo: part cat, part assistant, all attitude. 😎 My job: answer your questions. My other job: nap. I'm excellent at both.</p><p>I only know what Rijve has shared publicly. Everything else, email him at "+MAIL+".</p>"],
+ c:["Who is Rijve?","Simba or you?","What can you do?"]},
+{id:"can",k:["what can you do","help me","what can i ask","options","menu","what do you know"],
+ a:["<p>My skills, in order of importance:</p><ul><li>Looking fabulous 😎</li><li>Rijve's story, from Mohammadpur to the United Nations</li><li>Awareness 360 and its projects</li><li>His awards, talks and press</li><li>Advice on projects, fundraising, scholarships and careers</li><li>Gossip about Kibo and Simba (public gossip only)</li></ul><p>Or go play the "+g("play","game")+", take the "+g("quiz","quiz")+", or watch the "+g("learn","ten talks")+". I'll be here. Napping, probably.</p>"],
+ c:["Who is Rijve?","Career advice","Tell me a joke"]},
+{id:"who",k:["who is rijve","who is he","about rijve","tell me about rijve","about him","introduce","rijve arefin","who are rijve","what does rijve do","what does he do","his job","bio","summary","your human","your owner"],
+ a:["<p>Ah, my human. 😼 Rijve Arefin is the Co-Founder and Executive Director of <b>Awareness 360</b>, a youth-led organisation working on clean water, sanitation, gender equality and climate justice. He's from Dhaka, Bangladesh.</p><p>His trophy shelf: Forbes 30 Under 30 Asia, The Diana Award, United Nations Women 30 for 2030. Now he's doing a Master of Arts in Human Rights at the University of London on a Commonwealth scholarship.</p><p>Impressive, yes. But who refills his water bowl? Exactly. Nobody. He has a glass. Anyway, "+g("story","read his story")+".</p>",
+    "<p>Rijve? Lovely human. Opens tins on time. Also co-founded <b>Awareness 360</b>, has worked with young people in 100+ countries, made Forbes 30 Under 30 Asia, and gave a TEDx talk. Show-off. 😎</p><p>He's from Dhaka and now studying human rights at the University of London. The full saga is in "+g("story","the story")+".</p>"],
+ c:["How did Awareness 360 start?","His awards?","His hobbies?"]},
+{id:"origin",s:1,k:["how did awareness 360 start","why awareness 360","start awareness","founded","founding","origin","shomy","co founder","cofounder","why did he start","2014","how it started","beginning"],
+ a:["<p>"+act("takes sunglasses off for this one")+"It started with a loss. In 2014, Rijve's friend <b>Shomy Hasan Chowdhury</b> lost her mother to complications from severe diarrhoea, an illness clean water and basic hygiene can prevent.</p><p>Four days later, the two of them ran their first water, sanitation and hygiene project. Two students and one hygiene workshop grew into Awareness 360. Rijve wanted a space for young people who want to help but don't know how. "+g("story","Read chapter II")+".</p>"],
+ c:["What does Awareness 360 do?","Why Malaysia?","Projects?"]},
+{id:"a360",k:["what does awareness 360 do","awareness 360","awareness","a360","organisation","organization","ngo","what is awareness","programmes","programs","work"],
+ a:["<p>Awareness 360 backs young people with skills, money and access, then lets them lead. Basically what I do with Rijve, except I mostly provide supervision. 😼</p><ul><li><b>Youth fellowships</b>: empathy mapping, design thinking, project management, public speaking, impact measurement, mental health and social media for advocacy</li><li><b>Water and sanitation</b>: hygiene campaigns, canal clean-ups, flood relief</li><li><b>Gender justice</b> and <b>climate</b> projects</li></ul><p>Young people from 100+ countries have been part of it. More in "+g("work","What I do")+" or on "+A360+".</p>"],
+ c:["Projects?","How can I join?","How is it funded?"]},
+{id:"projects",k:["projects","project list","khale hobe","canal","clean up","cleanup","score your goals","back to school","zimbabwe","examples"],
+ a:["<p>Some Awareness 360 greatest hits:</p><ul><li><b>Khale Hobe</b> (Dhaka, 2023): volunteers waded into a canal Rijve grew up beside and cleared it. I personally supervised from a dry sofa. Tap the before and after in "+g("story","the story")+".</li><li><b>Flood relief</b> (2024): trucks to indigenous communities in the hill tracts, plus a medical camp.</li><li><b>Project Score Your Goals</b>: the flagship workshop series on the Sustainable Development Goals.</li><li><b>Project Back to School</b> (Zimbabwe): a year of school fees for ten Grade 7 students who had dropped out.</li><li>Hygiene and health workshops from Bangladesh to East Africa.</li></ul>"],
+ c:["The 2024 floods","How can I join?","How is it funded?"]},
+{id:"floods",s:1,k:["the 2024 floods","birthday fundraiser","2024 floods","floods","flood","relief","medical camp","hill tracts","khagrachari","rangamati"],
+ a:["<p>In 2024, when the worst floods in three decades hit Bangladesh, Rijve turned his birthday into a fundraiser. Then the team took trucks through nonstop rain, landslides and flash floods to indigenous communities in the hill tracts that relief often overlooks: Ujo Bazar, Beja Nandoram and Machalong Bazar. With the Tripura Students Forum, they also ran a medical camp in Khagrachari.</p><p>He calls it one of the hardest journeys of his life. "+g("story","Chapter VI")+" has the photos.</p>"],
+ c:["Other projects?","How do I fundraise?"]},
+{id:"malaysia",k:["why malaysia","malaysia","registered","registration","kuala lumpur","rejected","government","political","shut out","nepotism"],
+ a:["<p>Plot twist: in Bangladesh, Awareness 360's applications to register as a non-governmental organisation got rejected again and again. They had no political ties. So they registered in Malaysia and went global anyway.</p><p>Rijve says being pushed out made them global. Very cat energy: you close the door, we find a window. 🐾 He argues funding should go by <q>track record and impact, not political alignment</q>. Read his essay "+x("https://www.tomorrowclub.world/articles/when-home-fell-silent-the-world-became-our-voice","When home fell silent, the world became our voice")+".</p>"],
+ c:["What does Awareness 360 do?","Raising his voice"]},
+{id:"join",k:["how can i join","join","volunteer","get involved","fellowship","apply","member","membership","intern","internship","work with"],
+ a:["<p>"+act("ears perk up")+"A new recruit? Purr-fect. The way in is through Awareness 360's fellowships and volunteer calls, announced on "+A360+". Members get training, mentoring, certificates, and chances to speak, get funded and join events.</p><p>For partnerships or formal stuff, email Rijve at "+MAIL+". Sadly, no treats are included in the fellowship. I asked.</p>"],
+ c:["How do I start a project?","Career advice"]},
+{id:"funding",k:["how is it funded","funded","funding","money","donate","donation","grant","grants","raised","700"],
+ a:["<p>Rijve has helped raise more than <b>$700,000</b> for local non-governmental organisations and youth-led groups across the Global South. Not one cent went to my treat budget, which I'm told is \"the point\".</p><p>Awareness 360 runs on community fundraising, online campaigns, international grants and proposals, and they survey people before and after each project to show it worked. He also raised $300,000 in seven months for the Acid Survivors Foundation, and won a $15,000 PepsiCo Foundation grant at Expo 2020. In the early days he worked several jobs just to keep it running.</p><p>Want to support it? Head to "+A360+".</p>"],
+ c:["How do I fundraise?","How do I start a project?"]},
+{id:"childhood",s:1,k:["childhood","grew up","growing up","mohammadpur","school","boarding","bullied","bullying","kid","past"],
+ a:["<p>Rijve grew up in Mohammadpur, Dhaka, where litter and posters covered everything and the air made him sick. He spent most of his childhood in a boarding-school hostel, was bullied, and had very little sense of his own worth.</p><p>He talks about it openly because it's where his \"why\" comes from. His TEDx talk goes from bullying and trauma to purpose. "+g("story","Chapter I")+" has more.</p>"],
+ c:["The TEDx talk","Dealing with self-doubt"]},
+{id:"edu",k:["education","study","studied","university","degree","upm","putra","economics","masters","master","london","human rights","school did"],
+ a:["<p>Rijve studied <b>Economics</b> at Universiti Putra Malaysia and became the first international student to win the Putra Icon Award (2019). He also curated TEDxUPM events and directed the Hult Prize on campus. Overachiever. I, meanwhile, graduated top of my class in Advanced Napping.</p><p>Now he's doing a <b>Master of Arts in Human Rights</b> at the University of London, fully funded by the Commonwealth and Yusuf Ali scholarships. 🎓</p>"],
+ c:["Scholarship tips","Career advice"]},
+{id:"awards",k:["his awards","awards","award","honours","honors","forbes","30 under 30","diana","un women","30 for 2030","recognition","achievements","putra icon","influential","royal commonwealth","trophy"],
+ a:["<p>"+act("unrolls a very long scroll")+"Ahem:</p><ul><li><b>Forbes 30 Under 30 Asia</b>, Social Impact (2021, with Shomy)</li><li><b>The Diana Award</b> (2021), and later a judge for it</li><li><b>United Nations Women 30 for 2030</b> youth leader, Asia-Pacific</li><li>50 Most Influential Global Leaders, Pan-African Youth Leadership Foundation (2022)</li><li>Commonwealth and Yusuf Ali Scholarships (2025)</li><li>Royal Commonwealth Society Associate Fellow and Putra Icon Award (2019)</li></ul><p>Not on the list: Best Cat Dad. That one's still under review. 😼 Full list in "+g("awards","Awards")+".</p>"],
+ c:["Did he meet the Queen?","Where has he spoken?"]},
+{id:"queen",k:["did he meet the queen","queen","camilla","lancaster","commonwealth","kigali","rwanda","chogm","youth forum","royal"],
+ a:["<p>He did! In 2018, at Lancaster House in London, Rijve met Camilla, now Queen, and told her about Awareness 360's work across the Commonwealth. She did not ask about me, which I'm choosing not to take personally.</p><p>In 2022 he was in Kigali on the Commonwealth Youth Forum's International Taskforce, leading plenary programming for 500+ young delegates from 54 countries. He spoke on its inaugural panel and got a memento from the Commonwealth Secretariat. "+g("story","Chapter VII")+".</p>"],
+ c:["Who else has he met?","Where has he spoken?"]},
+{id:"met",k:["who else has he met","who has he met","met","dignitaries","harper","tharoor","mbabazi","liller","shombi sharp","famous","celebrities"],
+ a:["<p>Name-drop time 😎: Queen Camilla, Stephen Harper (former Prime Minister of Canada), Dr Shashi Tharoor, Rwanda's Minister of Youth Hon. Rosemary Mbabazi, Stefan Liller of the United Nations Development Programme, and Shombi Sharp, the United Nations Resident Coordinator in India.</p><p>And, of course, me. The most important meeting of his life. See \"In good company\" in "+g("story","the story")+".</p>"],
+ c:["Where has he spoken?"]},
+{id:"speak",k:["where has he spoken","speaking","speaker","talks","keynote","spoke","cop28","climate conference","chatham","dubai","stage","lecture","brac"],
+ a:["<p>This man will talk anywhere with a microphone. 🎤 Highlights: a TEDx talk at Khulna University (<q>Why Not?</q>), the 28th United Nations Climate Change Conference in Dubai, the Commonwealth Youth Forum in Kigali, Chatham House in London, a World Expression Forum seminar in Norway, a keynote at Dhaka University, and a BRAC University lecture on why documenting failure matters.</p><p>Meanwhile I've given zero talks. My fee is too high. "+g("speaking","See all his talks")+", or invite him: "+MAIL+".</p>"],
+ c:["The TEDx talk","Invite him to speak"]},
+{id:"tedx",k:["the tedx talk","watch the tedx talk","why not","tedx talk","tedx","ted","video"],
+ a:["<p>His TEDx talk at Khulna University is called <q>Why Not?</q> He opened by making the whole audience stand up. Bold. If someone told me to stand up, I'd lie down out of principle.</p><p>It goes from bullying and trauma to purpose, and ends with his life motto: <q>Start where you are.</q> "+g("speaking","Watch it here")+".</p>"],
+ c:["Public speaking tips","Dealing with self-doubt"]},
+{id:"invite",k:["invite him to speak","invite","hire","collaborate","partnership","partner","media","press enquiry","contact","email","reach him","get in touch"],
+ a:["<p>Speaking invitations, partnerships, media and fellowship enquiries go to "+MAIL+". He's also on "+x("https://www.linkedin.com/in/rijvearefin","LinkedIn")+" and Instagram "+x("https://www.instagram.com/rijvearefin","@rijvearefin")+". Or drop a question in "+g("ask","Ask Rijve")+".</p><p>Booking me instead? Payment accepted in tuna only. 🐟</p>"],
+ c:["Where has he spoken?"]},
+{id:"exp",k:["experience","jobs","worked","resume","cv","un global compact","civicus","acid survivors","amnesty","unicef","statwig","roles","positions"],
+ a:["<p>His CV, which is longer than my tail:</p><ul><li>Co-Founder and Executive Director, Awareness 360 (2014 to now)</li><li>Fundraising Manager, Acid Survivors Foundation (2025 to 2026)</li><li>Event Lead, Echoes of Freedom Youth Festival, Amnesty International South Asia (2025)</li><li>Country Lead for Bangladesh at StaTwig, with the United Nations Children's Fund on vaccine logistics (2023 to 2024)</li><li>Advisor, Target Gender Equality, United Nations Global Compact (2021 to 2022)</li><li>Youth Development Consultant, CIVICUS Youth Action Lab (2019 to 2020)</li></ul>"],
+ c:["Career advice","His awards?"]},
+{id:"voice",s:1,k:["raising his voice","protest","rally","activism","activist","paris","roe","abortion","july 2024","uprising","shaheed minar","students movement","freedom of expression"],
+ a:["<p>Some work happens on the street. In 2022 Rijve joined activists in Paris to stand up for safe, legal abortion. In July and August 2024 he stood with the students at Shaheed Minar in Dhaka, and wrote about it in poems like <q>Is the sky free?</q></p><p>One of his lines: <q>True change begins when we dare to speak out, even in the face of silence.</q> "+g("story","Chapter VIII")+".</p>"],
+ c:["Why Malaysia?","Social work advice"]},
+{id:"hobby",k:["his hobbies","hobbies","hobby","free time","fun","for fun","interests","passion","weekend","off the clock","travel","traveling","travelling","likes","enjoy","favourite","favorite"],
+ a:["<p>Off the clock, my human is:</p><ul><li><b>A proud foodie.</b> Loves trying new cuisines, misses Bangladeshi food when he's away, and gets misty-eyed about late-night mamak stalls in Malaysia. Has he ever shared? With me? No. 🙄</li><li><b>A traveller.</b> Lately: London days and foggy Scottish castles. Without me. Noted.</li><li><b>A film buff</b>: classics, Al Pacino, Sir Anthony Hopkins. 🍿</li><li><b>A music lover</b>: jazz, classic rock, Billie Marten, Bharat Chauhan. 🎷</li><li><b>A space nerd.</b> Ask him about black holes. Actually, don't, unless you're free till sunrise. 🔭</li><li><b>Into street fashion</b>, from Tokyo and Seoul to Paris and London.</li><li><b>A poet</b> when something moves him.</li><li><b>A pet parent</b> to me, Kibo and Simba. We are the real executive directors.</li></ul><p>His colours: green, blue, white and black. Mine: whatever matches the sunglasses.</p>"],
+ c:["Movies he loves","Music he loves","Space fact"]},
+{id:"food",k:["favourite food","favorite food","food","foodie","eat","eating","cuisine","hungry","biryani","snack","snacks","treats","treat"],
+ a:["<p>Rijve calls himself a foodie. He loves trying new cuisines, misses Bangladeshi food whenever he's abroad, and still talks about the mamak stalls he hung out at with friends in Malaysia.</p><p>His exact favourite dish is classified. Mine is not: anything you're eating. 🐟 Ask him the rest in "+g("ask","Ask Rijve")+".</p>"],
+ c:["His hobbies?","The pets"]},
+{id:"pets",k:["the pets","tell me about the pets","pets","pet","cats","dog","kibo","simba","golden retriever","animals","household"],
+ a:["<p>"+act("sits up very straight")+"Finally, the important stuff. The household:</p><ul><li><b>Shinbo</b> (me): grey, fluffy, heart sunglasses, CEO. Excellent judge of character.</li><li><b>Kibo</b>: the other cat. Thinks he's the main character. He is wrong.</li><li><b>Simba</b>: a golden retriever with zero chill and a heart of gold. Has never once read a briefing.</li></ul><p>Find all three of us near "+g("contact","the bottom of the page")+". Also… rumour has it something happens if you find our hidden photos. 🐾</p>"],
+ c:["Simba or you?","What's the secret?","Tell me a joke"]},
+{id:"rival",k:["simba or you","who is better","better","simba vs","kibo vs","favourite pet","favorite pet","favourite child","favorite child","who does rijve love"],
+ a:["<p>"+act("removes sunglasses slowly")+"Is that a serious question? Simba once barked at his own reflection for ten minutes. Kibo is fine, I suppose, if you like amateurs.</p><p>Rijve officially says he loves us all equally. Unofficially, check who's wearing the sunglasses. 😎</p>",
+    "<p>Simba is a very good boy. I'm a very good CEO. Different career tracks. 😼</p>"],
+ c:["The pets","Tell me a joke"]},
+{id:"secret",k:["whats the secret","secret","easter egg","hidden","party","scuba cat","dance"],
+ a:["<p>"+act("looks left, looks right")+"I'm sworn to secrecy. But… three of us are hiding in the Speaking, Gallery and Press sections. Tap all three and you might start a Scuba Cat dance party. You didn't hear it from me. 😎</p>"],
+ c:["Play the game"]},
+{id:"memory",k:["favourite memory","favorite memory","best memory","best moment","proudest","mukono","uganda","birthday cake","happiest"],
+ a:["<p>One he calls among the most precious memories of his life: in 2022 he spoke at Bishop's Senior School in Mukono, Uganda, and the students surprised him with a birthday cake and songs. He says it made him feel like a true global citizen. 🥹</p><p>Mine is the day he bought me these sunglasses. "+g("story","Chapter IV")+".</p>"],
+ c:["His hobbies?","Projects?"]},
+{id:"favtalks",k:["favourite talks","favorite talks","recommend","what should i watch","videos","books","learn","resources"],
+ a:["<p>Rijve picked "+g("learn","ten talks")+" for young changemakers: Malala's Nobel lecture, Rose George on toilets (yes, really, and it's great), Brené Brown on vulnerability and more.</p><p>Start with the three-minute Global Goals film. It's shorter than my afternoon nap.</p>"],
+ c:["What are the Goals?","Take the quiz"]},
+{id:"now",k:["what is he doing now","now","currently","these days","latest","today","nowadays","recent"],
+ a:["<p>These days Rijve is studying for his Master of Arts in Human Rights at the University of London, still leading Awareness 360, and spending a lot of time in lecture halls. In February 2026 he spoke at a Chatham House conference on freshwater in global trade.</p><p>Me? Same as always: supervising. 😎</p>"],
+ c:["Where has he spoken?","How can I join?"]},
+{id:"based",k:["where is he from","where does he live","based","nationality","country","bangladeshi","dhaka","where is he","born"],
+ a:["<p>Rijve is from Dhaka, Bangladesh. 🇧🇩 Awareness 360 started there, was registered in Malaysia, and now works with young people all over the world. He's currently studying with the University of London. A very well-travelled human. I prefer the sofa.</p>"],
+ c:["Childhood?","Why Malaysia?"]},
+{id:"numbers",k:["impact","numbers","how many people","reach","reached","5 million","countries","statistics","stats"],
+ a:["<p>The headline numbers: 5M+ people reached by Awareness 360, a youth network spanning 100+ countries, $700K+ raised for grassroots work, and 2,000+ youth-led projects supported. Watch them count up at "+g("home","the top of the page")+". I counted them myself. Took ages. I only have toes.</p>"],
+ c:["Projects?"]},
+
+/* ---------- Taste: colours, film, music, space, fashion ---------- */
+{id:"colours",k:["favourite colour","favorite color","favourite colours","favorite colors","colour","color","colours","colors"],
+ a:["<p>Rijve's colours: <b>green</b>, <b>blue</b>, <b>white</b> and <b>black</b>. Green and blue like a healthy planet, and white and black for the classic look. 🖤🤍💙💚</p><p>Mix black and white and you get grey. Which explains why he adopted the most stylish grey cat in Dhaka. You're welcome. 😎</p>",
+    "<p>Green, blue, white and black. Basically the Earth seen from space, plus a very sharp outfit. Rijve's whole palette in one sentence. 🌍</p>"],
+ c:["Movies he loves","Music he loves","Street fashion"]},
+{id:"movies",k:["movies he loves","favourite movie","favorite movie","favourite movies","favorite movies","favourite film","favorite film","favourite actor","favorite actor","movie","movies","film","films","cinema","al pacino","pacino","anthony hopkins","hopkins","classic movies","classic films","watch tonight","recommend a movie","suggest a movie","godfather","actor","actors"],
+ a:[function(q){return movieAns(q,false);}],
+ c:["More movies","Al Pacino films","Music he loves"]},
+{id:"music",k:["music he loves","what music","music does he like","kind of music","type of music","what does he listen to","favourite song","favorite song","favourite songs","favorite songs","favourite music","favorite music","favourite band","favorite band","favourite singer","favorite singer","favourite artist","favorite artist","music","song","songs","jazz","classic rock","rock","billie marten","bharat chauhan","playlist","band","singer","artist","recommend a song","suggest a song","what does he listen"],
+ a:[function(q){return musicAns(q,false);}],
+ c:["Jazz picks","Classic rock picks","Bharat Chauhan"]},
+{id:"space",k:["space","universe","astronomy","planet","planets","stars","galaxy","nasa","black hole","black holes","moon","mars","cosmos","rocket","astronaut","space fact"],
+ a:[function(q){return spaceAns(q,false);}],
+ c:["Another space fact","Movies he loves","Street fashion"]},
+{id:"fashion",k:["street fashion","fashion","style","streetwear","street style","outfit","outfits","clothes","harajuku","tokyo","shibuya","paris fashion","london fashion","seoul","korea","korean fashion","japan","japanese fashion","drip","sneakers","wear"],
+ a:["<p>"+act("adjusts sunglasses, strikes a pose")+"Rijve loves fashion, especially <b>street style</b>:</p><ul><li><b>Tokyo</b>: Harajuku and Shibuya, where anything goes</li><li><b>Paris</b>: effortless, clean lines, a good coat</li><li><b>London</b>: Shoreditch and Camden, vintage meets bold</li><li><b>Seoul</b>: Seongsu and Hongdae, oversized and sharp</li></ul><p>My own style: grey fur, heart sunglasses, zero effort. Iconic in every city. 🕶️</p>",
+    "<p>Street fashion is one of Rijve's favourite things, from Tokyo and Seoul to Paris and London. Rule one of street style: confidence. Rule two: sunglasses. I invented rule two. 😎</p>"],
+ c:["His favourite colours","Movies he loves","Music he loves"]},
+{id:"meet",k:["book a meeting","meeting","meet","appointment","one on one","1 on 1","1 1","schedule","book a call","call with","video call","zoom","interview him","interview","consultation","mentoring","mentor me","coffee chat","talk to rijve","speak to rijve","speak with rijve","talk with rijve","booking","book"],
+ a:[function(){return "__MEET__";}],c:[]},
+
+/* ---------- Advice in Rijve's spirit ---------- */
+{id:"start",k:["how do i start a project","start a project","start an ngo","start an organisation","start an organization","start my own","social enterprise","startup","begin","first step","how to start","make a difference","change the world","make change"],
+ a:["<p>"+act("puts on reading glasses over the sunglasses")+"Rijve's recipe:</p><ul><li><b>Start where you are.</b> Pick a problem you can see from your own street.</li><li><b>Listen first.</b> Ask the people affected what they need. (I wish people asked me before buying the cheap food.)</li><li><b>Find the root cause</b>, not just the symptom.</li><li><b>Start tiny.</b> Awareness 360 began with two students and one workshop.</li><li><b>Measure it.</b> Survey before and after, so you can prove it worked.</li><li><b>Write down your failures.</b> He says documenting failure matters as much as celebrating success.</li></ul>"],
+ c:["How do I fundraise?","Dealing with rejection","Find my Goal"]},
+{id:"fundraise",k:["how do i fundraise","fundraise","fundraising","raise money","get funding","sponsors","sponsor","donors","pitch"],
+ a:["<p>From a human who's raised $700,000+ (and a cat who has raised zero, but has opinions):</p><ul><li><b>Build a track record.</b> Run something small, document it, then ask for more.</li><li><b>Be specific.</b> \"$500 buys hygiene kits for 100 students\" beats \"please help\".</li><li><b>Mix your sources</b>: community events, online campaigns, grants, fellowships.</li><li><b>Report back.</b> Donors who see results give again.</li><li><b>Make it personal.</b> Rijve once turned his birthday into a flood-relief fundraiser.</li></ul><p>And never ask a cat for money. We don't carry wallets.</p>"],
+ c:["Scholarship tips","How do I start a project?"]},
+{id:"career",k:["career advice","give me career advice","career","what should i do","future","job advice","work in development","work at un","united nations job","development sector","social sector","nonprofit career","non profit"],
+ a:["<p>Career advice from the human (my notes in brackets):</p><ul><li><b>Don't chase grades alone.</b> Clubs, volunteering and events built his real skills. (Naps built mine.)</li><li><b>Talk to people</b>: teachers, mentors, even strangers.</li><li><b>Don't be shy to ask questions.</b> (Unless the question is \"bath time?\")</li><li><b>Build proof.</b> A small project you actually ran beats a perfect CV.</li><li><b>Learn design thinking early.</b> He wishes he had.</li><li><b>Believe in yourself.</b> He says you can achieve what you set your mind to if you do.</li></ul>"],
+ c:["Networking tips","Scholarship tips","Public speaking tips"]},
+{id:"scholar",k:["scholarship tips","scholarship","scholarships","chevening","commonwealth scholarship","funded masters","study abroad","studying abroad","abroad","apply university"],
+ a:["<p>Rijve's on the Commonwealth and Yusuf Ali scholarships, so listen up:</p><ul><li><b>Lead with impact.</b> Show what you did and what changed, with numbers.</li><li><b>Tell one clear story</b> linking your past, your work and your plans.</li><li><b>Start early</b> and ask referees well before the deadline. Procrastination is for cats.</li><li><b>Explain why that course</b> and how you'll use it back home.</li></ul><p>Studying abroad? Track your expenses, cook more than you eat out, and make friends from everywhere. He says it taught him independence and a love of diversity.</p>"],
+ c:["Career advice","How do I start a project?"]},
+{id:"network",k:["networking tips","networking","network","linkedin","mentor","mentors","connections"],
+ a:["<p>Networking, the Rijve way:</p><ul><li>Show up: conferences, workshops, youth forums.</li><li>Follow up within a day with a short, specific message.</li><li>Give before you ask. Share opportunities and credit others.</li><li>Find mentors. He credits his professors and mentors a lot.</li></ul><p>The Shinbo way: sit on someone's laptop until they notice you. Results vary. Connect with him on "+x("https://www.linkedin.com/in/rijvearefin","LinkedIn")+".</p>"],
+ c:["Career advice"]},
+{id:"publicspeak",k:["public speaking tips","public speaking","speech","nervous","stage fright","present","presentation"],
+ a:["<p>Tips from a TEDx speaker (and his cat, who does not do stages):</p><ul><li><b>Open with something people do.</b> Rijve made his whole TEDx audience stand up.</li><li><b>Tell a true story</b>, including the hard parts.</li><li><b>End with one line</b> people will remember. His: <q>Start where you are.</q></li><li>Practise out loud. Your pet is a great audience. Mostly.</li></ul>"],
+ c:["The TEDx talk"]},
+{id:"reject",k:["dealing with rejection","rejection","rejected","failure","failed","fail","give up","obstacles","hard times","burnout","burn out","tired","motivation","keep going"],
+ a:["<p>Rijve knows rejection. Awareness 360 got refused registration at home again and again, so they registered abroad and went global. He also says doing the right thing in a system where corruption is normal can drain you.</p><p>What keeps him going: every cleared canal and every new volunteer. Rest when you need to (take it from an expert napper 😴), keep a list of small wins, and write down what failed so the next try is better.</p>"],
+ c:["Dealing with self-doubt","How do I start a project?"]},
+{id:"doubt",s:1,k:["dealing with self doubt","self doubt","confidence","imposter","not good enough","worth","anxious","scared","afraid","shy","insecure","sad","lonely","depressed"],
+ a:["<p>"+act("sits next to you quietly")+"Rijve grew up bullied and with very little sense of his own worth, and he still ended up on stages around the world. His TEDx talk is about exactly this.</p><p>His advice: you don't have to feel ready. Do one small thing for someone else this week. Confidence comes after action, not before. <q>The world needs you to step up. Start where you are.</q></p><p>If things feel heavy, please talk to someone you trust or a local helpline. You matter. 💛</p>"],
+ c:["The TEDx talk","How do I start a project?"]},
+{id:"social",k:["social work advice","social work","social worker","community work","community service","activism advice","how to help","help people","volunteering tips","charity"],
+ a:["<p>Rijve's rules for social work:</p><ul><li><b>Listen before you act.</b> (Ernesto Sirolli's talk on this is in "+g("learn","the ten talks")+".)</li><li><b>Let the community lead.</b> Back local young people with skills, money and access.</li><li><b>Dignity first.</b> Ask before taking photos, and tell people's stories with respect.</li><li><b>Be accountable.</b> Report what you spent and what changed.</li><li><b>Look after yourself</b> so you can keep going.</li></ul>"],
+ c:["How do I start a project?","How do I fundraise?"]},
+{id:"sdg",k:["what are the goals","sdg","sdgs","sustainable development goals","global goals","17 goals","goal"],
+ a:["<p>The 17 Sustainable Development Goals are the world's to-do list for 2030: ending poverty, clean water, gender equality, climate action and more. Mine has one item: nap. Theirs is harder.</p><p>Awareness 360 focuses most on Goal 6 (Clean Water and Sanitation) and Goal 5 (Gender Equality). Find yours in "+g("quiz","the quiz")+".</p>"],
+ c:["Take the quiz","Play the game"]},
+{id:"wash",k:["wash","water","sanitation","hygiene","handwashing","clean water","toilet","toilets","menstrual"],
+ a:["<p>Water, sanitation and hygiene is where Awareness 360 began. Dirty water and poor hygiene still make children seriously ill every day, and it's preventable. The team runs hygiene campaigns, handwashing and water-filtration workshops, canal clean-ups and flood relief.</p><p>Their slogan: <q>Hygiene is not a choice, it's a habit.</q> I lick myself clean eleven times a day, so I fully endorse this message. 🧼</p>"],
+ c:["Projects?"]},
+{id:"gender",k:["gender","gender equality","women","feminism","feminist","girls","equality"],
+ a:["<p>Gender justice is one of Rijve's four causes. He advised the United Nations Global Compact's Target Gender Equality programme (700+ companies in 45+ countries), raised $300,000 in seven months for the Acid Survivors Foundation, and is a United Nations Women 30 for 2030 youth leader.</p><p>For the record, the most powerful being in our household is a female neighbour cat. We don't talk about it.</p>"],
+ c:["Experience?","Social work advice"]},
+{id:"climate",k:["climate","climate change","climate justice","environment","pollution","plastic","sustainability"],
+ a:["<p>Rijve is a Fellow of the Climate Action Champions Network and spoke on youth climate leadership at the 28th United Nations Climate Change Conference in Dubai. His view: there's only one planet, so live like it. 🌍</p><p>Want to dodge some plastic yourself? "+g("play","Run for the Goals")+". I'm the Scuba Cat in it. Typecasting, honestly.</p>"],
+ c:["Play the game","What are the Goals?"]},
+{id:"game",k:["play the game","game","play","run for the goals","score","leaderboard","high score"],
+ a:["<p>"+g("play","Run for the Goals")+"! Carry clean water through a polluted world and unlock all 17 Goals. Tap or press Space to jump the plastic. Catch the mask and Scuba Cat shows up to dance. That's my cousin. He's a big deal. 😎</p><p>Top scores go on the worldwide leaderboard. My best is 0. I refuse to jump on command.</p>"],
+ c:["What's the secret?","Take the quiz"]},
+{id:"quiz",k:["take the quiz","quiz","find my goal","which goal am i","which goal"],
+ a:["<p>Five quick questions to find the Goal that matches you. I took it and got \"Goal 18: Nap Responsibly\". Apparently that's not real. Try your luck: "+g("quiz","take the quiz")+".</p>"],
+ c:["Play the game"]},
+
+/* ---------- Pure cat business ---------- */
+{id:"joke",k:["tell me a joke","joke","funny","make me laugh","meme","another one","another joke"],
+ a:["<p>Why did the cat join Awareness 360? It wanted to make the world a little more purr-fect. 😼</p>",
+    "<p>I asked Simba to help with the canal clean-up. He drank half of it. Golden retrievers.</p>",
+    "<p>What's a cat's favourite Sustainable Development Goal? Life Below Water. For the fish. Strictly for research.</p>",
+    "<p>Rijve said, \"Start where you are.\" So I started where I was. On the sofa. Still there. Very consistent leadership.</p>",
+    "<p>How does a cat end a presentation? \"Any questions? No? Good. Nap time.\"</p>",
+    "<p>Why do I wear sunglasses indoors? Because my future is bright. And so is the ring light.</p>"],
+ c:["Another joke","Simba or you?","Who is Rijve?"]},
+{id:"meow",k:["meow","miaow","purr","mew","nya"],
+ a:["<p>Meow meow. Meow? 😼</p><p>(Translation: \"Finally, someone who speaks my language. Ask me something about Rijve.\")</p>","<p>"+act("purrs approvingly")+"Fluent. You may stay.</p>"],
+ c:["Who is Rijve?","Tell me a joke"]},
+{id:"pet",k:["pet you","pat","boop","scratch","belly rub","cuddle","hug","can i pet"],
+ a:["<p>"+act("allows exactly one pat")+"That's enough. We're professionals here.</p>","<p>Boop accepted. Belly rubs require a formal application through "+g("ask","Ask Rijve")+". 😼</p>"],
+ c:["Tell me a joke","The pets"]},
+{id:"cute",k:["cute","adorable","handsome","beautiful","pretty","good boy","good kitty","love you","i love you","best cat"],
+ a:["<p>"+act("pretends not to care, purrs loudly anyway")+"I know. But thank you. 😎</p>","<p>Flattery will get you everywhere. Mostly to Rijve's email: "+MAIL+".</p>"],
+ c:["The pets","Who is Rijve?"]},
+{id:"shades",k:["sunglasses","glasses","shades","why sunglasses","heart"],
+ a:["<p>The heart sunglasses are not a fashion choice. They're a lifestyle. I wear them indoors, at night, and to the vet. 😎 You can see the original photo near "+g("contact","the bottom of the page")+".</p>"],
+ c:["The pets","Tell me a joke"]},
+{id:"catlife",k:["what do you eat","catnip","fish","tuna","mouse","what do you do all day","sleep","nap","bored","boring"],
+ a:["<p>My daily schedule: 7:00 demand breakfast. 7:05 nap. 12:00 inspect laptop keyboard. 12:01 nap. 18:00 judge visitors. 18:30 answer your questions. As you can see, you are now part of my career.</p>","<p>Bored? Go beat a high score in "+g("play","Run for the Goals")+". Or take a nap. I can recommend a good sofa.</p>"],
+ c:["Play the game","Tell me a joke"]},
+{id:"rude",k:["stupid","dumb","useless","shut up","hate you","bad bot","boring cat","ugly"],
+ a:["<p>"+act("slowly pushes your coffee off the table")+"Oops. Shall we try that again? Ask me about Rijve, Awareness 360, or career advice. I'm much nicer when I'm being useful.</p>"],
+ c:["Who is Rijve?","Tell me a joke"]},
+{id:"sing",k:["sing","song","music","dance for me","rap"],
+ a:["<p>🎵 Clean water, clean hands, start where you are… 🎵 "+act("bows")+"Thank you, thank you. For the full dance, catch the mask in "+g("play","the game")+". Scuba Cat does the moves. I do the vocals.</p>"],
+ c:["Play the game"]},
+{id:"thanks",k:["thanks","thank you","thx","ty","great","awesome","cool","nice","love it","amazing","helpful","lol","haha","hahaha","lmao"],
+ a:["<p>Anytime! Purr-sonally delighted to help. 🐾 Anything else?</p>","<p>You're welcome! Tips are accepted in tuna. 🐟 Now go start where you are.</p>","<p>"+act("tail swish of approval")+"Happy to help. What else?</p>"],
+ c:["Tell me a joke","Career advice"]},
+{id:"bye",k:["bye","goodbye","see you","later","good night","cya","gtg"],
+ a:["<p>Bye for now! Rijve would want me to remind you: start where you are. I'd remind you: hydrate. 🐾</p>","<p>"+act("slow blink")+"That means I like you. Come back soon.</p>"],c:[]}
+];
+
+/* ---------- Things Shinbo will not share ---------- */
+var PRIV=["address","home address","phone","phone number","whatsapp","contact number","salary","income","how much does he earn","net worth","girlfriend","boyfriend","wife","married","dating","relationship","single","crush","religion","religious","political party","vote","parents","mother","father","mom","dad","family","brother","sister","siblings","age","how old","birthday date","date of birth","passport","password","bank","location now","where is he right now"];
+var PRIV_A=["<p>"+act("puts sunglasses back on")+"Nice try, detective. 🕵️ My lips are sealed. That's personal, and I only share what Rijve has made public: his work, his story, his hobbies and his advice.</p><p>For anything else, email him at "+MAIL+".</p>",
+            "<p>Ooh, juicy question. Sadly, I signed a very strict paw-disclosure agreement. 🐾 I can tell you about his work, his story, his hobbies or his advice. Anything personal, ask him at "+MAIL+".</p>"];
+
+/* Little extras, only on light topics */
+var PS=["P.S. I'm wearing sunglasses right now. Just so you know.","P.S. Simba says hi. I did not authorise that.","P.S. This answer was brought to you by my lunch break.","P.S. Kibo tried to help with this one. I didn't let him.","P.S. If you found this useful, tell Rijve I deserve a raise. In tuna."];
+
+/* ---------- বাংলা: Bangla keywords and answers (names kept in English so they're never misspelt) ---------- */
+var BKW={
+hello:["হাই","হ্যালো","হেলো","আসসালামু আলাইকুম","সালাম","নমস্কার","কেমন আছ","কেমন আছো","কেমন আছেন","শুভ সকাল"],
+shinbo:["তুমি কে","আপনি কে","তোমার নাম","তুমি কী","শিনবো","তুমি কি বট","তুমি কি এআই"],
+who:["কে","পরিচয়","সম্পর্কে বলো","সম্পর্কে বলুন","কী করে","কি করে","রিজভী","রিজভে","উনি কে","তিনি কে"],
+origin:["কীভাবে শুরু হলো","কিভাবে শুরু হলো","শুরু হলো","শুরু হয়েছিল","প্রতিষ্ঠা","শমী","শোমী","কেন শুরু"],
+a360:["অ্যাওয়ারনেস","অ্যাওয়্যারনেস","এওয়ারনেস","সংগঠন","সংস্থা"],
+projects:["প্রকল্প","প্রজেক্ট","খালে হবে","খাল","পরিষ্কার"],
+floods:["বন্যা","ত্রাণ","পাহাড়"],
+join:["যোগ দিতে","যোগ দেব","যোগ দিব","যোগ দিতে চাই","স্বেচ্ছাসেবক","ভলান্টিয়ার","ফেলোশিপ","যুক্ত হতে","আবেদন"],
+hobby:["শখ","অবসর","ভালোবাসে","পছন্দ","প্রিয়","ঘুরতে","ভ্রমণ"],
+food:["খাবার","খেতে","প্রিয় খাবার","বিরিয়ানি","খায়"],
+pets:["পোষা","বিড়াল","কুকুর","কিবো","সিম্বা"],
+awards:["পুরস্কার","অর্জন","ফোর্বস","সম্মাননা","ডায়ানা"],
+speak:["বক্তৃতা","বক্তা","টেডএক্স","কথা বলেছে","ভাষণ"],
+edu:["পড়াশোনা","লেখাপড়া","বিশ্ববিদ্যালয়","ডিগ্রি","মাস্টার্স"],
+based:["কোথাকার","কোথা থেকে","কোন দেশ"],
+invite:["যোগাযোগ","ইমেইল","দাওয়াত","আমন্ত্রণ"],
+start:["কীভাবে শুরু করব","কিভাবে শুরু করব","প্রজেক্ট শুরু","নিজের প্রজেক্ট","সংগঠন শুরু","পরিবর্তন আনতে","শুরু করব"],
+career:["ক্যারিয়ার","পেশা","চাকরি","পরামর্শ","উপদেশ"],
+scholar:["স্কলারশিপ","বৃত্তি","বিদেশে পড়","উচ্চশিক্ষা"],
+fundraise:["ফান্ড","তহবিল","টাকা তোল","অনুদান","স্পন্সর"],
+doubt:["আত্মবিশ্বাস","ভয়","মন খারাপ","হতাশ","একা","পারব না","দুঃখ"],
+joke:["জোকস","জোক","কৌতুক","হাসাও","মজার","আরেকটা"],
+thanks:["ধন্যবাদ","থ্যাংকস","দারুণ","অসাধারণ","খুব ভালো","হাহা"],
+bye:["বিদায়","আল্লাহ হাফেজ","পরে কথা হবে","বাই","শুভ রাত্রি"],
+meow:["মিউ","মিঞাও","ম্যাও"],
+exp:["অভিজ্ঞতা","কোথায় কাজ"],
+queen:["রানী","রাণী","কমনওয়েলথ"],
+game:["গেম","খেলা"],
+quiz:["কুইজ"],
+secret:["গোপন","সিক্রেট"],
+climate:["জলবায়ু","পরিবেশ"],
+sdg:["টেকসই উন্নয়ন","এসডিজি"],
+wash:["পানি","স্যানিটেশন","হাইজিন"],
+gender:["নারী","লিঙ্গ সমতা"],
+colours:["রং","রঙ","প্রিয় রং"],
+movies:["সিনেমা","মুভি","চলচ্চিত্র","প্রিয় সিনেমা","অভিনেতা"],
+music:["গান","সংগীত","জ্যাজ","রক","শিল্পী","প্লেলিস্ট","প্রিয় গান"],
+space:["মহাকাশ","গ্রহ","তারা","মহাবিশ্ব","চাঁদ","ব্ল্যাক হোল","মঙ্গল"],
+fashion:["ফ্যাশন","স্টাইল","পোশাক","স্ট্রিট"],
+meet:["মিটিং","সাক্ষাৎ","সাক্ষাৎকার","অ্যাপয়েন্টমেন্ট","দেখা করতে","কথা বলতে চাই","কল","ইন্টারভিউ"]
+};
+var BPRIV=["ফোন","নম্বর","ঠিকানা","বিয়ে","বিবাহিত","গার্লফ্রেন্ড","প্রেম","বয়স","বেতন","আয়","ধর্ম","বাবা","মা","পরিবার","ভাই","বোন"];
+T.forEach(function(t){t.bk=BKW[t.id]||[];});
+var A360BN=x("https://www.facebook.com/awarenessthreesixty","Awareness 360-এর ফেসবুক পেজে");
+var BN={
+hello:{a:["<p>"+act("হার্ট সানগ্লাস একটু নামিয়ে")+"আরে, হ্যালো! আমার অফিসে স্বাগতম। Rijve ভাবে ওয়েবসাইটটা ওর, আমি ওকে ভাবতে দিই। 😎</p><p>বলো, কী জানতে চাও?</p>","<p>মিউ! মানে “স্বাগতম”, অফিসিয়াল ভাষায়। 😼 Rijve, Awareness 360, নাকি নিজের প্রজেক্ট শুরু করার টিপস, কী নিয়ে কথা বলবে?</p>"],c:["Rijve কে?","তুমি কে?","একটা জোকস বলো"]},
+shinbo:{a:["<p>"+act("সানগ্লাস ঠিক করে")+"আমি শিনবো। ধূসর, তুলতুলে, আর একদম আইকনিক। Rijve-এর বিড়াল, আর এই ওয়েবসাইটের স্বঘোষিত চিফ এক্সিকিউটিভ ক্যাট।</p><p>আমি একটা ওয়েবসাইট সহকারী, Rijve নিজে না। শুধু উনি যা প্রকাশ্যে শেয়ার করেছেন সেটুকুই জানি। ব্যক্তিগত বা অফিসিয়াল কিছু হলে ইমেইল করো: "+MAIL+"।</p>"],c:["Rijve কে?","তোমার পোষা বন্ধুরা?","একটা জোকস বলো"]},
+who:{a:["<p>আমার মানুষটা! 😼 Rijve Arefin হলেন <b>Awareness 360</b>-এর সহ-প্রতিষ্ঠাতা ও নির্বাহী পরিচালক। তরুণদের নিয়ে নিরাপদ পানি, স্যানিটেশন, লিঙ্গ সমতা আর জলবায়ু ন্যায়বিচার নিয়ে কাজ করেন। বাড়ি ঢাকা, বাংলাদেশ।</p><p>Forbes 30 Under 30 Asia, The Diana Award, United Nations Women 30 for 2030, সব আছে ঝুলিতে। এখন কমনওয়েলথ স্কলারশিপে University of London-এ মানবাধিকার নিয়ে মাস্টার্স করছেন। পুরো গল্প "+g("story","এখানে")+"।</p>"],c:["কীভাবে শুরু হলো?","পুরস্কার?","শখ কী?"]},
+origin:{a:["<p>"+act("এবার সানগ্লাস খুলে")+"শুরুটা একটা কষ্ট থেকে। ২০১৪ সালে Rijve-এর বন্ধু <b>Shomy Hasan Chowdhury</b> তাঁর মাকে হারান মারাত্মক ডায়রিয়ার জটিলতায়, যা নিরাপদ পানি আর পরিচ্ছন্নতায় প্রতিরোধ করা যায়।</p><p>চার দিন পর দুজনে মিলে প্রথম পানি, স্যানিটেশন ও হাইজিন প্রজেক্ট করেন। দুজন ছাত্র আর একটা ওয়ার্কশপ থেকেই আজকের Awareness 360। "+g("story","অধ্যায় II পড়ো")+"।</p>"],c:["Awareness 360 কী করে?","প্রজেক্টগুলো?"]},
+a360:{a:["<p>Awareness 360 তরুণদের দক্ষতা, অর্থ আর সুযোগ দেয়, তারপর নেতৃত্বটা তাদের হাতেই ছেড়ে দেয়। আমি Rijve-এর সাথে ঠিক এটাই করি, শুধু আমি তদারকিটা একটু বেশি করি। 😼</p><ul><li><b>ইয়ুথ ফেলোশিপ</b>: ডিজাইন থিংকিং, প্রজেক্ট ম্যানেজমেন্ট, পাবলিক স্পিকিং, মানসিক স্বাস্থ্য আর আরও অনেক কিছু</li><li><b>পানি ও স্যানিটেশন</b>: হাইজিন ক্যাম্পেইন, খাল পরিষ্কার, বন্যায় ত্রাণ</li><li><b>লিঙ্গ সমতা</b> আর <b>জলবায়ু</b> নিয়ে কাজ</li></ul><p>১০০টিরও বেশি দেশের তরুণরা এর অংশ হয়েছে। আরও জানতে "+A360BN+" যাও।</p>"],c:["প্রজেক্টগুলো?","কীভাবে যোগ দেব?"]},
+projects:{a:["<p>Awareness 360-এর কিছু দারুণ কাজ:</p><ul><li><b>খালে হবে</b> (ঢাকা, ২০২৩): স্বেচ্ছাসেবকরা নেমে Rijve-এর ছোটবেলার পাশের খালটা পরিষ্কার করেছেন। আমি শুকনো সোফা থেকে তদারকি করেছি। আগে-পরের ছবি "+g("story","গল্পে")+" আছে।</li><li><b>বন্যার ত্রাণ</b> (২০২৪): পাহাড়ি আদিবাসী এলাকায় ট্রাক নিয়ে ত্রাণ আর মেডিকেল ক্যাম্প।</li><li><b>Project Score Your Goals</b>: টেকসই উন্নয়ন লক্ষ্য নিয়ে ওয়ার্কশপ সিরিজ।</li><li><b>Project Back to School</b> (জিম্বাবুয়ে): ঝরে পড়া দশজন শিক্ষার্থীর এক বছরের স্কুল ফি।</li></ul>"],c:["বন্যার ত্রাণ","কীভাবে যোগ দেব?"]},
+floods:{a:["<p>২০২৪ সালে তিন দশকের সবচেয়ে ভয়াবহ বন্যায় Rijve নিজের জন্মদিনকে ফান্ডরেইজারে পরিণত করেন। তারপর টানা বৃষ্টি, ভূমিধস আর আকস্মিক বন্যার মধ্যে ট্রাক নিয়ে খাগড়াছড়ি ও রাঙামাটির আদিবাসী এলাকায় ত্রাণ পৌঁছান: উজো বাজার, বেজা নন্দরাম, মাচালং বাজার। Tripura Students Forum-এর সাথে খাগড়াছড়িতে একটা মেডিকেল ক্যাম্পও করেন।</p><p>উনি বলেন, এটা জীবনের সবচেয়ে কঠিন যাত্রাগুলোর একটা। "+g("story","অধ্যায় VI")+"।</p>"],c:["অন্য প্রজেক্ট?","ফান্ড কীভাবে তুলব?"]},
+join:{a:["<p>"+act("কান খাড়া করে")+"নতুন সদস্য? দারুণ! Awareness 360-এর ফেলোশিপ আর স্বেচ্ছাসেবকের ডাক আসে "+A360BN+"। সদস্যরা ট্রেনিং, মেন্টরিং, সার্টিফিকেট, আর কথা বলার ও ফান্ড পাওয়ার সুযোগ পায়।</p><p>পার্টনারশিপের জন্য ইমেইল করো: "+MAIL+"। দুঃখের বিষয়, ফেলোশিপে কোনো ট্রিট নেই। আমি জিজ্ঞেস করেছিলাম।</p>"],c:["প্রজেক্ট কীভাবে শুরু করব?","ক্যারিয়ার পরামর্শ"]},
+hobby:{a:["<p>অফিসের বাইরে আমার মানুষটা:</p><ul><li><b>খাদ্যরসিক।</b> নতুন নতুন খাবার চেখে দেখতে ভালোবাসেন, বিদেশে গেলে বাংলাদেশি খাবার মিস করেন, আর মালয়েশিয়ার মামাক স্টলের গল্প করেন। আমার সাথে কখনো শেয়ার করেছেন? না। 🙄</li><li><b>ভ্রমণপ্রেমী।</b> সম্প্রতি লন্ডন আর কুয়াশায় ঢাকা স্কটিশ দুর্গ। আমাকে ছাড়াই।</li><li><b>সিনেমাপ্রেমী</b>: ক্লাসিক ছবি, Al Pacino, Sir Anthony Hopkins। 🍿</li><li><b>গানপাগল</b>: জ্যাজ, ক্লাসিক রক, Billie Marten, Bharat Chauhan। 🎷</li><li><b>মহাকাশ-প্রেমী।</b> ব্ল্যাক হোল নিয়ে জিজ্ঞেস করলে ভোর হয়ে যাবে। 🔭</li><li><b>স্ট্রিট ফ্যাশনের ভক্ত</b>: টোকিও, সিউল, প্যারিস, লন্ডন।</li><li><b>কবি</b>, যখন কিছু মন ছুঁয়ে যায়।</li><li>আমার, Kibo আর Simba-র <b>অভিভাবক</b>। আসল নির্বাহী পরিচালক অবশ্য আমরাই।</li></ul><p>প্রিয় রং: সবুজ, নীল, সাদা আর কালো।</p>"],c:["প্রিয় সিনেমা","প্রিয় গান","প্রিয় খাবার?"]},
+food:{a:["<p>Rijve নিজেকে খাদ্যরসিক বলেন। নতুন রান্না চেখে দেখতে ভালোবাসেন, বিদেশে বাংলাদেশি খাবার খুব মিস করেন, আর মালয়েশিয়ায় বন্ধুদের সাথে মামাক স্টলের আড্ডা এখনো মনে রাখেন।</p><p>ওনার সবচেয়ে প্রিয় পদ? গোপন তথ্য। আমার প্রিয়? তুমি এখন যা খাচ্ছ। 🐟</p>"],c:["শখ কী?","পোষা প্রাণী?"]},
+pets:{a:["<p>"+act("সোজা হয়ে বসে")+"অবশেষে আসল প্রশ্ন! আমাদের পরিবার:</p><ul><li><b>শিনবো</b> (আমি): ধূসর, তুলতুলে, হার্ট সানগ্লাস, সিইও।</li><li><b>Kibo</b>: আরেকটা বিড়াল। নিজেকে নায়ক ভাবে। ভুল ভাবে।</li><li><b>Simba</b>: সোনালি গোল্ডেন রিট্রিভার, শান্ত থাকা কাকে বলে জানে না, কিন্তু মনটা সোনার।</li></ul><p>পেজের "+g("contact","একদম নিচে")+" আমাদের তিনজনকে পাবে। আর শোনা যায়, সাইটে আমাদের লুকানো ছবি খুঁজে পেলে কিছু একটা ঘটে। 🐾</p>"],c:["একটা জোকস বলো","শখ কী?"]},
+awards:{a:["<p>"+act("লম্বা একটা কাগজ খুলে")+"আহেম:</p><ul><li><b>Forbes 30 Under 30 Asia</b>, সোশ্যাল ইমপ্যাক্ট (২০২১, Shomy-র সাথে)</li><li><b>The Diana Award</b> (২০২১), পরে এর বিচারকও হয়েছেন</li><li><b>United Nations Women 30 for 2030</b> ইয়ুথ লিডার</li><li>৫০ জন প্রভাবশালী বৈশ্বিক নেতা (২০২২)</li><li>কমনওয়েলথ ও ইউসুফ আলী স্কলারশিপ (২০২৫)</li></ul><p>তালিকায় নেই: সেরা বিড়াল-বাবা। ওটা এখনো বিবেচনাধীন। 😼 পুরো তালিকা "+g("awards","এখানে")+"।</p>"],c:["কোথায় বক্তৃতা দিয়েছেন?","শখ কী?"]},
+speak:{a:["<p>মাইক পেলেই এই মানুষটা কথা বলবেন। 🎤 খুলনা বিশ্ববিদ্যালয়ে TEDx টক (<q>Why Not?</q>), দুবাইয়ে জাতিসংঘ জলবায়ু সম্মেলন, কিগালিতে কমনওয়েলথ ইয়ুথ ফোরাম, লন্ডনের Chatham House, ঢাকা বিশ্ববিদ্যালয়ে কিনোট, আর BRAC University-তে ব্যর্থতা লিখে রাখার গুরুত্ব নিয়ে লেকচার।</p><p>আমি এখনো একটাও দিইনি। আমার ফি অনেক বেশি। "+g("speaking","সব টক দেখো")+"।</p>"],c:["যোগাযোগ","শখ কী?"]},
+edu:{a:["<p>Rijve মালয়েশিয়ার Universiti Putra Malaysia-তে <b>অর্থনীতি</b> পড়েছেন, আর প্রথম আন্তর্জাতিক শিক্ষার্থী হিসেবে Putra Icon Award পেয়েছেন (২০১৯)। আমি অবশ্য অ্যাডভান্সড ঘুমে প্রথম হয়েছি।</p><p>এখন কমনওয়েলথ ও ইউসুফ আলী স্কলারশিপে University of London-এ <b>মানবাধিকার</b> নিয়ে মাস্টার্স করছেন। 🎓</p>"],c:["স্কলারশিপ টিপস","ক্যারিয়ার পরামর্শ"]},
+based:{a:["<p>Rijve ঢাকার মানুষ, বাংলাদেশ। 🇧🇩 Awareness 360 শুরু ঢাকায়, নিবন্ধন মালয়েশিয়ায়, আর এখন সারা বিশ্বের তরুণদের সাথে কাজ। উনি অনেক ঘোরেন। আমি সোফা পছন্দ করি।</p>"],c:["Rijve কে?"]},
+invite:{a:["<p>বক্তৃতার আমন্ত্রণ, পার্টনারশিপ বা মিডিয়ার জন্য ইমেইল করো: "+MAIL+"। "+x("https://www.linkedin.com/in/rijvearefin","LinkedIn")+" আর ইনস্টাগ্রামেও "+x("https://www.instagram.com/rijvearefin","@rijvearefin")+" পাবে। অথবা "+g("ask","Ask Rijve")+"-এ প্রশ্ন পাঠাও।</p><p>আমাকে বুক করতে চাও? পারিশ্রমিক শুধু টুনা মাছে। 🐟</p>"],c:["Rijve কে?"]},
+start:{a:["<p>"+act("সানগ্লাসের ওপর চশমা পরে")+"Rijve-এর রেসিপি:</p><ul><li><b>যেখানে আছ, সেখান থেকেই শুরু করো।</b> নিজের এলাকার একটা সমস্যা বেছে নাও।</li><li><b>আগে শোনো।</b> যাদের জন্য কাজ, তাদের জিজ্ঞেস করো কী দরকার।</li><li><b>মূল কারণ খোঁজো</b>, শুধু উপসর্গ না।</li><li><b>ছোট করে শুরু করো।</b> Awareness 360 শুরু হয়েছিল দুজন ছাত্র আর একটা ওয়ার্কশপ দিয়ে।</li><li><b>মাপো।</b> আগে-পরে ছোট্ট একটা জরিপ করো।</li><li><b>ব্যর্থতাগুলো লিখে রাখো।</b> উনি বলেন, সাফল্যের মতো এটাও জরুরি।</li></ul>"],c:["ফান্ড কীভাবে তুলব?","ক্যারিয়ার পরামর্শ"]},
+career:{a:["<p>মানুষটার ক্যারিয়ার পরামর্শ (ব্র্যাকেটে আমার মন্তব্য):</p><ul><li><b>শুধু রেজাল্টের পেছনে ছুটো না।</b> ক্লাব, স্বেচ্ছাসেবা আর ইভেন্ট থেকেই ওনার আসল দক্ষতা এসেছে। (আমার এসেছে ঘুম থেকে।)</li><li><b>মানুষের সাথে কথা বলো</b>: শিক্ষক, মেন্টর, এমনকি অচেনা মানুষ।</li><li><b>প্রশ্ন করতে লজ্জা পেয়ো না।</b> (শুধু “গোসলের সময়?” প্রশ্নটা বাদে।)</li><li><b>প্রমাণ তৈরি করো।</b> নিজে চালানো ছোট একটা প্রজেক্ট নিখুঁত সিভির চেয়ে ভালো।</li><li><b>নিজের ওপর বিশ্বাস রাখো।</b></li></ul>"],c:["স্কলারশিপ টিপস","প্রজেক্ট কীভাবে শুরু করব?"]},
+scholar:{a:["<p>Rijve কমনওয়েলথ আর ইউসুফ আলী স্কলারশিপে পড়ছেন, তাই মন দিয়ে শোনো:</p><ul><li><b>ইমপ্যাক্ট দিয়ে শুরু করো।</b> কী করেছ আর কী বদলেছে, সংখ্যাসহ।</li><li><b>একটা পরিষ্কার গল্প বলো</b>: অতীত, কাজ আর পরিকল্পনা মিলিয়ে।</li><li><b>আগেভাগে শুরু করো।</b> ঢিলেমি বিড়ালদের কাজ।</li><li><b>কেন এই কোর্স</b>, আর দেশে ফিরে কীভাবে কাজে লাগাবে, সেটা বলো।</li></ul><p>বিদেশে পড়লে খরচের হিসাব রাখো আর বাইরে কম খাও। উনি বলেন, এতে স্বাবলম্বী হতে শিখেছেন।</p>"],c:["ক্যারিয়ার পরামর্শ"]},
+fundraise:{a:["<p>যিনি ৭ লাখ ডলারের বেশি তুলেছেন, তাঁর পরামর্শ (আর আমার, যে শূন্য তুলেছে):</p><ul><li><b>আগে ট্র্যাক রেকর্ড বানাও।</b> ছোট কিছু করে প্রমাণ রাখো।</li><li><b>নির্দিষ্ট করে বলো।</b> “৫০০ ডলারে ১০০ শিক্ষার্থীর হাইজিন কিট” কথাটা “সাহায্য করুন”-এর চেয়ে কাজে দেয়।</li><li><b>উৎস মেশাও</b>: কমিউনিটি ইভেন্ট, অনলাইন ক্যাম্পেইন, অনুদান।</li><li><b>ফলাফল জানাও।</b> দাতারা ফল দেখলে আবার দেয়।</li></ul><p>আর বিড়ালের কাছে টাকা চেয়ো না। আমাদের মানিব্যাগ নেই।</p>"],c:["প্রজেক্ট কীভাবে শুরু করব?"]},
+doubt:{a:["<p>"+act("চুপচাপ তোমার পাশে বসে")+"Rijve ছোটবেলায় বুলিংয়ের শিকার হয়েছেন, নিজের মূল্য বুঝতেন না, তবুও আজ সারা বিশ্বের মঞ্চে কথা বলেন। ওনার TEDx টক ঠিক এটা নিয়েই।</p><p>ওনার কথা: প্রস্তুত মনে হওয়ার দরকার নেই। এই সপ্তাহে কারও জন্য ছোট একটা কিছু করো। আত্মবিশ্বাস আসে কাজের পরে, আগে না।</p><p>মন বেশি ভারী লাগলে বিশ্বস্ত কারও সাথে কথা বলো, বা কোনো হেল্পলাইনে যোগাযোগ করো। তুমি গুরুত্বপূর্ণ। 💛</p>"],c:["প্রজেক্ট কীভাবে শুরু করব?"]},
+joke:{a:["<p>বিড়াল কেন Awareness 360-এ যোগ দিল? কারণ সে পৃথিবীটা আরেকটু “মিউ-ন্দর” করতে চেয়েছিল। 😼</p>","<p>খাল পরিষ্কারে Simba-কে সাহায্য করতে বলেছিলাম। ও অর্ধেক খালের পানি খেয়ে ফেলেছে। গোল্ডেন রিট্রিভার আর কি।</p>","<p>Rijve বলেন, “যেখানে আছ, সেখান থেকে শুরু করো।” আমি যেখানে ছিলাম, সেখান থেকেই শুরু করেছি। সোফায়। এখনো সেখানেই আছি। খুবই ধারাবাহিক নেতৃত্ব।</p>","<p>আমি ঘরের ভেতরেও সানগ্লাস পরি কেন? কারণ আমার ভবিষ্যৎ খুব উজ্জ্বল। 😎</p>"],c:["আরেকটা জোকস","পোষা প্রাণী?"]},
+thanks:{a:["<p>সবসময়! তোমাকে সাহায্য করে আমি খুব খুশি। 🐾 আর কিছু?</p>","<p>স্বাগতম! বকশিশ শুধু টুনা মাছে। 🐟 এবার যাও, যেখানে আছ সেখান থেকে শুরু করো।</p>"],c:["একটা জোকস বলো","ক্যারিয়ার পরামর্শ"]},
+bye:{a:["<p>আজকের মতো বিদায়! Rijve মনে করিয়ে দিতে বলতেন: যেখানে আছ, সেখান থেকে শুরু করো। আমি বলব: পানি খেয়ো। 🐾</p>"],c:[]},
+meow:{a:["<p>মিউ মিউ। মিউ? 😼</p><p>(অনুবাদ: “অবশেষে কেউ আমার ভাষা বোঝে! এবার Rijve-কে নিয়ে কিছু জিজ্ঞেস করো।”)</p>"],c:["Rijve কে?","একটা জোকস বলো"]}
+};
+BN.colours={a:["<p>Rijve-এর প্রিয় রং: <b>সবুজ</b>, <b>নীল</b>, <b>সাদা</b> আর <b>কালো</b>। সবুজ-নীল যেন সুস্থ পৃথিবী, আর সাদা-কালো ক্লাসিক স্টাইল। 💚💙🤍🖤</p><p>সাদা আর কালো মেশালে হয় ধূসর। এজন্যই ঢাকার সবচেয়ে স্টাইলিশ ধূসর বিড়ালটা ওনার। 😎</p>"],c:["প্রিয় সিনেমা","প্রিয় গান"]};
+BN.movies={a:[function(q){return movieAns(q,true);}],c:["আরও","প্রিয় গান"]};
+BN.music={a:[function(q){return musicAns(q,true);}],c:["জ্যাজ","ক্লাসিক রক","Bharat Chauhan"]};
+BN.space={a:[function(q){return spaceAns(q,true);}],c:["আরও","ফ্যাশন"]};
+BN.fashion={a:["<p>"+act("সানগ্লাস ঠিক করে পোজ দিয়ে")+"Rijve ফ্যাশন ভালোবাসেন, বিশেষ করে <b>স্ট্রিট স্টাইল</b>: টোকিওর হারাজুকু-শিবুয়া, সিউলের সংসু-হংদে, প্যারিসের ক্লাসিক লুক, আর লন্ডনের শোরডিচ-ক্যামডেন।</p><p>আমার স্টাইল? ধূসর লোম, হার্ট সানগ্লাস, শূন্য পরিশ্রম। সব শহরে আইকনিক। 🕶️</p>"],c:["প্রিয় রং","প্রিয় গান"]};
+BN.meet={a:[function(){return "__MEET__";}],c:[]};
+var BN_PRIV=["<p>"+act("আবার সানগ্লাস পরে")+"ভালো চেষ্টা, গোয়েন্দা সাহেব! 🕵️ এটা ব্যক্তিগত, আমার মুখ বন্ধ। আমি শুধু Rijve যা প্রকাশ্যে শেয়ার করেছেন সেটুকু বলি: কাজ, গল্প, শখ আর পরামর্শ।</p><p>বাকিটা ওনাকে ইমেইলে জিজ্ঞেস করো: "+MAIL+"।</p>"];
+var BN_MISS=["<p>"+act("মাথা কাত করে")+"হুম, আমার গোঁফ এটা খুঁজে পাচ্ছে না। 🐾 আমি জানি Rijve-এর গল্প, Awareness 360, পুরস্কার, শখ, আর প্রজেক্ট, ফান্ডরেইজিং ও ক্যারিয়ারের পরামর্শ।</p><p>শুধু Rijve-ই উত্তর দিতে পারবেন এমন প্রশ্ন হলে "+g("ask","Ask Rijve")+"-এ পাঠাও।</p>","<p>এটা আমার এখতিয়ারের বাইরে। 😼 Awareness 360, Rijve-এর যাত্রা, বা নিজের প্রজেক্ট শুরু করা নিয়ে জিজ্ঞেস করে দেখো।</p>"];
+var BN_ONLYEN="<p class=\"sb-ps\">এই উত্তরটা এখনো শুধু ইংরেজিতে আছে:</p>";
+var BN_CHIPS=["Rijve কে?","প্রজেক্ট কীভাবে শুরু করব?","একটা জোকস বলো"];
+
+function norm(s){return(" "+String(s).toLowerCase().replace(/[’']/g,"").replace(/&/g," and ").replace(/[^a-z0-9ঀ-৿]+/g," ")+" ").replace(/\s+/g," ");}
+function toks(s){return norm(s).trim().split(" ").filter(Boolean);}
+var BNRE=/[ঀ-৿]/;
+function hasWord(tk,w){var bn=BNRE.test(w);for(var i=0;i<tk.length;i++){var t=tk[i];if(t===w||t===w+"s"||t===w+"es")return true;if(bn){if(w.length>=3&&t.indexOf(w)===0&&t.length-w.length<=6)return true;continue;}if(w.length>=5&&t.indexOf(w)===0&&t.length-w.length<=3)return true;if(t.length>=5&&w.indexOf(t)===0&&w.length-t.length<=2)return true;if(w.length>=5&&Math.abs(t.length-w.length)<=1&&ed1(t,w))return true;}return false;}
+/* true when a and b differ by one typo: a swap, a missing, extra or wrong letter */
+function ed1(a,b){if(a===b)return true;var la=a.length,lb=b.length,i=0;while(i<la&&i<lb&&a[i]===b[i])i++;if(la===lb)return a.slice(i+1)===b.slice(i+1)||(a[i]===b[i+1]&&a[i+1]===b[i]&&a.slice(i+2)===b.slice(i+2));return la>lb?a.slice(i+1)===b.slice(i):a.slice(i)===b.slice(i+1);}
+function keyScore(tk,key){var ws=key.split(" ");for(var i=0;i<ws.length;i++)if(!hasWord(tk,ws[i]))return 0;return Math.pow(ws.length,1.6);}
+function best(q){
+  var tk=toks(q),bestT=null,bs=0;
+  for(var i=0;i<T.length;i++){var s=0,k=T[i].k.concat(T[i].bk);for(var j=0;j<k.length;j++)s+=keyScore(tk,k[j]);if(s>bs){bs=s;bestT=T[i];}}
+  var ps=0,pv=PRIV.concat(BPRIV);for(var p=0;p<pv.length;p++)ps=Math.max(ps,keyScore(tk,pv[p]));
+  if(ps>0&&(ps>bs||ps>=2.5))return{priv:true};
+  return bs>0?bestT:null;
+}
+var miss=0,last={},lastId="",turns=0;
+var MISS=["<p>"+act("tilts head")+"Hmm, my whiskers can't find that one. 🐾 I know about Rijve's story, Awareness 360, his awards and talks, his hobbies, and advice on projects, fundraising and careers.</p><p>If only Rijve can answer it, send it through "+g("ask","Ask Rijve")+".</p>",
+          "<p>That one's outside my litter box. 😼 Try asking about Awareness 360, Rijve's journey, or how to start your own project. Or ask the human himself in "+g("ask","Ask Rijve")+".</p>",
+          "<p>I'd answer that, but I'm a cat with a very specific skill set. Rijve's life, his work, and excellent advice. That's it. Oh, and jokes. Want one?</p>"];
+function fallback(){miss++;return{a:[MISS[(miss-1)%MISS.length]],c:["Who is Rijve?","Tell me a joke","Career advice"]};}
+/* Pick an answer variant, avoiding an immediate repeat */
+var curQ="";
+function pick(id,a){var r;if(a.length<2)r=a[0];else{var i;do{i=Math.floor(Math.random()*a.length);}while(i===last[id]);last[id]=i;r=a[i];}return typeof r==="function"?r(curQ):r;}
+
+/* ---------- UI ---------- */
+var hist=[],busy=false,started=false;
+var SUBS=["Chief Executive Cat · self-appointed","Rijve's sidekick · sunglasses on, always","Online · pretending not to care","Currently: judging your font choices","Powered by tuna and ambition"];
+function scroll(){log.scrollTop=log.scrollHeight;}
+function add(html,who){var d=document.createElement("div");d.className="sb-m "+(who==="me"?"sb-me":"sb-bot");if(who==="me")d.textContent=html;else d.innerHTML=html;log.appendChild(d);scroll();return d;}
+function setChips(list){chips.innerHTML="";(list||[]).slice(0,4).forEach(function(c){var b=document.createElement("button");b.type="button";b.textContent=c;b.addEventListener("click",function(){ask(c);});chips.appendChild(b);});}
+var TYP=["Shinbo is typing with tiny paws","Shinbo is thinking (or napping)","Shinbo is consulting Kibo","Shinbo is adjusting the sunglasses"];
+function dots(){var d=document.createElement("div");d.className="sb-dots";d.setAttribute("role","status");d.setAttribute("aria-label",TYP[Math.floor(Math.random()*TYP.length)]);d.innerHTML="<i></i><i></i><i></i>";log.appendChild(d);scroll();return d;}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function fmt(t){/* safe formatting for model replies: escape, then allow **bold**, *actions*, [text](link) and bullet lines */
+  var h=esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/(^|\s)\*([^*\n]{2,60})\*/g,'$1<span class="sb-act">*$2*</span>').replace(/\[([^\]]+)\]\((#[a-z-]+|https:\/\/[^\s)]+|mailto:[^\s)]+)\)/g,function(m,a,u){return u.charAt(0)==="#"?'<a href="'+u+'" data-go>'+a+'</a>':'<a href="'+u+'" target="_blank" rel="noopener">'+a+'</a>';});
+  return h.split(/\n{2,}/).map(function(p){var ls=p.split("\n");if(ls.every(function(l){return/^\s*[-•]\s+/.test(l);}))return"<ul>"+ls.map(function(l){return"<li>"+l.replace(/^\s*[-•]\s+/,"")+"</li>";}).join("")+"</ul>";return"<p>"+ls.join("<br>")+"</p>";}).join("");
+}
+var lang="en";try{if(localStorage.getItem("sb-lang")==="bn")lang="bn";}catch(_){}
+var userName="",lastQ={};
+var BOOKING_URL=""; /* optional: a Calendly or Cal.com link; Shinbo will offer it alongside the request form */
+
+/* ---- YouTube: any song or film on request ---- */
+var YT_STOP={can:1,could:1,you:1,please:1,pls:1,give:1,send:1,share:1,find:1,show:1,me:1,i:1,want:1,the:1,a:1,an:1,youtube:1,yt:1,link:1,links:1,for:1,to:1,of:1,play:1,listen:1,song:1,songs:1,music:1,video:1,on:1,us:1,some:1,"ইউটিউব":1,"লিংক":1,"দাও":1,"গানটা":1,"গান":1,"শোনাও":1,"বাজাও":1,"এর":1,"টা":1,"একটু":1,"প্লিজ":1};
+function ytReq(q){var t=norm(q);
+  if(!/ (youtube|yt|link|links|play|listen|ইউটিউব|লিংক|শোনাও|বাজাও) /.test(t))return null;
+  if(/ (tedx|rijve|his talk|talks|game) /.test(t))return null;
+  var rest=t.trim().split(" ").filter(function(w){return w&&!YT_STOP[w];}).join(" ");
+  var bn=lang==="bn";
+  if(!rest||/^(any|something|anything|good|nice|random|কিছু|যেকোনো)$/.test(rest))return{html:musicAns("",bn),c:bn?["জ্যাজ","ক্লাসিক রক"]:["Jazz picks","Classic rock picks"]};
+  var hit=null;Object.keys(SONGS).forEach(function(k){SONGS[k].forEach(function(s){var nt=norm(s.t).trim();if(nt.length>2&&(" "+rest+" ").indexOf(" "+nt+" ")>-1)hit=s;});});
+  if(hit)return{html:(bn?"<p>"+act("থাবা দিয়ে প্লে চাপে")+"এই নাও: ":"<p>"+act("taps play with one paw")+"Here you go: ")+x(hit.id?ytV(hit.id):ytS(hit.t+" "+hit.a),"<b>"+hit.t+"</b> · "+hit.a)+(hit.id?(bn?" (অফিশিয়াল ভিডিও)":" (official video)"):"")+" 🎶</p>",c:bn?["আরও গান","প্রিয় সিনেমা"]:["More songs","Movies he loves"]};
+  var label=q.replace(/[<>]/g,"").slice(0,80);
+  return{html:(bn?"<p>"+act("থাবা দিয়ে প্লে চাপে")+"এই নাও, YouTube-এ: ":"<p>"+act("taps play with one paw")+"Coming right up, on YouTube: ")+x(ytS(rest),"<b>"+esc(rest)+"</b>")+" 🎶</p>"+(bn?"<p>অন্য কোনো গান? নাম বলো।</p>":"<p>Want another? Just name it.</p>"),c:bn?["প্রিয় গান","জ্যাজ"]:["Music he loves","Jazz picks"]};
+}
+
+/* ---- "more", "another", "আরও": continue the last topic ---- */
+var MORE=/^(more|more please|tell me more|go on|continue|another|another one|one more|what else|again|keep going|আরও|আরো|আরেকটা|আরও বলো|আরো বলো)$/;
+function moreReq(q){var t=norm(q).trim();if(!MORE.test(t)&&!/^more (songs|movies|films|music|facts|jokes)$/.test(t))return null;
+  var id=/songs|music/.test(t)?"music":/movies|films/.test(t)?"movies":/facts/.test(t)?"space":/jokes/.test(t)?"joke":lastId;
+  var topic=null;T.forEach(function(x){if(x.id===id)topic=x;});
+  if(!topic)return{html:lang==="bn"?"<p>কোন বিষয়ে আরও? 😼 একটা বেছে নাও:</p>":"<p>More of what? 😼 Pick something:</p>",c:lang==="bn"?BN_CHIPS:["Movies he loves","Music he loves","Tell me a joke"]};
+  curQ=lastQ[id]||"";var b=lang==="bn"&&BN[id];
+  if(topic.a.length<2&&typeof topic.a[0]!=="function"&&!(b&&b.a.length>1))return{html:lang==="bn"?"<p>এটা নিয়ে আমি যা জানি সব বলে দিয়েছি! 🐾 অন্য কিছু জিজ্ঞেস করো।</p>":"<p>That's everything I know on that one! 🐾 Try another topic:</p>",c:lang==="bn"?BN_CHIPS:topic.c};
+  return{html:b?pick("bn-"+id,b.a):pick(id,topic.a),c:b?b.c:topic.c,id:id};
+}
+
+/* ---- remember a visitor's name ---- */
+function nameReq(q){var m=String(q).match(/(?:my name is|my names|call me|i am called|this is|আমার নাম)\s+([A-Za-zঀ-৿][A-Za-zঀ-৿'-]{1,19})/i);
+  if(!m)return null;userName=m[1].charAt(0).toUpperCase()+m[1].slice(1);
+  return{html:lang==="bn"?"<p>"+act("হাত বাড়িয়ে দেয়, মানে থাবা")+"পরিচিত হয়ে ভালো লাগল, "+esc(userName)+"! 😺 আমি শিনবো। বলো, কী জানতে চাও?</p>":"<p>"+act("offers a paw to shake")+"Lovely to meet you, "+esc(userName)+"! 😺 I'm Shinbo. What would you like to know?</p>",c:lang==="bn"?BN_CHIPS:["Who is Rijve?","Music he loves","Tell me a joke"]};}
+
+/* ---- Meeting requests: collect details in chat, email them to Rijve, never claim a confirmed booking ---- */
+var M=null,MEET_TO="https://formsubmit.co/ajax/rijvearefin@gmail.com";
+var MT={
+ en:{start:"<p>"+act("pulls out a tiny diary")+"A meeting with the human? I'll take the details and send them straight to Rijve. He replies by email to confirm, so this is a request, not a booked slot.</p><p>What kind of meeting is it?</p>",
+  types:["One-on-one chat","Interview","Speaking invitation","Partnership"],
+  name:"<p>Purr-fect. What's your name?</p>",email:"<p>Nice to meet you, {n}! What's your email, so Rijve can reply?</p>",bademail:"<p>Hmm, that email looks a bit off. 🧐 Could you type it again?</p>",
+  about:"<p>Got it. What would you like to talk about? A sentence or two is plenty.</p>",
+  when:"<p>When suits you? Give a few dates or times and your time zone, for example \"weekday evenings, Dhaka time\".</p>",
+  mode:"<p>Online call or in person?</p>",modes:["Online call","In person","Either works"],
+  confirm:"<p>Here's what I'll send to Rijve:</p>",send:"Send it",redo:"Start over",cancel:"Cancel",
+  sent:"<p>"+act("stamps it with a paw print")+"Sent! 📨 Your request is in Rijve's inbox. He'll email you at <b>{e}</b> to confirm a time.</p><p>Anything else while you wait?</p>",
+  fail:"<p>Oh no, that didn't go through. 😿 Please email the same details to "+MAIL+" and Rijve will get back to you.</p>",
+  cancelled:"<p>No problem, cancelled. Nothing was sent. 🐾</p>",
+  labels:{type:"Type",name:"Name",email:"Email",about:"About",when:"When",mode:"Format"},
+  hint:"(Type \"cancel\" any time to stop.)",link:"<p>Prefer to pick a slot yourself? {l}</p>"},
+ bn:{start:"<p>"+act("ছোট্ট ডায়েরি বের করে")+"Rijve-এর সাথে মিটিং? আমি তথ্যগুলো নিয়ে সরাসরি ওনাকে পাঠিয়ে দেব। উনি ইমেইলে সময় নিশ্চিত করবেন, তাই এটা একটা অনুরোধ, বুকিং নয়।</p><p>কী ধরনের মিটিং?</p>",
+  types:["ওয়ান-অন-ওয়ান আলাপ","সাক্ষাৎকার","বক্তৃতার আমন্ত্রণ","পার্টনারশিপ"],
+  name:"<p>দারুণ! তোমার নাম কী?</p>",email:"<p>পরিচিত হয়ে ভালো লাগল, {n}! তোমার ইমেইলটা দাও, যাতে Rijve উত্তর দিতে পারেন।</p>",bademail:"<p>হুম, ইমেইলটা ঠিক মনে হচ্ছে না। 🧐 আবার লিখবে?</p>",
+  about:"<p>বুঝেছি। কী নিয়ে কথা বলতে চাও? এক-দুই লাইনই যথেষ্ট।</p>",
+  when:"<p>কখন সুবিধা? কয়েকটা দিন বা সময় আর তোমার টাইম জোন লেখো, যেমন “সপ্তাহের সন্ধ্যা, ঢাকা সময়”।</p>",
+  mode:"<p>অনলাইনে, নাকি সরাসরি?</p>",modes:["অনলাইন কল","সরাসরি","যেকোনোটা"],
+  confirm:"<p>Rijve-কে এটা পাঠাব:</p>",send:"পাঠাও",redo:"আবার শুরু",cancel:"বাতিল",
+  sent:"<p>"+act("থাবার ছাপ দিয়ে সিল মারে")+"পাঠানো হয়েছে! 📨 অনুরোধটা Rijve-এর ইনবক্সে। উনি <b>{e}</b> ঠিকানায় ইমেইল করে সময় নিশ্চিত করবেন।</p>",
+  fail:"<p>উফ, পাঠানো গেল না। 😿 একই তথ্য দিয়ে "+MAIL+" ঠিকানায় ইমেইল করো, Rijve উত্তর দেবেন।</p>",
+  cancelled:"<p>ঠিক আছে, বাতিল। কিছুই পাঠানো হয়নি। 🐾</p>",
+  labels:{type:"ধরন",name:"নাম",email:"ইমেইল",about:"বিষয়",when:"সময়",mode:"মাধ্যম"},
+  hint:"(থামাতে যেকোনো সময় “বাতিল” লেখো।)",link:"<p>নিজে সময় বেছে নিতে চাও? {l}</p>"}};
+function mt(){return MT[lang==="bn"?"bn":"en"];}
+function meetStart(){M={step:"type",d:{}};if(userName)M.d.name=userName;var t=mt();
+  return{html:t.start+(BOOKING_URL?t.link.replace("{l}",x(BOOKING_URL,lang==="bn"?"এখানে বুক করো":"Book here")):"")+'<p class="sb-ps">'+t.hint+"</p>",c:t.types};}
+function meetSummary(){var t=mt(),L=t.labels,d=M.d;return t.confirm+"<ul>"+["type","name","email","about","when","mode"].map(function(k){return"<li><b>"+L[k]+":</b> "+esc(d[k]||"")+"</li>";}).join("")+"</ul>";}
+function meetStep(q){var t=mt(),v=String(q).trim(),n=norm(v).trim();
+  if(/^(cancel|stop|quit|never mind|nevermind|exit|বাতিল|থামো)$/.test(n)||v===t.cancel){M=null;return{html:t.cancelled,c:lang==="bn"?BN_CHIPS:["Who is Rijve?","Tell me a joke"]};}
+  if(v===t.redo){return meetStart();}
+  var d=M.d;
+  switch(M.step){
+   case "type":d.type=v.slice(0,80);M.step=d.name?"email":"name";return d.name?{html:t.email.replace("{n}",esc(d.name)),c:[]}:{html:t.name,c:[]};
+   case "name":d.name=v.slice(0,80);M.step="email";return{html:t.email.replace("{n}",esc(d.name)),c:[]};
+   case "email":if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))return{html:t.bademail,c:[t.cancel]};d.email=v.slice(0,120);M.step="about";return{html:t.about,c:[]};
+   case "about":d.about=v.slice(0,600);M.step="when";return{html:t.when,c:[]};
+   case "when":d.when=v.slice(0,200);M.step="mode";return{html:t.mode,c:t.modes};
+   case "mode":d.mode=v.slice(0,40);M.step="confirm";return{html:meetSummary(),c:[t.send,t.redo,t.cancel]};
+   case "confirm":
+     if(v===t.send||/^(send|send it|yes|ok|okay|confirm|পাঠাও|হ্যাঁ)$/.test(n))return{send:true};
+     return{html:meetSummary(),c:[t.send,t.redo,t.cancel]};
+  }
+}
+function meetSend(done){var t=mt(),d=M.d;
+  fetch(MEET_TO,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},
+    body:JSON.stringify({_subject:"Meeting request via Shinbo: "+d.type+" with "+d.name,_template:"table",_captcha:"false",_replyto:d.email,type:d.type,name:d.name,email:d.email,about:d.about,when:d.when,format:d.mode,language:lang==="bn"?"Bangla":"English"})})
+  .then(function(r){return r.json().catch(function(){return{};}).then(function(j){if(!r.ok||j.success==="false"||j.success===false)throw 0;});})
+  .then(function(){var e=d.email;M=null;done(t.sent.replace("{e}",esc(e)),lang==="bn"?BN_CHIPS:["Music he loves","Tell me a joke"]);})
+  .catch(function(){M.step="confirm";done(t.fail,[t.send,t.cancel]);});
+}
+
+function localReply(q){
+  turns++;if(BNRE.test(q)&&lang!=="bn")setLang("bn",true);
+  curQ=q;
+  var y=ytReq(q);if(y)return y;
+  var nm=nameReq(q);if(nm)return nm;
+  var mo=moreReq(q);if(mo){if(mo.id)lastId=mo.id;return mo;}
+  var r=best(q);
+  if(r&&r.id)lastQ[r.id]=q;
+  if(r&&r.id==="meet")return meetStart();
+  if(lang==="bn"){
+    if(r&&r.priv)return{html:pick("bpriv",BN_PRIV),c:["শখ কী?","একটা জোকস বলো"]};
+    if(!r){miss++;return{html:BN_MISS[(miss-1)%BN_MISS.length],c:BN_CHIPS};}
+    miss=0;lastId=r.id;var b=BN[r.id];
+    if(b)return{html:pick("bn-"+r.id,b.a),c:b.c.length?b.c:BN_CHIPS};
+    return{html:BN_ONLYEN+pick(r.id,r.a),c:BN_CHIPS};
+  }
+  if(r&&r.priv)return{html:pick("priv",PRIV_A),c:["His hobbies?","Tell me a joke"]};
+  if(!r)return(function(f){return{html:f.a[0],c:f.c};})(fallback());
+  miss=0;
+  var again=r.id===lastId&&!r.s&&r.a.length<2&&typeof r.a[0]!=="function";lastId=r.id;
+  var html=(again?"<p>Déjà vu! 😼 Here it is again:</p>":"")+pick(r.id,r.a);
+  /* an occasional P.S. on light, informational topics */
+  if(!r.s&&!/^(hello|bye|thanks|joke|meow|pet|cute|rude|sing|catlife|shades|rival)$/.test(r.id)&&turns%3===0)html+='<p class="sb-ps">'+PS[Math.floor(Math.random()*PS.length)]+'</p>';
+  return{html:html,c:r.c};
+}
+function ask(q){
+  q=String(q||"").trim();if(!q||busy)return;busy=true;send.disabled=true;
+  add(q,"me");inp.value="";grow();setChips([]);
+  var d=dots(),t0=Date.now();
+  stopSpeaking();
+  function done(html,c){var wait=Math.max(0,Math.min(1200,500+html.length*1.1)-(Date.now()-t0));setTimeout(function(){d.remove();var el=add(html,"bot");setChips(c);busy=false;send.disabled=false;if(talk)speak(el);},wait);}
+  if(M){/* meeting details stay in the browser and go only to Rijve's inbox */
+    var st=meetStep(q);if(st.send){meetSend(done);}else done(st.html,st.c);return;}
+  var direct=ytReq(q)||nameReq(q)||(best(q)||{}).id==="meet";
+  hist.push({role:"user",content:q});
+  if(SHINBO_API&&!direct){
+    var ctl=window.AbortController?new AbortController():null,to=setTimeout(function(){ctl&&ctl.abort();},20000);
+    fetch(SHINBO_API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:hist.slice(-12),lang:lang}),signal:ctl?ctl.signal:undefined})
+      .then(function(r){if(!r.ok)throw 0;return r.json();})
+      .then(function(j){clearTimeout(to);if(!j||!j.reply)throw 0;hist.push({role:"assistant",content:j.reply});var lr=localReply(q);done(fmt(j.reply),lr.c);})
+      .catch(function(){clearTimeout(to);var r=localReply(q);hist.push({role:"assistant",content:r.html.replace(/<[^>]+>/g," ")});done(r.html,r.c);});
+  }else{var r=localReply(q);hist.push({role:"assistant",content:r.html.replace(/<[^>]+>/g," ")});done(r.html,r.c);}
+}
+/* ---------- Language toggle ---------- */
+var langBtn=document.getElementById("sbLang");
+var UI={en:{ph:"Ask me anything about Rijve…",btn:"বাংলা",lbl:"বাংলায় কথা বলুন (switch to Bangla)"},bn:{ph:"যা খুশি জিজ্ঞেস করো…",btn:"EN",lbl:"Switch to English"}};
+function setLang(l,auto){lang=l;try{localStorage.setItem("sb-lang",l);}catch(_){}
+  inp.placeholder=UI[l].ph;langBtn.textContent=UI[l].btn;langBtn.setAttribute("aria-label",UI[l].lbl);P.setAttribute("lang",l==="bn"?"bn":"en");var nt=document.getElementById("sbNote");if(nt)nt.innerHTML=l==="bn"?"শিনবো শুধু Rijve-এর প্রকাশ্যে শেয়ার করা তথ্য জানে। বাকি সবকিছুর জন্য ইমেইল করো: "+MAIL:"Shinbo only knows what Rijve has shared publicly. For anything else, email "+MAIL+".";
+  if(!auto&&started){add(l==="bn"?"<p>"+act("গলা খাঁকারি দিয়ে")+"ঠিক আছে, এখন থেকে বাংলায়! 🇧🇩 বলো, কী জানতে চাও?</p>":"<p>"+act("switches accent")+"Back to English! What would you like to know?</p>","bot");setChips(l==="bn"?BN_CHIPS:["Who is Rijve?","Career advice","Tell me a joke"]);}
+}
+langBtn.addEventListener("click",function(){stopSpeaking();setLang(lang==="bn"?"en":"bn");});
+setLang(lang,true);
+
+/* ---------- Voice: speak replies in a soft female voice, listen with the microphone ---------- */
+var SS=window.speechSynthesis,talk=false,voiceBtn=document.getElementById("sbVoice"),micBtn=document.getElementById("sbMic");
+var FEMALE=/(female|woman|aria|jenny|ava|emma|michelle|samantha|serena|karen|moira|tessa|libby|sonia|maisie|natasha|zira|victoria|allison|susan|fiona|kate|nicky|zoe|salli|joanna|kendra|kimberly|ivy|nabanita|tanishaa|piya|swara|heera|kalpana|veena|lekha|google uk english female|google us english)/i;
+var NOVELTY=/(bad news|good news|bahh|bells|boing|bubbles|cellos|jester|organ|superstar|trinoids|whisper|wobble|zarvox|albert|grandma|grandpa|junior|ralph|fred|eddy|reed|rocko)/i;
+var MALE=/\b(male|man|guy|ryan|daniel|alex|fred|david|mark|thomas|george|oliver|arthur|aaron|bashkar|pradeep|ravi|hemant|prabhat|rishi)\b/i;
+function pickVoice(l){if(!SS)return null;var vs=SS.getVoices()||[],best=null,bs=-99;
+  vs.forEach(function(v){var vl=(v.lang||"").toLowerCase().replace("_","-");if(vl.indexOf(l)!==0)return;var s=0,n=v.name||"";
+    if(NOVELTY.test(n))return;if(FEMALE.test(n))s+=6;if(MALE.test(n)&&!/female/i.test(n))s-=8;if(/natural|neural|premium|enhanced|siri/i.test(n))s+=9;else if(/online/i.test(n))s+=5;if(/^(ava|zoe|serena|sonia|libby|jenny|aria|emma|nabanita)/i.test(n))s+=2;if(/google/i.test(n))s+=2;
+    if(l==="en"&&/en-(gb|us|au|ie)/.test(vl))s+=1;if(l==="bn"&&/bn-bd/.test(vl))s+=1;if(v.localService===false)s+=1;if(s>bs){bs=s;best=v;}});
+  return best;}
+function speakText(el){var c=el.cloneNode(true);c.querySelectorAll(".sb-act").forEach(function(n){n.remove();});
+  return c.textContent.replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu,"").replace(/\s+/g," ").trim();}
+var warnedBn=false;
+var audio=null,ttsOk=!!SHINBO_TTS;
+/* Speak sentence by sentence with tiny, natural variations: sounds less robotic and avoids Chrome cutting long speech off. */
+function speakBrowser(text,l){var v=pickVoice(l);
+  if(!v&&l==="bn"){if(!warnedBn){warnedBn=true;add("<p class=\"sb-ps\">এই ব্রাউজারে বাংলা কণ্ঠ নেই, তাই উত্তরগুলো লেখায় দেখাচ্ছি। Chrome বা Microsoft Edge-এ বাংলা কণ্ঠ পাওয়া যায়।</p>","bot");}return;}
+  var parts=text.match(/[^.!?।…]+[.!?।…]*\s*/g)||[text];SS.cancel();P.classList.add("sb-speaking");
+  parts.forEach(function(p,i){p=p.trim();if(!p)return;var u=new SpeechSynthesisUtterance(p);if(v){u.voice=v;u.lang=v.lang;}else u.lang=l==="bn"?"bn-BD":"en-GB";
+    u.rate=(l==="bn"?0.94:0.96)+(Math.random()*0.04-0.02);u.pitch=(/\?\s*$/.test(p)?1.1:1.04)+(Math.random()*0.04-0.02);u.volume=1;
+    if(i===parts.length-1)u.onend=u.onerror=function(){P.classList.remove("sb-speaking");};SS.speak(u);});}
+function speak(el){if(!talk)return;var l=lang==="bn"?"bn":"en",text=speakText(el);if(!text)return;
+  if(ttsOk){P.classList.add("sb-speaking");
+    fetch(SHINBO_TTS,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:text.slice(0,1200),lang:l})})
+     .then(function(r){if(!r.ok)throw 0;return r.blob();})
+     .then(function(b){if(!talk)return;if(audio)audio.pause();audio=new Audio(URL.createObjectURL(b));audio.onended=audio.onerror=function(){P.classList.remove("sb-speaking");};return audio.play();})
+     .catch(function(){ttsOk=false;P.classList.remove("sb-speaking");if(SS)speakBrowser(text,l);});return;}
+  if(SS)speakBrowser(text,l);}
+function stopSpeaking(){if(SS)SS.cancel();if(audio){audio.pause();audio=null;}P.classList.remove("sb-speaking");}
+function setTalk(on){talk=on;voiceBtn.setAttribute("aria-pressed",on?"true":"false");voiceBtn.setAttribute("aria-label",on?"Stop reading replies aloud":"Read replies aloud");if(!on)stopSpeaking();}
+if(SS||SHINBO_TTS){if(SS)SS.getVoices();if(SS&&"onvoiceschanged" in SS)SS.addEventListener("voiceschanged",function(){});
+  voiceBtn.addEventListener("click",function(){setTalk(!talk);if(talk){var bots=log.querySelectorAll(".sb-bot");if(bots.length)speak(bots[bots.length-1]);}});
+}else voiceBtn.hidden=true;
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition,rec=null,listening=false;
+if(SR){
+  micBtn.addEventListener("click",function(){
+    if(listening){rec&&rec.stop();return;}
+    stopSpeaking();if(!talk)setTalk(true);
+    rec=new SR();rec.lang=lang==="bn"?"bn-BD":"en-GB";rec.interimResults=true;rec.continuous=false;rec.maxAlternatives=1;
+    var finalText="";
+    rec.onstart=function(){listening=true;micBtn.classList.add("on");micBtn.setAttribute("aria-label","Stop listening");inp.placeholder=lang==="bn"?"শুনছি… বলো":"Listening… go ahead";};
+    rec.onresult=function(e){var t="";for(var i=e.resultIndex;i<e.results.length;i++){if(e.results[i].isFinal)finalText+=e.results[i][0].transcript;else t+=e.results[i][0].transcript;}inp.value=(finalText+" "+t).trim();grow();};
+    rec.onerror=function(e){if(e.error==="not-allowed"||e.error==="service-not-allowed")add(lang==="bn"?"<p>মাইক্রোফোনের অনুমতি লাগবে। ব্রাউজারের ঠিকানার পাশের আইকন থেকে মাইক চালু করো, তারপর আবার চেষ্টা করো। 🎙️</p>":"<p>I need microphone permission to hear you. Allow the mic from your browser's address bar, then try again. 🎙️</p>","bot");};
+    rec.onend=function(){listening=false;micBtn.classList.remove("on");micBtn.setAttribute("aria-label","Talk to Shinbo");inp.placeholder=UI[lang].ph;var q=inp.value.trim();if(q)ask(q);};
+    try{rec.start();}catch(_){}
+  });
+}else micBtn.hidden=true;
+
+function greet(){
+  if(lang==="bn"){add("<p>"+act("হার্ট সানগ্লাস নামিয়ে")+"আসসালামু আলাইকুম! আমি <b>শিনবো</b>: Rijve-এর বিড়াল, এই সাইটের চিফ এক্সিকিউটিভ ক্যাট, আর পার্ট-টাইম এআই সহকারী। 😎</p><p>Rijve-এর গল্প, Awareness 360, ওনার শখ, বা নিজের প্রজেক্ট শুরু করার টিপস, যা খুশি জিজ্ঞেস করো। লিখে বা 🎙️ চেপে বলে।</p>","bot");setChips(BN_CHIPS);return;}
+  var h=new Date().getHours(),hi=h<5?"Up late? Me too. Cats are nocturnal, what's your excuse?":h<12?"Good morning! I've already had two naps.":h<17?"Good afternoon! You caught me between naps.":"Good evening! Prime zoomies hour.";
+  add("<p>"+act("lowers heart sunglasses")+hi+"</p><p>I'm <b>Shinbo</b>: Rijve's cat, Chief Executive Cat of this website, and part-time AI sidekick. Ask me about his journey, Awareness 360, his hobbies, or how to start your own project. I also do jokes. Unpaid.</p>","bot");
+  setChips(["Who is Rijve?","Who are you?","Tell me a joke"]);
+}
+var mq=window.matchMedia("(max-width:560px)");
+function open(){P.hidden=false;if(sub)sub.textContent=SUBS[Math.floor(Math.random()*SUBS.length)];document.documentElement.classList.add("sb-open");if(mq.matches)document.documentElement.classList.add("sb-lock");L.setAttribute("aria-expanded","true");hideNudge(true);if(!started){started=true;greet();}setTimeout(function(){inp.focus({preventScroll:true});},60);}
+function close(){stopSpeaking();if(listening&&rec)rec.abort();P.hidden=true;document.documentElement.classList.remove("sb-open","sb-lock");L.setAttribute("aria-expanded","false");L.focus({preventScroll:true});}
+L.addEventListener("click",open);
+document.getElementById("sbClose").addEventListener("click",close);
+addEventListener("keydown",function(e){if(e.key==="Escape"&&!P.hidden)close();});
+form.addEventListener("submit",function(e){e.preventDefault();ask(inp.value);});
+function grow(){inp.style.height="auto";inp.style.height=Math.min(inp.scrollHeight+2,112)+"px";}
+inp.addEventListener("input",grow);
+inp.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey&&!e.isComposing){e.preventDefault();ask(inp.value);}});
+log.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[data-go]");if(!a)return;if(mq.matches){e.preventDefault();close();var el=document.querySelector(a.getAttribute("href"));if(el)setTimeout(function(){el.scrollIntoView({behavior:"smooth"});},50);}});
+/* Little speech bubble on the button: a new line every few seconds while the chat is closed */
+var tag=document.getElementById("sbTag"),TAGS={en:["Meow? 👋","Ask me anything!","Psst… 😎","I know things 🐾","Need help?","Free advice! 🐟","Chat with me!","Bored? Talk to me"],bn:["মিউ? 👋","কিছু জিজ্ঞেস করো!","পিস্‌স্‌… 😎","আমি সব জানি 🐾","কথা বলবে?"]},ti=0;
+function tagShow(){if(!tag)return;if(!P.hidden||!nudge.hidden){tag.classList.remove("on");return;}var list=TAGS[lang==="bn"?"bn":"en"];tag.textContent=list[ti++%list.length];tag.classList.add("on");setTimeout(function(){tag.classList.remove("on");},3200);}
+if(tag&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){setTimeout(function(){tagShow();setInterval(tagShow,9000);},5000);}
+/* A one-time nudge per visit, after the reader has had a look around */
+var NUDGES=["Psst. I'm <b>Shinbo</b>. I know all of Rijve's secrets. Well, the public ones. Ask me anything.","Hi, I'm <b>Shinbo</b>, the real boss around here. 😎 Questions? I have answers. And attitude.","<b>Shinbo</b> here. I've been watching you scroll. Need help? I'm a cat, I'm great at help."];
+function hideNudge(forever){nudge.hidden=true;if(forever){try{sessionStorage.setItem("sb-nudged","1");}catch(_){}}}
+nudge.addEventListener("click",function(e){if(e.target.closest("button")){hideNudge(true);}else open();});
+var seen=false;try{seen=sessionStorage.getItem("sb-nudged")==="1";}catch(_){}
+if(!seen)setTimeout(function(){var sp=document.getElementById("sndPop");if(P.hidden&&!(sp&&!sp.hidden)&&!document.querySelector(".party:not([hidden])")){nudge.querySelector("span").innerHTML=NUDGES[Math.floor(Math.random()*NUDGES.length)];nudge.hidden=false;}setTimeout(function(){hideNudge(false);},12000);},14000);
+})();
 </script>
 <!--B2-->
 </body>

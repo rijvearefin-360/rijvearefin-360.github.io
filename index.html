@@ -497,6 +497,19 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 }
 </style>
 <style>
+/* In-page video player */
+.gp-frame{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3;background:#000}
+.gp-card.playing{grid-template-columns:1fr}
+.gp-card.playing .gp-thumb{max-width:none}
+.gp-card.playing .gp-thumb img{filter:none}
+.gp-yt{align-self:center;margin-left:auto;font:500 .7rem/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);text-underline-offset:3px}
+.gp-yt:hover{color:var(--gold)}
+.gp-watch{border:0;cursor:pointer}
+.video.playing{aspect-ratio:16/9;cursor:default}
+.video.playing .play{display:none}
+@media (max-width:760px){.gp-yt{margin-left:0;flex-basis:100%;padding-top:.35rem}}
+</style>
+<style>
 /* Watch & learn: 17 Goal-coloured tiles and one feature card, compact by design */
 .gp{display:grid;gap:1rem}
 .gp-tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(17,minmax(0,1fr));gap:4px}
@@ -1057,7 +1070,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
       <h2>Stages, panels &amp; <em class="g">classrooms</em></h2>
     </div>
     <div class="feature">
-      <a class="video" href="https://www.youtube.com/watch?v=nLxSssT-mWE" target="_blank" rel="noopener" aria-label="Watch Why Not? by Rijve Arefin at TEDxKhulna University on YouTube">
+      <a class="video" href="https://www.youtube.com/watch?v=nLxSssT-mWE" target="_blank" rel="noopener" data-yt="nLxSssT-mWE" aria-label="Play Why Not? by Rijve Arefin at TEDxKhulna University">
         <picture><source srcset="img/brac-lecture-800.webp 800w, img/brac-lecture.webp 1440w" sizes="(max-width: 820px) 92vw, 50vw" type="image/webp"><img src="img/brac-lecture.jpg" alt="Rijve presenting The Story of Awareness 360 to an audience" loading="lazy" width="1440" height="1080"></picture>
         <span class="play">▶ Watch the TEDx talk</span>
       </a>
@@ -1172,7 +1185,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
           <h3 class="gp-title" id="gpTitle">A World of Three Zeros</h3>
           <p class="gp-who" id="gpWho">Muhammad Yunus · Talks at Google</p>
           <p class="gp-why" id="gpWhy">Bangladesh&#x27;s Nobel laureate on social business and a world with zero poverty.</p>
-          <div class="gp-act"><a class="gp-watch" id="gpWatch" href="https://www.youtube.com/watch?v=8YHtLGI172k" target="_blank" rel="noopener">Watch on YouTube ↗</a><button type="button" class="gp-btn" data-d="-1" aria-label="Previous Goal">←</button><button type="button" class="gp-btn" data-d="1" aria-label="Next Goal">→</button><button type="button" class="gp-btn gp-rand" id="gpRand">Surprise me</button></div>
+          <div class="gp-act"><button type="button" class="gp-watch" id="gpPlay">▶ Play here</button><button type="button" class="gp-btn" data-d="-1" aria-label="Previous Goal">←</button><button type="button" class="gp-btn" data-d="1" aria-label="Next Goal">→</button><button type="button" class="gp-btn gp-rand" id="gpRand">Surprise me</button><a class="gp-yt" id="gpWatch" href="https://www.youtube.com/watch?v=8YHtLGI172k" target="_blank" rel="noopener">Open on YouTube ↗</a></div>
         </div>
       </article>
     </div>
@@ -2965,7 +2978,7 @@ if(!seen)setTimeout(function(){whenIdle(function(){var sp=document.getElementByI
 (function(){var gp=document.getElementById("gp");if(!gp)return;
 var V=[[1, "#E5243B", "No Poverty", "8YHtLGI172k", "A World of Three Zeros", "Muhammad Yunus · Talks at Google", 60, "Bangladesh's Nobel laureate on social business and a world with zero poverty."], [2, "#DDA63A", "Zero Hunger", "CdxVbUja_pY", "Ending hunger now", "Josette Sheeran · TED", 19, "The former head of the World Food Programme on how we can end hunger in our lifetime."], [3, "#4C9F38", "Good Health and Well-being", "iCvmsMzlF7o", "The power of vulnerability", "Brené Brown · TED", 21, "Why courage and connection start with being honest about who you are."], [4, "#C5192D", "Quality Education", "c2DHzlkUI6s", "Nobel Peace Prize Lecture", "Malala Yousafzai · Nobel Prize", 28, "Why one girl's voice for education can move the world."], [5, "#FF3A21", "Gender Equality", "hg3umXU_qWc", "We should all be feminists", "Chimamanda Ngozi Adichie · TEDxEuston", 30, "A warm, funny case for gender equality that everyone should hear."], [6, "#26BDE2", "Clean Water and Sanitation", "ZmSF9gVz9pg", "Let's talk crap. Seriously.", "Rose George · TED", 14, "The sanitation crisis nobody talks about, and why it matters."], [7, "#FCC30B", "Affordable and Clean Energy", "6qqqVwM6bMM", "Learning from a barefoot movement", "Bunker Roy · TED", 19, "Rural grandmothers trained as solar engineers, lighting up their own villages."], [8, "#A21942", "Decent Work and Economic Growth", "HI7zfpitZpo", "How to make peace? Get angry", "Kailash Satyarthi · TED", 19, "A Nobel laureate who freed children from forced labour, on turning anger into action."], [9, "#FD6925", "Industry, Innovation and Infrastructure", "crjU5hu2fag", "How I harnessed the wind", "William Kamkwamba · TED", 6, "A teenager in Malawi built a windmill from scrap to power his family's home."], [10, "#DD1367", "Reduced Inequalities", "hVimVzgtD6w", "The best stats you've ever seen", "Hans Rosling · TED", 21, "Data that will change how you see the world and the people in it."], [11, "#FD9D24", "Sustainable Cities and Communities", "j3YjeARuilI", "Why buses represent democracy in action", "Enrique Peñalosa · TED", 14, "A former mayor of Bogotá on building cities for people, not cars."], [12, "#BF8B2E", "Responsible Consumption and Production", "cWC_zDdF74s", "The global food waste scandal", "Tristram Stuart · TED", 14, "The staggering scale of food waste, and how ordinary people can stop it."], [13, "#3F7E44", "Climate Action", "H2QxFM9y0tY", "The disarming case to act right now on climate change", "Greta Thunberg · TEDxStockholm", 11, "A teenager's clear-eyed case for acting on climate now, not later."], [14, "#0A97D9", "Life Below Water", "ROW9F-c0kIQ", "How the oceans can clean themselves", "Boyan Slat · TEDxDelft", 11, "An 18-year-old's idea to clean ocean plastic. Proof that age is no barrier."], [15, "#56C02B", "Life on Land", "dXWikNXiG2Q", "How to restore a rainforest", "Willie Smits · TED", 21, "How a scientist and a community brought a rainforest in Borneo back to life."], [16, "#00689D", "Peace, Justice and Strong Institutions", "c2tOp7OxyQ8", "We need to talk about an injustice", "Bryan Stevenson · TED", 24, "A lawyer's powerful call to confront injustice in the justice system."], [17, "#19486A", "Partnerships for the Goals", "chXsLtHqfdM", "Want to help someone? Shut up and listen!", "Ernesto Sirolli · TED", 17, "The first lesson of development work: listen before you act."]];
 var tiles=[].slice.call(gp.querySelectorAll(".gp-t")),cur=0,$=function(id){return document.getElementById(id);};
-function show(i,focus){cur=(i+V.length)%V.length;var v=V[cur],url="https://www.youtube.com/watch?v="+v[3];
+function show(i,focus){stopV();cur=(i+V.length)%V.length;var v=V[cur],url="https://www.youtube.com/watch?v="+v[3];
   gp.style.setProperty("--c",v[1]);$("gpImg").src="https://i.ytimg.com/vi/"+v[3]+"/hqdefault.jpg";$("gpThumb").href=url;$("gpWatch").href=url;
   $("gpDur").textContent=v[6]+" min";$("gpNum").textContent=v[0];$("gpName").textContent=v[2];$("gpTitle").textContent=v[4];$("gpWho").textContent=v[5];$("gpWhy").textContent=v[7];
   var b=gp.querySelector(".gp-body");b.classList.remove("swap");void b.offsetWidth;b.classList.add("swap");
@@ -2974,6 +2987,16 @@ tiles.forEach(function(t,k){t.addEventListener("click",function(e){e.preventDefa
   t.addEventListener("keydown",function(e){if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();show(cur+(e.key==="ArrowRight"?1:-1),true);}});
   t.addEventListener("pointerenter",function(){var im=new Image();im.src="https://i.ytimg.com/vi/"+V[k][3]+"/hqdefault.jpg";},{once:true});});
 [].forEach.call(gp.querySelectorAll(".gp-btn[data-d]"),function(b){b.addEventListener("click",function(){show(cur+(+b.getAttribute("data-d")));});});
+/* play in place: the YouTube player (privacy-enhanced mode) loads only when someone presses play */
+var card=$("gpCard"),thumb=$("gpThumb"),btn=$("gpPlay"),frame=null;
+function playV(){if(frame){stopV();return;}var v=V[cur];frame=document.createElement("iframe");frame.className="gp-frame";
+  frame.src="https://www.youtube-nocookie.com/embed/"+v[3]+"?autoplay=1&rel=0&modestbranding=1&playsinline=1";frame.title=v[4]+" ("+v[5]+")";
+  frame.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";frame.setAttribute("allowfullscreen","");frame.referrerPolicy="strict-origin-when-cross-origin";
+  thumb.appendChild(frame);card.classList.add("playing");btn.textContent="■ Close video";if(window.__nature&&window.__nature.isOn())window.__nature.stop();
+  setTimeout(function(){var r=card.getBoundingClientRect();if(r.top<70||r.bottom>innerHeight)card.scrollIntoView({behavior:"smooth",block:"center"});},80);}
+function stopV(){if(!frame)return;frame.remove();frame=null;card.classList.remove("playing");btn.textContent="▶ Play here";}
+btn.addEventListener("click",playV);
+thumb.addEventListener("click",function(e){e.preventDefault();if(!frame)playV();});
 $("gpRand").addEventListener("click",function(){var n;do{n=Math.floor(Math.random()*V.length);}while(n===cur);show(n);});
 })();
 </script>
@@ -2984,6 +3007,13 @@ function upd(){var y=p2.getBoundingClientRect().top,st=document.getElementById("
   [].forEach.call(parts,function(a){a.classList.toggle("on",+a.getAttribute("data-part")===cur);if(+a.getAttribute("data-part")===cur)a.setAttribute("aria-current","true");else a.removeAttribute("aria-current");});
   [].forEach.call(heads,function(h,k){h.classList.toggle("on",k+1===cur);});}
 addEventListener("scroll",upd,{passive:true});upd();})();
+</script>
+<script>
+/* Play YouTube videos in place (privacy-enhanced mode, loaded only on click) */
+(function(){[].forEach.call(document.querySelectorAll("a.video[data-yt]"),function(a){a.addEventListener("click",function(e){if(a.querySelector("iframe"))return;e.preventDefault();
+  var f=document.createElement("iframe");f.className="gp-frame";f.src="https://www.youtube-nocookie.com/embed/"+a.getAttribute("data-yt")+"?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+  f.title=a.getAttribute("aria-label").replace(/^Play /,"");f.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";f.setAttribute("allowfullscreen","");f.referrerPolicy="strict-origin-when-cross-origin";
+  a.classList.add("playing");a.appendChild(f);if(window.__nature&&window.__nature.isOn())window.__nature.stop();});});})();
 </script>
 <!--B2-->
 </body>

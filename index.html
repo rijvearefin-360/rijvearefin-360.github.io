@@ -565,10 +565,23 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 .sb-launch:active .sb-face{transform:scale(.92)}
 .sb-open .sb-launch{transform:scale(.7);opacity:0;pointer-events:none;animation:none;transition:transform .2s,opacity .2s}
 @keyframes sbSpin{to{transform:rotate(360deg)}}
+/* Grab and throw */
+.sb-launch{touch-action:none;cursor:grab}
+.sb-launch.sb-grab{cursor:grabbing;animation:none;scale:1.08}
+.sb-launch.sb-fly{animation:none}
+.sb-grab .sb-ear.l{animation:none;transform:rotate(-62deg) translate(-3px,5px)}
+.sb-grab .sb-ear.r{animation:none;transform:rotate(62deg) translate(3px,5px)}
+.sb-grab .sb-paw{animation:sbFlail .32s ease-in-out infinite}
+.sb-grab .sb-shades{animation:none;transform:translateY(10px)}
+.sb-grab .sb-wink{animation:none;transform:none}
+@keyframes sbFlail{0%,100%{transform:rotate(-24deg)}50%{transform:rotate(22deg)}}
+.sb-moved .sb-hide,.sb-moved .sb-nudge{display:none!important}
+.sb-puff{position:fixed;z-index:70;background:var(--gold);color:var(--on-gold);font:600 .86rem/1.2 var(--f-body);padding:.45rem .75rem;border-radius:999px 999px 999px 4px;box-shadow:0 8px 20px rgba(0,0,0,.45);pointer-events:none;white-space:nowrap;animation:sbPuff 1.8s ease-out forwards}
+@keyframes sbPuff{0%{opacity:0;transform:translateY(8px) scale(.8)}12%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0;transform:translateY(-22px)}}
 /* Gentle floating drift, on the separate translate/rotate properties so it layers with the hop */
 @keyframes sbFloat{0%,100%{translate:0 0}50%{translate:0 -3px}}
 /* Hide button: shows on hover on a laptop, always (small) on touch screens */
-.sb-hide{position:fixed;z-index:45;right:calc(max(16px,env(safe-area-inset-right,0px)) - 6px);bottom:calc(18px + 3.55rem + env(safe-area-inset-bottom,0px));width:1.5rem;height:1.5rem;border-radius:50%;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-soft);font-size:.7rem;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0;opacity:0;transform:scale(.7);transition:opacity .2s,transform .2s}
+.sb-hide{position:fixed;z-index:45;right:calc(max(16px,env(safe-area-inset-right,0px)) - 6px);bottom:calc(18px + 5.1rem + env(safe-area-inset-bottom,0px));width:1.5rem;height:1.5rem;border-radius:50%;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-soft);font-size:.7rem;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0;opacity:0;transform:scale(.7);transition:opacity .2s,transform .2s}
 .sb-launch:hover+.sb-hide,.sb-hide:hover,.sb-hide:focus-visible{opacity:1;transform:none}
 .sb-hide:hover{color:var(--gold);border-color:var(--gold)}
 @media (hover:none){.sb-hide{opacity:.9;transform:none}}
@@ -667,6 +680,80 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
   .sb-m{max-width:92%}
 }
 @media print{.sb-launch,.sb-nudge,.sb-panel{display:none!important}}
+/* ---------- Shinbo, the full-body cat ---------- */
+.k-defs{position:absolute;width:0;height:0;overflow:hidden}
+.sb-launch{width:4.6rem;height:5.75rem;animation:none!important;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35));overflow:visible}
+.sb-launch.k-perch{position:absolute;z-index:30}
+.kit-wrap{position:absolute;inset:0;display:block;transition:transform .25s}
+.k-left .kit-wrap{transform:scaleX(-1)}
+.kit{position:absolute;bottom:0;left:0;width:100%;height:100%;overflow:visible}
+.kit-sit,.kit-walk{transition:opacity .2s ease}
+.kit-walk{opacity:0;width:126%;left:-13%}
+.k-walking .kit-sit{opacity:0}.k-walking .kit-walk{opacity:1}
+.kit *{transform-box:fill-box}
+/* breathing, tail, head */
+.k-body{transform-origin:50% 100%;animation:kBreathe 3.6s ease-in-out infinite}
+.k-tail{transform-origin:0% 60%;animation:kTail 7.3s cubic-bezier(.45,0,.55,1) infinite}
+.k-head{transform-origin:50% 90%;rotate:var(--hr,0deg);transition:transform .5s cubic-bezier(.3,1.4,.5,1),rotate .6s cubic-bezier(.25,.8,.3,1)}
+.k-pupil{transform:translate(var(--px,0px),var(--py,0px));transition:transform .25s ease-out}
+.k-ear{transition:transform .25s}
+.k-ear.l{transform-origin:70% 100%}.k-ear.r{transform-origin:30% 100%}
+.k-eye{transform-origin:50% 50%;transition:transform .09s ease-in}
+.k-happy,.k-groom{opacity:0}
+.k-sg{transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+@keyframes kBreathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.025)}}
+@keyframes kTail{0%,100%{transform:rotate(0)}18%{transform:rotate(-6deg)}34%{transform:rotate(-2deg)}52%{transform:rotate(5deg)}70%{transform:rotate(1deg)}86%{transform:rotate(-3deg)}}
+/* little moments */
+.k-blink .k-eye{transform:scaleY(.08)}
+.k-twitch .k-ear.l{transform:rotate(-16deg)}
+.k-look .k-head{transform:rotate(-9deg) translateX(-2px)}
+.k-lookr .k-head{transform:rotate(8deg) translateX(2px)}
+.k-cool .k-sg{transform:translateY(19.5px)}
+.k-groom-on .k-groom{opacity:1;animation:kLick .45s ease-in-out infinite}
+.k-groom-on .k-leg.l,.k-groom-on .k-paw.l{opacity:0}
+.k-groom-on .k-eye{transform:scaleY(.15)}
+.k-groom-on .k-head{transform:rotate(6deg) translateY(2px)}
+@keyframes kLick{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px) rotate(-3deg)}}
+/* purring: eyes closed happily, a soft rumble */
+.k-purr .k-eye,.k-sleep .k-eye{opacity:0}
+.k-purr .k-happy,.k-sleep .k-happy{opacity:1}
+.k-purr .kit-sit{animation:kRumble .09s linear infinite}
+.k-purr .k-tail{animation:kTail 1.6s ease-in-out infinite}
+.k-purr .k-head{transform:rotate(-6deg)}
+@keyframes kRumble{0%,100%{transform:translate(0,0)}25%{transform:translate(.4px,-.3px)}75%{transform:translate(-.4px,.3px)}}
+/* sleeping: slower breathing, head down */
+.k-sleep .k-body{animation-duration:6s}
+.k-sleep .k-head{transform:translateY(4px) rotate(4deg)}
+.k-sleep .k-tail{animation:none}
+/* jumping */
+.k-crouch .kit-sit{transform:scaleY(.86) scaleX(1.05);transform-origin:50% 100%;transition:transform .2s}
+.k-air .kit-sit{transform:scaleY(1.08) scaleX(.95);transform-origin:50% 100%}
+.k-land .kit-sit{animation:kLand .35s ease-out}
+@keyframes kLand{0%{transform:scaleY(.82) scaleX(1.08)}60%{transform:scaleY(1.04) scaleX(.98)}100%{transform:none}}
+.kit-sit{transform-origin:50% 100%}
+/* walking */
+.k-wl{transform-origin:50% 0}
+.k-walking .k-wl.f1,.k-walking .k-wl.b2{animation:kStepA .62s ease-in-out infinite}
+.k-walking .k-wl.f2,.k-walking .k-wl.b1{animation:kStepB .62s ease-in-out infinite}
+.k-walking .kit-walk{animation:kBob .31s ease-in-out infinite}
+.k-whead{transform-origin:20% 80%}
+.k-walking .k-whead{animation:kNod .62s ease-in-out infinite}
+@keyframes kNod{0%,100%{transform:rotate(0)}50%{transform:rotate(-2.5deg) translateY(1px)}}
+.k-wtail{transform-origin:100% 100%;animation:kTail 1.4s ease-in-out infinite}
+@keyframes kStepA{0%,100%{transform:rotate(16deg)}45%{transform:rotate(-14deg) translateY(-1px)}50%{transform:rotate(-16deg)}}
+@keyframes kStepB{0%,100%{transform:rotate(-16deg)}45%{transform:rotate(14deg) translateY(-1px)}50%{transform:rotate(16deg)}}
+@keyframes kBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px)}}
+/* held by the scruff */
+.sb-grab .k-legs{transform:translateY(5px) scaleY(1.12);transform-origin:50% 0}
+.sb-grab .k-pupil{transform:translate(var(--px,0px),var(--py,0px)) scale(2.2,.9)}
+.sb-grab .k-ear.l{transform:rotate(-34deg)}.sb-grab .k-ear.r{transform:rotate(34deg)}
+.sb-grab .k-tail{animation:kTail .5s ease-in-out infinite}
+.sb-grab .k-sg{transform:translateY(19.5px)}
+/* speech bubble sits above the cat */
+.sb-launch .sb-tag{right:3.6rem;top:-.4rem}
+.k-z{position:absolute;right:.2rem;top:-.3rem;font:600 .8rem/1 var(--f-body);color:var(--gold-ink);opacity:0;pointer-events:none}
+.k-sleep .k-z{animation:kZ 2.6s ease-in-out infinite}
+@keyframes kZ{0%{opacity:0;transform:translate(0,4px)}30%{opacity:1}100%{opacity:0;transform:translate(8px,-14px)}}
 </style>
 <!--A2-->
 </head>
@@ -1189,7 +1276,73 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 </div>
 <button type="button" class="snd-btn" id="sndBtn" aria-label="Play nature sounds" aria-pressed="false" hidden></button>
 
-<button type="button" class="sb-launch" id="sbLaunch" aria-label="Chat with Shinbo, Rijve's sidekick" aria-expanded="false" aria-controls="sbPanel"><span class="sb-ear l" aria-hidden="true"></span><span class="sb-ear r" aria-hidden="true"></span><span class="sb-ring" aria-hidden="true"></span><span class="sb-face"><svg class="sb-cat" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="#1b2122"/><ellipse cx="50" cy="57" rx="48" ry="46" fill="#8a8e91"/><ellipse cx="22" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="78" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="22" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><ellipse cx="78" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><path d="M44 17v9M50 15v10M56 17v9" stroke="#6f7376" stroke-width="2.6" stroke-linecap="round"/><g class="sb-eyes"><g class="sb-eye"><ellipse cx="34" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="34" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="34" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="36" cy="42.5" r="1.6" fill="#fff"/></g><g class="sb-eye sb-wink"><ellipse cx="66" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="66" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="66" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="68" cy="42.5" r="1.6" fill="#fff"/></g></g><ellipse cx="43" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><ellipse cx="57" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><path d="M46.5 63.5h7l-3.5 4.2z" fill="#e7a3ae" stroke="#c77f8c" stroke-width="1" stroke-linejoin="round"/><path d="M43.5 71.5q3.3 3.6 6.5 0q3.2 3.6 6.5 0" fill="none" stroke="#3a3d40" stroke-width="1.6" stroke-linecap="round"/><path d="M50 67.7v3.8" stroke="#3a3d40" stroke-width="1.4" stroke-linecap="round"/><g stroke="#f1ede4" stroke-width="1" stroke-linecap="round" opacity=".75"><path d="M34 70 16 67M34 73.5 15 75M66 70 84 67M66 73.5 85 75"/></g><g class="sb-shades"><path d="M43.5 42q6.5-4.5 13 0" fill="none" stroke="#d6bd8e" stroke-width="2.4" stroke-linecap="round"/><path d="M34 56C19 46 22 33 34 40C46 33 49 46 34 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M66 56C51 46 54 33 66 40C78 33 81 46 66 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M14 41 25.5 40.5M86 41 74.5 40.5" stroke="#d6bd8e" stroke-width="2.2" stroke-linecap="round"/><g class="sb-glint" fill="#fff"><path d="M27 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/><path d="M59 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/></g></g></svg></span><svg class="sb-paw" viewBox="0 0 32 32" aria-hidden="true"><ellipse cx="16" cy="21" rx="9" ry="7.5" fill="#8a8e91"/><ellipse cx="7" cy="12" rx="3.3" ry="4.2" fill="#8a8e91"/><ellipse cx="13" cy="7.5" rx="3.3" ry="4.3" fill="#8a8e91"/><ellipse cx="19.5" cy="7.5" rx="3.3" ry="4.3" fill="#8a8e91"/><ellipse cx="25.5" cy="12" rx="3.3" ry="4.2" fill="#8a8e91"/><ellipse cx="16" cy="22" rx="5.2" ry="4.2" fill="#e7a3ae"/><ellipse cx="7.2" cy="12.6" rx="1.7" ry="2.2" fill="#e7a3ae"/><ellipse cx="13" cy="8.2" rx="1.7" ry="2.3" fill="#e7a3ae"/><ellipse cx="19.5" cy="8.2" rx="1.7" ry="2.3" fill="#e7a3ae"/><ellipse cx="25.3" cy="12.6" rx="1.7" ry="2.2" fill="#e7a3ae"/></svg><span class="sb-dot" aria-hidden="true"></span><span class="sb-tag" id="sbTag" aria-hidden="true">Meow? 👋</span></button>
+<button type="button" class="sb-launch" id="sbLaunch" aria-label="Chat with Shinbo, Rijve's sidekick" aria-expanded="false" aria-controls="sbPanel"><svg class="k-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs>
+<radialGradient id="kFur" cx="44%" cy="32%" r="78%"><stop offset="0" stop-color="#b1b5b8"/><stop offset=".5" stop-color="#8d9194"/><stop offset="1" stop-color="#5c6063"/></radialGradient>
+<radialGradient id="kFur2" cx="50%" cy="15%" r="95%"><stop offset="0" stop-color="#9da1a4"/><stop offset="1" stop-color="#63676a"/></radialGradient>
+<radialGradient id="kBib" cx="50%" cy="30%" r="70%"><stop offset="0" stop-color="#f1f2f3"/><stop offset=".6" stop-color="#c9ccce"/><stop offset="1" stop-color="#9a9ea1" stop-opacity="0"/></radialGradient>
+<radialGradient id="kEye" cx="45%" cy="40%" r="60%"><stop offset="0" stop-color="#f6d36a"/><stop offset=".7" stop-color="#d9a12b"/><stop offset="1" stop-color="#a8761c"/></radialGradient>
+<linearGradient id="kLens" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d3253f"/><stop offset="1" stop-color="#8e0f22"/></linearGradient>
+</defs></svg>
+<span class="kit-wrap" aria-hidden="true">
+<svg class="kit kit-sit" viewBox="0 0 120 150">
+ <ellipse class="k-shadow" cx="60" cy="145" rx="36" ry="4.5" fill="#000" opacity=".38"/>
+ <g class="k-tail"><path d="M84 139 C110 142 119 120 111 100 C107 90 99 88 96 94" fill="none" stroke="url(#kFur2)" stroke-width="10" stroke-linecap="round"/><path d="M108 104 l5 -2 M111 114 l5 0 M108 124 l5 2" stroke="#5c6063" stroke-width="2" stroke-linecap="round" opacity=".7"/></g>
+ <g class="k-body">
+  <path d="M29 141 C21 112 30 84 60 80 C90 84 99 112 91 141 Z" fill="url(#kFur)"/>
+  <path d="M36 98 q5 6 1 13 M33 112 q5 5 2 12 M84 98 q-5 6 -1 13 M87 112 q-5 5 -2 12" stroke="#666a6d" stroke-width="2" fill="none" stroke-linecap="round" opacity=".55"/>
+  <ellipse cx="33" cy="124" rx="13" ry="17" fill="url(#kFur2)"/><ellipse cx="87" cy="124" rx="13" ry="17" fill="url(#kFur2)"/><path d="M40 92 C47 82 73 82 80 92 C85 110 74 129 60 133 C46 129 35 110 40 92Z" fill="url(#kBib)" opacity=".55"/><path d="M48 88 q3 4 0 8 M54 86 q3 5 0 10 M60 85 q3 5 0 11 M66 86 q3 5 0 10 M72 88 q3 4 0 8" stroke="#f3f4f5" stroke-width="1.2" fill="none" opacity=".5"/>
+  <g class="k-legs">
+   <path class="k-leg l" d="M43 106 C41 121 41 132 42 141 L55 141 C55 131 55 120 54 106Z" fill="url(#kFur2)"/>
+   <path class="k-leg r" d="M66 106 C65 120 65 131 65 141 L78 141 C79 132 79 121 77 106Z" fill="url(#kFur2)"/>
+   <ellipse class="k-paw l" cx="48.5" cy="141" rx="8.5" ry="4.2" fill="#dadcdd"/><ellipse cx="71.5" cy="141" rx="8.5" ry="4.2" fill="#dadcdd"/>
+   <path d="M45 141v-2.5M48.5 141v-3M52 141v-2.5M68 141v-2.5M71.5 141v-3M75 141v-2.5" stroke="#9a9da0" stroke-width="1"/>
+  </g>
+ </g>
+ <g class="k-head">
+  <g class="k-ear l"><path d="M29 46 L33 11 L58 33 Z" fill="url(#kFur2)"/><path d="M34 40 L36.5 19 L51 33Z" fill="#e7a3ae"/><path d="M36 26 l3 4 M37 32 l3 2" stroke="#f4eef0" stroke-width="1" opacity=".8"/></g>
+  <g class="k-ear r"><path d="M91 46 L87 11 L62 33 Z" fill="url(#kFur2)"/><path d="M86 40 L83.5 19 L69 33Z" fill="#e7a3ae"/><path d="M84 26 l-3 4 M83 32 l-3 2" stroke="#f4eef0" stroke-width="1" opacity=".8"/></g>
+  <ellipse cx="60" cy="83" rx="22" ry="5" fill="#000" opacity=".22"/>
+  <ellipse cx="60" cy="55" rx="34" ry="28.5" fill="url(#kFur)"/>
+  <path d="M34 42 C42 28 78 28 86 42" fill="none" stroke="#d9dcde" stroke-width="2" opacity=".28" stroke-linecap="round"/>
+  <path d="M60 46 C58 52 58 56 59 60 M60 46 C62 52 62 56 61 60" stroke="#7b7f82" stroke-width="1.2" fill="none" opacity=".5"/>
+  <path d="M27 58 q-5 9 3 16 q3 -3 6 1 q1 -5 6 -4 M93 58 q5 9 -3 16 q-3 -3 -6 1 q-1 -5 -6 -4" fill="#9a9ea1"/>
+  <path d="M55 30v7M60 28v9M65 30v7" stroke="#686c6f" stroke-width="2.3" stroke-linecap="round" opacity=".8"/>
+  <g class="k-eyes">
+   <g class="k-eye"><ellipse cx="46" cy="53" rx="7" ry="7.4" fill="url(#kEye)" stroke="#6b4a12" stroke-width=".8"/><circle cx="46" cy="53" r="4.6" fill="none" stroke="#f9e7a6" stroke-width=".6" opacity=".5"/><ellipse class="k-pupil" cx="46" cy="53.5" rx="2.1" ry="6.2" fill="#111"/><circle cx="48.4" cy="50.2" r="1.8" fill="#fff"/><path d="M38.6 50 q7.4 -6 14.8 0" fill="none" stroke="#4d5154" stroke-width="1.4"/></g>
+   <g class="k-eye"><ellipse cx="74" cy="53" rx="7" ry="7.4" fill="url(#kEye)" stroke="#6b4a12" stroke-width=".8"/><circle cx="74" cy="53" r="4.6" fill="none" stroke="#f9e7a6" stroke-width=".6" opacity=".5"/><ellipse class="k-pupil" cx="74" cy="53.5" rx="2.1" ry="6.2" fill="#111"/><circle cx="76.4" cy="50.2" r="1.8" fill="#fff"/><path d="M66.6 50 q7.4 -6 14.8 0" fill="none" stroke="#4d5154" stroke-width="1.4"/></g>
+  </g>
+  <g class="k-happy"><path d="M39.5 54 q6.5 -6.5 13 0 M67.5 54 q6.5 -6.5 13 0" fill="none" stroke="#2c2e30" stroke-width="2.3" stroke-linecap="round"/></g>
+  <ellipse cx="55" cy="67" rx="7.4" ry="5.8" fill="#dcdedf"/><ellipse cx="65" cy="67" rx="7.4" ry="5.8" fill="#dcdedf"/>
+  <path d="M56.8 61.2h6.4l-3.2 3.8z" fill="#e39aa7" stroke="#c97e8c" stroke-width=".8" stroke-linejoin="round"/>
+  <path class="k-mouth" d="M54.8 67.6 q2.6 3 5.2 0 q2.6 3 5.2 0" stroke="#3a3d40" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+  <path d="M60 65v2.6" stroke="#3a3d40" stroke-width="1.2"/>
+  <g stroke="#f1ede4" stroke-width=".9" stroke-linecap="round" opacity=".8"><path d="M48 66 L26 62 M48 69 L25 70 M48 72 L28 77 M72 66 L94 62 M72 69 L95 70 M72 72 L92 77"/></g>
+  <g class="k-sg"><path d="M53.5 33.5 q6.5 -3.5 13 0" fill="none" stroke="#d6bd8e" stroke-width="1.8" stroke-linecap="round"/><path d="M46 44 C35 37 37 27 46 31.5 C55 27 57 37 46 44Z" fill="url(#kLens)" stroke="#d6bd8e" stroke-width="1.8" stroke-linejoin="round"/><path d="M74 44 C63 37 65 27 74 31.5 C83 27 85 37 74 44Z" fill="url(#kLens)" stroke="#d6bd8e" stroke-width="1.8" stroke-linejoin="round"/><path d="M41 33.5q1.5 -2.5 4 -2 M69 33.5q1.5 -2.5 4 -2" stroke="#fff" stroke-width="1.3" stroke-linecap="round" opacity=".85"/></g>
+ </g>
+ <g class="k-groom"><path d="M60 92 C62 80 64 74 62 70" fill="none" stroke="url(#kFur2)" stroke-width="11" stroke-linecap="round"/><ellipse cx="62" cy="69" rx="6.5" ry="5" fill="#dadcdd"/><path class="k-tongue" d="M58 69.5 q2 3 4 0" fill="#e78a99"/></g>
+</svg>
+<svg class="kit kit-walk" viewBox="0 0 150 150">
+ <ellipse class="k-shadow" cx="76" cy="145" rx="46" ry="4.5" fill="#000" opacity=".35"/>
+ <g class="k-wtail"><path d="M36 92 C16 86 12 62 22 48 C25 44 30 45 29 50" fill="none" stroke="url(#kFur2)" stroke-width="9" stroke-linecap="round"/></g>
+ <g class="k-wl b2"><rect x="45" y="92" width="11" height="48" rx="5.5" fill="#5f6366"/><ellipse cx="52.5" cy="140" rx="7.5" ry="3.8" fill="#bfc2c4"/></g>
+ <g class="k-wl f2"><rect x="98" y="92" width="11" height="48" rx="5.5" fill="#5f6366"/><ellipse cx="105.5" cy="140" rx="7.5" ry="3.8" fill="#bfc2c4"/></g>
+ <ellipse cx="74" cy="96" rx="43" ry="21" fill="url(#kFur)"/>
+ <path d="M54 82 q4 8 0 16 M66 79 q4 9 0 18 M78 79 q4 9 0 18" stroke="#666a6d" stroke-width="2.2" fill="none" stroke-linecap="round" opacity=".5"/>
+ <ellipse cx="82" cy="108" rx="26" ry="7" fill="#c6c9cb" opacity=".55"/>
+ <g class="k-wl b1"><rect x="36" y="94" width="12" height="47" rx="6" fill="url(#kFur2)"/><ellipse cx="44.0" cy="141" rx="7.5" ry="3.8" fill="#dadcdd"/></g>
+ <g class="k-wl f1"><rect x="89" y="94" width="12" height="47" rx="6" fill="url(#kFur2)"/><ellipse cx="97.0" cy="141" rx="7.5" ry="3.8" fill="#dadcdd"/></g>
+ <g class="k-whead">
+  <path d="M104 62 L106 38 L121 55Z" fill="url(#kFur2)"/><path d="M107 58 L108 44 L117 55Z" fill="#e7a3ae"/>
+  <path d="M121 55 L130 36 L136 60Z" fill="url(#kFur2)"/><path d="M124 56 L129 43 L133 59Z" fill="#e7a3ae"/>
+  <circle cx="119" cy="72" r="21" fill="url(#kFur)"/>
+  <ellipse cx="134" cy="80" rx="8" ry="6" fill="#dcdedf"/>
+  <path d="M138 75.5 l3 -1 l-1 3.2z" fill="#e39aa7"/>
+  <g class="k-weye"><ellipse cx="127" cy="69" rx="4.6" ry="5.4" fill="url(#kEye)"/><ellipse cx="128" cy="69.4" rx="1.4" ry="4.4" fill="#111"/><circle cx="129" cy="67.4" r="1.2" fill="#fff"/></g>
+  <path d="M118 57 C110 52 111 46 117 48.5 C123 46 125 52 118 57Z" fill="url(#kLens)" stroke="#d6bd8e" stroke-width="1.6"/>
+  <g stroke="#f1ede4" stroke-width=".8" opacity=".8"><path d="M132 82 L148 80 M132 84 L147 87"/></g>
+ </g>
+</svg>
+</span><span class="k-z" aria-hidden="true">z</span><span class="sb-tag" id="sbTag" aria-hidden="true">Meow? 👋</span></button>
 <button type="button" class="sb-hide" id="sbHide" aria-label="Hide Shinbo">✕</button>
 <div class="sb-sneak" id="sbSneak" role="status" hidden><div class="sb-psst"><p id="sbPsst"></p><div class="sb-psst-b"><button type="button" id="sbYes">Yes, let's chat</button><button type="button" id="sbNo">Not now</button></div></div><span class="sb-sneak-face" aria-hidden="true"><span class="sb-ear l"></span><span class="sb-ear r"></span><span class="sb-sf"><svg class="sb-cat" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="#1b2122"/><ellipse cx="50" cy="57" rx="48" ry="46" fill="#8a8e91"/><ellipse cx="22" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="78" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="22" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><ellipse cx="78" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><path d="M44 17v9M50 15v10M56 17v9" stroke="#6f7376" stroke-width="2.6" stroke-linecap="round"/><g class="sb-eyes"><g class="sb-eye"><ellipse cx="34" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="34" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="34" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="36" cy="42.5" r="1.6" fill="#fff"/></g><g class="sb-eye sb-wink"><ellipse cx="66" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="66" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="66" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="68" cy="42.5" r="1.6" fill="#fff"/></g></g><ellipse cx="43" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><ellipse cx="57" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><path d="M46.5 63.5h7l-3.5 4.2z" fill="#e7a3ae" stroke="#c77f8c" stroke-width="1" stroke-linejoin="round"/><path d="M43.5 71.5q3.3 3.6 6.5 0q3.2 3.6 6.5 0" fill="none" stroke="#3a3d40" stroke-width="1.6" stroke-linecap="round"/><path d="M50 67.7v3.8" stroke="#3a3d40" stroke-width="1.4" stroke-linecap="round"/><g stroke="#f1ede4" stroke-width="1" stroke-linecap="round" opacity=".75"><path d="M34 70 16 67M34 73.5 15 75M66 70 84 67M66 73.5 85 75"/></g><g class="sb-shades"><path d="M43.5 42q6.5-4.5 13 0" fill="none" stroke="#d6bd8e" stroke-width="2.4" stroke-linecap="round"/><path d="M34 56C19 46 22 33 34 40C46 33 49 46 34 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M66 56C51 46 54 33 66 40C78 33 81 46 66 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M14 41 25.5 40.5M86 41 74.5 40.5" stroke="#d6bd8e" stroke-width="2.2" stroke-linecap="round"/><g class="sb-glint" fill="#fff"><path d="M27 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/><path d="M59 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/></g></g></svg></span></span></div>
 <button type="button" class="sb-tab" id="sbTab" aria-label="Bring Shinbo back" hidden><span class="sb-ear l" aria-hidden="true"></span><span class="sb-ear r" aria-hidden="true"></span><span class="sb-sf"><svg class="sb-cat" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="#1b2122"/><ellipse cx="50" cy="57" rx="48" ry="46" fill="#8a8e91"/><ellipse cx="22" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="78" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="22" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><ellipse cx="78" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><path d="M44 17v9M50 15v10M56 17v9" stroke="#6f7376" stroke-width="2.6" stroke-linecap="round"/><g class="sb-eyes"><g class="sb-eye"><ellipse cx="34" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="34" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="34" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="36" cy="42.5" r="1.6" fill="#fff"/></g><g class="sb-eye sb-wink"><ellipse cx="66" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="66" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="66" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="68" cy="42.5" r="1.6" fill="#fff"/></g></g><ellipse cx="43" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><ellipse cx="57" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><path d="M46.5 63.5h7l-3.5 4.2z" fill="#e7a3ae" stroke="#c77f8c" stroke-width="1" stroke-linejoin="round"/><path d="M43.5 71.5q3.3 3.6 6.5 0q3.2 3.6 6.5 0" fill="none" stroke="#3a3d40" stroke-width="1.6" stroke-linecap="round"/><path d="M50 67.7v3.8" stroke="#3a3d40" stroke-width="1.4" stroke-linecap="round"/><g stroke="#f1ede4" stroke-width="1" stroke-linecap="round" opacity=".75"><path d="M34 70 16 67M34 73.5 15 75M66 70 84 67M66 73.5 85 75"/></g><g class="sb-shades"><path d="M43.5 42q6.5-4.5 13 0" fill="none" stroke="#d6bd8e" stroke-width="2.4" stroke-linecap="round"/><path d="M34 56C19 46 22 33 34 40C46 33 49 46 34 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M66 56C51 46 54 33 66 40C78 33 81 46 66 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M14 41 25.5 40.5M86 41 74.5 40.5" stroke="#d6bd8e" stroke-width="2.2" stroke-linecap="round"/><g class="sb-glint" fill="#fff"><path d="M27 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/><path d="M59 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/></g></g></svg></span></button>
@@ -2077,6 +2230,9 @@ var T=[
  c:["Play the game"]},
 
 /* ---------- Pure cat business ---------- */
+{id:"throw",k:["throw you","can i throw","drag you","move you","yeet","yeet you","pick you up","toss you","can i move you"],
+ a:["<p>Yes, you can grab me and drag me anywhere on the screen. You can even throw me. I'll land on my feet, obviously. 😎</p><p>But throw me too hard and I <b>will</b> say ouch. And I'll remember. Cats always remember.</p>"],
+ c:["Tell me a joke","The pets"]},
 {id:"roast",k:["roast simba","roast kibo","roast someone","roast"],
  a:["<p>Simba once lost a staring contest with a sock. The sock won by default. He still talks about it.</p>","<p>Kibo thinks he's the main character. Kibo is a background extra in my biopic.</p>","<p>Simba's idea of a five-year plan is \"find stick\". Respect, honestly.</p>"],
  c:["Roast Simba","The pets","Tell me a joke"]},
@@ -2091,7 +2247,7 @@ var T=[
 {id:"meow",k:["meow","miaow","purr","mew","nya"],
  a:["<p>Meow meow. Meow? 😼</p><p>(Translation: \"Finally, someone who speaks my language. Ask me something about Rijve.\")</p>","<p>"+act("purrs approvingly")+"Fluent. You may stay.</p>"],
  c:["Who is Rijve?","Tell me a joke"]},
-{id:"pet",k:["pet you","pat","boop","scratch","belly rub","cuddle","hug","can i pet"],
+{id:"pet",after:function(){if(window.__purr)window.__purr(2.4);},k:["pet you","pat","boop","scratch","belly rub","cuddle","hug","can i pet"],
  a:["<p>One pat. Just one. 😼 That's enough, we're professionals here.</p>","<p>Boop accepted. Belly rubs require a formal application through "+g("ask","Ask Rijve")+". 😼</p>"],
  c:["Tell me a joke","The pets"]},
 {id:"cute",k:["cute","adorable","handsome","beautiful","pretty","good boy","good kitty","love you","i love you","best cat"],
@@ -2518,6 +2674,7 @@ function localReply(q){
   /* an occasional P.S. on light, informational topics */
   var hooked=withHook(r.id,html,false);
   if(hooked===html&&!r.s&&!/^(hello|bye|thanks|joke|meow|pet|cute|rude|sing|catlife|shades|rival|mental|helplines|ground)$/.test(r.id)&&turns%4===0)hooked+='<p class="sb-ps">'+PS[Math.floor(Math.random()*PS.length)]+'</p>';
+  if(r.after)setTimeout(r.after,300);
   return{html:flavour(hooked,r.s||/^(mental|helplines|ground|priv)$/.test(r.id),hooked!==html,false),c:r.c};
 }
 function ask(q){
@@ -2621,7 +2778,7 @@ var lastScroll=Date.now();addEventListener("scroll",function(){lastScroll=Date.n
 function idle(ms){return Date.now()-lastScroll>(ms||4000);}
 function whenIdle(fn,ms){(function chk(){if(idle(ms))fn();else setTimeout(chk,2500);})();}
 /* Little speech bubble on the button: three times a visit at most, only during a pause */
-var tag=document.getElementById("sbTag"),TAGS={en:["Meow? 👋","Ask me anything!","Psst… 😎","I know things 🐾","Need help?","Free advice! 🐟","Chat with me!","Bored? Talk to me"],bn:["মিউ? 👋","কিছু জিজ্ঞেস করো!","পিস্‌স্‌… 😎","আমি সব জানি 🐾","কথা বলবে?"]},ti=0;
+var tag=document.getElementById("sbTag"),TAGS={en:["Meow? 👋","You can throw me. Gently. 😼","Ask me anything!","Psst… 😎","I know things 🐾","Need help?","Free advice! 🐟","Chat with me!","Bored? Talk to me"],bn:["মিউ? 👋","কিছু জিজ্ঞেস করো!","পিস্‌স্‌… 😎","আমি সব জানি 🐾","কথা বলবে?"]},ti=0;
 function tagShow(){if(!tag)return;if(gone||!P.hidden||!nudge.hidden){tag.classList.remove("on");return;}var list=TAGS[lang==="bn"?"bn":"en"];tag.textContent=list[ti++%list.length];tag.classList.add("on");setTimeout(function(){tag.classList.remove("on");},3200);}
 if(tag&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){[40000,110000,220000].forEach(function(t){setTimeout(function(){whenIdle(tagShow);},t);});}
 /* ---------- Hide Shinbo, who then sneaks back in now and then (at most three times a visit) ---------- */
@@ -2647,6 +2804,153 @@ sNo.addEventListener("click",function(){clearTimeout(sAuto);psst.textContent=NOP
 tabBtn.addEventListener("click",function(){bringBack(true);});
 var wasGone=false;try{wasGone=sessionStorage.getItem("sb-gone")==="1";}catch(_){}
 if(wasGone){gone=true;document.documentElement.classList.add("sb-gone");plan();}
+
+/* ---------- Grab and throw: Shinbo dangles, flies, lands on his feet, and complains ---------- */
+var ac=null;
+/* A synthesised cat voice: a sawtooth through a moving vowel filter, with a little vibrato */
+function meow(kind){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(ac.state==="suspended")ac.resume();
+  var t=ac.currentTime,P={mrrp:{d:.22,f:[520,720,640],v:[1100,1500,1300],g:.13},meow:{d:.6,f:[460,780,430],v:[800,1800,950],g:.16},ouch:{d:.8,f:[620,980,330],v:[900,2100,800],g:.2},happy:{d:.35,f:[600,820,760],v:[1300,1900,1600],g:.12}}[kind]||{d:.5,f:[480,760,440],v:[800,1700,950],g:.15};
+  var o=ac.createOscillator(),o2=ac.createOscillator(),f=ac.createBiquadFilter(),f2=ac.createBiquadFilter(),g=ac.createGain(),lfo=ac.createOscillator(),lg=ac.createGain();
+  o.type="sawtooth";o2.type="triangle";o2.detune.value=7;f.type="bandpass";f.Q.value=5;f2.type="lowpass";f2.frequency.value=3200;
+  lfo.frequency.value=kind==="ouch"?9:6;lg.gain.value=kind==="ouch"?18:8;lfo.connect(lg);lg.connect(o.frequency);lg.connect(o2.frequency);
+  [o,o2].forEach(function(x){x.frequency.setValueAtTime(P.f[0],t);x.frequency.linearRampToValueAtTime(P.f[1],t+P.d*.35);x.frequency.exponentialRampToValueAtTime(P.f[2],t+P.d);x.connect(f);});
+  f.frequency.setValueAtTime(P.v[0],t);f.frequency.linearRampToValueAtTime(P.v[1],t+P.d*.4);f.frequency.linearRampToValueAtTime(P.v[2],t+P.d);
+  f.connect(f2);f2.connect(g);g.connect(ac.destination);
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(P.g,t+.04);g.gain.setValueAtTime(P.g,t+P.d*.7);g.gain.exponentialRampToValueAtTime(.0001,t+P.d+.08);
+  [o,o2,lfo].forEach(function(x){x.start(t);x.stop(t+P.d+.1);});}catch(_){}}
+/* a speech puff that floats up and fades */
+function puff(txt,x,y){var d=document.createElement("div");d.className="sb-puff";d.textContent=txt;d.setAttribute("aria-hidden","true");
+  d.style.left=Math.max(8,Math.min(innerWidth-150,x))+"px";d.style.top=Math.max(8,Math.min(innerHeight-40,y))+"px";document.body.appendChild(d);setTimeout(function(){d.remove();},1800);}
+var REDUCED=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+(function(){
+  var SIZE=66,drag=null,fly=0,justDragged=false,pos=null,samples=[];
+  function at(x,y,rot){pos={x:x,y:y};L.style.left=x+"px";L.style.top=y+"px";L.style.right="auto";L.style.bottom="auto";L.style.rotate=(rot||0)+"deg";}
+  function home(){pos=null;L.style.left=L.style.top=L.style.right=L.style.bottom=L.style.rotate=L.style.position=L.style.translate="";L.classList.remove("k-perch");if(window.__cat)window.__cat.mode="dock";document.documentElement.classList.remove("sb-moved");}
+  function bubble(txt){if(!tag)return;tag.textContent=txt;tag.classList.add("on");clearTimeout(bubble.t);bubble.t=setTimeout(function(){tag.classList.remove("on");},1800);}
+  L.addEventListener("pointerdown",function(e){if(e.button>0||gone)return;cancelAnimationFrame(fly);var r=L.getBoundingClientRect();SIZE=r.width;
+    drag={sx:e.clientX,sy:e.clientY,ox:e.clientX-r.left,oy:e.clientY-r.top,moved:false,id:e.pointerId};var dd=drag;if(e.pointerType!=="mouse")dd.lp=setTimeout(function(){if(drag===dd&&!dd.moved){dd.lpDone=true;if(window.__purr)window.__purr(2.6);}},520);samples=[{x:e.clientX,y:e.clientY,t:performance.now()}];});
+  addEventListener("pointermove",function(e){if(!drag||e.pointerId!==drag.id)return;var dx=e.clientX-drag.sx,dy=e.clientY-drag.sy;
+    if(!drag.moved){if(Math.abs(dx)+Math.abs(dy)<7)return;drag.moved=true;clearTimeout(drag.lp);try{L.setPointerCapture(drag.id);}catch(_){}L.classList.add("sb-grab");document.documentElement.classList.add("sb-moved");nudge.hidden=true;meow("mrrp");bubble(lang==="bn"?"এই! নামাও! 🙀":"Hey! Put me down! 🙀");}
+    e.preventDefault();var now=performance.now();samples.push({x:e.clientX,y:e.clientY,t:now});if(samples.length>6)samples.shift();
+    var a=samples[0],vx=(e.clientX-a.x)/Math.max(1,now-a.t);
+    at(e.clientX-drag.ox,e.clientY-drag.oy,Math.max(-35,Math.min(35,vx*28)));},{passive:false});
+  function release(e){if(!drag||(e&&e.pointerId!==drag.id))return;var d=drag;drag=null;clearTimeout(d.lp);L.classList.remove("sb-grab");if(d.lpDone){justDragged=true;setTimeout(function(){justDragged=false;},80);return;}if(!d.moved)return;justDragged=true;setTimeout(function(){justDragged=false;},60);
+    var now=performance.now(),a=samples[0],b=samples[samples.length-1],dt=Math.max(16,now-a.t),vx=(b.x-a.x)/dt,vy=(b.y-a.y)/dt;if(now-b.t>90){vx=0;vy=0;}
+    var speed=Math.sqrt(vx*vx+vy*vy),harsh=speed>2.2;launch(vx,vy,harsh);}
+  addEventListener("pointerup",release);addEventListener("pointercancel",release);
+  /* a drag is not a click: don't open the chat after one */
+  addEventListener("click",function(e){if(justDragged&&L.contains(e.target)){e.stopImmediatePropagation();e.preventDefault();}},true);
+
+  function launch(vx,vy,harsh){
+    if(REDUCED){if(Math.abs(vx)+Math.abs(vy)>1.2)yeet(harsh,pos.x,pos.y);else land(false);return;}
+    var x=pos.x,y=pos.y,rot=parseFloat(L.style.rotate)||0,last=performance.now(),G=.0024,floor=innerHeight-SIZE-14,bounced=0;
+    L.classList.add("sb-fly");
+    (function step(now){var dt=Math.min(32,now-last);last=now;vy+=G*dt;x+=vx*dt;y+=vy*dt;rot+=vx*dt*.45;vx*=Math.pow(.9985,dt);
+      if(x>innerWidth+10||x<-SIZE-10||y<-SIZE*2.5){L.classList.remove("sb-fly");return yeet(harsh,x,y);}
+      if(y>floor){y=floor;if(Math.abs(vy)>1.6&&bounced===0){meow("ouch");puff(lang==="bn"?"উফ! 😾":"Ouch! 😾",x-10,y-34);}
+        vy=-vy*.38;vx*=.7;bounced++;if(Math.abs(vy)<.12||bounced>3){L.classList.remove("sb-fly");at(Math.max(6,Math.min(innerWidth-SIZE-6,x)),floor,0);return land(bounced>1);}}
+      at(x,y,rot);fly=requestAnimationFrame(step);})(last);
+  }
+  function land(wasBumpy){L.style.rotate="0deg";
+    var lines=lang==="bn"?["চার পায়েই নামলাম। স্বাভাবিক। 😎","আবার করো! না, থাক। 😼"]:["Landed on my feet. Obviously. 😎","Wheee! Again! No wait. 😼","Ten out of ten landing. 🐾"];
+    if(!wasBumpy)meow("happy");bubble(lines[Math.floor(Math.random()*lines.length)]);}
+  function yeet(harsh,x,y){
+    var px=Math.max(10,Math.min(innerWidth-160,x)),py=Math.max(10,Math.min(innerHeight-60,y));
+    meow(harsh?"ouch":"meow");
+    puff(harsh?(lang==="bn"?"উফফ! এত জোরে?! 😾":"Ouch! That was rude! 😾"):(lang==="bn"?"মিয়াঁও! ঠিক আছে, যাচ্ছি… 😿":"Mrraow! Fine, I'm going… 😿"),px,py);
+    home();L.classList.remove("sb-fly");hideShinbo();}
+  addEventListener("resize",function(){if(pos)at(Math.max(6,Math.min(innerWidth-SIZE-6,pos.x)),Math.max(6,Math.min(innerHeight-SIZE-6,pos.y)),0);});
+})();
+
+/* ---------- Cat life: blinking, grooming, purring, pacing, napping, and perching on the page ---------- */
+(function(){
+  var CAT={mode:"dock",busy:false,roams:0,hover:0,sleeping:false,lastAct:Date.now()};
+  window.__cat=CAT;
+  function cls(c,ms,cb){L.classList.add(c);setTimeout(function(){L.classList.remove(c);if(cb)cb();},ms);}
+  function free(){return !CAT.busy&&P.hidden&&!gone&&!L.classList.contains("sb-grab")&&!L.classList.contains("sb-fly");}
+
+  /* purring: a soft rumble of filtered noise, pulsing about 25 times a second */
+  var purrSrc=null;
+  function purrSound(sec){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(ac.state==="suspended")ac.resume();if(purrSrc)return;
+    var len=ac.sampleRate*2,buf=ac.createBuffer(1,len,ac.sampleRate),d=buf.getChannelData(0),last=0;for(var i=0;i<len;i++){var w=Math.random()*2-1;last=(last+.02*w)/1.02;d[i]=last*3.2;}
+    var src=ac.createBufferSource(),lp=ac.createBiquadFilter(),g=ac.createGain(),am=ac.createGain(),lfo=ac.createOscillator(),lg=ac.createGain(),t=ac.currentTime;
+    src.buffer=buf;src.loop=true;lp.type="lowpass";lp.frequency.value=260;lfo.frequency.value=24;lg.gain.value=.5;am.gain.value=.5;lfo.connect(lg);lg.connect(am.gain);
+    src.connect(lp);lp.connect(am);am.connect(g);g.connect(ac.destination);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.55,t+.4);g.gain.setValueAtTime(.55,t+sec-.5);g.gain.linearRampToValueAtTime(0,t+sec);
+    src.start(t);lfo.start(t);src.stop(t+sec+.05);lfo.stop(t+sec+.05);purrSrc=src;src.onended=function(){purrSrc=null;};}catch(_){}}
+  function purr(sec){if(L.classList.contains("k-purr"))return;wake();sec=sec||2.4;L.classList.add("k-purr");purrSound(sec);
+    if(tag){tag.textContent=lang==="bn"?"প্র্র্র্‌… 💛":"prrrrr… 💛";tag.classList.add("on");}
+    setTimeout(function(){L.classList.remove("k-purr");if(tag)tag.classList.remove("on");},sec*1000);}
+  window.__purr=purr;
+  /* petting: hover for a moment on a laptop; on phones, press and hold */
+  L.addEventListener("pointerenter",function(e){if(e.pointerType!=="mouse")return;clearTimeout(CAT.hover);CAT.hover=setTimeout(function(){if(L.matches(":hover")&&free())purr(2.6);},650);});
+  L.addEventListener("pointerleave",function(){clearTimeout(CAT.hover);});
+
+  /* small moments while sitting */
+  function idleLife(){var wait=2600+Math.random()*4200;setTimeout(idleLife,wait);
+    if(!free()||REDUCED||L.classList.contains("k-walking")||L.classList.contains("k-purr"))return;
+    if(Date.now()-lastScroll>70000&&CAT.mode!=="perch"){sleep();return;}
+    if(CAT.sleeping)return;
+    var r=Math.random();
+    if(r<.42)cls("k-blink",150);
+    else if(r<.55)cls("k-twitch",320);
+    else if(r<.66)cls(Math.random()<.5?"k-look":"k-lookr",1500);
+    else if(r<.74){cls("k-groom-on",2200);}
+    else if(r<.81)cls("k-cool",3200);
+    else if(r<.87&&CAT.mode==="dock"&&!L.style.left)pace();
+    else cls("k-blink",150);}
+  setTimeout(idleLife,3000);
+
+  function sleep(){if(CAT.sleeping)return;CAT.sleeping=true;L.classList.add("k-sleep");}
+  function wake(){if(!CAT.sleeping)return;CAT.sleeping=false;L.classList.remove("k-sleep");cls("k-blink",150);}
+  addEventListener("scroll",wake,{passive:true});L.addEventListener("pointerenter",wake);
+
+  /* walk a few steps along the bottom of the screen and back */
+  function walkBy(dx,ms,done){var x0=parseFloat(L.style.translate)||0,t0=performance.now();L.classList.add("k-walking");L.classList.toggle("k-left",dx<0);
+    (function f(now){var k=Math.min(1,(now-t0)/ms);L.style.translate=(x0+dx*k)+"px 0";if(k<1)requestAnimationFrame(f);else{L.classList.remove("k-walking");if(done)done();}})(t0);}
+  function pace(){CAT.busy=true;walkBy(-70,1400,function(){setTimeout(function(){walkBy(70,1400,function(){L.classList.remove("k-left");L.style.translate="";CAT.busy=false;});},2600);});}
+
+  /* perching: hop up onto a photo or card that has clear space above it, without covering any text */
+  var PERCH=".ch-media .main,.gp-card,.numbers .num,.co picture,.press,.vid,.quiz .q-card,.board,.lb";
+  var TEXTY="p,h1,h2,h3,h4,a,button,li,figcaption,label,input,textarea,img,picture,svg,canvas,blockquote,b,em,span,time,.sb-panel";
+  function clearAt(x,y){var el=document.elementFromPoint(x,y);if(!el||L.contains(el))return true;return !el.closest(TEXTY);}
+  function findPerch(){var w=L.offsetWidth,h=L.offsetHeight,best=null;
+    [].forEach.call(document.querySelectorAll(PERCH),function(el){var r=el.getBoundingClientRect();if(r.width<140||r.top<h+90||r.top>innerHeight-60||r.right>innerWidth-4)return;
+      var x=r.right-w-14,ok=x>8;for(var yy=6;ok&&yy<=h;yy+=Math.max(10,h/5))for(var xx=x+6;ok&&xx<x+w-4;xx+=Math.max(12,w/3))ok=clearAt(xx,r.top-yy);
+      if(ok&&(!best||Math.abs(r.top-innerHeight*.45)<Math.abs(best.r.top-innerHeight*.45)))best={el:el,r:r,x:x,y:r.top-h+5};});return best;}
+  function hop(sx,sy,ex,ey,done){var t0=performance.now(),ms=720,hgt=90+Math.min(160,Math.abs(ex-sx)*.25);L.classList.toggle("k-left",ex<sx);L.classList.add("k-crouch");
+    setTimeout(function(){L.classList.remove("k-crouch");L.classList.add("k-air");meow("mrrp");
+      (function f(now){var k=Math.min(1,(now-t0-220)/ms);if(k<0)k=0;var e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+        L.style.left=(sx+(ex-sx)*e)+"px";L.style.top=(sy+(ey-sy)*e-Math.sin(Math.PI*k)*hgt)+"px";
+        if(k<1)requestAnimationFrame(f);else{L.classList.remove("k-air");cls("k-land",360);if(done)done();}})(t0+220);},220);}
+  function roam(){if(!free()||REDUCED||CAT.roams>=5||CAT.mode!=="dock"||L.style.left||!idle(6000)||CAT.sleeping)return;
+    var p=findPerch();if(!p)return;CAT.busy=true;CAT.roams++;var r=L.getBoundingClientRect();
+    L.style.right="auto";L.style.bottom="auto";L.style.left=r.left+"px";L.style.top=r.top+"px";document.documentElement.classList.add("sb-moved");
+    hop(r.left,r.top,p.x,p.y,function(){var rr=p.el.getBoundingClientRect();
+      L.classList.add("k-perch");L.style.left=(rr.right-L.offsetWidth-14+scrollX)+"px";L.style.top=(rr.top-L.offsetHeight+5+scrollY)+"px";
+      CAT.mode="perch";CAT.busy=false;L.classList.remove("k-left");
+      if(tag&&Math.random()<.6){tag.textContent=(lang==="bn"?["এখানে বসলাম। 😼","এই জায়গাটা আমার।"]:["Nice spot. 😼","I'm sitting here now.","This is my seat now."])[Math.floor(Math.random()*(lang==="bn"?2:3))];tag.classList.add("on");setTimeout(function(){tag.classList.remove("on");},2200);}});}
+  [45000,140000,240000,340000,440000].forEach(function(t){setTimeout(roam,t);});
+
+  /* when his perch scrolls away, he strolls back to his corner */
+  function comeHome(){if(CAT.mode!=="perch"||CAT.busy)return;CAT.busy=true;CAT.mode="walking";
+    L.classList.remove("k-perch");L.style.left=(innerWidth+20)+"px";L.style.top=(innerHeight-L.offsetHeight-18)+"px";L.style.right="auto";L.style.bottom="auto";
+    var target=innerWidth-L.offsetWidth-Math.max(16,0)-2,x=innerWidth+20,t0=performance.now();L.classList.add("k-walking","k-left");
+    (function f(now){var k=Math.min(1,(now-t0)/1500);L.style.left=(x+(target-x)*k)+"px";if(k<1)requestAnimationFrame(f);else{L.classList.remove("k-walking","k-left");
+      L.style.left=L.style.top=L.style.right=L.style.bottom="";document.documentElement.classList.remove("sb-moved");CAT.mode="dock";CAT.busy=false;cls("k-blink",150);}})(t0);}
+  addEventListener("scroll",function(){if(CAT.mode!=="perch")return;var r=L.getBoundingClientRect();if(r.bottom<70||r.top>innerHeight)comeHome();},{passive:true});
+  addEventListener("resize",function(){if(CAT.mode==="perch"){CAT.mode="dock";L.classList.remove("k-perch");L.style.left=L.style.top=L.style.right=L.style.bottom="";document.documentElement.classList.remove("sb-moved");}});
+  /* picking him up from a perch: switch to screen coordinates first */
+  L.addEventListener("pointerdown",function(){wake();if(CAT.mode==="perch"){var r=L.getBoundingClientRect();L.classList.remove("k-perch");L.style.left=r.left+"px";L.style.top=r.top+"px";CAT.mode="dock";}},true);
+
+  /* his eyes and head follow your cursor, and drift back to centre when you stop */
+  var lookRAF=0,lastLook=0;
+  addEventListener("pointermove",function(e){if(e.pointerType!=="mouse"||REDUCED)return;lastLook=Date.now();if(lookRAF)return;var cx=e.clientX,cy=e.clientY;
+    lookRAF=requestAnimationFrame(function(){lookRAF=0;var r=L.getBoundingClientRect();if(!r.width)return;var dx=cx-(r.left+r.width/2),dy=cy-(r.top+r.height*.35),f=Math.hypot(dx,dy)<700?1:.45;
+      if(L.classList.contains("k-left"))dx=-dx;
+      L.style.setProperty("--px",(Math.max(-1,Math.min(1,dx/180))*1.9*f).toFixed(2)+"px");L.style.setProperty("--py",(Math.max(-1,Math.min(1,dy/180))*1.4*f).toFixed(2)+"px");
+      L.style.setProperty("--hr",(Math.max(-1,Math.min(1,dx/420))*7*f).toFixed(1)+"deg");});},{passive:true});
+  setInterval(function(){if(Date.now()-lastLook>3500){L.style.setProperty("--px","0px");L.style.setProperty("--py","0px");L.style.setProperty("--hr","0deg");}},1500);
+})();
 
 /* A one-time nudge per visit, after the reader has had a look around */
 var NUDGES=["Reading for a while? I can play soft sea waves and birdsong. Just ask <b>Shinbo</b>. 🌊","Psst. I'm <b>Shinbo</b>. I know all of Rijve's secrets. Well, the public ones. Ask me anything.","Hi, I'm <b>Shinbo</b>, the real boss around here. 😎 Questions? I have answers. And attitude.","<b>Shinbo</b> here. I've been watching you scroll. Need help? I'm a cat, I'm great at help."];

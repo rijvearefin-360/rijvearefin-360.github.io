@@ -469,8 +469,68 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 .hero h1{animation-delay:.05s}.hero .lead{animation-delay:.12s}.hero .cta-row{animation-delay:.18s}.portrait{animation-delay:.1s}
 </style>
 <style>
+/* Part I / Part II shortcuts: numerals in the desktop nav, a compact pill in the bar on smaller screens */
+.parts{display:none;align-items:stretch;border:1px solid rgba(191,162,113,.45);margin-left:auto}
+.part{display:flex;align-items:center;gap:.45rem;padding:.55rem .75rem;text-decoration:none;color:var(--ink-soft);font:500 .64rem/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;transition:background .25s,color .25s}
+.part+.part{border-left:1px solid rgba(191,162,113,.45)}
+.part .pn{font:italic 400 1.05rem/1 var(--f-display);letter-spacing:0;text-transform:none;color:var(--gold)}
+.part:hover{color:var(--gold-ink)}
+.part.on{background:var(--gold);color:var(--on-gold)}.part.on .pn{color:var(--on-gold)}
+.nav .nav-h{display:inline-flex}
+.nav .nav-h a{font:italic 400 1.05rem/1 var(--f-display)!important;letter-spacing:0!important;text-transform:none!important;color:var(--gold)!important;padding:.4rem .1rem!important;border:0!important}
+.nav .nav-h a .nh-p,.nav .nav-h a .nh-t{display:none}
+.nav .nav-h a:hover{color:var(--gold-ink)!important}
+.nav .nav-h.on a{text-decoration:underline;text-underline-offset:5px}
+@media (max-width:1240px){
+  .parts{display:flex;margin-right:.6rem}
+  .nav .nav-h{display:block}
+  .nav .nav-h a{font:500 .66rem/1.4 var(--f-body)!important;letter-spacing:.26em!important;text-transform:uppercase!important;font-style:normal!important;padding:0!important;display:inline}
+  .nav .nav-h a .nh-p,.nav .nav-h a .nh-t{display:inline}
+  .nav .nav-h a i{font-style:normal}
+}
+@media (max-width:420px){.part .pl{display:none}.part{padding:.55rem .7rem}.parts{margin-right:.45rem}.top .wrap{gap:.5rem}.brand{white-space:nowrap}.menu-btn{white-space:nowrap;padding:.9rem 1rem;letter-spacing:.2em}}
+/* Phones: wide paired photos show whole, one per row, at their natural shape (no cropping) */
+@media (max-width:640px){
+  .ch-media .pair:not(.tall){grid-template-columns:1fr}
+  .ch-media .pair:not(.tall) .main{aspect-ratio:auto!important;height:auto}
+  .ch-media .pair:not(.tall) .main img{height:auto;object-position:50% 50%!important}
+}
+</style>
+<style>
+/* Watch & learn: 17 Goal-coloured tiles and one feature card, compact by design */
+.gp{display:grid;gap:1rem}
+.gp-tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(17,minmax(0,1fr));gap:4px}
+.gp-t{position:relative;display:grid;place-items:center;aspect-ratio:1;background:var(--c);color:#fff;text-decoration:none;opacity:.6;transition:opacity .25s,transform .25s}
+.gp-t b{font:700 clamp(.72rem,1.4vw,1rem)/1 var(--f-body)}
+.gp-t:hover,.gp-t:focus-visible{opacity:.85}
+.gp-t[aria-current="true"]{opacity:1;transform:translateY(-3px)}
+.gp-t[aria-current="true"]::after{content:"";position:absolute;left:50%;bottom:-9px;margin-left:-5px;border:5px solid transparent;border-top-color:var(--c)}
+.gp-card{display:grid;grid-template-columns:minmax(0,21rem) minmax(0,1fr);gap:1.5rem;align-items:center;padding:1.1rem;background:var(--bg);border:1px solid var(--line);border-top:3px solid var(--c);transition:border-color .3s}
+.gp-thumb{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;background:var(--bg-3);max-width:100%}
+.gp-thumb img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) brightness(.85);transition:filter .3s,transform .5s}
+.gp-thumb:hover img{filter:none;transform:scale(1.04)}
+.gp-body{min-width:0}
+.gp-body.swap{animation:gpIn .4s ease both}
+@keyframes gpIn{from{opacity:0;transform:translateY(6px)}}
+.gp-goal{display:flex;align-items:center;gap:.55rem;margin:0;font:500 .64rem/1.3 var(--f-body);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint)}
+.gp-goal em{font-style:normal;display:grid;place-items:center;min-width:1.5rem;height:1.5rem;padding:0 .25rem;background:var(--c);color:#fff;font:700 .72rem/1 var(--f-body);letter-spacing:0}
+.gp-title{font:400 clamp(1.3rem,2.4vw,1.75rem)/1.15 var(--f-display);margin:.55rem 0 .35rem;color:var(--ink)}
+.gp-who{margin:0;font:500 .66rem/1.4 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
+.gp-why{margin:.6rem 0 0;font:300 1rem/1.55 var(--f-body);color:var(--ink-soft)}
+.gp-act{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1rem}
+.gp-watch{background:var(--gold);color:var(--on-gold);text-decoration:none;font:500 .74rem/1 var(--f-body);letter-spacing:.18em;text-transform:uppercase;padding:.85rem 1.1rem}
+.gp-watch:hover{background:var(--gold-ink)}
+.gp-btn{background:none;border:1px solid var(--line);color:var(--ink-soft);font:500 .82rem/1 var(--f-body);padding:.75rem .9rem;cursor:pointer;transition:border-color .2s,color .2s}
+.gp-btn:hover{border-color:var(--gold);color:var(--gold)}
+@media (max-width:760px){
+  .gp-tiles{grid-template-columns:repeat(9,minmax(0,1fr))}
+  .gp-card{grid-template-columns:1fr;gap:1rem;padding:.9rem}
+  .gp-rand{flex:1}
+}
+</style>
+<style>
 /* Shinbo: the site's chat sidekick. Same charcoal, gold and type as the rest of the page. */
-.snd-btn{bottom:calc(16px + 5.3rem + env(safe-area-inset-bottom,0px))}
+.snd-btn,.snd-pop{display:none!important}
 /* Launcher: Shinbo's photo with twitching cat ears, a slowly turning ring in the 17 Goal colours, a waving paw and a speech bubble */
 .sb-launch{position:fixed;z-index:44;right:calc(max(16px,env(safe-area-inset-right,0px)) + 2px);bottom:calc(18px + env(safe-area-inset-bottom,0px));width:4.1rem;height:4.1rem;border:0;padding:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:sbFloat 7s ease-in-out infinite;transition:opacity .4s,translate .5s}
 .sb-launch:focus-visible{outline:none}.sb-launch:focus-visible .sb-face{outline:2px solid var(--gold);outline-offset:4px}
@@ -495,6 +555,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 .sb-ear.l{animation:sbTwitchL 14s ease-in-out 2s infinite}.sb-ear.r{animation:sbTwitchR 17s ease-in-out 6s infinite}
 .sb-paw{position:absolute;left:-.55rem;bottom:-.1rem;width:1.55rem;height:1.55rem;z-index:3;transform-origin:70% 90%;animation:sbWave 24s ease-in-out 3s infinite;filter:drop-shadow(0 3px 5px rgba(0,0,0,.45))}
 .sb-dot{position:absolute;right:.15rem;bottom:.2rem;width:.8rem;height:.8rem;border-radius:50%;background:#56C02B;border:2px solid var(--bg);z-index:3}
+.nature-on .sb-launch::before{content:"🌊";position:absolute;left:-.35rem;top:-.25rem;z-index:5;font-size:.95rem;line-height:1;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5));animation:sbFloat 3s ease-in-out infinite}
 .sb-dot::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid #56C02B;animation:sbPing 2.4s ease-out 3}
 .sb-tag{position:absolute;right:3.3rem;top:-1.1rem;z-index:4;white-space:nowrap;background:var(--gold);color:var(--on-gold);font:600 .78rem/1 var(--f-body);letter-spacing:.01em;padding:.42rem .62rem;border-radius:999px 999px 4px 999px;box-shadow:0 8px 20px rgba(0,0,0,.4);opacity:0;transform:translateY(6px) scale(.8);transform-origin:100% 100%;transition:opacity .3s,transform .35s cubic-bezier(.2,1.4,.4,1);pointer-events:none}
 .sb-tag.on{opacity:1;transform:none}
@@ -615,15 +676,19 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#home">Rijve <em>Arefin</em></a>
+    <div class="parts" aria-label="Jump to a part">
+      <a class="part" href="#story" data-part="1" aria-label="Part I: My story"><span class="pn">I</span><span class="pl">My story</span></a>
+      <a class="part" href="#your-turn" data-part="2" aria-label="Part II: Your turn"><span class="pn">II</span><span class="pl">Your turn</span></a>
+    </div>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu">Dive in</button>
     <nav class="nav" id="nav" aria-label="Sections">
-      <span class="nav-h" aria-hidden="true">Part I · My story</span>
+      <span class="nav-h"><a href="#story" aria-label="Part I: My story"><span class="nh-p">Part </span><i>I</i><span class="nh-t"> · My story</span></a></span>
       <a href="#story">Story</a>
       <a href="#work">Work</a>
       <a href="#speaking">Speaking</a>
       <a href="#gallery">Gallery</a>
       <a href="#press">Press</a>
-      <span class="nav-h" aria-hidden="true">Part II · Your turn</span>
+      <span class="nav-h"><a href="#your-turn" aria-label="Part II: Your turn"><span class="nh-p">Part </span><i>II</i><span class="nh-t"> · Your turn</span></a></span>
       <a href="#learn">Learn</a>
       <a href="#quiz">Quiz</a>
       <a href="#play">Play</a>
@@ -1008,50 +1073,21 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
   <div class="wrap">
     <div class="sec-head">
       <p class="label gold">Resources · Watch &amp; learn</p>
-      <h2>Ten talks to <em class="g">start</em> with</h2>
-      <p>For young people who want to change something. Pick one tonight, then start where you are.</p>
+      <h2>Seventeen talks, <em class="g">one</em> for every Goal</h2>
+      <p>Tap a colour, press play, then start where you are. New to the Goals? <a class="tl" href="https://www.youtube.com/watch?v=RpqVmvMCmp0" target="_blank" rel="noopener">Watch the three-minute intro ↗</a></p>
     </div>
-    <div class="vids">
-      <a class="vid" href="https://www.youtube.com/watch?v=RpqVmvMCmp0" target="_blank" rel="noopener">
-        <span class="vt"><img src="https://i.ytimg.com/vi/RpqVmvMCmp0/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">3 min</span></span>
-        <span class="vb"><span class="vn">01</span><b>We the People for The Global Goals</b><span class="vw">The Global Goals</span><span class="vy">The 17 Goals in three minutes, read by people from all over the world. Start here.</span><span class="vg all"><em></em>All 17 Goals</span></span>
-      </a>
-      <a class="vid" href="https://www.youtube.com/watch?v=c2DHzlkUI6s" target="_blank" rel="noopener">
-        <span class="vt"><img src="https://i.ytimg.com/vi/c2DHzlkUI6s/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">28 min</span></span>
-        <span class="vb"><span class="vn">02</span><b>Nobel Peace Prize Lecture</b><span class="vw">Malala Yousafzai · Nobel Prize</span><span class="vy">Why one girl's voice for education can move the world.</span><span class="vg" style="--g:#C5192D"><em>4</em>Quality Education</span></span>
-      </a>
-      <a class="vid" href="https://www.youtube.com/watch?v=hg3umXU_qWc" target="_blank" rel="noopener">
-        <span class="vt"><img src="https://i.ytimg.com/vi/hg3umXU_qWc/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">30 min</span></span>
-        <span class="vb"><span class="vn">03</span><b>We should all be feminists</b><span class="vw">Chimamanda Ngozi Adichie · TEDxEuston</span><span class="vy">A warm, funny case for gender equality that everyone should hear.</span><span class="vg" style="--g:#FF3A21"><em>5</em>Gender Equality</span></span>
-      </a>
-      <a class="vid" href="https://www.youtube.com/watch?v=ZmSF9gVz9pg" target="_blank" rel="noopener">
-        <span class="vt"><img src="https://i.ytimg.com/vi/ZmSF9gVz9pg/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">14 min</span></span>
-        <span class="vb"><span class="vn">04</span><b>Let's talk crap. Seriously.</b><span class="vw">Rose George · TED</span><span class="vy">The sanitation crisis nobody talks about, and why it matters.</span><span class="vg" style="--g:#26BDE2"><em>6</em>Clean Water</span></span>
-      </a>
-      <a class="vid" href="https://www.youtube.com/watch?v=ROW9F-c0kIQ" target="_blank" rel="noopener">
-        <span class="vt"><img src="https://i.ytimg.com/vi/ROW9F-c0kIQ/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">11 min</span></span>
-        <span class="vb"><span class="vn">05</span><b>How the oceans can clean themselves</b><span class="vw">Boyan Slat · TEDxDelft</span><span class="vy">An 18-year-old's idea to clean ocean plastic. Proof that age is no barrier.</span><span class="vg" style="--g:#0A97D9"><em>14</em>Life Below Water</span></span>
-      </a>
-      <a class="vid" href="https://www.youtube.com/watch?v=8YHtLGI172k" target="_blank" rel="noopener">
-        <span class="vt"><img src="https://i.ytimg.com/vi/8YHtLGI172k/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">60 min</span></span>
-        <span class="vb"><span class="vn">06</span><b>A World of Three Zeros</b><span class="vw">Muhammad Yunus · Talks at Google</span><span class="vy">Bangladesh's Nobel laureate on social business and ending poverty.</span><span class="vg" style="--g:#E5243B"><em>1</em>No Poverty</span></span>
-      </a>
-      <a class="vid" href="https://www.youtube.com/watch?v=hVimVzgtD6w" target="_blank" rel="noopener">
-        <span class="vt"><img src="https://i.ytimg.com/vi/hVimVzgtD6w/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">21 min</span></span>
-        <span class="vb"><span class="vn">07</span><b>The best stats you've ever seen</b><span class="vw">Hans Rosling · TED</span><span class="vy">Data that will change how you see the world and the people in it.</span><span class="vg" style="--g:#DD1367"><em>10</em>Reduced Inequalities</span></span>
-      </a>
-      <a class="vid" href="https://www.youtube.com/watch?v=chXsLtHqfdM" target="_blank" rel="noopener">
-        <span class="vt"><img src="https://i.ytimg.com/vi/chXsLtHqfdM/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">17 min</span></span>
-        <span class="vb"><span class="vn">08</span><b>Want to help someone? Shut up and listen!</b><span class="vw">Ernesto Sirolli · TED</span><span class="vy">The first lesson of development work: listen before you act.</span><span class="vg" style="--g:#19486A"><em>17</em>Partnerships</span></span>
-      </a>
-      <a class="vid" href="https://www.youtube.com/watch?v=H14bBuluwB8" target="_blank" rel="noopener">
-        <span class="vt"><img src="https://i.ytimg.com/vi/H14bBuluwB8/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">6 min</span></span>
-        <span class="vb"><span class="vn">09</span><b>Grit: the power of passion and perseverance</b><span class="vw">Angela Lee Duckworth · TED</span><span class="vy">Why passion and perseverance matter more than talent.</span><span class="vg mind"><em>✦</em>Mindset</span></span>
-      </a>
-      <a class="vid" href="https://www.youtube.com/watch?v=iCvmsMzlF7o" target="_blank" rel="noopener">
-        <span class="vt"><img src="https://i.ytimg.com/vi/iCvmsMzlF7o/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp" aria-hidden="true">▶</span><span class="vd">21 min</span></span>
-        <span class="vb"><span class="vn">10</span><b>The power of vulnerability</b><span class="vw">Brené Brown · TED</span><span class="vy">Why courage starts with being honest about who you are.</span><span class="vg" style="--g:#4C9F38"><em>3</em>Good Health</span></span>
-      </a>
+    <div class="gp" id="gp" style="--c:#E5243B">
+      <ol class="gp-tiles" aria-label="Pick a Goal"><li><a class="gp-t" href="https://www.youtube.com/watch?v=8YHtLGI172k" target="_blank" rel="noopener" data-i="0" style="--c:#E5243B" aria-label="Goal 1, No Poverty: A World of Three Zeros" aria-current="true"><b>1</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=CdxVbUja_pY" target="_blank" rel="noopener" data-i="1" style="--c:#DDA63A" aria-label="Goal 2, Zero Hunger: Ending hunger now"><b>2</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=iCvmsMzlF7o" target="_blank" rel="noopener" data-i="2" style="--c:#4C9F38" aria-label="Goal 3, Good Health and Well-being: The power of vulnerability"><b>3</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=c2DHzlkUI6s" target="_blank" rel="noopener" data-i="3" style="--c:#C5192D" aria-label="Goal 4, Quality Education: Nobel Peace Prize Lecture"><b>4</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=hg3umXU_qWc" target="_blank" rel="noopener" data-i="4" style="--c:#FF3A21" aria-label="Goal 5, Gender Equality: We should all be feminists"><b>5</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=ZmSF9gVz9pg" target="_blank" rel="noopener" data-i="5" style="--c:#26BDE2" aria-label="Goal 6, Clean Water and Sanitation: Let&#x27;s talk crap. Seriously."><b>6</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=6qqqVwM6bMM" target="_blank" rel="noopener" data-i="6" style="--c:#FCC30B" aria-label="Goal 7, Affordable and Clean Energy: Learning from a barefoot movement"><b>7</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=HI7zfpitZpo" target="_blank" rel="noopener" data-i="7" style="--c:#A21942" aria-label="Goal 8, Decent Work and Economic Growth: How to make peace? Get angry"><b>8</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=crjU5hu2fag" target="_blank" rel="noopener" data-i="8" style="--c:#FD6925" aria-label="Goal 9, Industry, Innovation and Infrastructure: How I harnessed the wind"><b>9</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=hVimVzgtD6w" target="_blank" rel="noopener" data-i="9" style="--c:#DD1367" aria-label="Goal 10, Reduced Inequalities: The best stats you&#x27;ve ever seen"><b>10</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=j3YjeARuilI" target="_blank" rel="noopener" data-i="10" style="--c:#FD9D24" aria-label="Goal 11, Sustainable Cities and Communities: Why buses represent democracy in action"><b>11</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=cWC_zDdF74s" target="_blank" rel="noopener" data-i="11" style="--c:#BF8B2E" aria-label="Goal 12, Responsible Consumption and Production: The global food waste scandal"><b>12</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=H2QxFM9y0tY" target="_blank" rel="noopener" data-i="12" style="--c:#3F7E44" aria-label="Goal 13, Climate Action: The disarming case to act right now on climate change"><b>13</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=ROW9F-c0kIQ" target="_blank" rel="noopener" data-i="13" style="--c:#0A97D9" aria-label="Goal 14, Life Below Water: How the oceans can clean themselves"><b>14</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=dXWikNXiG2Q" target="_blank" rel="noopener" data-i="14" style="--c:#56C02B" aria-label="Goal 15, Life on Land: How to restore a rainforest"><b>15</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=c2tOp7OxyQ8" target="_blank" rel="noopener" data-i="15" style="--c:#00689D" aria-label="Goal 16, Peace, Justice and Strong Institutions: We need to talk about an injustice"><b>16</b></a></li><li><a class="gp-t" href="https://www.youtube.com/watch?v=chXsLtHqfdM" target="_blank" rel="noopener" data-i="16" style="--c:#19486A" aria-label="Goal 17, Partnerships for the Goals: Want to help someone? Shut up and listen!"><b>17</b></a></li></ol>
+      <article class="gp-card" id="gpCard" aria-live="polite">
+        <a class="gp-thumb" id="gpThumb" href="https://www.youtube.com/watch?v=8YHtLGI172k" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img id="gpImg" src="https://i.ytimg.com/vi/8YHtLGI172k/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vp">▶</span><span class="vd" id="gpDur">60 min</span></a>
+        <div class="gp-body">
+          <p class="gp-goal"><em id="gpNum">1</em><span id="gpName">No Poverty</span></p>
+          <h3 class="gp-title" id="gpTitle">A World of Three Zeros</h3>
+          <p class="gp-who" id="gpWho">Muhammad Yunus · Talks at Google</p>
+          <p class="gp-why" id="gpWhy">Bangladesh&#x27;s Nobel laureate on social business and a world with zero poverty.</p>
+          <div class="gp-act"><a class="gp-watch" id="gpWatch" href="https://www.youtube.com/watch?v=8YHtLGI172k" target="_blank" rel="noopener">Watch on YouTube ↗</a><button type="button" class="gp-btn" data-d="-1" aria-label="Previous Goal">←</button><button type="button" class="gp-btn" data-d="1" aria-label="Next Goal">→</button><button type="button" class="gp-btn gp-rand" id="gpRand">Surprise me</button></div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -1544,14 +1580,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
     on=true;fade(.7,5);clearTimeout(birdT);birdT=setTimeout(bird,4000+Math.random()*4000);clearTimeout(waveT.timer);waveT.forEach(function(L){L.next=Math.max(L.next,ctx.currentTime+.3);});scheduleWaves();ui();store("rtg-sound","on");
   }
   function stop(){if(!ctx)return;on=false;clearTimeout(birdT);clearTimeout(waveT.timer);fade(0,1.2);setTimeout(function(){if(!on&&ctx)ctx.suspend();},1400);ui();store("rtg-sound","off");}
-  function ui(){btn.hidden=false;btn.innerHTML=on?ICON_ON:ICON_OFF;btn.setAttribute("aria-pressed",on?"true":"false");btn.setAttribute("aria-label",on?"Turn nature sounds off":"Play nature sounds");}
+  function ui(){btn.hidden=true;document.documentElement.classList.toggle("nature-on",on);btn.innerHTML=on?ICON_ON:ICON_OFF;btn.setAttribute("aria-pressed",on?"true":"false");btn.setAttribute("aria-label",on?"Turn nature sounds off":"Play nature sounds");}
   yes.addEventListener("click",function(){pop.hidden=true;start();});
   no.addEventListener("click",function(){pop.hidden=true;store("rtg-sound","off");ui();});
   btn.addEventListener("click",function(){on?stop():start();});
   document.addEventListener("visibilitychange",function(){if(!ctx||!on)return;if(document.hidden)ctx.suspend();else ctx.resume();});
-  var pref=read("rtg-sound");
-  if(pref){ui();}
-  else{var shown=false;function maybe(){if(shown)return;if(window.scrollY>window.innerHeight*0.9){shown=true;window.removeEventListener("scroll",maybe);setTimeout(function(){pop.hidden=false;},600);}}window.addEventListener("scroll",maybe,{passive:true});}
+  /* The pop-up and floating button are retired: Shinbo offers the sounds in the chat instead. */
+  window.__nature={start:start,stop:stop,isOn:function(){return on;}};
   document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){pop.hidden=true;}});
 })();
 </script>
@@ -2227,8 +2262,8 @@ var PLACES=[["home",/\b(home|top|beginning)\b|শুরুতে|উপরে/,"
  ["play",/\b(game|play)\b|গেম|খেলা/,"the game","গেমে"],["ask",/\b(ask rijve|ask form|question form)\b/,"Ask Rijve","Ask Rijve-এ"],["contact",/\b(contact|email him|socials|pets)\b|যোগাযোগ/,"the contact section","যোগাযোগের অংশে"]];
 var GO=/^(please |pls |can you |could you )?(go to|take me to|bring me to|show me|show|open|scroll to|navigate to|jump to|start the|let me see|i want to see)\b|(নিয়ে যাও|নিয়ে চলো|দেখাও|খোলো|খুলে দাও)/;
 function goTo(id){var el=document.getElementById(id);if(!el)return;if(mq.matches)close();setTimeout(function(){el.scrollIntoView({behavior:"smooth",block:"start"});if(id==="play"){var cv=document.getElementById("gc");if(cv)setTimeout(function(){cv.focus({preventScroll:true});},700);}},mq.matches?120:0);}
-function soundOn(on){var b=document.getElementById("sndBtn"),y=document.getElementById("sndYes"),pressed=b&&b.getAttribute("aria-pressed")==="true";
-  if(on&&!pressed){if(b&&!b.hidden)b.click();else if(y)y.click();}else if(!on&&pressed)b.click();}
+function soundOn(on){var n=window.__nature;if(!n)return;if(on&&!n.isOn())n.start();else if(!on&&n.isOn())n.stop();}
+function natureChip(bn){var on=window.__nature&&window.__nature.isOn();return bn?(on?"প্রকৃতির শব্দ বন্ধ":"🌊 প্রকৃতির শব্দ"):(on?"Stop nature sounds":"🌊 Nature sounds while I read");}
 function cmdReq(q,peek){var t=norm(q).trim(),bn=lang==="bn",r=null;
   if(/^(stop|stop talking|be quiet|quiet|shush|shut up|mute|silence|চুপ|থামো|চুপ করো)$/.test(t)||/\b(stop talking|stop reading|voice off|turn off (the )?voice)\b/.test(t))
     r={html:bn?"<p>ঠিক আছে, চুপ করলাম। 🤐 আবার শুনতে চাইলে স্পিকার বোতাম চাপো।</p>":"<p>Zipping it. 🤐 Tap the speaker button if you want my lovely voice back.</p>",after:function(){setTalk(false);}};
@@ -2238,8 +2273,8 @@ function cmdReq(q,peek){var t=norm(q).trim(),bn=lang==="bn",r=null;
     r={html:"<p>Switching to English! What would you like to know?</p>",c:["Who is Rijve?","Tell me a joke"],after:function(){setLang("en",true);}};
   else if(/\b(talk to me|read (it )?aloud|voice on|turn on (the )?voice|speak to me|say it)\b|কথা বলো|পড়ে শোনাও/.test(t)&&t.split(" ").length<=5)
     r={html:bn?"<p>ঠিক আছে, এখন থেকে উত্তর পড়ে শোনাব। 🎙️</p>":"<p>Voice on! 🎙️ I'll read my replies out loud. Try not to swoon.</p>",after:function(){if(voiceBtn&&!voiceBtn.hidden)setTalk(true);}};
-  else if(/\b(nature sounds?|sea sounds?|waves|birds|background (music|sound)|ambient)\b|প্রকৃতির শব্দ/.test(t)){var off=/\b(off|stop|mute|turn off|pause|disable)\b|বন্ধ/.test(t);
-    r={html:off?(bn?"<p>প্রকৃতির শব্দ বন্ধ। 🔇</p>":"<p>Nature sounds off. 🔇 Back to blissful silence.</p>"):(bn?"<p>ঢেউ আর পাখির ডাক চালু করলাম। 🌊🐦</p>":"<p>Cue the sea waves and birdsong. 🌊🐦 Very relaxing. I may nap.</p>"),after:function(){soundOn(!off);}};}
+  else if(/\b(nature sounds?|sea sounds?|waves|birds|background (music|sound)|ambient|relaxing sounds?|reading music|music while (i )?read(ing)?)\b|প্রকৃতির শব্দ/.test(t)){var off=/\b(off|stop|mute|turn off|pause|disable|no more)\b|বন্ধ/.test(t);
+    r={html:off?(bn?"<p>প্রকৃতির শব্দ বন্ধ। 🔇</p>":"<p>Nature sounds off. 🔇 Back to blissful silence.</p>"):(bn?"<p>ঢেউ আর পাখির ডাক চালু করলাম। 🌊🐦</p>":"<p>Cue the sea waves and birdsong. 🌊🐦 Very relaxing. I may nap.</p>"),after:function(){soundOn(!off);setTimeout(function(){setChips([natureChip(bn),bn?"Rijve কে?":"Who is Rijve?",bn?"একটা জোকস বলো":"Tell me a joke"]);},300);}};}
   else if(/\b(therapist|therapy mode|calm mode|gentle mode)\b|থেরাপিস্ট/.test(t)&&/\b(mode|cat|switch|be|turn|on)\b|মোড/.test(t))
     r={html:"",after:function(){setMode("therapist");}};
   else if(/\b(unhinged|chaos|chaotic|nonchalant|crazy mode|wild mode)\b|পাগলাটে/.test(t))
@@ -2565,10 +2600,10 @@ if(SR){
 
 function greet(){
   if(mode!=="classic"){add(MODE[mode].greet[lang==="bn"?"bn":"en"],"bot");setChips(MODE[mode].chips[lang==="bn"?"bn":"en"]);return;}
-  if(lang==="bn"){add("<p>"+act("হার্ট সানগ্লাস নামিয়ে")+"আসসালামু আলাইকুম! আমি <b>শিনবো</b>: Rijve-এর বিড়াল, এই সাইটের চিফ এক্সিকিউটিভ ক্যাট, আর পার্ট-টাইম এআই সহকারী। 😎</p><p>Rijve-এর গল্প, Awareness 360, ওনার শখ, বা নিজের প্রজেক্ট শুরু করার টিপস, যা খুশি জিজ্ঞেস করো। লিখে বা 🎙️ চেপে বলে।</p>","bot");setChips(BN_CHIPS);return;}
+  if(lang==="bn"){add("<p>"+act("হার্ট সানগ্লাস নামিয়ে")+"আসসালামু আলাইকুম! আমি <b>শিনবো</b>: Rijve-এর বিড়াল, এই সাইটের চিফ এক্সিকিউটিভ ক্যাট, আর পার্ট-টাইম এআই সহকারী। 😎</p><p>Rijve-এর গল্প, Awareness 360, ওনার শখ, বা নিজের প্রজেক্ট শুরু করার টিপস, যা খুশি জিজ্ঞেস করো। লিখে বা 🎙️ চেপে বলে।</p>","bot");setChips(["Rijve কে?",natureChip(true),"একটা জোকস বলো"]);return;}
   var h=new Date().getHours(),hi=h<5?"Up late? Me too. Cats are nocturnal, what's your excuse?":h<12?"Good morning! I've already had two naps.":h<17?"Good afternoon! You caught me between naps.":"Good evening! Prime zoomies hour.";
-  add("<p>"+act("lowers heart sunglasses")+hi+"</p><p>I'm <b>Shinbo</b>: Rijve's cat, Chief Executive Cat of this website, and part-time AI sidekick. Ask me about his journey, Awareness 360, his hobbies, or how to start your own project. I also do jokes. Unpaid.</p>","bot");
-  setChips(["Who is Rijve?","Who are you?","Tell me a joke"]);
+  add("<p>"+act("lowers heart sunglasses")+hi+"</p><p>I'm <b>Shinbo</b>: Rijve's cat, Chief Executive Cat of this website, and part-time AI sidekick. Ask me about his journey, Awareness 360, his hobbies, or how to start your own project. I also do jokes. Unpaid.</p><p class=\"sb-ps\">Reading for a while? I can play soft sea waves and birdsong in the background. 🌊</p>","bot");
+  setChips(["Who is Rijve?",natureChip(false),"Tell me a joke"]);
 }
 var mq=window.matchMedia("(max-width:560px)");
 function open(){P.hidden=false;if(sub)sub.textContent=SUBS[Math.floor(Math.random()*SUBS.length)];document.documentElement.classList.add("sb-open");if(mq.matches)document.documentElement.classList.add("sb-lock");L.setAttribute("aria-expanded","true");hideNudge(true);if(!started){started=true;greet();}setTimeout(function(){inp.focus({preventScroll:true});},60);}
@@ -2596,7 +2631,7 @@ var PSST={en:["Pssst… do you need me? 👀 You can use me, I'm fun. I promise.
           bn:["পিস্‌স্‌… আমাকে লাগবে? 👀 আমি কিন্তু খুব মজার, কথা দিচ্ছি।","আচ্ছা, শেষবার, সত্যি। 😼 জোকস, কফির টিপস আর Rijve-এর পুরো গল্প, সব আমার জানা। আমি কোণায় আছি।"]};
 var NOPE={en:"Fine. 😾 I'll be napping in the corner if you change your mind.",bn:"ঠিক আছে। 😾 মন বদলালে আমি কোণায় ঘুমাচ্ছি।"};
 function setSneaks(){try{sessionStorage.setItem("sb-sneaks",String(sneaks));}catch(_){}}
-function busyScreen(){var sp=document.getElementById("sndPop");return(sp&&!sp.hidden)||document.querySelector(".party:not([hidden])")||document.documentElement.classList.contains("menu-open");}
+function busyScreen(){return document.querySelector(".party:not([hidden])")||document.documentElement.classList.contains("menu-open");}
 function hideShinbo(){gone=true;document.documentElement.classList.add("sb-gone");nudge.hidden=true;if(tag)tag.classList.remove("on");try{sessionStorage.setItem("sb-gone","1");}catch(_){}plan();}
 function plan(){clearTimeout(sTimer);if(!gone)return;if(sneaks>=PSST.en.length){tabBtn.hidden=false;return;}sTimer=setTimeout(sneakIn,[120000,360000][sneaks]||360000);}
 function sneakIn(){if(!gone)return;if(busyScreen()||!idle(6000)){sTimer=setTimeout(sneakIn,4000);return;}
@@ -2614,12 +2649,37 @@ var wasGone=false;try{wasGone=sessionStorage.getItem("sb-gone")==="1";}catch(_){
 if(wasGone){gone=true;document.documentElement.classList.add("sb-gone");plan();}
 
 /* A one-time nudge per visit, after the reader has had a look around */
-var NUDGES=["Psst. I'm <b>Shinbo</b>. I know all of Rijve's secrets. Well, the public ones. Ask me anything.","Hi, I'm <b>Shinbo</b>, the real boss around here. 😎 Questions? I have answers. And attitude.","<b>Shinbo</b> here. I've been watching you scroll. Need help? I'm a cat, I'm great at help."];
+var NUDGES=["Reading for a while? I can play soft sea waves and birdsong. Just ask <b>Shinbo</b>. 🌊","Psst. I'm <b>Shinbo</b>. I know all of Rijve's secrets. Well, the public ones. Ask me anything.","Hi, I'm <b>Shinbo</b>, the real boss around here. 😎 Questions? I have answers. And attitude.","<b>Shinbo</b> here. I've been watching you scroll. Need help? I'm a cat, I'm great at help."];
 function hideNudge(forever){nudge.hidden=true;if(forever){try{sessionStorage.setItem("sb-nudged","1");}catch(_){}}}
 nudge.addEventListener("click",function(e){if(e.target.closest("button")){hideNudge(true);}else open();});
 var seen=false;try{seen=sessionStorage.getItem("sb-nudged")==="1";}catch(_){}
 if(!seen)setTimeout(function(){whenIdle(function(){var sp=document.getElementById("sndPop");if(!gone&&P.hidden&&!(sp&&!sp.hidden)&&!document.querySelector(".party:not([hidden])")){nudge.querySelector("span").innerHTML=NUDGES[Math.floor(Math.random()*NUDGES.length)];nudge.hidden=false;}setTimeout(function(){hideNudge(false);},10000);},5000);},30000);
 })();
+</script>
+<script>
+/* Watch & learn picker */
+(function(){var gp=document.getElementById("gp");if(!gp)return;
+var V=[[1, "#E5243B", "No Poverty", "8YHtLGI172k", "A World of Three Zeros", "Muhammad Yunus · Talks at Google", 60, "Bangladesh's Nobel laureate on social business and a world with zero poverty."], [2, "#DDA63A", "Zero Hunger", "CdxVbUja_pY", "Ending hunger now", "Josette Sheeran · TED", 19, "The former head of the World Food Programme on how we can end hunger in our lifetime."], [3, "#4C9F38", "Good Health and Well-being", "iCvmsMzlF7o", "The power of vulnerability", "Brené Brown · TED", 21, "Why courage and connection start with being honest about who you are."], [4, "#C5192D", "Quality Education", "c2DHzlkUI6s", "Nobel Peace Prize Lecture", "Malala Yousafzai · Nobel Prize", 28, "Why one girl's voice for education can move the world."], [5, "#FF3A21", "Gender Equality", "hg3umXU_qWc", "We should all be feminists", "Chimamanda Ngozi Adichie · TEDxEuston", 30, "A warm, funny case for gender equality that everyone should hear."], [6, "#26BDE2", "Clean Water and Sanitation", "ZmSF9gVz9pg", "Let's talk crap. Seriously.", "Rose George · TED", 14, "The sanitation crisis nobody talks about, and why it matters."], [7, "#FCC30B", "Affordable and Clean Energy", "6qqqVwM6bMM", "Learning from a barefoot movement", "Bunker Roy · TED", 19, "Rural grandmothers trained as solar engineers, lighting up their own villages."], [8, "#A21942", "Decent Work and Economic Growth", "HI7zfpitZpo", "How to make peace? Get angry", "Kailash Satyarthi · TED", 19, "A Nobel laureate who freed children from forced labour, on turning anger into action."], [9, "#FD6925", "Industry, Innovation and Infrastructure", "crjU5hu2fag", "How I harnessed the wind", "William Kamkwamba · TED", 6, "A teenager in Malawi built a windmill from scrap to power his family's home."], [10, "#DD1367", "Reduced Inequalities", "hVimVzgtD6w", "The best stats you've ever seen", "Hans Rosling · TED", 21, "Data that will change how you see the world and the people in it."], [11, "#FD9D24", "Sustainable Cities and Communities", "j3YjeARuilI", "Why buses represent democracy in action", "Enrique Peñalosa · TED", 14, "A former mayor of Bogotá on building cities for people, not cars."], [12, "#BF8B2E", "Responsible Consumption and Production", "cWC_zDdF74s", "The global food waste scandal", "Tristram Stuart · TED", 14, "The staggering scale of food waste, and how ordinary people can stop it."], [13, "#3F7E44", "Climate Action", "H2QxFM9y0tY", "The disarming case to act right now on climate change", "Greta Thunberg · TEDxStockholm", 11, "A teenager's clear-eyed case for acting on climate now, not later."], [14, "#0A97D9", "Life Below Water", "ROW9F-c0kIQ", "How the oceans can clean themselves", "Boyan Slat · TEDxDelft", 11, "An 18-year-old's idea to clean ocean plastic. Proof that age is no barrier."], [15, "#56C02B", "Life on Land", "dXWikNXiG2Q", "How to restore a rainforest", "Willie Smits · TED", 21, "How a scientist and a community brought a rainforest in Borneo back to life."], [16, "#00689D", "Peace, Justice and Strong Institutions", "c2tOp7OxyQ8", "We need to talk about an injustice", "Bryan Stevenson · TED", 24, "A lawyer's powerful call to confront injustice in the justice system."], [17, "#19486A", "Partnerships for the Goals", "chXsLtHqfdM", "Want to help someone? Shut up and listen!", "Ernesto Sirolli · TED", 17, "The first lesson of development work: listen before you act."]];
+var tiles=[].slice.call(gp.querySelectorAll(".gp-t")),cur=0,$=function(id){return document.getElementById(id);};
+function show(i,focus){cur=(i+V.length)%V.length;var v=V[cur],url="https://www.youtube.com/watch?v="+v[3];
+  gp.style.setProperty("--c",v[1]);$("gpImg").src="https://i.ytimg.com/vi/"+v[3]+"/hqdefault.jpg";$("gpThumb").href=url;$("gpWatch").href=url;
+  $("gpDur").textContent=v[6]+" min";$("gpNum").textContent=v[0];$("gpName").textContent=v[2];$("gpTitle").textContent=v[4];$("gpWho").textContent=v[5];$("gpWhy").textContent=v[7];
+  var b=gp.querySelector(".gp-body");b.classList.remove("swap");void b.offsetWidth;b.classList.add("swap");
+  tiles.forEach(function(t,k){if(k===cur)t.setAttribute("aria-current","true");else t.removeAttribute("aria-current");});if(focus)tiles[cur].focus();}
+tiles.forEach(function(t,k){t.addEventListener("click",function(e){e.preventDefault();show(k);});
+  t.addEventListener("keydown",function(e){if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();show(cur+(e.key==="ArrowRight"?1:-1),true);}});
+  t.addEventListener("pointerenter",function(){var im=new Image();im.src="https://i.ytimg.com/vi/"+V[k][3]+"/hqdefault.jpg";},{once:true});});
+[].forEach.call(gp.querySelectorAll(".gp-btn[data-d]"),function(b){b.addEventListener("click",function(){show(cur+(+b.getAttribute("data-d")));});});
+$("gpRand").addEventListener("click",function(){var n;do{n=Math.floor(Math.random()*V.length);}while(n===cur);show(n);});
+})();
+</script>
+<script>
+/* Highlight which part the reader is in */
+(function(){var p2=document.getElementById("your-turn"),parts=document.querySelectorAll(".part"),heads=document.querySelectorAll(".nav-h");if(!p2)return;var last=0;
+function upd(){var y=p2.getBoundingClientRect().top,st=document.getElementById("story"),inP1=st&&st.getBoundingClientRect().top<innerHeight*.5,cur=y<innerHeight*.5?2:(inP1?1:0);if(cur===last)return;last=cur;
+  [].forEach.call(parts,function(a){a.classList.toggle("on",+a.getAttribute("data-part")===cur);if(+a.getAttribute("data-part")===cur)a.setAttribute("aria-current","true");else a.removeAttribute("aria-current");});
+  [].forEach.call(heads,function(h,k){h.classList.toggle("on",k+1===cur);});}
+addEventListener("scroll",upd,{passive:true});upd();})();
 </script>
 <!--B2-->
 </body>

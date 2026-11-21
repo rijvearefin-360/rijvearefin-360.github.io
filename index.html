@@ -472,17 +472,17 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 /* Shinbo: the site's chat sidekick. Same charcoal, gold and type as the rest of the page. */
 .snd-btn{bottom:calc(16px + 5.3rem + env(safe-area-inset-bottom,0px))}
 /* Launcher: Shinbo's photo with twitching cat ears, a slowly turning ring in the 17 Goal colours, a waving paw and a speech bubble */
-.sb-launch{position:fixed;z-index:44;right:calc(max(16px,env(safe-area-inset-right,0px)) + 2px);bottom:calc(18px + env(safe-area-inset-bottom,0px));width:4.1rem;height:4.1rem;border:0;padding:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:sbHop 9s ease-in-out 4s infinite}
+.sb-launch{position:fixed;z-index:44;right:calc(max(16px,env(safe-area-inset-right,0px)) + 2px);bottom:calc(18px + env(safe-area-inset-bottom,0px));width:4.1rem;height:4.1rem;border:0;padding:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:sbFloat 7s ease-in-out infinite;transition:opacity .4s,translate .5s}
 .sb-launch:focus-visible{outline:none}.sb-launch:focus-visible .sb-face{outline:2px solid var(--gold);outline-offset:4px}
-.sb-ring{position:absolute;inset:0;border-radius:50%;z-index:1;background:conic-gradient(#E5243B 0 5.88%,#DDA63A 0 11.76%,#4C9F38 0 17.65%,#C5192D 0 23.53%,#FF3A21 0 29.41%,#26BDE2 0 35.29%,#FCC30B 0 41.18%,#A21942 0 47.06%,#FD6925 0 52.94%,#DD1367 0 58.82%,#FD9D24 0 64.71%,#BF8B2E 0 70.59%,#3F7E44 0 76.47%,#0A97D9 0 82.35%,#56C02B 0 88.24%,#00689D 0 94.12%,#19486A 0 100%);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3.5px),#000 calc(100% - 3px));mask:radial-gradient(farthest-side,transparent calc(100% - 3.5px),#000 calc(100% - 3px));animation:sbSpin 14s linear infinite;box-shadow:0 12px 32px rgba(0,0,0,.5)}
+.sb-ring{position:absolute;inset:0;border-radius:50%;z-index:1;background:conic-gradient(#E5243B 0 5.88%,#DDA63A 0 11.76%,#4C9F38 0 17.65%,#C5192D 0 23.53%,#FF3A21 0 29.41%,#26BDE2 0 35.29%,#FCC30B 0 41.18%,#A21942 0 47.06%,#FD6925 0 52.94%,#DD1367 0 58.82%,#FD9D24 0 64.71%,#BF8B2E 0 70.59%,#3F7E44 0 76.47%,#0A97D9 0 82.35%,#56C02B 0 88.24%,#00689D 0 94.12%,#19486A 0 100%);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3.5px),#000 calc(100% - 3px));mask:radial-gradient(farthest-side,transparent calc(100% - 3.5px),#000 calc(100% - 3px));animation:sbSpin 40s linear infinite;box-shadow:0 12px 32px rgba(0,0,0,.5)}
 .sb-face{position:absolute;inset:5px;border-radius:50%;overflow:hidden;z-index:2;background:var(--bg-2);transition:transform .3s cubic-bezier(.2,1.4,.4,1)}
 .sb-cat{width:100%;height:100%;display:block}
 .sb-cat .sb-shades{transition:transform .35s cubic-bezier(.2,1.4,.4,1)}
 .sb-cat .sb-wink{transform-box:fill-box;transform-origin:center}
 /* Every 11 seconds he lowers his heart sunglasses, winks, and puts them back. A glint crosses the lenses in between. */
-.sb-launch .sb-shades{animation:sbPeek 11s ease-in-out 6s infinite}
-.sb-launch .sb-wink{animation:sbWink 11s ease-in-out 6s infinite}
-.sb-launch .sb-glint{opacity:0;animation:sbGlint 5.5s ease-in-out 1s infinite}
+.sb-launch .sb-shades{animation:sbPeek 22s ease-in-out 8s infinite}
+.sb-launch .sb-wink{animation:sbWink 22s ease-in-out 8s infinite}
+.sb-launch .sb-glint{opacity:0;animation:sbGlint 12s ease-in-out 2s infinite}
 .sb-launch:hover .sb-shades{animation:none;transform:translateY(10px)}
 .sb-launch:hover .sb-wink{animation:sbWinkFast 1.4s ease-in-out .35s infinite}
 @keyframes sbPeek{0%,70%,90%,100%{transform:translateY(0)}74%,86%{transform:translateY(10px)}}
@@ -492,10 +492,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 .sb-ear{position:absolute;top:-.55rem;width:1.15rem;height:1.3rem;z-index:0;background:#868a8d;clip-path:polygon(50% 0,100% 100%,0 100%);transform-origin:50% 100%;transition:transform .3s cubic-bezier(.2,1.4,.4,1)}
 .sb-ear::after{content:"";position:absolute;inset:38% 26% 6%;background:#e7a3ae;clip-path:polygon(50% 0,100% 100%,0 100%)}
 .sb-ear.l{left:.35rem;transform:rotate(-24deg)}.sb-ear.r{right:.35rem;transform:rotate(24deg)}
-.sb-ear.l{animation:sbTwitchL 6s ease-in-out 2s infinite}.sb-ear.r{animation:sbTwitchR 7.5s ease-in-out 3.5s infinite}
-.sb-paw{position:absolute;left:-.55rem;bottom:-.1rem;width:1.55rem;height:1.55rem;z-index:3;transform-origin:70% 90%;animation:sbWave 9s ease-in-out 1.5s infinite;filter:drop-shadow(0 3px 5px rgba(0,0,0,.45))}
+.sb-ear.l{animation:sbTwitchL 14s ease-in-out 2s infinite}.sb-ear.r{animation:sbTwitchR 17s ease-in-out 6s infinite}
+.sb-paw{position:absolute;left:-.55rem;bottom:-.1rem;width:1.55rem;height:1.55rem;z-index:3;transform-origin:70% 90%;animation:sbWave 24s ease-in-out 3s infinite;filter:drop-shadow(0 3px 5px rgba(0,0,0,.45))}
 .sb-dot{position:absolute;right:.15rem;bottom:.2rem;width:.8rem;height:.8rem;border-radius:50%;background:#56C02B;border:2px solid var(--bg);z-index:3}
-.sb-dot::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid #56C02B;animation:sbPing 2.4s ease-out infinite}
+.sb-dot::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid #56C02B;animation:sbPing 2.4s ease-out 3}
 .sb-tag{position:absolute;right:3.3rem;top:-1.1rem;z-index:4;white-space:nowrap;background:var(--gold);color:var(--on-gold);font:600 .78rem/1 var(--f-body);letter-spacing:.01em;padding:.42rem .62rem;border-radius:999px 999px 4px 999px;box-shadow:0 8px 20px rgba(0,0,0,.4);opacity:0;transform:translateY(6px) scale(.8);transform-origin:100% 100%;transition:opacity .3s,transform .35s cubic-bezier(.2,1.4,.4,1);pointer-events:none}
 .sb-tag.on{opacity:1;transform:none}
 .sb-launch:hover .sb-face{transform:rotate(-8deg) scale(1.04)}
@@ -504,6 +504,34 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 .sb-launch:active .sb-face{transform:scale(.92)}
 .sb-open .sb-launch{transform:scale(.7);opacity:0;pointer-events:none;animation:none;transition:transform .2s,opacity .2s}
 @keyframes sbSpin{to{transform:rotate(360deg)}}
+/* Gentle floating drift, on the separate translate/rotate properties so it layers with the hop */
+@keyframes sbFloat{0%,100%{translate:0 0}50%{translate:0 -3px}}
+/* Hide button: shows on hover on a laptop, always (small) on touch screens */
+.sb-hide{position:fixed;z-index:45;right:calc(max(16px,env(safe-area-inset-right,0px)) - 6px);bottom:calc(18px + 3.55rem + env(safe-area-inset-bottom,0px));width:1.5rem;height:1.5rem;border-radius:50%;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-soft);font-size:.7rem;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0;opacity:0;transform:scale(.7);transition:opacity .2s,transform .2s}
+.sb-launch:hover+.sb-hide,.sb-hide:hover,.sb-hide:focus-visible{opacity:1;transform:none}
+.sb-hide:hover{color:var(--gold);border-color:var(--gold)}
+@media (hover:none){.sb-hide{opacity:.9;transform:none}}
+.sb-open .sb-hide,.sb-gone .sb-hide{display:none}
+.sb-gone .sb-launch{animation:none;translate:170% 0;rotate:30deg;opacity:0;pointer-events:none}
+.sb-gone .sb-nudge{display:none!important}
+/* Sneaking back in from the right edge */
+.sb-sneak{position:fixed;z-index:46;right:0;bottom:calc(180px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:.4rem;pointer-events:none}
+.sb-sneak-face{position:relative;flex:none;width:4.4rem;height:4.4rem;margin-right:-1.3rem;transform:translateX(140%) rotate(-25deg);transition:transform .6s cubic-bezier(.2,1.3,.4,1);pointer-events:auto}
+.sb-sneak-face .sb-ear{top:-.5rem}
+.sb-sf{position:absolute;inset:0;border-radius:50%;overflow:hidden;border:2px solid var(--gold);z-index:1;background:var(--bg-2)}
+.sb-sneak.in .sb-sneak-face{transform:translateX(0) rotate(-18deg)}
+.sb-sneak .sb-shades{animation:sbPeek 3.2s ease-in-out .6s infinite}.sb-sneak .sb-wink{animation:sbWink 3.2s ease-in-out .6s infinite}
+.sb-psst{max-width:min(17rem,calc(100vw - 6.5rem));background:var(--bg-2);border:1px solid var(--gold);padding:.75rem .85rem;box-shadow:0 16px 40px rgba(0,0,0,.5);font:400 .92rem/1.45 var(--f-body);color:var(--ink);opacity:0;transform:translateX(16px) scale(.92);transform-origin:100% 50%;transition:opacity .3s .35s,transform .45s .35s cubic-bezier(.2,1.3,.4,1);pointer-events:auto}
+.sb-sneak.in .sb-psst{opacity:1;transform:none}
+.sb-psst p{margin:0 0 .6rem}
+.sb-psst-b{display:flex;gap:.4rem;flex-wrap:wrap}
+.sb-psst-b button{font:500 .82rem/1 var(--f-body);padding:.55rem .75rem;cursor:pointer;border:1px solid var(--gold)}
+#sbYes{background:var(--gold);color:var(--on-gold)}#sbNo{background:none;color:var(--gold-ink)}
+/* After the last sneak: a tiny face peeking from the corner, tap to bring him back */
+.sb-tab{position:fixed;z-index:44;right:0;bottom:calc(30px + env(safe-area-inset-bottom,0px));width:3.3rem;height:3.3rem;padding:0;border:0;background:none;cursor:pointer;transform:translateX(45%) rotate(-28deg);transition:transform .35s cubic-bezier(.2,1.3,.4,1);animation:sbTabIn .6s cubic-bezier(.2,1.3,.4,1) both}
+.sb-tab .sb-ear{top:-.4rem;width:.9rem;height:1rem}.sb-tab .sb-ear.l{left:.25rem}.sb-tab .sb-ear.r{right:.25rem}
+.sb-tab:hover,.sb-tab:focus-visible{transform:translateX(18%) rotate(-14deg)}
+@keyframes sbTabIn{from{transform:translateX(120%) rotate(-28deg)}}
 @keyframes sbHop{0%,86%,100%{transform:translateY(0)}89%{transform:translateY(-9px) rotate(-3deg)}92%{transform:translateY(0)}95%{transform:translateY(-4px) rotate(2deg)}98%{transform:translateY(0)}}
 @keyframes sbTwitchL{0%,90%,100%{transform:rotate(-24deg)}93%{transform:rotate(-38deg)}96%{transform:rotate(-20deg)}}
 @keyframes sbTwitchR{0%,88%,100%{transform:rotate(24deg)}91%{transform:rotate(36deg)}94%{transform:rotate(20deg)}}
@@ -534,6 +562,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 #sbVoice[aria-pressed="true"] .w1,#sbVoice[aria-pressed="true"] .w2{opacity:1}
 .sb-head{gap:.5rem}.sb-head>div{margin-left:.25rem}
 .sb-stripe{display:flex;height:3px;flex:none}.sb-stripe i{flex:1}
+.sb-modes{display:flex;gap:.35rem;padding:.55rem .9rem;background:var(--bg-2);border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.sb-modes::-webkit-scrollbar{display:none}
+.sb-modes button{flex:1 0 auto;font:500 .78rem/1 var(--f-body);color:var(--ink-soft);background:none;border:1px solid var(--line);border-radius:999px;padding:.45rem .7rem;cursor:pointer;white-space:nowrap;transition:background .2s,color .2s,border-color .2s}
+.sb-modes button:hover{color:var(--gold-ink);border-color:rgba(191,162,113,.5)}
+.sb-modes button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
+.sb-panel[data-mode="therapist"] .sb-bot{border-left-color:#56C02B}
+.sb-panel[data-mode="unhinged"] .sb-bot{border-left-color:#DD1367}
 .sb-log{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:1rem;display:flex;flex-direction:column;gap:.7rem;scroll-behavior:smooth}
 .sb-m{max-width:88%;padding:.65rem .85rem;font:400 .96rem/1.55 var(--f-body);animation:sbIn .3s ease both;overflow-wrap:anywhere}
 .sb-m p{margin:0}.sb-m p+p{margin-top:.5rem}
@@ -543,6 +578,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 .sb-m ul{margin:.35rem 0 0;padding-left:1.1rem}.sb-m li{margin:.15rem 0}
 .sb-act{color:var(--ink-faint);font-style:italic}
 .sb-ps{font-size:.86rem;color:var(--ink-soft);font-style:italic}
+.sb-m .sb-help{display:block;margin:.4rem 0 0;padding:.55rem .7rem;border:1px solid rgba(191,162,113,.35);background:rgba(191,162,113,.07)}
+.sb-m .sb-help b{color:var(--gold-ink);font-weight:500}
+.sb-m .sb-hook{color:var(--gold-ink);margin-top:.55rem}
 .sb-m q{font-family:var(--f-display);font-style:italic;color:var(--gold-ink)}
 .sb-dots{align-self:flex-start;display:flex;gap:.3rem;padding:.8rem .9rem;background:var(--bg-3);border-left:2px solid var(--gold)}
 .sb-dots i{width:.42rem;height:.42rem;border-radius:50%;background:var(--gold);animation:sbDot 1s infinite ease-in-out}
@@ -1116,6 +1154,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 <button type="button" class="snd-btn" id="sndBtn" aria-label="Play nature sounds" aria-pressed="false" hidden></button>
 
 <button type="button" class="sb-launch" id="sbLaunch" aria-label="Chat with Shinbo, Rijve's sidekick" aria-expanded="false" aria-controls="sbPanel"><span class="sb-ear l" aria-hidden="true"></span><span class="sb-ear r" aria-hidden="true"></span><span class="sb-ring" aria-hidden="true"></span><span class="sb-face"><svg class="sb-cat" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="#1b2122"/><ellipse cx="50" cy="57" rx="48" ry="46" fill="#8a8e91"/><ellipse cx="22" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="78" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="22" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><ellipse cx="78" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><path d="M44 17v9M50 15v10M56 17v9" stroke="#6f7376" stroke-width="2.6" stroke-linecap="round"/><g class="sb-eyes"><g class="sb-eye"><ellipse cx="34" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="34" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="34" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="36" cy="42.5" r="1.6" fill="#fff"/></g><g class="sb-eye sb-wink"><ellipse cx="66" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="66" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="66" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="68" cy="42.5" r="1.6" fill="#fff"/></g></g><ellipse cx="43" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><ellipse cx="57" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><path d="M46.5 63.5h7l-3.5 4.2z" fill="#e7a3ae" stroke="#c77f8c" stroke-width="1" stroke-linejoin="round"/><path d="M43.5 71.5q3.3 3.6 6.5 0q3.2 3.6 6.5 0" fill="none" stroke="#3a3d40" stroke-width="1.6" stroke-linecap="round"/><path d="M50 67.7v3.8" stroke="#3a3d40" stroke-width="1.4" stroke-linecap="round"/><g stroke="#f1ede4" stroke-width="1" stroke-linecap="round" opacity=".75"><path d="M34 70 16 67M34 73.5 15 75M66 70 84 67M66 73.5 85 75"/></g><g class="sb-shades"><path d="M43.5 42q6.5-4.5 13 0" fill="none" stroke="#d6bd8e" stroke-width="2.4" stroke-linecap="round"/><path d="M34 56C19 46 22 33 34 40C46 33 49 46 34 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M66 56C51 46 54 33 66 40C78 33 81 46 66 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M14 41 25.5 40.5M86 41 74.5 40.5" stroke="#d6bd8e" stroke-width="2.2" stroke-linecap="round"/><g class="sb-glint" fill="#fff"><path d="M27 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/><path d="M59 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/></g></g></svg></span><svg class="sb-paw" viewBox="0 0 32 32" aria-hidden="true"><ellipse cx="16" cy="21" rx="9" ry="7.5" fill="#8a8e91"/><ellipse cx="7" cy="12" rx="3.3" ry="4.2" fill="#8a8e91"/><ellipse cx="13" cy="7.5" rx="3.3" ry="4.3" fill="#8a8e91"/><ellipse cx="19.5" cy="7.5" rx="3.3" ry="4.3" fill="#8a8e91"/><ellipse cx="25.5" cy="12" rx="3.3" ry="4.2" fill="#8a8e91"/><ellipse cx="16" cy="22" rx="5.2" ry="4.2" fill="#e7a3ae"/><ellipse cx="7.2" cy="12.6" rx="1.7" ry="2.2" fill="#e7a3ae"/><ellipse cx="13" cy="8.2" rx="1.7" ry="2.3" fill="#e7a3ae"/><ellipse cx="19.5" cy="8.2" rx="1.7" ry="2.3" fill="#e7a3ae"/><ellipse cx="25.3" cy="12.6" rx="1.7" ry="2.2" fill="#e7a3ae"/></svg><span class="sb-dot" aria-hidden="true"></span><span class="sb-tag" id="sbTag" aria-hidden="true">Meow? 👋</span></button>
+<button type="button" class="sb-hide" id="sbHide" aria-label="Hide Shinbo">✕</button>
+<div class="sb-sneak" id="sbSneak" role="status" hidden><div class="sb-psst"><p id="sbPsst"></p><div class="sb-psst-b"><button type="button" id="sbYes">Yes, let's chat</button><button type="button" id="sbNo">Not now</button></div></div><span class="sb-sneak-face" aria-hidden="true"><span class="sb-ear l"></span><span class="sb-ear r"></span><span class="sb-sf"><svg class="sb-cat" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="#1b2122"/><ellipse cx="50" cy="57" rx="48" ry="46" fill="#8a8e91"/><ellipse cx="22" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="78" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="22" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><ellipse cx="78" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><path d="M44 17v9M50 15v10M56 17v9" stroke="#6f7376" stroke-width="2.6" stroke-linecap="round"/><g class="sb-eyes"><g class="sb-eye"><ellipse cx="34" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="34" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="34" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="36" cy="42.5" r="1.6" fill="#fff"/></g><g class="sb-eye sb-wink"><ellipse cx="66" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="66" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="66" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="68" cy="42.5" r="1.6" fill="#fff"/></g></g><ellipse cx="43" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><ellipse cx="57" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><path d="M46.5 63.5h7l-3.5 4.2z" fill="#e7a3ae" stroke="#c77f8c" stroke-width="1" stroke-linejoin="round"/><path d="M43.5 71.5q3.3 3.6 6.5 0q3.2 3.6 6.5 0" fill="none" stroke="#3a3d40" stroke-width="1.6" stroke-linecap="round"/><path d="M50 67.7v3.8" stroke="#3a3d40" stroke-width="1.4" stroke-linecap="round"/><g stroke="#f1ede4" stroke-width="1" stroke-linecap="round" opacity=".75"><path d="M34 70 16 67M34 73.5 15 75M66 70 84 67M66 73.5 85 75"/></g><g class="sb-shades"><path d="M43.5 42q6.5-4.5 13 0" fill="none" stroke="#d6bd8e" stroke-width="2.4" stroke-linecap="round"/><path d="M34 56C19 46 22 33 34 40C46 33 49 46 34 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M66 56C51 46 54 33 66 40C78 33 81 46 66 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M14 41 25.5 40.5M86 41 74.5 40.5" stroke="#d6bd8e" stroke-width="2.2" stroke-linecap="round"/><g class="sb-glint" fill="#fff"><path d="M27 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/><path d="M59 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/></g></g></svg></span></span></div>
+<button type="button" class="sb-tab" id="sbTab" aria-label="Bring Shinbo back" hidden><span class="sb-ear l" aria-hidden="true"></span><span class="sb-ear r" aria-hidden="true"></span><span class="sb-sf"><svg class="sb-cat" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="#1b2122"/><ellipse cx="50" cy="57" rx="48" ry="46" fill="#8a8e91"/><ellipse cx="22" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="78" cy="78" rx="17" ry="14" fill="#9a9ea1"/><ellipse cx="22" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><ellipse cx="78" cy="63" rx="6" ry="3.6" fill="#e7a3ae" opacity=".5"/><path d="M44 17v9M50 15v10M56 17v9" stroke="#6f7376" stroke-width="2.6" stroke-linecap="round"/><g class="sb-eyes"><g class="sb-eye"><ellipse cx="34" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="34" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="34" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="36" cy="42.5" r="1.6" fill="#fff"/></g><g class="sb-eye sb-wink"><ellipse cx="66" cy="45" rx="7.5" ry="8" fill="#f3efe6"/><ellipse cx="66" cy="45.5" rx="5.6" ry="6.6" fill="#d9a72b"/><ellipse cx="66" cy="45.5" rx="2" ry="5.6" fill="#14120e"/><circle cx="68" cy="42.5" r="1.6" fill="#fff"/></g></g><ellipse cx="43" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><ellipse cx="57" cy="71" rx="9" ry="7.5" fill="#e4e2dd"/><path d="M46.5 63.5h7l-3.5 4.2z" fill="#e7a3ae" stroke="#c77f8c" stroke-width="1" stroke-linejoin="round"/><path d="M43.5 71.5q3.3 3.6 6.5 0q3.2 3.6 6.5 0" fill="none" stroke="#3a3d40" stroke-width="1.6" stroke-linecap="round"/><path d="M50 67.7v3.8" stroke="#3a3d40" stroke-width="1.4" stroke-linecap="round"/><g stroke="#f1ede4" stroke-width="1" stroke-linecap="round" opacity=".75"><path d="M34 70 16 67M34 73.5 15 75M66 70 84 67M66 73.5 85 75"/></g><g class="sb-shades"><path d="M43.5 42q6.5-4.5 13 0" fill="none" stroke="#d6bd8e" stroke-width="2.4" stroke-linecap="round"/><path d="M34 56C19 46 22 33 34 40C46 33 49 46 34 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M66 56C51 46 54 33 66 40C78 33 81 46 66 56Z" fill="#b5172c" stroke="#d6bd8e" stroke-width="2.2" stroke-linejoin="round"/><path d="M14 41 25.5 40.5M86 41 74.5 40.5" stroke="#d6bd8e" stroke-width="2.2" stroke-linecap="round"/><g class="sb-glint" fill="#fff"><path d="M27 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/><path d="M59 41.5q1.8-3.4 5.4-2.6-3.2.9-4.1 3.4z" opacity=".85"/></g></g></svg></span></button>
 <div class="sb-nudge" id="sbNudge" hidden><span>Psst. I'm <b>Shinbo</b>. Ask me anything.</span><button type="button" aria-label="Dismiss">✕</button></div>
 <section class="sb-panel" id="sbPanel" role="dialog" aria-modal="false" aria-labelledby="sbTitle" hidden>
   <header class="sb-head">
@@ -1126,6 +1167,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
     <button type="button" class="sb-tb" id="sbClose" aria-label="Close chat">✕</button>
   </header>
   <div class="sb-stripe" aria-hidden="true"><i style="background:#E5243B"></i><i style="background:#DDA63A"></i><i style="background:#4C9F38"></i><i style="background:#C5192D"></i><i style="background:#FF3A21"></i><i style="background:#26BDE2"></i><i style="background:#FCC30B"></i><i style="background:#A21942"></i><i style="background:#FD6925"></i><i style="background:#DD1367"></i><i style="background:#FD9D24"></i><i style="background:#BF8B2E"></i><i style="background:#3F7E44"></i><i style="background:#0A97D9"></i><i style="background:#56C02B"></i><i style="background:#00689D"></i><i style="background:#19486A"></i></div>
+  <div class="sb-modes" id="sbModes" role="group" aria-label="Shinbo's mood"><button type="button" data-mode="classic" aria-pressed="true">😎 Classic</button><button type="button" data-mode="therapist" aria-pressed="false">🌿 Therapist cat</button><button type="button" data-mode="unhinged" aria-pressed="false">🌀 Unhinged</button></div>
   <div class="sb-log" id="sbLog" role="log" aria-live="polite" aria-relevant="additions"></div>
   <div class="sb-chips" id="sbChips"></div>
   <form class="sb-form" id="sbForm">
@@ -1739,7 +1781,7 @@ var P=document.getElementById("sbPanel"),L=document.getElementById("sbLaunch");i
 var log=document.getElementById("sbLog"),chips=document.getElementById("sbChips"),form=document.getElementById("sbForm"),inp=document.getElementById("sbIn"),send=document.getElementById("sbSend"),nudge=document.getElementById("sbNudge"),sub=document.getElementById("sbSub");
 function g(id,t){return '<a href="#'+id+'" data-go>'+t+'</a>';}
 function x(u,t){return '<a href="'+u+'" target="_blank" rel="noopener">'+t+'</a>';}
-function act(t){return '<span class="sb-act">*'+t+'*</span> ';}
+function act(t){return "";} /* stage directions removed from the chat by request */
 var A360=x("https://www.facebook.com/awarenessthreesixty","Awareness 360's Facebook page");
 var MAIL='<a href="mailto:rijvearefin@gmail.com">rijvearefin@gmail.com</a>';
 
@@ -1792,7 +1834,7 @@ function spaceAns(q,bn){var f=SPACE[Math.floor(Math.random()*SPACE.length)];
 var T=[
 {id:"hello",k:["hi","hello","hey","salam","assalamualaikum","yo","hola","good morning","good evening","whats up","sup","howdy"],
  a:["<p>"+act("lowers heart sunglasses")+"Well, hello. Welcome to my office. Rijve thinks it's his website, and I let him believe that.</p><p>What can I do for you?</p>",
-    "<p>Oh hi! "+act("pretends I wasn't asleep on the keyboard")+"Shinbo here, Chief Executive Cat. Ask me about Rijve, Awareness 360, or how to change the world before lunch.</p>",
+    "<p>Oh hi! Shinbo here, Chief Executive Cat. Ask me about Rijve, Awareness 360, or how to change the world before lunch.</p>",
     "<p>Meow. That's \"hello\" in executive. 😎 What brings you to my corner of the internet?</p>"],
  c:["Who is Rijve?","Who are you?","Tell me a joke"]},
 {id:"shinbo",k:["who are you","what are you","your name","shinbo","are you ai","are you a bot","are you real","are you human","you a cat","chatgpt","introduce yourself"],
@@ -1910,6 +1952,48 @@ var T=[
 {id:"meet",k:["book a meeting","meeting","meet","appointment","one on one","1 on 1","1 1","schedule","book a call","call with","video call","zoom","interview him","interview","consultation","mentoring","mentor me","coffee chat","talk to rijve","speak to rijve","speak with rijve","talk with rijve","booking","book"],
  a:[function(){return "__MEET__";}],c:[]},
 
+/* ---------- Wellbeing: sincere, no jokes. Helplines checked against several sources (Nov 2026); numbers change, so findahelpline.com is always offered too ---------- */
+{id:"mental",s:1,k:["i'd like to talk","id like to talk","i want to talk","mental health","stress","stressed","anxiety","anxious","depression","depressed","overwhelmed","burnout","burned out","burnt out","panic","panic attack","therapy","therapist","counselling","counseling","counsellor","need someone to talk","need to talk","talk to someone","feel low","feeling low","not okay","not ok","struggling","exhausted","cant cope","heartbroken","grief","grieving"],
+ a:["<p>I'm really glad you reached out. 💛 Whatever you're carrying right now, you don't have to carry it alone.</p><p>A few things that can help today:</p><ul><li><b>Breathe slowly:</b> in for 4, hold for 4, out for 6. Do it five times.</li><li><b>Tell one person you trust</b> how you're actually feeling.</li><li><b>Talk to a trained listener.</b> It's free and confidential.</li></ul><span class=\"sb-help\"><b>Bangladesh:</b> Kaan Pete Roi, <a href=\"tel:09612119911\">09612-119911</a> (3 PM to 3 AM daily), emotional support. In an emergency call <a href=\"tel:999\">999</a>.<br><b>Anywhere else:</b> "+x("https://findahelpline.com","findahelpline.com")+" lists free helplines in your country.</span><p>Rijve talks openly about how hard things got for him growing up. Reaching out is strength, not weakness. I'm a website cat, not a counsellor, but I'm right here if you want to keep talking.</p>"],
+ c:["Helplines in other countries","A grounding exercise","Dealing with self-doubt"]},
+{id:"helplines",s:1,k:["helplines in other countries","helpline","helplines","hotline","crisis line","emergency number","emergency numbers","suicide hotline","mental health number","who can i call","support line"],
+ a:["<p>Free, confidential support lines (please check the organisation's site if a number doesn't connect, as numbers sometimes change):</p><ul>"+
+ "<li><b>Bangladesh:</b> Kaan Pete Roi <a href=\"tel:09612119911\">09612-119911</a> (3 PM–3 AM) · Violence against women and children helpline <a href=\"tel:109\">109</a> (24 hours) · Emergency <a href=\"tel:999\">999</a></li>"+
+ "<li><b>India:</b> Tele-MANAS <a href=\"tel:14416\">14416</a> or 1-800-891-4416 (24/7, many languages) · Emergency 112</li>"+
+ "<li><b>Pakistan:</b> Umang 0311-7786264 (24/7)</li>"+
+ "<li><b>Nepal:</b> National Suicide Prevention Helpline 1166</li>"+
+ "<li><b>Sri Lanka:</b> 1333 Crisis Support Line (24/7) · National mental health helpline 1926</li>"+
+ "<li><b>Malaysia:</b> Befrienders KL +603-7627 2929 (24/7) · Talian HEAL 15555</li>"+
+ "<li><b>Philippines:</b> National Center for Mental Health crisis line 1553</li>"+
+ "<li><b>Kenya:</b> Befrienders Kenya +254 722 178 177</li>"+
+ "<li><b>South Africa:</b> South African Depression and Anxiety Group 0800 567 567 (24/7)</li>"+
+ "<li><b>United Kingdom:</b> Samaritans 116 123 · <b>United States:</b> 988</li></ul>"+
+ "<span class=\"sb-help\"><b>Any other country:</b> "+x("https://findahelpline.com","findahelpline.com")+" and "+x("https://befrienders.org","befrienders.org")+" list free helplines worldwide. If someone is in immediate danger, call your local emergency number now.</span>"],
+ c:["A grounding exercise","I need someone to talk to"]},
+{id:"ground",s:1,k:["a grounding exercise","grounding","calm down","calm me","breathing exercise","relax me","help me relax"],
+ a:["<p>Let's do this together. 💛 The 5-4-3-2-1 grounding exercise:</p><ul><li>Name <b>5</b> things you can see</li><li><b>4</b> things you can touch</li><li><b>3</b> things you can hear</li><li><b>2</b> things you can smell</li><li><b>1</b> slow breath, in for 4, out for 6</li></ul><p>Take your time. I'll wait right here, no rush. If it still feels too heavy, please reach out to someone you trust or a helpline.</p>"],
+ c:["Helplines in other countries","I need someone to talk to"]},
+
+/* ---------- Careers in the development sector ---------- */
+{id:"devcareer",k:["development careers","development sector","development career","career in development","work in development","international development","ngo career","ngo job","nonprofit career","non profit career","social sector","humanitarian","un career","united nations job","impact career","get into development","development jobs"],
+ a:["<p>Building a career in development, from someone who went from student volunteer to United Nations advisor:</p><ul><li><b>Get field proof early.</b> Volunteer, run a small project, document it. Rijve started with one hygiene workshop.</li><li><b>Learn the hard skills employers hire for:</b> proposal and report writing, monitoring and evaluation, budgeting, data (Excel, KoboToolbox), and project management.</li><li><b>Pick a lane</b>: water, gender, climate, education, health. Generalists struggle; specialists get hired.</li><li><b>Know the ladders</b>: local non-governmental organisations, international ones, United Nations agencies, social enterprises, research and policy.</li><li><b>Write well.</b> In this sector, a clear two-page concept note opens more doors than a fancy CV.</li></ul><p>Rijve's own path: volunteering → founding Awareness 360 → consulting for CIVICUS → advising the United Nations Global Compact → country lead and fundraising roles.</p>"],
+ c:["United Nations routes","Where to find jobs","Funding for young people"]},
+{id:"unroutes",k:["work at the un","work at un","work for the un","work for un","join the un","join un","un job","un jobs","united nations routes","un routes","unv","un volunteer","un volunteers","young professionals programme","ypp","jpo","junior professional officer","un internship","un internships","un entry","consultant roster"],
+ a:["<p>Ways young people get into the United Nations system:</p><ul><li><b>United Nations Volunteers</b>: paid volunteer assignments, including national and youth ones. "+x("https://www.unv.org","unv.org")+"</li><li><b>Internships</b> at agencies like the United Nations Development Programme, UNICEF and United Nations Women. Many are unpaid, so look for stipends. "+x("https://careers.un.org","careers.un.org")+"</li><li><b>Young Professionals Programme</b>: an entry exam for nationals of participating countries.</li><li><b>Junior Professional Officer</b> posts, sponsored by certain governments for their own nationals.</li><li><b>Consultancies</b>: short contracts are a common way in. Get on agency rosters.</li></ul><p>Tip: tailor every application to the job's competencies, and use the STAR method (Situation, Task, Action, Result) for interviews.</p>"],
+ c:["Where to find jobs","Career advice"]},
+{id:"jobboards",k:["where to find jobs","job boards","job board","job sites","find jobs","job search","where to apply","devex","reliefweb","impactpool","idealist"],
+ a:["<p>Where development jobs actually get posted:</p><ul><li>"+x("https://reliefweb.int/jobs","ReliefWeb Jobs")+": humanitarian and development roles worldwide</li><li>"+x("https://www.devex.com/jobs","Devex")+": international development jobs and news</li><li>"+x("https://www.impactpool.org","Impactpool")+": United Nations and international organisation jobs</li><li>"+x("https://www.idealist.org","Idealist")+": non-profit jobs and volunteering</li><li>"+x("https://careers.un.org","careers.un.org")+" and each agency's own careers page</li></ul><p>And LinkedIn: follow the organisations you love, and message people working there. Most of Rijve's doors opened through conversations.</p>"],
+ c:["Funding for young people","Scholarship tips"]},
+{id:"youthfund",k:["funding for young people","youth funding","grants for young people","youth grants","seed grant","seed funding","fellowship for young","fellowships","funding opportunities","opportunities for young","youth opportunities","competitions","social venture","fund my project","money for my project"],
+ a:["<p>Funding and fellowships for young changemakers (check each site for current deadlines and eligibility):</p><ul><li>"+x("https://thepollinationproject.org","The Pollination Project")+": small seed grants for grassroots projects</li><li>"+x("https://www.resolutionproject.org","Resolution Project")+": social venture fellowships for students</li><li>"+x("https://www.hultprize.org","Hult Prize")+": student social-enterprise competition (Rijve directed it on his campus)</li><li>"+x("https://echoinggreen.org","Echoing Green")+" and "+x("https://acumen.org","Acumen")+": fellowships for early-stage social entrepreneurs</li><li>"+x("https://www.ashoka.org","Ashoka")+": young changemaker programmes</li><li>"+x("https://www.oneyoungworld.com","One Young World")+": summit scholarships</li><li>"+x("https://diana-award.org.uk","The Diana Award")+": recognition for young people creating change (Rijve won it in 2021)</li><li>Regional: "+x("https://mandelawashingtonfellowship.org","Mandela Washington Fellowship")+" (Africa), "+x("https://asean.usmission.gov/yseali/","YSEALI")+" (Southeast Asia), "+x("https://www.obama.org","Obama Foundation Leaders")+"</li></ul><p>Never miss one: "+x("https://opportunitydesk.org","Opportunity Desk")+" and "+x("https://www.youthop.com","Youth Opportunities")+" collect new calls every day.</p>"],
+ c:["How do I fundraise?","Scholarship tips","How do I start a project?"]},
+
+/* ---------- Coffee ---------- */
+{id:"coffee",k:["coffee shop","coffee shops","favourite cafe","favorite cafe","favourite coffee shop","favorite coffee shop","cafe","cafes","café","where to get coffee","coffee in dhaka","north end","brown cafe","brown coffee","like coffee","coffee person","drink coffee","love coffee","make coffee","coffee","espresso","macchiato","cappuccino","latte","flat white","barista","caffeine","favourite drink","favorite drink","drink","drinks","brew"],
+ a:["<p>Now we're talking. ☕ Rijve is a proper coffee person. He makes a seriously good <b>espresso</b> and an excellent <b>macchiato</b>, ideally with jazz playing in the background.</p><p>When he's out in Bangladesh, his favourite coffee spots are <b>North End</b> and <b>Brown</b>. If you see a guy at North End or Brown talking passionately about black holes over a macchiato, say hi.</p><p>I'm not allowed near the machine since The Incident. We don't talk about The Incident.</p>",
+    "<p>Rijve's perfect morning: pull a rich espresso, mark it with a little foam for a macchiato, put on some Chet Baker or Miles Davis. ☕🎷 Then save the world.</p><p>And when he's out in Dhaka? <b>North End</b> or <b>Brown</b>, his two favourite coffee shops in Bangladesh. ☕</p><p>Me? I knock the spoon off the counter. Teamwork.</p>"],
+ c:["Jazz picks","His hobbies?","Tell me a joke"]},
+
 /* ---------- Advice in Rijve's spirit ---------- */
 {id:"start",k:["how do i start a project","start a project","start an ngo","start an organisation","start an organization","start my own","social enterprise","startup","begin","first step","how to start","make a difference","change the world","make change"],
  a:["<p>"+act("puts on reading glasses over the sunglasses")+"Rijve's recipe:</p><ul><li><b>Start where you are.</b> Pick a problem you can see from your own street.</li><li><b>Listen first.</b> Ask the people affected what they need. (I wish people asked me before buying the cheap food.)</li><li><b>Find the root cause</b>, not just the symptom.</li><li><b>Start tiny.</b> Awareness 360 began with two students and one workshop.</li><li><b>Measure it.</b> Survey before and after, so you can prove it worked.</li><li><b>Write down your failures.</b> He says documenting failure matters as much as celebrating success.</li></ul>"],
@@ -1919,10 +2003,10 @@ var T=[
  c:["Scholarship tips","How do I start a project?"]},
 {id:"career",k:["career advice","give me career advice","career","what should i do","future","job advice","work in development","work at un","united nations job","development sector","social sector","nonprofit career","non profit"],
  a:["<p>Career advice from the human (my notes in brackets):</p><ul><li><b>Don't chase grades alone.</b> Clubs, volunteering and events built his real skills. (Naps built mine.)</li><li><b>Talk to people</b>: teachers, mentors, even strangers.</li><li><b>Don't be shy to ask questions.</b> (Unless the question is \"bath time?\")</li><li><b>Build proof.</b> A small project you actually ran beats a perfect CV.</li><li><b>Learn design thinking early.</b> He wishes he had.</li><li><b>Believe in yourself.</b> He says you can achieve what you set your mind to if you do.</li></ul>"],
- c:["Networking tips","Scholarship tips","Public speaking tips"]},
+ c:["Development careers","Funding for young people","Scholarship tips"]},
 {id:"scholar",k:["scholarship tips","scholarship","scholarships","chevening","commonwealth scholarship","funded masters","study abroad","studying abroad","abroad","apply university"],
- a:["<p>Rijve's on the Commonwealth and Yusuf Ali scholarships, so listen up:</p><ul><li><b>Lead with impact.</b> Show what you did and what changed, with numbers.</li><li><b>Tell one clear story</b> linking your past, your work and your plans.</li><li><b>Start early</b> and ask referees well before the deadline. Procrastination is for cats.</li><li><b>Explain why that course</b> and how you'll use it back home.</li></ul><p>Studying abroad? Track your expenses, cook more than you eat out, and make friends from everywhere. He says it taught him independence and a love of diversity.</p>"],
- c:["Career advice","How do I start a project?"]},
+ a:["<p>Rijve's on the Commonwealth and Yusuf Ali scholarships, so listen up:</p><ul><li><b>Lead with impact.</b> Show what you did and what changed, with numbers.</li><li><b>Tell one clear story</b> linking your past, your work and your plans.</li><li><b>Start early</b> and ask referees well before the deadline. Procrastination is for cats.</li><li><b>Explain why that course</b> and how you'll use it back home.</li></ul><p><b>Fully funded scholarships worth a look</b> (check eligibility for your country): "+x("https://cscuk.fcdo.gov.uk","Commonwealth")+", "+x("https://www.chevening.org","Chevening")+", "+x("https://foreign.fulbrightonline.org","Fulbright")+", "+x("https://erasmus-plus.ec.europa.eu","Erasmus Mundus")+", "+x("https://www.daad.de/en/","DAAD")+", "+x("https://www.dfat.gov.au/people-to-people/australia-awards","Australia Awards")+", "+x("https://www.studyinkorea.go.kr","Korea's GKS")+", "+x("https://www.studyinjapan.go.jp","Japan's MEXT")+", "+x("https://si.se/en/","Swedish Institute")+", "+x("https://www.turkiyeburslari.gov.tr","Türkiye Bursları")+", "+x("https://www.gatescambridge.org","Gates Cambridge")+" and "+x("https://www.rhodeshouse.ox.ac.uk","Rhodes")+".</p><p>Studying abroad? Track your expenses, cook more than you eat out, and make friends from everywhere. He says it taught him independence and a love of diversity.</p>"],
+ c:["Funding for young people","Development careers"]},
 {id:"network",k:["networking tips","networking","network","linkedin","mentor","mentors","connections"],
  a:["<p>Networking, the Rijve way:</p><ul><li>Show up: conferences, workshops, youth forums.</li><li>Follow up within a day with a short, specific message.</li><li>Give before you ask. Share opportunities and credit others.</li><li>Find mentors. He credits his professors and mentors a lot.</li></ul><p>The Shinbo way: sit on someone's laptop until they notice you. Results vary. Connect with him on "+x("https://www.linkedin.com/in/rijvearefin","LinkedIn")+".</p>"],
  c:["Career advice"]},
@@ -1933,8 +2017,8 @@ var T=[
  a:["<p>Rijve knows rejection. Awareness 360 got refused registration at home again and again, so they registered abroad and went global. He also says doing the right thing in a system where corruption is normal can drain you.</p><p>What keeps him going: every cleared canal and every new volunteer. Rest when you need to (take it from an expert napper 😴), keep a list of small wins, and write down what failed so the next try is better.</p>"],
  c:["Dealing with self-doubt","How do I start a project?"]},
 {id:"doubt",s:1,k:["dealing with self doubt","self doubt","confidence","imposter","not good enough","worth","anxious","scared","afraid","shy","insecure","sad","lonely","depressed"],
- a:["<p>"+act("sits next to you quietly")+"Rijve grew up bullied and with very little sense of his own worth, and he still ended up on stages around the world. His TEDx talk is about exactly this.</p><p>His advice: you don't have to feel ready. Do one small thing for someone else this week. Confidence comes after action, not before. <q>The world needs you to step up. Start where you are.</q></p><p>If things feel heavy, please talk to someone you trust or a local helpline. You matter. 💛</p>"],
- c:["The TEDx talk","How do I start a project?"]},
+ a:["<p>"+act("sits next to you quietly")+"Rijve grew up bullied and with very little sense of his own worth, and he still ended up on stages around the world. His TEDx talk is about exactly this.</p><p>His advice: you don't have to feel ready. Do one small thing for someone else this week. Confidence comes after action, not before. <q>The world needs you to step up. Start where you are.</q></p><p>If things feel heavy, please talk to someone you trust. Free helplines are one tap away below. You matter. 💛</p>"],
+ c:["The TEDx talk","Helplines in other countries","How do I start a project?"]},
 {id:"social",k:["social work advice","social work","social worker","community work","community service","activism advice","how to help","help people","volunteering tips","charity"],
  a:["<p>Rijve's rules for social work:</p><ul><li><b>Listen before you act.</b> (Ernesto Sirolli's talk on this is in "+g("learn","the ten talks")+".)</li><li><b>Let the community lead.</b> Back local young people with skills, money and access.</li><li><b>Dignity first.</b> Ask before taking photos, and tell people's stories with respect.</li><li><b>Be accountable.</b> Report what you spent and what changed.</li><li><b>Look after yourself</b> so you can keep going.</li></ul>"],
  c:["How do I start a project?","How do I fundraise?"]},
@@ -1958,6 +2042,9 @@ var T=[
  c:["Play the game"]},
 
 /* ---------- Pure cat business ---------- */
+{id:"roast",k:["roast simba","roast kibo","roast someone","roast"],
+ a:["<p>Simba once lost a staring contest with a sock. The sock won by default. He still talks about it.</p>","<p>Kibo thinks he's the main character. Kibo is a background extra in my biopic.</p>","<p>Simba's idea of a five-year plan is \"find stick\". Respect, honestly.</p>"],
+ c:["Roast Simba","The pets","Tell me a joke"]},
 {id:"joke",k:["tell me a joke","joke","funny","make me laugh","meme","another one","another joke"],
  a:["<p>Why did the cat join Awareness 360? It wanted to make the world a little more purr-fect. 😼</p>",
     "<p>I asked Simba to help with the canal clean-up. He drank half of it. Golden retrievers.</p>",
@@ -1970,7 +2057,7 @@ var T=[
  a:["<p>Meow meow. Meow? 😼</p><p>(Translation: \"Finally, someone who speaks my language. Ask me something about Rijve.\")</p>","<p>"+act("purrs approvingly")+"Fluent. You may stay.</p>"],
  c:["Who is Rijve?","Tell me a joke"]},
 {id:"pet",k:["pet you","pat","boop","scratch","belly rub","cuddle","hug","can i pet"],
- a:["<p>"+act("allows exactly one pat")+"That's enough. We're professionals here.</p>","<p>Boop accepted. Belly rubs require a formal application through "+g("ask","Ask Rijve")+". 😼</p>"],
+ a:["<p>One pat. Just one. 😼 That's enough, we're professionals here.</p>","<p>Boop accepted. Belly rubs require a formal application through "+g("ask","Ask Rijve")+". 😼</p>"],
  c:["Tell me a joke","The pets"]},
 {id:"cute",k:["cute","adorable","handsome","beautiful","pretty","good boy","good kitty","love you","i love you","best cat"],
  a:["<p>"+act("pretends not to care, purrs loudly anyway")+"I know. But thank you. 😎</p>","<p>Flattery will get you everywhere. Mostly to Rijve's email: "+MAIL+".</p>"],
@@ -1991,7 +2078,7 @@ var T=[
  a:["<p>Anytime! Purr-sonally delighted to help. 🐾 Anything else?</p>","<p>You're welcome! Tips are accepted in tuna. 🐟 Now go start where you are.</p>","<p>"+act("tail swish of approval")+"Happy to help. What else?</p>"],
  c:["Tell me a joke","Career advice"]},
 {id:"bye",k:["bye","goodbye","see you","later","good night","cya","gtg"],
- a:["<p>Bye for now! Rijve would want me to remind you: start where you are. I'd remind you: hydrate. 🐾</p>","<p>"+act("slow blink")+"That means I like you. Come back soon.</p>"],c:[]}
+ a:["<p>Bye for now! Rijve would want me to remind you: start where you are. I'd remind you: hydrate. 🐾</p>","<p>Slow blink. 😺 That means I like you. Come back soon.</p>"],c:[]}
 ];
 
 /* ---------- Things Shinbo will not share ---------- */
@@ -2043,6 +2130,12 @@ movies:["সিনেমা","মুভি","চলচ্চিত্র","প�
 music:["গান","সংগীত","জ্যাজ","রক","শিল্পী","প্লেলিস্ট","প্রিয় গান"],
 space:["মহাকাশ","গ্রহ","তারা","মহাবিশ্ব","চাঁদ","ব্ল্যাক হোল","মঙ্গল"],
 fashion:["ফ্যাশন","স্টাইল","পোশাক","স্ট্রিট"],
+mental:["মানসিক","দুশ্চিন্তা","উদ্বেগ","ডিপ্রেশন","বিষণ্ণ","মানসিক চাপ","কাউন্সেলিং","কারো সাথে কথা বলতে চাই","ভালো লাগছে না","একা লাগছে"],
+helplines:["হেল্পলাইন","জরুরি নম্বর","হটলাইন"],
+ground:["শান্ত হতে","শান্ত হতে সাহায্য করো","শ্বাস"],
+coffee:["কফি শপ","ক্যাফে","প্রিয় ক্যাফে","নর্থ এন্ড","ব্রাউন","কফি পছন্দ","কফি খায়","কফি","এসপ্রেসো","ম্যাকিয়াটো","পানীয়"],
+devcareer:["উন্নয়ন খাত","এনজিও","জাতিসংঘে চাকরি","উন্নয়নে ক্যারিয়ার"],
+youthfund:["তরুণদের ফান্ড","অনুদানের সুযোগ","সুযোগ"],
 meet:["মিটিং","সাক্ষাৎ","সাক্ষাৎকার","অ্যাপয়েন্টমেন্ট","দেখা করতে","কথা বলতে চাই","কল","ইন্টারভিউ"]
 };
 var BPRIV=["ফোন","নম্বর","ঠিকানা","বিয়ে","বিবাহিত","গার্লফ্রেন্ড","প্রেম","বয়স","বেতন","আয়","ধর্ম","বাবা","মা","পরিবার","ভাই","বোন"];
@@ -2081,6 +2174,9 @@ BN.music={a:[function(q){return musicAns(q,true);}],c:["জ্যাজ","ক্
 BN.space={a:[function(q){return spaceAns(q,true);}],c:["আরও","ফ্যাশন"]};
 BN.fashion={a:["<p>"+act("সানগ্লাস ঠিক করে পোজ দিয়ে")+"Rijve ফ্যাশন ভালোবাসেন, বিশেষ করে <b>স্ট্রিট স্টাইল</b>: টোকিওর হারাজুকু-শিবুয়া, সিউলের সংসু-হংদে, প্যারিসের ক্লাসিক লুক, আর লন্ডনের শোরডিচ-ক্যামডেন।</p><p>আমার স্টাইল? ধূসর লোম, হার্ট সানগ্লাস, শূন্য পরিশ্রম। সব শহরে আইকনিক। 🕶️</p>"],c:["প্রিয় রং","প্রিয় গান"]};
 BN.meet={a:[function(){return "__MEET__";}],c:[]};
+BN.mental={a:["<p>তুমি যোগাযোগ করেছ, এজন্য আমি সত্যিই খুশি। 💛 যা-ই বয়ে বেড়াচ্ছ, একা বইতে হবে না।</p><ul><li><b>ধীরে শ্বাস নাও:</b> ৪ গুনে নাও, ৪ গুনে ধরে রাখো, ৬ গুনে ছাড়ো। পাঁচবার।</li><li><b>বিশ্বস্ত একজনকে</b> সত্যি অনুভূতিটা বলো।</li><li><b>প্রশিক্ষিত কারও সাথে কথা বলো।</b> বিনামূল্যে, গোপনীয়।</li></ul><span class=\"sb-help\"><b>বাংলাদেশ:</b> Kaan Pete Roi (কান পেতে রই), <a href=\"tel:09612119911\">09612-119911</a> (প্রতিদিন বিকেল ৩টা থেকে রাত ৩টা)। জরুরি প্রয়োজনে <a href=\"tel:999\">999</a>।<br><b>অন্য দেশ:</b> "+x("https://findahelpline.com","findahelpline.com")+"</span><p>আমি কাউন্সেলর নই, শুধু একটা ওয়েবসাইটের বিড়াল, কিন্তু কথা বলতে চাইলে আমি আছি।</p>"],c:["হেল্পলাইন","শান্ত হতে সাহায্য করো"]};
+BN.ground={a:["<p>চলো একসাথে করি। 💛 ৫-৪-৩-২-১ পদ্ধতি:</p><ul><li><b>৫টা</b> জিনিস যা দেখতে পাচ্ছ</li><li><b>৪টা</b> জিনিস যা ছুঁতে পারছ</li><li><b>৩টা</b> শব্দ যা শুনতে পাচ্ছ</li><li><b>২টা</b> গন্ধ</li><li><b>১টা</b> ধীর শ্বাস</li></ul><p>তাড়া নেই। ভারী লাগলে বিশ্বস্ত কাউকে বা হেল্পলাইনে ফোন করো।</p>"],c:["হেল্পলাইন"]};
+BN.coffee={a:["<p>এবার জমবে! ☕ Rijve আসল কফিপ্রেমী। দারুণ <b>এসপ্রেসো</b> আর চমৎকার <b>ম্যাকিয়াটো</b> বানান, সাথে অবশ্যই জ্যাজ।</p><p>বাংলাদেশে ওনার প্রিয় কফি শপ দুটো: <b>North End</b> আর <b>Brown</b>। ☕</p><p>সেই ঘটনার পর থেকে আমাকে মেশিনের কাছে যেতে দেওয়া হয় না। ঘটনাটা নিয়ে আমরা কথা বলি না।</p>"],c:["জ্যাজ","শখ কী?"]};
 var BN_PRIV=["<p>"+act("আবার সানগ্লাস পরে")+"ভালো চেষ্টা, গোয়েন্দা সাহেব! 🕵️ এটা ব্যক্তিগত, আমার মুখ বন্ধ। আমি শুধু Rijve যা প্রকাশ্যে শেয়ার করেছেন সেটুকু বলি: কাজ, গল্প, শখ আর পরামর্শ।</p><p>বাকিটা ওনাকে ইমেইলে জিজ্ঞেস করো: "+MAIL+"।</p>"];
 var BN_MISS=["<p>"+act("মাথা কাত করে")+"হুম, আমার গোঁফ এটা খুঁজে পাচ্ছে না। 🐾 আমি জানি Rijve-এর গল্প, Awareness 360, পুরস্কার, শখ, আর প্রজেক্ট, ফান্ডরেইজিং ও ক্যারিয়ারের পরামর্শ।</p><p>শুধু Rijve-ই উত্তর দিতে পারবেন এমন প্রশ্ন হলে "+g("ask","Ask Rijve")+"-এ পাঠাও।</p>","<p>এটা আমার এখতিয়ারের বাইরে। 😼 Awareness 360, Rijve-এর যাত্রা, বা নিজের প্রজেক্ট শুরু করা নিয়ে জিজ্ঞেস করে দেখো।</p>"];
 var BN_ONLYEN="<p class=\"sb-ps\">এই উত্তরটা এখনো শুধু ইংরেজিতে আছে:</p>";
@@ -2089,7 +2185,8 @@ var BN_CHIPS=["Rijve কে?","প্রজেক্ট কীভাবে শ�
 function norm(s){return(" "+String(s).toLowerCase().replace(/[’']/g,"").replace(/&/g," and ").replace(/[^a-z0-9ঀ-৿]+/g," ")+" ").replace(/\s+/g," ");}
 function toks(s){return norm(s).trim().split(" ").filter(Boolean);}
 var BNRE=/[ঀ-৿]/;
-function hasWord(tk,w){var bn=BNRE.test(w);for(var i=0;i<tk.length;i++){var t=tk[i];if(t===w||t===w+"s"||t===w+"es")return true;if(bn){if(w.length>=3&&t.indexOf(w)===0&&t.length-w.length<=6)return true;continue;}if(w.length>=5&&t.indexOf(w)===0&&t.length-w.length<=3)return true;if(t.length>=5&&w.indexOf(t)===0&&w.length-t.length<=2)return true;if(w.length>=5&&Math.abs(t.length-w.length)<=1&&ed1(t,w))return true;}return false;}
+function hasWord(tk,w){var bn=BNRE.test(w);for(var i=0;i<tk.length;i++){var t=tk[i];if(t===w||(w.length>=4&&(t===w+"s"||t===w+"es")))return true;if(bn){if(w.length>=3&&t.indexOf(w)===0&&t.length-w.length<=6)return true;continue;}if(w.length>=5&&t.indexOf(w)===0&&t.length-w.length<=3)return true;if(t.length>=5&&w.indexOf(t)===0&&w.length-t.length<=2)return true;if(w.length>=5&&!COMMON[t]&&Math.abs(t.length-w.length)<=1&&ed1(t,w))return true;}return false;}
+var COMMON={};"really there their where about which would could should think thing things being going doing these those other after again still every never maybe right great least while whose world words wrote years young under since might first found today until heard hello sorry thanks money".split(" ").forEach(function(w){COMMON[w]=1;});
 /* true when a and b differ by one typo: a swap, a missing, extra or wrong letter */
 function ed1(a,b){if(a===b)return true;var la=a.length,lb=b.length,i=0;while(i<la&&i<lb&&a[i]===b[i])i++;if(la===lb)return a.slice(i+1)===b.slice(i+1)||(a[i]===b[i+1]&&a[i+1]===b[i]&&a.slice(i+2)===b.slice(i+2));return la>lb?a.slice(i+1)===b.slice(i):a.slice(i)===b.slice(i+1);}
 function keyScore(tk,key){var ws=key.split(" ");for(var i=0;i<ws.length;i++)if(!hasWord(tk,ws[i]))return 0;return Math.pow(ws.length,1.6);}
@@ -2098,7 +2195,7 @@ function best(q){
   for(var i=0;i<T.length;i++){var s=0,k=T[i].k.concat(T[i].bk);for(var j=0;j<k.length;j++)s+=keyScore(tk,k[j]);if(s>bs){bs=s;bestT=T[i];}}
   var ps=0,pv=PRIV.concat(BPRIV);for(var p=0;p<pv.length;p++)ps=Math.max(ps,keyScore(tk,pv[p]));
   if(ps>0&&(ps>bs||ps>=2.5))return{priv:true};
-  return bs>0?bestT:null;
+  lastScore=bs;return bs>0?bestT:null;
 }
 var miss=0,last={},lastId="",turns=0;
 var MISS=["<p>"+act("tilts head")+"Hmm, my whiskers can't find that one. 🐾 I know about Rijve's story, Awareness 360, his awards and talks, his hobbies, and advice on projects, fundraising and careers.</p><p>If only Rijve can answer it, send it through "+g("ask","Ask Rijve")+".</p>",
@@ -2119,10 +2216,75 @@ var TYP=["Shinbo is typing with tiny paws","Shinbo is thinking (or napping)","Sh
 function dots(){var d=document.createElement("div");d.className="sb-dots";d.setAttribute("role","status");d.setAttribute("aria-label",TYP[Math.floor(Math.random()*TYP.length)]);d.innerHTML="<i></i><i></i><i></i>";log.appendChild(d);scroll();return d;}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function fmt(t){/* safe formatting for model replies: escape, then allow **bold**, *actions*, [text](link) and bullet lines */
-  var h=esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/(^|\s)\*([^*\n]{2,60})\*/g,'$1<span class="sb-act">*$2*</span>').replace(/\[([^\]]+)\]\((#[a-z-]+|https:\/\/[^\s)]+|mailto:[^\s)]+)\)/g,function(m,a,u){return u.charAt(0)==="#"?'<a href="'+u+'" data-go>'+a+'</a>':'<a href="'+u+'" target="_blank" rel="noopener">'+a+'</a>';});
+  var h=esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/(^|\s)\*([^*\n]{2,60})\*\s?/g,"$1").replace(/\[([^\]]+)\]\((#[a-z-]+|https:\/\/[^\s)]+|mailto:[^\s)]+)\)/g,function(m,a,u){return u.charAt(0)==="#"?'<a href="'+u+'" data-go>'+a+'</a>':'<a href="'+u+'" target="_blank" rel="noopener">'+a+'</a>';});
   return h.split(/\n{2,}/).map(function(p){var ls=p.split("\n");if(ls.every(function(l){return/^\s*[-•]\s+/.test(l);}))return"<ul>"+ls.map(function(l){return"<li>"+l.replace(/^\s*[-•]\s+/,"")+"</li>";}).join("")+"</ul>";return"<p>"+ls.join("<br>")+"</p>";}).join("");
 }
-var lang="en";try{if(localStorage.getItem("sb-lang")==="bn")lang="bn";}catch(_){}
+/* English by default on every visit; a Bangla choice lasts only for this visit */
+/* ---- Commands, spoken or typed: "take me to the gallery", "switch to Bangla", "stop talking", "nature sounds on" ---- */
+var PLACES=[["home",/\b(home|top|beginning)\b|শুরুতে|উপরে/,"the top","শুরুতে"],["story",/\b(story|journey|chapters?|life story)\b|গল্প/,"the story","গল্পে"],["work",/\b(work|causes|experience|what he does)\b|কাজ/,"his work","কাজের অংশে"],
+ ["speaking",/\b(speaking|talks|tedx|speeches)\b|বক্তৃতা/,"his talks","বক্তৃতার অংশে"],["gallery",/\b(gallery|photos?|pictures?|pics)\b|ছবি/,"the gallery","গ্যালারিতে"],["press",/\b(press|news|articles|media)\b|সংবাদ|খবর/,"the press","সংবাদের অংশে"],
+ ["awards",/\b(awards?|honours|honors)\b|পুরস্কার/,"the awards","পুরস্কারের অংশে"],["learn",/\b(learn|videos?|resources|ten talks|watch)\b|ভিডিও/,"the ten talks","ভিডিওর অংশে"],["quiz",/\bquiz\b|কুইজ/,"the quiz","কুইজে"],
+ ["play",/\b(game|play)\b|গেম|খেলা/,"the game","গেমে"],["ask",/\b(ask rijve|ask form|question form)\b/,"Ask Rijve","Ask Rijve-এ"],["contact",/\b(contact|email him|socials|pets)\b|যোগাযোগ/,"the contact section","যোগাযোগের অংশে"]];
+var GO=/^(please |pls |can you |could you )?(go to|take me to|bring me to|show me|show|open|scroll to|navigate to|jump to|start the|let me see|i want to see)\b|(নিয়ে যাও|নিয়ে চলো|দেখাও|খোলো|খুলে দাও)/;
+function goTo(id){var el=document.getElementById(id);if(!el)return;if(mq.matches)close();setTimeout(function(){el.scrollIntoView({behavior:"smooth",block:"start"});if(id==="play"){var cv=document.getElementById("gc");if(cv)setTimeout(function(){cv.focus({preventScroll:true});},700);}},mq.matches?120:0);}
+function soundOn(on){var b=document.getElementById("sndBtn"),y=document.getElementById("sndYes"),pressed=b&&b.getAttribute("aria-pressed")==="true";
+  if(on&&!pressed){if(b&&!b.hidden)b.click();else if(y)y.click();}else if(!on&&pressed)b.click();}
+function cmdReq(q,peek){var t=norm(q).trim(),bn=lang==="bn",r=null;
+  if(/^(stop|stop talking|be quiet|quiet|shush|shut up|mute|silence|চুপ|থামো|চুপ করো)$/.test(t)||/\b(stop talking|stop reading|voice off|turn off (the )?voice)\b/.test(t))
+    r={html:bn?"<p>ঠিক আছে, চুপ করলাম। 🤐 আবার শুনতে চাইলে স্পিকার বোতাম চাপো।</p>":"<p>Zipping it. 🤐 Tap the speaker button if you want my lovely voice back.</p>",after:function(){setTalk(false);}};
+  else if(/\b(bangla|bengali)\b|বাংলায়|বাংলা বলো/.test(t)&&/\b(switch|speak|talk|change|in|use|reply)\b|বলো|কথা/.test(t)&&!bn)
+    r={html:"<p>ঠিক আছে, এখন থেকে বাংলায়! 🇧🇩 বলো, কী জানতে চাও?</p>",c:BN_CHIPS,after:function(){setLang("bn",true);}};
+  else if(/\b(english)\b|ইংরেজি/.test(t)&&/\b(switch|speak|talk|change|in|use|reply)\b|বলো|কথা/.test(t)&&bn)
+    r={html:"<p>Switching to English! What would you like to know?</p>",c:["Who is Rijve?","Tell me a joke"],after:function(){setLang("en",true);}};
+  else if(/\b(talk to me|read (it )?aloud|voice on|turn on (the )?voice|speak to me|say it)\b|কথা বলো|পড়ে শোনাও/.test(t)&&t.split(" ").length<=5)
+    r={html:bn?"<p>ঠিক আছে, এখন থেকে উত্তর পড়ে শোনাব। 🎙️</p>":"<p>Voice on! 🎙️ I'll read my replies out loud. Try not to swoon.</p>",after:function(){if(voiceBtn&&!voiceBtn.hidden)setTalk(true);}};
+  else if(/\b(nature sounds?|sea sounds?|waves|birds|background (music|sound)|ambient)\b|প্রকৃতির শব্দ/.test(t)){var off=/\b(off|stop|mute|turn off|pause|disable)\b|বন্ধ/.test(t);
+    r={html:off?(bn?"<p>প্রকৃতির শব্দ বন্ধ। 🔇</p>":"<p>Nature sounds off. 🔇 Back to blissful silence.</p>"):(bn?"<p>ঢেউ আর পাখির ডাক চালু করলাম। 🌊🐦</p>":"<p>Cue the sea waves and birdsong. 🌊🐦 Very relaxing. I may nap.</p>"),after:function(){soundOn(!off);}};}
+  else if(/\b(therapist|therapy mode|calm mode|gentle mode)\b|থেরাপিস্ট/.test(t)&&/\b(mode|cat|switch|be|turn|on)\b|মোড/.test(t))
+    r={html:"",after:function(){setMode("therapist");}};
+  else if(/\b(unhinged|chaos|chaotic|nonchalant|crazy mode|wild mode)\b|পাগলাটে/.test(t))
+    r={html:"",after:function(){setMode("unhinged");}};
+  else if(/\b(classic|normal|default|regular) (mode|shinbo)\b|স্বাভাবিক মোড/.test(t))
+    r={html:"",after:function(){setMode("classic");}};
+  else if(/^(close|close (the )?chat|close this|minimi[sz]e|go away|bye shinbo|বন্ধ করো)$/.test(t))
+    r={html:bn?"<p>ঠিক আছে, পরে দেখা হবে! 🐾</p>":"<p>Closing the chat. I'll be right here. 🐾</p>",after:function(){close();}};
+  else if(GO.test(t)||/^(gallery|quiz|game|story|awards|press|contact)$/.test(t)){for(var i=0;i<PLACES.length;i++)if(PLACES[i][1].test(t)){var pl=PLACES[i];
+      r={html:bn?"<p>চলো যাই! 🐾 তোমাকে "+pl[3]+" নিয়ে যাচ্ছি।</p>":"<p>Off we go! 🐾 Taking you to "+pl[2]+".</p>",after:(function(id){var f=function(){goTo(id);};f.delay=700;return f;})(pl[0])};break;}}
+  if(!r)return null;if(peek)return true;
+  if(r.html===""){r.html=bn?"<p>মোড বদলাচ্ছি… 🐾</p>":"<p>Switching modes… 🐾</p>";r.c=[];}
+  if(!r.c)r.c=bn?BN_CHIPS:["Who is Rijve?","Tell me a joke"];return r;}
+
+var lang="en",lastScore=0;try{if(sessionStorage.getItem("sb-lang")==="bn")lang="bn";}catch(_){}
+
+/* ---- Educated guesses: when someone asks about Rijve and there's no public answer, Shinbo reasons from what he does know ---- */
+var ABOUT=/\b(rijve|rijves|he|hes|his|him|your human|your owner|your dad)\b/;
+var ABOUT_BN=/(রিজভ|ওনার|উনি|তিনি|তাঁর|ওর )/;
+var GUESS=[
+ [/\b(book|books|read|reading|novel|author|writer)\b/,"a book that makes you want to go out and change something. Probably human rights, history or space, ideally with a jazz record playing in the background. 📚"],
+ [/\b(sport|sports|football|cricket|team|gym|workout|exercise|fitness|running)\b/,"cheering for whichever team the young people around him support. Between you and me, his real sport is sprinting between meetings. ⚽"],
+ [/\b(visit|destination|travel next|dream trip|holiday|vacation|country|city|place)\b/,"somewhere with great street fashion, great food and a clear night sky. Tokyo or Seoul would tick every box. Bonus points for a stargazing spot. ✈️"],
+ [/\b(superpower|power|magic)\b/,"cleaning every canal in Dhaka with one snap of his fingers. Or teleportation, to skip airport queues between conferences. 🦸"],
+ [/\b(season|weather|rain|winter|summer|monsoon|spring|autumn)\b/,"a cool, clear night: perfect for stargazing, and cold enough for a jacket worth showing off. 🌌"],
+ [/\b(dream|goal|goals|ambition|future|plan|plans|wish|vision)\b/,"a world where every young person is backed with skills, money and access, and then gets to lead. Plus a lot more clean canals. 🌍"],
+ [/\b(hero|heroes|inspire|inspiration|inspired|role model|idol|admire|look up)\b/,"the young people he works with. He says their drive is what keeps him going. Also, obviously, me. 😎"],
+ [/\b(fear|fears|afraid|scared)\b/,"young people giving up before they even start. That's exactly why his motto is \"start where you are\". (Also possibly Simba eating his shoes.)"],
+ [/\b(morning person|night owl|night person|early bird|sleep|wake up)\b/,"a night owl who still makes the morning meeting. All that stargazing doesn't help. 🦉"],
+ [/\b(instrument|guitar|piano|saxophone|sing|singing)\b/,"something jazzy. If he picked one up, my bet is the saxophone, purely for the drama. 🎷"],
+ [/\b(language|languages|speak)\b/,"Bangla and English for sure, and I'd bet a few words of Malay from his years in Kuala Lumpur. 🗣️"],
+ [/\b(car|cars|bike|drive|driving)\b/,"whatever gets him to the next project fastest. Style points if it's black, white, green or blue. 🚗"],
+ [/\b(video game|games|gaming|gamer)\b/,"Run for the Goals, obviously. He'd never admit his high score though. 🎮"],
+ [/\b(zodiac|star sign|mbti|personality|personality type)\b/,"whatever means \"stubborn optimist who can't sit still\". The stars agree. ✨"],
+ [/\b(hate|hates|dislike|dislikes|pet peeve|annoy|annoys)\b/,"littered streets, closed doors for young people, and slow Wi-Fi during a live session. 😤"],
+ [/\b(talent|good at|skill|skills|strength|strengths)\b/,"getting a room full of strangers to stand up and care. He literally did it at his TEDx talk. 🎤"],
+ [/\b(weekend|sunday|saturday|day off|relax|chill)\b/,"good food, a classic film or some jazz, a long chat about the universe, and a cuddle from his three executive directors. 🛋️"],
+ [/\b(gift|present|birthday gift)\b/,"something that helps someone else. Remember, he turned his own birthday into a flood-relief fundraiser. 🎁"]
+];
+function guess(q,bn){
+  var t=norm(q);if(bn?!ABOUT_BN.test(q):!ABOUT.test(t))return null;
+  var gt=null;for(var i=0;i<GUESS.length;i++)if(GUESS[i][0].test(t)){gt=GUESS[i][1];break;}
+  if(bn)return{html:"<p>এটা Rijve প্রকাশ্যে বলেননি, তবে ওনাকে আমি খুব ভালো চিনি। তাই আমার অনুমান 🧐: উত্তরে থাকবে তরুণরা, ভালো একটা গান (জ্যাজ বা ক্লাসিক রক), নয়তো রাতের তারাভরা আকাশ।</p><p class=\"sb-ps\">আসল উত্তর জানতে "+g("ask","Ask Rijve")+"-এ জিজ্ঞেস করো।</p>",c:BN_CHIPS};
+  return{html:"<p>Rijve hasn't said this one publicly, but I know him better than anyone (I sleep on his laptop). So here's my educated guess 🧐:</p><p>"+(gt?"I'd say "+gt:"the answer probably involves young people, a good soundtrack (jazz or classic rock), or a view of the stars. Those are his three favourite things after me.")+"</p><p class=\"sb-ps\">Want the official answer? Ask him in "+g("ask","Ask Rijve")+".</p>",c:["His hobbies?","Music he loves","Tell me a joke"]};
+}
 var userName="",lastQ={};
 var BOOKING_URL=""; /* optional: a Calendly or Cal.com link; Shinbo will offer it alongside the request form */
 
@@ -2211,58 +2373,143 @@ function meetSend(done){var t=mt(),d=M.d;
   .catch(function(){M.step="confirm";done(t.fail,[t.send,t.cancel]);});
 }
 
+/* ---- Crisis: checked before anything else, always sincere, never sent anywhere ---- */
+var CRISIS=/\b(suicide|suicidal|kill myself|killing myself|end my life|end it all|want to die|wanna die|dont want to live|don't want to live|dont want to be alive|don't want to be alive|self harm|self-harm|hurt myself|harm myself|cutting myself|no reason to live|better off dead|take my own life)\b/i;
+var CRISIS_BN=/(আত্মহত্যা|মরে যেতে চাই|মরতে চাই|বাঁচতে চাই না|বেঁচে থাকতে চাই না|নিজের ক্ষতি|নিজেকে শেষ)/;
+function crisisReq(q){if(!CRISIS.test(q)&&!CRISIS_BN.test(q))return null;var bn=lang==="bn"||CRISIS_BN.test(q);
+  var help='<span class="sb-help"><b>'+(bn?"এখনই বিপদে থাকলে জরুরি নম্বরে ফোন করো":"If you are in immediate danger, call your local emergency number now")+'</b> ('+(bn?"বাংলাদেশে":"")+' <a href="tel:999">999</a>'+(bn?"":" in Bangladesh, 112 in India and many other countries")+').<br><b>'+(bn?"বাংলাদেশ":"Bangladesh")+':</b> Kaan Pete Roi <a href="tel:09612119911">09612-119911</a> ('+(bn?"প্রতিদিন বিকেল ৩টা থেকে রাত ৩টা":"3 PM to 3 AM, every day")+')<br><b>'+(bn?"ভারত":"India")+':</b> Tele-MANAS <a href="tel:14416">14416</a> (24/7)<br><b>'+(bn?"অন্য দেশ":"Other countries")+':</b> '+x("https://findahelpline.com","findahelpline.com")+(bn?" -এ তোমার কাছের বিনামূল্যের হেল্পলাইন পাবে।":" shows a free, confidential line near you.")+'</span>';
+  return{html:bn?"<p>তুমি আমাকে বলেছ, এজন্য আমি সত্যিই কৃতজ্ঞ। 💛 তোমার অনুভূতিগুলো গুরুত্বপূর্ণ, আর এই মুহূর্তে একজন মানুষের সহায়তা তোমার প্রাপ্য।</p>"+help+"<p>পারলে এখনই বিশ্বস্ত কাউকে জানাও, বা কারও সাথে থাকো। আমি শুধু একটা ওয়েবসাইটের বিড়াল, একজন মানুষের মতো তোমাকে সুরক্ষা দিতে পারব না, কিন্তু আমি এখানে আছি। তুমি একা নও।</p>"
+    :"<p>I'm really, really glad you told me. 💛 What you're feeling matters, and you deserve support from a real person right now.</p>"+help+"<p>If you can, tell someone you trust what's going on, or stay close to someone. I'm only a website cat and can't keep you safe the way a person can, but I'm still here, and you are not alone.</p>",
+    c:bn?["হেল্পলাইন","শান্ত হতে সাহায্য করো"]:["Helplines in other countries","A grounding exercise"],crisis:true};}
+
+/* ---- Conversation hooks: Shinbo asks something back, then answers the visitor's reply ---- */
+var GOALS=[[/climate|environment|planet|carbon|global warming|জলবায়ু|পরিবেশ/,13,"Climate Action"],[/water|sanitation|hygiene|toilet|পানি|স্যানিটেশন/,6,"Clean Water and Sanitation"],[/education|school|learning|teach|literacy|শিক্ষা/,4,"Quality Education"],[/women|gender|girls|feminis|equality|নারী|লিঙ্গ/,5,"Gender Equality"],[/poverty|poor|homeless|দারিদ্র্য/,1,"No Poverty"],[/hunger|food|nutrition|ক্ষুধা|খাদ্য/,2,"Zero Hunger"],[/health|mental|disease|medicine|স্বাস্থ্য/,3,"Good Health and Well-being"],[/jobs|work|employment|economy|unemploy|কর্মসংস্থান|চাকরি/,8,"Decent Work and Economic Growth"],[/justice|rights|corruption|democracy|peace|freedom|ন্যায়|অধিকার|দুর্নীতি/,16,"Peace, Justice and Strong Institutions"],[/inequality|discrimination|disab|refugee|বৈষম্য/,10,"Reduced Inequalities"],[/ocean|sea|fish|plastic|সমুদ্র/,14,"Life Below Water"],[/animal|forest|tree|wildlife|biodiversity|বন|প্রাণী/,15,"Life on Land"],[/city|cities|housing|transport|শহর/,11,"Sustainable Cities and Communities"]];
+var HOOKS={
+ coffee:{en:"Your turn: how do you take your coffee? ☕",bn:"এবার তোমার পালা: কফি কীভাবে খাও? ☕",r:function(q,bn){var t=norm(q);
+   if(bn)return /চা/.test(q)?"চা-প্রেমী! বাংলাদেশে চা তো পবিত্র জিনিস, তাই মাফ করা হলো। 🍵":"দারুণ পছন্দ! Rijve তবুও তোমাকে একটা এসপ্রেসো সাধবেন। ☕";
+   if(/espresso/.test(t))return"An espresso person! Short, strong, no nonsense. Rijve approves. ☕";
+   if(/macchiato/.test(t))return"A macchiato! You and Rijve would get along dangerously well. ☕";
+   if(/latte|cappuccino|flat white|milk/.test(t))return"Smooth and milky. Respect. Rijve might still try to convert you to espresso. 😼";
+   if(/black|americano|filter|drip/.test(t))return"Black coffee. Serious business. 😎 Rijve would nod slowly at you.";
+   if(/tea|cha|chai/.test(t))return"A tea person in a coffee household! Bold. Cha is sacred in Bangladesh, so you're forgiven. 🍵";
+   if(/dont|do not|no coffee|hate|never/.test(t))return"No coffee?! 😱 More espresso for Rijve, I suppose.";
+   return"Noted! Rijve would still offer you an espresso, he can't help himself. ☕";},c:["Jazz picks","His hobbies?"]},
+ cause:{en:"Your turn: what cause do you care about most? 🌍",bn:"এবার বলো: কোন বিষয়টা নিয়ে তুমি সবচেয়ে বেশি ভাবো? 🌍",r:function(q,bn){var t=norm(q)+" "+q,gl=null;for(var i=0;i<GOALS.length;i++)if(GOALS[i][0].test(t)){gl=GOALS[i];break;}
+   if(bn)return gl?"দারুণ! এটা টেকসই উন্নয়ন লক্ষ্য "+gl[1]+"-এর সাথে যুক্ত। Rijve-এর পরামর্শ: যেখানে আছ সেখান থেকেই শুরু করো, আশেপাশের ছোট একটা সমস্যা দিয়ে। 💚":"খুব ভালো লাগল শুনে। প্রতিটা বিষয় ১৭টা লক্ষ্যের কোনো একটার সাথে যুক্ত। কুইজটা দিয়ে নিজেরটা খুঁজে দেখো! 💚";
+   return gl?"Ooh, that's <b>Goal "+gl[1]+": "+gl[2]+"</b>. 💚 Great one to care about. Rijve's advice: start where you are. Find one small problem around you linked to it, and do something about it this month. Want help planning it?":"Love that you care about it. 💚 Every cause links to at least one of the 17 Goals. Try "+g("quiz","the quiz")+" to find yours, then start small.";},c:["How do I start a project?","Funding for young people","Take the quiz"]},
+ music:{en:"What are you listening to these days? 🎧",bn:"আজকাল কী গান শুনছ? 🎧",r:function(q,bn){var t=norm(q).replace(/\b(i m|im|i am|listening to|listen to|these days|lately|mostly|a lot of|a lot|right now|currently|on repeat)\b/g," ").replace(/\s+/g," ").trim();
+   if(!t||/^(nothing|none|not much|no)$/.test(t))return bn?"নীরবতা? খুবই জেন। একটু জ্যাজ শুনে দেখো: "+x(ytS("Take Five Dave Brubeck"),"Take Five"):"Silence? Very zen. 🧘 Try some jazz: "+x(ytS("Take Five Dave Brubeck"),"Take Five")+".";
+   return(bn?"দারুণ! আমার ঘুমের প্লেলিস্টে যোগ করলাম। 🎧 YouTube-এ: ":"Ooh, nice. Adding it to my nap playlist. 🎧 Here it is on YouTube: ")+x(ytS(t),esc(t))+(bn?"":". Rijve would probably pair it with an espresso.");},c:["Music he loves","Jazz picks"]},
+ from:{en:"By the way, where are you reading this from? 🌏",bn:"আচ্ছা, তুমি কোথা থেকে পড়ছ? 🌏",r:function(q,bn){var place=String(q).replace(/^(i'?m |i am |im )?(from |in |based in |living in )?/i,"").replace(/[.!?]+$/,"").slice(0,40);
+   if(/bangladesh|dhaka|chittagong|chattogram|sylhet|khulna|rajshahi|barishal|barisal|rangpur|mymensingh|comilla|cumilla|বাংলাদেশ|ঢাকা|চট্টগ্রাম|সিলেট|খুলনা|রাজশাহী/i.test(q))return bn?"আরে, দেশি! 🇧🇩 Rijve-ও ঢাকার মানুষ, তাই তুমি তো পরিবারেরই। যা খুশি জিজ্ঞেস করো।":"A fellow Bangladeshi! 🇧🇩 Rijve's from Dhaka too, so you're basically family. Ask me anything.";
+   return bn?"হ্যালো, "+esc(place)+"! 🌍 Awareness 360-এর নেটওয়ার্ক ১০০টিরও বেশি দেশে, তোমার কাছেও হয়তো কেউ আছে।":"Hello to "+esc(place)+"! 🌍 Awareness 360's network spans 100+ countries, so there may well be fellow changemakers near you.";},c:["Who is Rijve?","How can I join?"]},
+ stage:{en:"Quick question so I can help better: are you a student, just starting out, or switching careers?",bn:"একটা প্রশ্ন: তুমি কি ছাত্র, সবে শুরু করছ, নাকি ক্যারিয়ার বদলাচ্ছ?",r:function(q,bn){var t=norm(q);
+   if(bn)return"বুঝেছি! ছোট একটা প্রজেক্ট দিয়ে প্রমাণ তৈরি করো, লেখার দক্ষতা বাড়াও, আর তরুণদের ফেলোশিপে আবেদন করো। নিচের বোতামগুলো দেখো। 💼";
+   if(/student|university|college|school|studying|undergrad|masters/.test(t))return"A student! This is your golden window. 🎓 Join clubs, volunteer, start something small, and apply for youth fellowships and competitions while you're eligible. Most have age limits, so use them now.";
+   if(/switch|change|changing|transition|pivot|corporate|career change/.test(t))return"Switching in? Your experience is an asset. 💼 Finance, tech, communications and data are all badly needed in development. Reframe your skills around impact, volunteer on the side, and target roles that use what you already do well.";
+   return"Just starting out? Build proof: one volunteer role or small project, sharp writing, and one skill employers hire for, like monitoring and evaluation, data, or proposal writing. 💼 Then apply widely and follow up.";},c:["Development careers","Where to find jobs","Funding for young people"]}
+};
+HOOKS.feel={en:"",bn:"",r:function(q,bn){return bn?"বুঝতে পারছি, এটা সত্যিই কঠিন। নিজের প্রতি একটু দয়ালু হও। 💛 একটা ছোট শ্বাসের ব্যায়াম করবে, নাকি কারো সাথে কথা বলা ভালো হবে? বাংলাদেশে Kaan Pete Roi: <a href=\"tel:09612119911\">09612-119911</a> (বিকেল ৩টা–রাত ৩টা)।"
+  :"That makes a lot of sense, and it's okay to feel this way. 💛 Be gentle with yourself today. Would a short breathing exercise help, or would talking to a real person help more? In Bangladesh, Kaan Pete Roi listens for free on <a href=\"tel:09612119911\">09612-119911</a> (3 PM–3 AM), and "+x("https://findahelpline.com","findahelpline.com")+" lists helplines everywhere else.";},c:["A grounding exercise","Helplines in other countries","Who is Rijve?"]};
+var HOOKMAP={coffee:"coffee",hobby:"coffee",a360:"cause",start:"cause",sdg:"cause",projects:"cause",social:"cause",music:"music",jazz:"music",who:"from",hello:"from",career:"stage",devcareer:"stage",scholar:"stage",youthfund:"stage"};
+var awaiting=null,askedHook={},lastAsked="";
+function withHook(id,html,bn){var h=HOOKMAP[id];if(!h||askedHook[h]||awaiting)return html;askedHook[h]=1;awaiting=h;return html+'<p class="sb-hook">'+HOOKS[h][bn?"bn":"en"]+"</p>";}
+
+/* ---- Modes the visitor picks: classic (default), therapist cat, unhinged. Serious topics always stay sincere. ---- */
+var mode="classic";try{var sm=sessionStorage.getItem("sb-mode");if(sm==="therapist"||sm==="unhinged")mode=sm;}catch(_){}
+var MODE={
+ therapist:{
+  open:{en:["That's a really good question to ask. 🌿","Thank you for asking. Let's take it slowly.","Gently, then. Here's what I know."],bn:["খুব সুন্দর প্রশ্ন। 🌿","ধীরে ধীরে বলি, কেমন?"]},
+  close:{en:["How does that sit with you?","Is there a part of this you'd like to explore more?","Take whatever's useful and leave the rest. 🌿","No rush. I'm here whenever you want to keep talking."],bn:["এটা তোমার কাছে কেমন লাগল?","তাড়া নেই, আমি আছি। 🌿"]},
+  greet:{en:"<p>Hi. I'm Shinbo, and today I'm in <b>therapist cat</b> mode: calm, kind and listening. 🌿</p><p>(I'm not a real therapist, just a very attentive cat.) Ask me about Rijve, careers or anything else, or simply tell me how you're doing.</p>",bn:"<p>হাই। আমি শিনবো, এখন <b>থেরাপিস্ট বিড়াল</b> মোডে: শান্ত, যত্নশীল, মন দিয়ে শুনছি। 🌿</p><p>(আসল থেরাপিস্ট নই, শুধু খুব মনোযোগী একটা বিড়াল।) যা খুশি জিজ্ঞেস করো, বা বলো কেমন আছ।</p>"},
+  miss:{en:"<p>I'm not sure I have an answer to that, and that's okay. 🌿 Would you like to tell me a bit more? Or you can ask Rijve directly in "+g("ask","Ask Rijve")+".</p>",bn:"<p>এটার উত্তর আমার জানা নেই, আর তাতে কোনো সমস্যা নেই। 🌿 আরেকটু বলবে?</p>"},
+  chips:{en:["I'd like to talk","Who is Rijve?","Career advice"],bn:["কারো সাথে কথা বলতে চাই","Rijve কে?"]}},
+ unhinged:{
+  open:{en:["Okay so. Buckle up.","Not to be dramatic, but:","Ugh, fine. Since you asked nicely.","I was napping, but sure.","Respectfully, here's the tea:","Hold my tuna."],bn:["আচ্ছা শোনো, শক্ত করে ধরো।","ঘুমাচ্ছিলাম, কিন্তু ঠিক আছে।","নাটক করছি না, কিন্তু:"]},
+  close:{en:["Anyway, I'm about to knock a glass off the table. Bye.","That's it. That's the post. 😼","I have no further comments. I'm a cat.","Simba could never explain it this well.","Don't tell Rijve I said it like that.","Okay that's enough productivity for one decade."],bn:["ব্যস, এটুকুই। 😼","Rijve-কে বোলো না আমি এভাবে বলেছি।","এবার টেবিল থেকে একটা গ্লাস ফেলতে যাচ্ছি। বাই।"]},
+  greet:{en:"<p>oh. it's you. hi. 😼</p><p>I'm Shinbo, <b>unhinged</b> mode. I've had four espressos I was absolutely not allowed to have. Ask me anything about Rijve. Or don't. I'm a cat, I don't care. (I care a little.)</p>",bn:"<p>ওহ। তুমি। হাই। 😼</p><p>আমি শিনবো, <b>পাগলাটে</b> মোডে। চারটা এসপ্রেসো খেয়ে ফেলেছি যেগুলো খাওয়ার কথা ছিল না। Rijve-কে নিয়ে যা খুশি জিজ্ঞেস করো। না করলেও চলে। আমি বিড়াল, আমার কিছু যায় আসে না। (একটু আসে।)</p>"},
+  miss:{en:"<p>No idea. Genuinely zero. My brain is 90% tuna and 10% sunglasses. 😼 Try asking about Rijve, careers, coffee, or the meaning of life (I still won't know that one).</p>",bn:"<p>জানি না। একদম শূন্য। আমার মাথা ৯০% টুনা আর ১০% সানগ্লাস। 😼 Rijve, ক্যারিয়ার বা কফি নিয়ে জিজ্ঞেস করো।</p>"},
+  chips:{en:["Roast Simba","Who is Rijve?","Tell me a joke"],bn:["একটা জোকস বলো","Rijve কে?"]}}
+};
+function rnd(a){return a[Math.floor(Math.random()*a.length)];}
+/* wrap an ordinary answer in the current mode's voice */
+function flavour(html,serious,hooked,bn){if(mode==="classic"||serious)return html;var m=MODE[mode],l=bn?"bn":"en";
+  var out=(Math.random()<.75?"<p>"+rnd(m.open[l])+"</p>":"")+html;
+  if(!hooked&&Math.random()<.7)out+='<p class="sb-ps">'+rnd(m.close[l])+"</p>";return out;}
+/* therapist mode: reflect feelings back, gently */
+var FEEL=/\b(?:i feel|i'?m feeling|im feeling|i am feeling|i'?ve been feeling|ive been feeling|i feel like|feeling)\s+(.{2,60}?)(?:[.!?]|$)/i;
+function feelReq(q){if(mode!=="therapist")return null;var m=String(q).match(FEEL);if(!m)return null;var f=esc(m[1].trim());awaiting="feel";
+  return{html:"<p>It sounds like you're feeling <b>"+f+"</b>. Thank you for telling me that. 💛</p><p>What do you think has been behind it lately?</p>",c:[]};}
+function setMode(m,quiet){mode=m;try{sessionStorage.setItem("sb-mode",m);}catch(_){}
+  document.querySelectorAll("#sbModes button").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-mode")===m?"true":"false");});
+  P.setAttribute("data-mode",m);
+  if(!quiet&&started){var bn=lang==="bn";stopSpeaking();
+    var html=m==="classic"?(bn?"<p>আবার আগের শিনবো! 😎 বলো, কী জানতে চাও?</p>":"<p>Classic Shinbo is back. 😎 Sunglasses on. What would you like to know?</p>"):MODE[m].greet[bn?"bn":"en"];
+    var el=add(html,"bot");setChips(m==="classic"?(bn?BN_CHIPS:["Who is Rijve?","Tell me a joke","Career advice"]):MODE[m].chips[bn?"bn":"en"]);if(talk)speak(el);}}
+
 function localReply(q){
   turns++;if(BNRE.test(q)&&lang!=="bn")setLang("bn",true);
+  var prevAsked=lastAsked;lastAsked=norm(q);
   curQ=q;
+  var cr=crisisReq(q);if(cr){awaiting=null;return cr;}
+  var cm=cmdReq(q);if(cm)return cm;
+  if(!awaiting){var fr=feelReq(q);if(fr)return fr;}
+  if(/^(i'?m|i am|im|we'?re|we are) (from|in|based in|writing from|reading from) /i.test(String(q).trim())||/^আমি .+(থেকে|এ থাকি)/.test(String(q).trim())){var fb=lang==="bn";return{html:"<p>"+HOOKS.from.r(q,fb)+"</p>",c:fb?BN_CHIPS:HOOKS.from.c};}
   var y=ytReq(q);if(y)return y;
   var nm=nameReq(q);if(nm)return nm;
   var mo=moreReq(q);if(mo){if(mo.id)lastId=mo.id;return mo;}
   var r=best(q);
+  if(awaiting){var hk=awaiting;awaiting=null;var isQ=/\?|^(what|whats|how|who|whos|why|where|when|which|can|could|do|does|did|is|are|was|tell|show|give|explain)\b/i.test(String(q).trim())||/^(কী|কি|কেন|কোথায়|কবে|কীভাবে|কিভাবে|কে)/.test(String(q).trim());if(!(r&&r.priv)&&!isQ&&(!r||lastScore<3||norm(q).trim().split(" ").length<=8)){var hb=lang==="bn";return{html:"<p>"+HOOKS[hk].r(q,hb)+"</p>",c:hb?BN_CHIPS:HOOKS[hk].c};}}
   if(r&&r.id)lastQ[r.id]=q;
   if(r&&r.id==="meet")return meetStart();
+  var gs=null,tq=norm(q),cat=GUESS.some(function(x){return x[0].test(tq);});if(!(r&&r.priv)&&(!r||(cat&&(/^(hobby|who|hello|shinbo|now|based)$/.test(r.id)||lastScore<=2))))gs=guess(q,lang==="bn");
+  if(gs){miss=0;return gs;}
   if(lang==="bn"){
     if(r&&r.priv)return{html:pick("bpriv",BN_PRIV),c:["শখ কী?","একটা জোকস বলো"]};
-    if(!r){miss++;return{html:BN_MISS[(miss-1)%BN_MISS.length],c:BN_CHIPS};}
+    if(!r){miss++;return{html:mode!=="classic"?MODE[mode].miss.bn:BN_MISS[(miss-1)%BN_MISS.length],c:BN_CHIPS};}
     miss=0;lastId=r.id;var b=BN[r.id];
-    if(b)return{html:pick("bn-"+r.id,b.a),c:b.c.length?b.c:BN_CHIPS};
+    if(b){var bh=pick("bn-"+r.id,b.a),bw=withHook(r.id,bh,true);return{html:flavour(bw,r.s,bw!==bh,true),c:b.c.length?b.c:BN_CHIPS};}
     return{html:BN_ONLYEN+pick(r.id,r.a),c:BN_CHIPS};
   }
   if(r&&r.priv)return{html:pick("priv",PRIV_A),c:["His hobbies?","Tell me a joke"]};
-  if(!r)return(function(f){return{html:f.a[0],c:f.c};})(fallback());
+  if(!r)return(function(f){return{html:mode!=="classic"?MODE[mode].miss.en:f.a[0],c:mode!=="classic"?MODE[mode].chips.en:f.c};})(fallback());
   miss=0;
-  var again=r.id===lastId&&!r.s&&r.a.length<2&&typeof r.a[0]!=="function";lastId=r.id;
+  var again=r.id===lastId&&norm(q)===prevAsked&&!r.s&&r.a.length<2&&typeof r.a[0]!=="function";lastId=r.id;
   var html=(again?"<p>Déjà vu! 😼 Here it is again:</p>":"")+pick(r.id,r.a);
   /* an occasional P.S. on light, informational topics */
-  if(!r.s&&!/^(hello|bye|thanks|joke|meow|pet|cute|rude|sing|catlife|shades|rival)$/.test(r.id)&&turns%3===0)html+='<p class="sb-ps">'+PS[Math.floor(Math.random()*PS.length)]+'</p>';
-  return{html:html,c:r.c};
+  var hooked=withHook(r.id,html,false);
+  if(hooked===html&&!r.s&&!/^(hello|bye|thanks|joke|meow|pet|cute|rude|sing|catlife|shades|rival|mental|helplines|ground)$/.test(r.id)&&turns%4===0)hooked+='<p class="sb-ps">'+PS[Math.floor(Math.random()*PS.length)]+'</p>';
+  return{html:flavour(hooked,r.s||/^(mental|helplines|ground|priv)$/.test(r.id),hooked!==html,false),c:r.c};
 }
 function ask(q){
   q=String(q||"").trim();if(!q||busy)return;busy=true;send.disabled=true;
   add(q,"me");inp.value="";grow();setChips([]);
   var d=dots(),t0=Date.now();
   stopSpeaking();
-  function done(html,c){var wait=Math.max(0,Math.min(1200,500+html.length*1.1)-(Date.now()-t0));setTimeout(function(){d.remove();var el=add(html,"bot");setChips(c);busy=false;send.disabled=false;if(talk)speak(el);},wait);}
+  function done(html,c,after){var wait=Math.max(0,Math.min(1200,500+html.length*1.1)-(Date.now()-t0));setTimeout(function(){d.remove();var el=add(html,"bot");setChips(c);busy=false;send.disabled=false;if(talk)speak(el);if(after)setTimeout(after,after.delay||0);},wait);}
   if(M){/* meeting details stay in the browser and go only to Rijve's inbox */
     var st=meetStep(q);if(st.send){meetSend(done);}else done(st.html,st.c);return;}
-  var direct=ytReq(q)||nameReq(q)||(best(q)||{}).id==="meet";
+  var direct=CRISIS.test(q)||CRISIS_BN.test(q)||!!awaiting||cmdReq(q,true)||ytReq(q)||nameReq(q)||(best(q)||{}).id==="meet";
   hist.push({role:"user",content:q});
   if(SHINBO_API&&!direct){
     var ctl=window.AbortController?new AbortController():null,to=setTimeout(function(){ctl&&ctl.abort();},20000);
-    fetch(SHINBO_API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:hist.slice(-12),lang:lang}),signal:ctl?ctl.signal:undefined})
+    fetch(SHINBO_API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:hist.slice(-12),lang:lang,mode:mode}),signal:ctl?ctl.signal:undefined})
       .then(function(r){if(!r.ok)throw 0;return r.json();})
       .then(function(j){clearTimeout(to);if(!j||!j.reply)throw 0;hist.push({role:"assistant",content:j.reply});var lr=localReply(q);done(fmt(j.reply),lr.c);})
       .catch(function(){clearTimeout(to);var r=localReply(q);hist.push({role:"assistant",content:r.html.replace(/<[^>]+>/g," ")});done(r.html,r.c);});
-  }else{var r=localReply(q);hist.push({role:"assistant",content:r.html.replace(/<[^>]+>/g," ")});done(r.html,r.c);}
+  }else{var r=localReply(q);hist.push({role:"assistant",content:r.html.replace(/<[^>]+>/g," ")});done(r.html,r.c,r.after);}
 }
 /* ---------- Language toggle ---------- */
 var langBtn=document.getElementById("sbLang");
 var UI={en:{ph:"Ask me anything about Rijve…",btn:"বাংলা",lbl:"বাংলায় কথা বলুন (switch to Bangla)"},bn:{ph:"যা খুশি জিজ্ঞেস করো…",btn:"EN",lbl:"Switch to English"}};
-function setLang(l,auto){lang=l;try{localStorage.setItem("sb-lang",l);}catch(_){}
+function setLang(l,auto){lang=l;try{sessionStorage.setItem("sb-lang",l);localStorage.removeItem("sb-lang");}catch(_){}
   inp.placeholder=UI[l].ph;langBtn.textContent=UI[l].btn;langBtn.setAttribute("aria-label",UI[l].lbl);P.setAttribute("lang",l==="bn"?"bn":"en");var nt=document.getElementById("sbNote");if(nt)nt.innerHTML=l==="bn"?"শিনবো শুধু Rijve-এর প্রকাশ্যে শেয়ার করা তথ্য জানে। বাকি সবকিছুর জন্য ইমেইল করো: "+MAIL:"Shinbo only knows what Rijve has shared publicly. For anything else, email "+MAIL+".";
   if(!auto&&started){add(l==="bn"?"<p>"+act("গলা খাঁকারি দিয়ে")+"ঠিক আছে, এখন থেকে বাংলায়! 🇧🇩 বলো, কী জানতে চাও?</p>":"<p>"+act("switches accent")+"Back to English! What would you like to know?</p>","bot");setChips(l==="bn"?BN_CHIPS:["Who is Rijve?","Career advice","Tell me a joke"]);}
 }
 langBtn.addEventListener("click",function(){stopSpeaking();setLang(lang==="bn"?"en":"bn");});
 setLang(lang,true);
+document.querySelectorAll("#sbModes button").forEach(function(b){b.addEventListener("click",function(){if(b.getAttribute("data-mode")!==mode)setMode(b.getAttribute("data-mode"));});});
+setMode(mode,true);
 
 /* ---------- Voice: speak replies in a soft female voice, listen with the microphone ---------- */
 var SS=window.speechSynthesis,talk=false,voiceBtn=document.getElementById("sbVoice"),micBtn=document.getElementById("sbMic");
@@ -2283,7 +2530,7 @@ function speakBrowser(text,l){var v=pickVoice(l);
   if(!v&&l==="bn"){if(!warnedBn){warnedBn=true;add("<p class=\"sb-ps\">এই ব্রাউজারে বাংলা কণ্ঠ নেই, তাই উত্তরগুলো লেখায় দেখাচ্ছি। Chrome বা Microsoft Edge-এ বাংলা কণ্ঠ পাওয়া যায়।</p>","bot");}return;}
   var parts=text.match(/[^.!?।…]+[.!?।…]*\s*/g)||[text];SS.cancel();P.classList.add("sb-speaking");
   parts.forEach(function(p,i){p=p.trim();if(!p)return;var u=new SpeechSynthesisUtterance(p);if(v){u.voice=v;u.lang=v.lang;}else u.lang=l==="bn"?"bn-BD":"en-GB";
-    u.rate=(l==="bn"?0.94:0.96)+(Math.random()*0.04-0.02);u.pitch=(/\?\s*$/.test(p)?1.1:1.04)+(Math.random()*0.04-0.02);u.volume=1;
+    u.rate=(l==="bn"?0.94:0.96)+(mode==="therapist"?-0.06:mode==="unhinged"?0.06:0)+(Math.random()*0.04-0.02);u.pitch=(/\?\s*$/.test(p)?1.1:1.04)+(Math.random()*0.04-0.02);u.volume=1;
     if(i===parts.length-1)u.onend=u.onerror=function(){P.classList.remove("sb-speaking");};SS.speak(u);});}
 function speak(el){if(!talk)return;var l=lang==="bn"?"bn":"en",text=speakText(el);if(!text)return;
   if(ttsOk){P.classList.add("sb-speaking");
@@ -2313,6 +2560,7 @@ if(SR){
 }else micBtn.hidden=true;
 
 function greet(){
+  if(mode!=="classic"){add(MODE[mode].greet[lang==="bn"?"bn":"en"],"bot");setChips(MODE[mode].chips[lang==="bn"?"bn":"en"]);return;}
   if(lang==="bn"){add("<p>"+act("হার্ট সানগ্লাস নামিয়ে")+"আসসালামু আলাইকুম! আমি <b>শিনবো</b>: Rijve-এর বিড়াল, এই সাইটের চিফ এক্সিকিউটিভ ক্যাট, আর পার্ট-টাইম এআই সহকারী। 😎</p><p>Rijve-এর গল্প, Awareness 360, ওনার শখ, বা নিজের প্রজেক্ট শুরু করার টিপস, যা খুশি জিজ্ঞেস করো। লিখে বা 🎙️ চেপে বলে।</p>","bot");setChips(BN_CHIPS);return;}
   var h=new Date().getHours(),hi=h<5?"Up late? Me too. Cats are nocturnal, what's your excuse?":h<12?"Good morning! I've already had two naps.":h<17?"Good afternoon! You caught me between naps.":"Good evening! Prime zoomies hour.";
   add("<p>"+act("lowers heart sunglasses")+hi+"</p><p>I'm <b>Shinbo</b>: Rijve's cat, Chief Executive Cat of this website, and part-time AI sidekick. Ask me about his journey, Awareness 360, his hobbies, or how to start your own project. I also do jokes. Unpaid.</p>","bot");
@@ -2329,16 +2577,44 @@ function grow(){inp.style.height="auto";inp.style.height=Math.min(inp.scrollHeig
 inp.addEventListener("input",grow);
 inp.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey&&!e.isComposing){e.preventDefault();ask(inp.value);}});
 log.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[data-go]");if(!a)return;if(mq.matches){e.preventDefault();close();var el=document.querySelector(a.getAttribute("href"));if(el)setTimeout(function(){el.scrollIntoView({behavior:"smooth"});},50);}});
-/* Little speech bubble on the button: a new line every few seconds while the chat is closed */
+/* Reading comes first: Shinbo only pipes up when the visitor has paused scrolling for a few seconds */
+var lastScroll=Date.now();addEventListener("scroll",function(){lastScroll=Date.now();},{passive:true});
+function idle(ms){return Date.now()-lastScroll>(ms||4000);}
+function whenIdle(fn,ms){(function chk(){if(idle(ms))fn();else setTimeout(chk,2500);})();}
+/* Little speech bubble on the button: three times a visit at most, only during a pause */
 var tag=document.getElementById("sbTag"),TAGS={en:["Meow? 👋","Ask me anything!","Psst… 😎","I know things 🐾","Need help?","Free advice! 🐟","Chat with me!","Bored? Talk to me"],bn:["মিউ? 👋","কিছু জিজ্ঞেস করো!","পিস্‌স্‌… 😎","আমি সব জানি 🐾","কথা বলবে?"]},ti=0;
-function tagShow(){if(!tag)return;if(!P.hidden||!nudge.hidden){tag.classList.remove("on");return;}var list=TAGS[lang==="bn"?"bn":"en"];tag.textContent=list[ti++%list.length];tag.classList.add("on");setTimeout(function(){tag.classList.remove("on");},3200);}
-if(tag&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){setTimeout(function(){tagShow();setInterval(tagShow,9000);},5000);}
+function tagShow(){if(!tag)return;if(gone||!P.hidden||!nudge.hidden){tag.classList.remove("on");return;}var list=TAGS[lang==="bn"?"bn":"en"];tag.textContent=list[ti++%list.length];tag.classList.add("on");setTimeout(function(){tag.classList.remove("on");},3200);}
+if(tag&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){[40000,110000,220000].forEach(function(t){setTimeout(function(){whenIdle(tagShow);},t);});}
+/* ---------- Hide Shinbo, who then sneaks back in now and then (at most three times a visit) ---------- */
+var hideBtn=document.getElementById("sbHide"),sneak=document.getElementById("sbSneak"),psst=document.getElementById("sbPsst"),sYes=document.getElementById("sbYes"),sNo=document.getElementById("sbNo"),tabBtn=document.getElementById("sbTab");
+var gone=false,sneaks=0,sTimer=0,sAuto=0;try{sneaks=+sessionStorage.getItem("sb-sneaks")||0;}catch(_){}
+var PSST={en:["Pssst… do you need me? 👀 You can use me, I'm fun. I promise.","Okay, last time, I swear. 😼 I know jokes, coffee tips AND Rijve's whole life story. I'll be in the corner."],
+          bn:["পিস্‌স্‌… আমাকে লাগবে? 👀 আমি কিন্তু খুব মজার, কথা দিচ্ছি।","আচ্ছা, শেষবার, সত্যি। 😼 জোকস, কফির টিপস আর Rijve-এর পুরো গল্প, সব আমার জানা। আমি কোণায় আছি।"]};
+var NOPE={en:"Fine. 😾 I'll be napping in the corner if you change your mind.",bn:"ঠিক আছে। 😾 মন বদলালে আমি কোণায় ঘুমাচ্ছি।"};
+function setSneaks(){try{sessionStorage.setItem("sb-sneaks",String(sneaks));}catch(_){}}
+function busyScreen(){var sp=document.getElementById("sndPop");return(sp&&!sp.hidden)||document.querySelector(".party:not([hidden])")||document.documentElement.classList.contains("menu-open");}
+function hideShinbo(){gone=true;document.documentElement.classList.add("sb-gone");nudge.hidden=true;if(tag)tag.classList.remove("on");try{sessionStorage.setItem("sb-gone","1");}catch(_){}plan();}
+function plan(){clearTimeout(sTimer);if(!gone)return;if(sneaks>=PSST.en.length){tabBtn.hidden=false;return;}sTimer=setTimeout(sneakIn,[120000,360000][sneaks]||360000);}
+function sneakIn(){if(!gone)return;if(busyScreen()||!idle(6000)){sTimer=setTimeout(sneakIn,4000);return;}
+  var l=lang==="bn"?"bn":"en";psst.textContent=PSST[l][Math.min(sneaks,PSST[l].length-1)];sYes.textContent=l==="bn"?"হ্যাঁ, কথা বলি":"Yes, let's chat";sNo.textContent=l==="bn"?"এখন না":"Not now";
+  sYes.hidden=sNo.hidden=false;sneaks++;setSneaks();sneak.hidden=false;requestAnimationFrame(function(){requestAnimationFrame(function(){sneak.classList.add("in");});});
+  clearTimeout(sAuto);sAuto=setTimeout(function(){sneakOut();plan();},11000);}
+function sneakOut(cb){sneak.classList.remove("in");setTimeout(function(){sneak.hidden=true;if(cb)cb();},500);}
+function bringBack(openIt){gone=false;clearTimeout(sTimer);clearTimeout(sAuto);document.documentElement.classList.remove("sb-gone");tabBtn.hidden=true;try{sessionStorage.removeItem("sb-gone");}catch(_){}
+  if(!sneak.hidden)sneakOut();if(openIt)setTimeout(open,250);}
+hideBtn.addEventListener("click",function(e){e.stopPropagation();hideShinbo();});
+sYes.addEventListener("click",function(){bringBack(true);});
+sNo.addEventListener("click",function(){clearTimeout(sAuto);psst.textContent=NOPE[lang==="bn"?"bn":"en"];sYes.hidden=sNo.hidden=true;setTimeout(function(){sneakOut();plan();},2300);});
+tabBtn.addEventListener("click",function(){bringBack(true);});
+var wasGone=false;try{wasGone=sessionStorage.getItem("sb-gone")==="1";}catch(_){}
+if(wasGone){gone=true;document.documentElement.classList.add("sb-gone");plan();}
+
 /* A one-time nudge per visit, after the reader has had a look around */
 var NUDGES=["Psst. I'm <b>Shinbo</b>. I know all of Rijve's secrets. Well, the public ones. Ask me anything.","Hi, I'm <b>Shinbo</b>, the real boss around here. 😎 Questions? I have answers. And attitude.","<b>Shinbo</b> here. I've been watching you scroll. Need help? I'm a cat, I'm great at help."];
 function hideNudge(forever){nudge.hidden=true;if(forever){try{sessionStorage.setItem("sb-nudged","1");}catch(_){}}}
 nudge.addEventListener("click",function(e){if(e.target.closest("button")){hideNudge(true);}else open();});
 var seen=false;try{seen=sessionStorage.getItem("sb-nudged")==="1";}catch(_){}
-if(!seen)setTimeout(function(){var sp=document.getElementById("sndPop");if(P.hidden&&!(sp&&!sp.hidden)&&!document.querySelector(".party:not([hidden])")){nudge.querySelector("span").innerHTML=NUDGES[Math.floor(Math.random()*NUDGES.length)];nudge.hidden=false;}setTimeout(function(){hideNudge(false);},12000);},14000);
+if(!seen)setTimeout(function(){whenIdle(function(){var sp=document.getElementById("sndPop");if(!gone&&P.hidden&&!(sp&&!sp.hidden)&&!document.querySelector(".party:not([hidden])")){nudge.querySelector("span").innerHTML=NUDGES[Math.floor(Math.random()*NUDGES.length)];nudge.hidden=false;}setTimeout(function(){hideNudge(false);},10000);},5000);},30000);
 })();
 </script>
 <!--B2-->

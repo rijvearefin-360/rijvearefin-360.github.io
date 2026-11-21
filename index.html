@@ -2248,7 +2248,7 @@ function cmdReq(q,peek){var t=norm(q).trim(),bn=lang==="bn",r=null;
     r={html:"",after:function(){setMode("classic");}};
   else if(/^(close|close (the )?chat|close this|minimi[sz]e|go away|bye shinbo|বন্ধ করো)$/.test(t))
     r={html:bn?"<p>ঠিক আছে, পরে দেখা হবে! 🐾</p>":"<p>Closing the chat. I'll be right here. 🐾</p>",after:function(){close();}};
-  else if(GO.test(t)||/^(gallery|quiz|game|story|awards|press|contact)$/.test(t)){for(var i=0;i<PLACES.length;i++)if(PLACES[i][1].test(t)){var pl=PLACES[i];
+  else if(GO.test(t)||/^(gallery|quiz|game)$/.test(t)){for(var i=0;i<PLACES.length;i++)if(PLACES[i][1].test(t)){var pl=PLACES[i];
       r={html:bn?"<p>চলো যাই! 🐾 তোমাকে "+pl[3]+" নিয়ে যাচ্ছি।</p>":"<p>Off we go! 🐾 Taking you to "+pl[2]+".</p>",after:(function(id){var f=function(){goTo(id);};f.delay=700;return f;})(pl[0])};break;}}
   if(!r)return null;if(peek)return true;
   if(r.html===""){r.html=bn?"<p>মোড বদলাচ্ছি… 🐾</p>":"<p>Switching modes… 🐾</p>";r.c=[];}
@@ -2411,6 +2411,10 @@ var HOOKS={
 };
 HOOKS.feel={en:"",bn:"",r:function(q,bn){return bn?"বুঝতে পারছি, এটা সত্যিই কঠিন। নিজের প্রতি একটু দয়ালু হও। 💛 একটা ছোট শ্বাসের ব্যায়াম করবে, নাকি কারো সাথে কথা বলা ভালো হবে? বাংলাদেশে Kaan Pete Roi: <a href=\"tel:09612119911\">09612-119911</a> (বিকেল ৩টা–রাত ৩টা)।"
   :"That makes a lot of sense, and it's okay to feel this way. 💛 Be gentle with yourself today. Would a short breathing exercise help, or would talking to a real person help more? In Bangladesh, Kaan Pete Roi listens for free on <a href=\"tel:09612119911\">09612-119911</a> (3 PM–3 AM), and "+x("https://findahelpline.com","findahelpline.com")+" lists helplines everywhere else.";},c:["A grounding exercise","Helplines in other countries","Who is Rijve?"]};
+HOOKS.coffee.m=/coffee|espresso|latte|cappuccino|macchiato|cortado|mocha|americano|flat white|black|milk|sugar|filter|drip|tea|cha|chai|decaf|কফি|চা|দুধ|চিনি/;
+HOOKS.cause.m=new RegExp(GOALS.map(function(g){return g[0].source;}).join("|"));
+HOOKS.stage.m=/student|university|college|school|studying|graduate|fresh|starting|first job|switch|change|changing|career|working|job|ছাত্র|চাকরি/;
+HOOKS.feel.m=/./;
 var HOOKMAP={coffee:"coffee",hobby:"coffee",a360:"cause",start:"cause",sdg:"cause",projects:"cause",social:"cause",music:"music",jazz:"music",who:"from",hello:"from",career:"stage",devcareer:"stage",scholar:"stage",youthfund:"stage"};
 var awaiting=null,askedHook={},lastAsked="";
 function withHook(id,html,bn){var h=HOOKMAP[id];if(!h||askedHook[h]||awaiting)return html;askedHook[h]=1;awaiting=h;return html+'<p class="sb-hook">'+HOOKS[h][bn?"bn":"en"]+"</p>";}
@@ -2459,7 +2463,7 @@ function localReply(q){
   var nm=nameReq(q);if(nm)return nm;
   var mo=moreReq(q);if(mo){if(mo.id)lastId=mo.id;return mo;}
   var r=best(q);
-  if(awaiting){var hk=awaiting;awaiting=null;var isQ=/\?|^(what|whats|how|who|whos|why|where|when|which|can|could|do|does|did|is|are|was|tell|show|give|explain)\b/i.test(String(q).trim())||/^(কী|কি|কেন|কোথায়|কবে|কীভাবে|কিভাবে|কে)/.test(String(q).trim());if(!(r&&r.priv)&&!isQ&&(!r||lastScore<3||norm(q).trim().split(" ").length<=8)){var hb=lang==="bn";return{html:"<p>"+HOOKS[hk].r(q,hb)+"</p>",c:hb?BN_CHIPS:HOOKS[hk].c};}}
+  if(awaiting){var hk=awaiting;awaiting=null;var isQ=/\?|^(what|whats|how|who|whos|why|where|when|which|can|could|do|does|did|is|are|was|tell|show|give|explain)\b/i.test(String(q).trim())||/^(কী|কি|কেন|কোথায়|কবে|কীভাবে|কিভাবে|কে)/.test(String(q).trim());var hm=HOOKS[hk].m,fits=hm?hm.test(norm(q)+" "+q):false,strong=r&&(r.priv||r.s||/^(mental|helplines|ground)$/.test(r.id));if(!strong&&!isQ&&(fits||!r)){var hb=lang==="bn";return{html:"<p>"+HOOKS[hk].r(q,hb)+"</p>",c:hb?BN_CHIPS:HOOKS[hk].c};}}
   if(r&&r.id)lastQ[r.id]=q;
   if(r&&r.id==="meet")return meetStart();
   var gs=null,tq=norm(q),cat=GUESS.some(function(x){return x[0].test(tq);});if(!(r&&r.priv)&&(!r||(cat&&(/^(hobby|who|hello|shinbo|now|based)$/.test(r.id)||lastScore<=2))))gs=guess(q,lang==="bn");
